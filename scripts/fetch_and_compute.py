@@ -127,6 +127,11 @@ def fetch_fixtures():
     rest of this script already expects (which was originally shaped
     around API-Football's response) — so build_table() and everything
     downstream needed zero changes when the data source was swapped.
+
+    Before the league phase draw (27 Aug 2026), football-data.org has no
+    season object for the CL competition yet, which returns a 404 — that's
+    a normal "nothing exists yet" state, not a real failure, so it's
+    handled here rather than left to crash the whole script.
     """
     resp = requests.get(
         f"{BASE_URL}/competitions/{COMPETITION_CODE}/matches",
@@ -134,6 +139,10 @@ def fetch_fixtures():
         params={"season": SEASON},
         timeout=30,
     )
+    if resp.status_code == 404:
+        print("INFO: no fixtures available yet for this season (expected "
+              "before the 27 Aug league phase draw) — writing empty state.")
+        return []
     resp.raise_for_status()
     data = resp.json()
     matches = data.get("matches", [])
