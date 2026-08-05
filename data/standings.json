@@ -1,9 +1,81 @@
 {
-  "generated_at": "2026-08-05T05:45:39.667309Z",
+  "generated_at": "2026-08-05T06:52:45.180916Z",
   "league_phase_matchdays": 8,
   "top_auto_r16": 8,
   "top_playoff_cutoff": 24,
   "all_teams_confirmed": false,
   "teams": [],
-  "matches": []
+  "matches": [],
+  "qualifying_odds": [
+    {
+      "label": "Champions Path \u2014 CP1",
+      "a": "Dinamo Zagreb",
+      "b": "Kauno Zalgiris",
+      "prob_a": 0.677,
+      "prob_b": 0.323
+    },
+    {
+      "label": "Champions Path \u2014 CP2",
+      "a": "Slovan Bratislava",
+      "b": "Mjallby AIF",
+      "prob_a": 0.651,
+      "prob_b": 0.349
+    },
+    {
+      "label": "Champions Path \u2014 CP3",
+      "a": "Kairat Almaty",
+      "b": "Levski Sofia",
+      "prob_a": 0.519,
+      "prob_b": 0.481
+    },
+    {
+      "label": "Champions Path \u2014 CP4",
+      "a": "AGF Aarhus",
+      "b": "Sabah FK",
+      "prob_a": 0.514,
+      "prob_b": 0.486
+    },
+    {
+      "label": "Champions Path \u2014 CP5",
+      "a": "NK Celje",
+      "b": "Ararat-Armenia",
+      "prob_a": 0.589,
+      "prob_b": 0.411
+    },
+    {
+      "label": "Champions Path \u2014 CP6",
+      "a": "Red Star Belgrade",
+      "b": "Vikingur Reykjavik",
+      "prob_a": 0.67,
+      "prob_b": 0.33
+    },
+    {
+      "label": "League Path \u2014 LP1",
+      "a": "Olympiacos",
+      "b": "NEC Nijmegen",
+      "prob_a": 0.727,
+      "prob_b": 0.273
+    },
+    {
+      "label": "League Path \u2014 LP2",
+      "a": "Bodo/Glimt",
+      "b": "Union Saint-Gilloise",
+      "prob_a": 0.578,
+      "prob_b": 0.422
+    },
+    {
+      "label": "League Path \u2014 LP3",
+      "a": "Fenerbahce",
+      "b": "Sturm Graz",
+      "prob_a": 0.65,
+      "prob_b": 0.35
+    },
+    {
+      "label": "League Path \u2014 LP4",
+      "a": "Lyon",
+      "b": "Sparta Prague",
+      "prob_a": 0.639,
+      "prob_b": 0.361
+    }
+  ]
 }
