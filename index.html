@@ -60,15 +60,6 @@
   .tab-panel{display:none; padding-top:28px;}
   .tab-panel.active{display:block;}
 
-  .table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch; margin-bottom:24px; border-radius:6px; border:1px solid var(--line); background:var(--bg-1);}
-  table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px;}
-  thead th{
-    text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;
-    letter-spacing:.07em;color:var(--ivory-dim);padding:12px 10px;border-bottom:1px solid var(--line);
-    background:var(--bg-2); white-space:nowrap; position:sticky; top:0; z-index:5;
-  }
-  tbody td{padding:10px;border-bottom:1px solid var(--line-soft); transition:background .15s ease;}
-  tbody tr:hover td{background:var(--bg-2);}
   .rank{font-family:'IBM Plex Mono',monospace;color:var(--ivory-dim); text-align:center;}
   .team-name{font-weight:600; white-space:nowrap;}
   .num{font-family:'IBM Plex Mono',monospace;text-align:right;}
@@ -83,7 +74,22 @@
   .zone-r16{color:var(--gold-soft); border-top:1px solid var(--gold); border-bottom:1px solid var(--gold);}
   .zone-playoff{color:var(--ice); border-top:1px solid var(--ice); border-bottom:1px solid var(--ice);}
   .zone-elim{color:var(--red); border-top:1px solid var(--red); border-bottom:1px solid var(--red);}
-  .open-slot td{color:var(--ivory-dim); font-style:italic;}
+  .standings-row{
+    padding:11px 4px; border-bottom:1px solid var(--line-soft);
+  }
+  .standings-row-top{
+    display:flex; align-items:center; gap:10px; margin-bottom:6px;
+  }
+  .standings-row-top .rank{font-family:'IBM Plex Mono',monospace; color:var(--ivory-dim); width:22px; flex-shrink:0;}
+  .standings-row-top .team-name{flex:1; min-width:0;}
+  .standings-row-top .pts{font-family:'Anton',sans-serif; font-size:16px; color:var(--gold-soft); flex-shrink:0;}
+  .standings-row-stats{
+    display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);
+  }
+  .single-bar-track{width:100%; height:6px; background:rgba(238,239,250,0.08); border-radius:3px; overflow:hidden;}
+  .single-bar-fill{height:100%; border-radius:3px;}
+  .open-slot{color:var(--ivory-dim); font-style:italic; padding-left:32px;}
 
   .empty{
     padding:48px 24px;text-align:center;color:var(--ivory-dim);
@@ -118,12 +124,17 @@
   .focus-next{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ivory-dim); background:var(--bg-2); border:1px solid var(--line); border-radius:4px; padding:10px 14px; display:inline-block;}
   .focus-next strong{color:var(--gold-soft);font-family:'IBM Plex Sans'; text-transform:uppercase; font-size:10px; letter-spacing:.06em; display:block; margin-bottom:3px;}
 
-  .change-team{
-    display:inline-flex; align-items:center; gap:6px; margin-bottom:16px;
-    font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase;
-    letter-spacing:.06em; color:var(--gold-soft); cursor:pointer; transition:var(--transition);
+  .team-switcher{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--bg-1); border:1px solid var(--line); border-radius:20px;
+    padding:6px 14px 6px 6px; cursor:pointer; transition:var(--transition);
+    font-family:'IBM Plex Sans',sans-serif; font-size:13px; font-weight:600;
   }
-  .change-team:hover{color:var(--ivory); transform:translateX(-3px);}
+  .team-switcher:hover{border-color:var(--gold); background:var(--bg-2);}
+  .team-switcher .dot{width:20px; height:20px; border-radius:50%; flex-shrink:0;}
+  .team-switcher .caret{color:var(--ivory-dim); font-size:10px; margin-left:2px;}
+  .team-switcher.locked{opacity:0.75;}
+  .team-switcher.locked:hover{border-color:var(--ivory-dim); opacity:1;}
   .locked-note{
     font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);
     margin-bottom:16px;
@@ -214,6 +225,7 @@
     <div id="picker-locked" style="display:none;" class="empty">
       <strong>Not open yet</strong>
       All 36 clubs need to be confirmed before picking a favourite — the final 7 spots are decided by 26 August. Check the Qualifying tab in the meantime.
+      <button class="none-btn" style="margin-top:20px;" onclick="closePicker()">Back to the tracker</button>
     </div>
     <div id="picker-open">
       <div class="picker-group-label">All 36 clubs</div>
@@ -284,6 +296,58 @@ function initials(name){
   return name.replace(/[^A-Za-zÀ-ÿ0-9\s]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
 }
 
+function teamColor(name){
+  const t = CONFIRMED_TEAMS.find(c => c.name === name);
+  if (t) return t.color;
+  // Qualifying-round teams aren't in CONFIRMED_TEAMS yet — spread them
+  // across a small fixed palette so two teams in the same bar are never
+  // the same color, rather than falling back to one flat grey for all.
+  const fallbackPalette = ['#8a6fd1', '#4fa3a3', '#c9784f', '#6b8fc4', '#a05a8c'];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) >>> 0;
+  return fallbackPalette[hash % fallbackPalette.length];
+}
+
+function chipHTML(name, sizePx, shape){
+  const t = CONFIRMED_TEAMS.find(c => c.name === name);
+  const color = t ? t.color : teamColor(name);
+  const dark = t && t.dark;
+  const radius = shape === 'circle' ? '50%' : '5px';
+  return `<span class="kit-chip" style="width:${sizePx}px;height:${sizePx}px;border-radius:${radius};font-size:${Math.round(sizePx*0.4)}px;background:${color};color:${dark?'#141414':'rgba(255,255,255,0.92)'};text-shadow:${dark?'none':'0 1px 1px rgba(0,0,0,0.4)'};">${initials(name)}</span>`;
+}
+
+/**
+ * Real crest image when the backend has one on file (only true once a
+ * team has appeared in real fixture data from football-data.org — so
+ * mostly not yet, pre-draw). Falls back to the kit-color initials chip
+ * either way: no crest known yet, or the image URL fails to load.
+ */
+function crestOrChipHTML(name, sizePx, shape){
+  const teamData = (STANDINGS && STANDINGS.teams || []).find(t => t.name === name);
+  if (!teamData || !teamData.crest) return chipHTML(name, sizePx, shape);
+  const radius = shape === 'circle' ? '50%' : '5px';
+  const fallback = chipHTML(name, sizePx, shape).replace(/"/g, '&quot;');
+  return `<img src="${teamData.crest}" alt="" width="${sizePx}" height="${sizePx}" style="border-radius:${radius};object-fit:contain;background:rgba(255,255,255,0.06);flex-shrink:0;" onerror="this.outerHTML='${fallback}';">`;
+}
+
+/**
+ * Builds a horizontal proportional bar — one colored segment per outcome.
+ * segments: [{label, prob, color}], probs don't need to sum to exactly 1
+ * (rounding is fine, tiny gaps/overlaps are invisible at this width).
+ */
+function probabilityBar(segments){
+  const bar = segments.map(s =>
+    `<div style="width:${Math.max(0, s.prob * 100)}%; background:${s.color};" title="${s.label}: ${Math.round(s.prob*100)}%"></div>`
+  ).join('');
+  const labels = segments.map(s =>
+    `<span style="color:${s.color};">${Math.round(s.prob*100)}%</span>`
+  ).join(' <span style="color:var(--ivory-dim);">/</span> ');
+  return `<div>
+    <div style="display:flex; height:8px; border-radius:4px; overflow:hidden; margin-bottom:4px;">${bar}</div>
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:10px;">${labels}</div>
+  </div>`;
+}
+
 function buildPicker(locked){
   document.getElementById('picker-locked').style.display = locked ? 'block' : 'none';
   document.getElementById('picker-open').style.display = locked ? 'none' : 'block';
@@ -293,15 +357,10 @@ function buildPicker(locked){
   const all = CONFIRMED_TEAMS.map(t => t.name).concat(
     QUALIFYING_STILL_ALIVE.filter(n => !CONFIRMED_TEAMS.some(c => c.name === n))
   );
-  el.innerHTML = all.map(name => {
-    const t = CONFIRMED_TEAMS.find(c => c.name === name);
-    const color = t ? t.color : '#3a4a6a';
-    const dark = t && t.dark;
-    return `<button class="team-btn" onclick="selectTeam('${name.replace(/'/g,"\\'")}')">
-      <span class="kit-chip" style="background:${color};color:${dark?'#141414':'rgba(255,255,255,0.92)'};text-shadow:${dark?'none':'0 1px 1px rgba(0,0,0,0.4)'};">${initials(name)}</span>
+  el.innerHTML = all.map(name => `<button class="team-btn" onclick="selectTeam('${name.replace(/'/g,"\\'")}')">
+      ${crestOrChipHTML(name, 24)}
       ${name}
-    </button>`;
-  }).join('');
+    </button>`).join('');
 }
 
 function selectTeam(name){
@@ -315,6 +374,11 @@ function openPicker(){
   buildPicker(STANDINGS ? !STANDINGS.all_teams_confirmed : true);
   document.getElementById('main-wrap').style.display = 'none';
   document.getElementById('picker').style.display = 'block';
+}
+
+function closePicker(){
+  document.getElementById('picker').style.display = 'none';
+  document.getElementById('main-wrap').style.display = 'block';
 }
 
 const savedTeam = localStorage.getItem('cl-tracker-team');
@@ -336,7 +400,10 @@ boot();
 
 <script id="main-content-template" type="text/template">
 <header>
-    <h1>2026/27 Champions League</h1>
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+      <h1 style="margin-bottom:0;">2026/27 Champions League</h1>
+      <div id="team-switcher"></div>
+    </div>
     <nav class="tabs">
       <button class="tab-btn active" data-tab="standings">Standings</button>
       <button class="tab-btn" data-tab="matches">Matches</button>
@@ -346,7 +413,6 @@ boot();
 </header>
 
   <div class="tab-panel active" id="panel-standings">
-    <div class="change-team" onclick="openPicker()">&larr; Change team</div>
     <div id="focus"></div>
     <div id="standings-content"></div>
   </div>
@@ -408,7 +474,10 @@ function renderFocusPanel(selectedName){
 
   focusEl.innerHTML = `<div class="focus-panel fade-in">
     <div class="focus-eyebrow">Your team</div>
-    <h2 class="focus-title">${team.name}</h2>
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+      ${crestOrChipHTML(team.name, 40)}
+      <h2 class="focus-title" style="margin-bottom:0;">${team.name}</h2>
+    </div>
     <div class="focus-stats">
       <div class="stat-box"><span class="val">#${team.rank}</span><span class="lbl">of 36</span></div>
       <div class="stat-box"><span class="val">${team.points}</span><span class="lbl">points</span></div>
@@ -428,51 +497,60 @@ function renderStandings(){
 
   if (teams.length === 0){
     const provisional = [...CONFIRMED_TEAMS].sort((a,b) => b.coef - a.coef);
-    const rows = provisional.map((t,i) => `<tr>
-        <td class="rank">${i+1}</td>
-        <td class="team-name">${t.name}</td>
-        <td class="num">${t.coef.toFixed(2)}</td>
-      </tr>`).join('');
-    const openRows = Array.from({length:7}, (_,i) => `<tr class="open-slot">
-        <td class="rank">${30+i}</td>
-        <td>Open — decided by qualifying</td>
-        <td class="num">—</td>
-      </tr>`).join('');
+    const maxCoef = provisional[0].coef;
+    const rows = provisional.map((t,i) => `
+      <div class="standings-row">
+        <div class="standings-row-top">
+          <span class="rank">${i+1}</span>
+          ${crestOrChipHTML(t.name, 20, 'circle')}
+          <span class="team-name">${t.name}</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ivory-dim);">${t.coef.toFixed(1)}</span>
+        </div>
+        <div style="padding-left:62px;">
+          <div class="single-bar-track"><div class="single-bar-fill" style="width:${(t.coef/maxCoef*100).toFixed(1)}%; background:${t.color};"></div></div>
+        </div>
+      </div>`).join('');
+    const openRows = Array.from({length:7}, (_,i) => `
+      <div class="standings-row open-slot">${30+i}. Open — decided by qualifying</div>`).join('');
 
     el.innerHTML = `<div class="provisional-note">Provisional seeding — ranked by UEFA coefficient, not results. Real standings begin Matchday 1 (8 Sept).</div>
-      <div class="table-wrap fade-in"><table><thead><tr><th>#</th><th>Team</th><th style="text-align:right;">Coefficient</th></tr></thead>
-      <tbody>${rows}${openRows}</tbody></table></div>`;
+      <div class="fade-in">${rows}${openRows}</div>`;
     return;
   }
 
   document.getElementById('updated-line').textContent = 'Last updated: ' + new Date(STANDINGS.generated_at).toUTCString();
   const selectedName = localStorage.getItem('cl-tracker-team');
+  const maxPoints = Math.max(...teams.map(t => t.points), 1);
   let rows = '';
-  teams.forEach((t, idx) => {
+  teams.forEach((t) => {
     if (t.rank === 1){
-      rows += `<tr class="zone-divider zone-r16"><td colspan="8">Automatic Round of 16 — top ${STANDINGS.top_auto_r16}</td></tr>`;
+      rows += `<div class="zone-divider zone-r16" style="padding:7px 4px;">Automatic Round of 16 — top ${STANDINGS.top_auto_r16}</div>`;
     } else if (t.rank === STANDINGS.top_auto_r16 + 1){
-      rows += `<tr class="zone-divider zone-playoff"><td colspan="8">Play-off round — ${STANDINGS.top_auto_r16 + 1}th to ${STANDINGS.top_playoff_cutoff}th</td></tr>`;
+      rows += `<div class="zone-divider zone-playoff" style="padding:7px 4px;">Play-off round — ${STANDINGS.top_auto_r16 + 1}th to ${STANDINGS.top_playoff_cutoff}th</div>`;
     } else if (t.rank === STANDINGS.top_playoff_cutoff + 1){
-      rows += `<tr class="zone-divider zone-elim"><td colspan="8">Eliminated</td></tr>`;
+      rows += `<div class="zone-divider zone-elim" style="padding:7px 4px;">Eliminated</div>`;
     }
     const isYours = selectedName && t.name.toLowerCase() === selectedName.toLowerCase();
-    rows += `<tr style="${isYours ? 'background:rgba(217,184,74,0.08);' : ''}">
-      <td class="rank">${t.rank}</td>
-      <td class="team-name">${t.name}${isYours ? ' <span style="color:var(--gold-soft);">&bull;</span>' : ''}</td>
-      <td class="num">${t.played}</td>
-      <td class="num">${t.won}-${t.drawn}-${t.lost}</td>
-      <td class="num">${t.gd > 0 ? '+' : ''}${t.gd}</td>
-      <td class="num" style="font-weight:700;">${t.points}</td>
-      <td>${pill(t.status_top8)}</td>
-      <td>${pill(t.status_top24)}</td>
-    </tr>`;
+    rows += `<div class="standings-row" style="${isYours ? 'background:rgba(217,184,74,0.08);' : ''}">
+      <div class="standings-row-top">
+        <span class="rank">${t.rank}</span>
+        ${crestOrChipHTML(t.name, 20, 'circle')}
+        <span class="team-name">${t.name}${isYours ? ' <span style="color:var(--gold-soft);">&bull;</span>' : ''}</span>
+        <span class="pts">${t.points} pts</span>
+      </div>
+      <div style="padding-left:62px;">
+        <div class="single-bar-track" style="margin-bottom:6px;"><div class="single-bar-fill" style="width:${(t.points/maxPoints*100).toFixed(1)}%; background:${teamColor(t.name)};"></div></div>
+        <div class="standings-row-stats">
+          <span>${t.played} played</span>
+          <span>${t.won}-${t.drawn}-${t.lost}</span>
+          <span>${t.gd > 0 ? '+' : ''}${t.gd} GD</span>
+          ${pill(t.status_top8)}
+          ${pill(t.status_top24)}
+        </div>
+      </div>
+    </div>`;
   });
-  el.innerHTML = `<div class="table-wrap fade-in"><table><thead><tr>
-      <th>#</th><th>Team</th><th style="text-align:right;">P</th><th style="text-align:right;">W-D-L</th>
-      <th style="text-align:right;">GD</th><th style="text-align:right;">Pts</th>
-      <th>Auto R16</th><th>Play-off</th>
-    </tr></thead><tbody>${rows}</tbody></table></div>`;
+  el.innerHTML = `<div class="fade-in">${rows}</div>`;
 }
 
 function renderMatches(){
@@ -489,9 +567,18 @@ function renderMatches(){
   el.innerHTML = '<div class="fade-in">' + Object.entries(groups).map(([md, ms]) => `
     <div class="matchday-group">
       <div class="matchday-label">${md}</div>
-      ${ms.map(m => `<div class="match-row">
-        <span>${m.home} vs ${m.away}</span>
-        ${m.played ? `<span class="match-score">${m.score}</span>` : `<span class="match-date">${new Date(m.date).toDateString()}</span>`}
+      ${ms.map(m => `<div class="match-row" style="${m.odds ? 'flex-direction:column; align-items:stretch; gap:8px;' : ''}">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span>${m.home} vs ${m.away}</span>
+          ${m.played
+            ? `<span class="match-score">${m.score}</span>`
+            : `<span class="match-date">${new Date(m.date).toDateString()}</span>`}
+        </div>
+        ${(!m.played && m.odds) ? probabilityBar([
+            {label: m.home, prob: m.odds.home, color: teamColor(m.home)},
+            {label: 'Draw', prob: m.odds.draw, color: 'var(--ivory-dim)'},
+            {label: m.away, prob: m.odds.away, color: teamColor(m.away)},
+          ]) : ''}
       </div>`).join('')}
     </div>
   `).join('') + '</div>';
@@ -500,16 +587,27 @@ function renderMatches(){
 function renderQualifying(){
   const el = document.getElementById('qualifying-content');
   if (!el) return;
-  el.innerHTML = `<p class="sub" style="margin-bottom:20px;">Ten ties, third qualifying round (4&ndash;11 Aug), decide who joins the play-off round. Five Champions Path winners plus Celtic/AEK Athens/LASK/Viking fight for 5 spots; two League Path winners plus Lyon/Bodø/Olympiacos's bracket fight for 2. <em>Updated manually after each round — not yet live.</em></p>` +
-    QUALIFYING_PATHS.map(p => `
-      <div class="qual-path">
-        <div>
-          <div class="qual-meta">${p.label}</div>
-          <div class="qual-teams">${p.a}<span class="vs">vs</span>${p.b}</div>
+  const odds = STANDINGS.qualifying_odds || [];
+
+  el.innerHTML = `<p class="sub" style="margin-bottom:20px;">Ten ties, third qualifying round (4&ndash;11 Aug), decide who joins the play-off round. Five Champions Path winners plus Celtic/AEK Athens/LASK/Viking fight for 5 spots; two League Path winners plus Lyon/Bodø/Olympiacos's bracket fight for 2. Ties are fixed manually after each round; odds are simulated live from current Elo.</p>` +
+    QUALIFYING_PATHS.map(p => {
+      const tieOdds = odds.find(o => o.label === p.label);
+      return `
+      <div class="qual-path" style="flex-direction:column; align-items:stretch;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:${tieOdds ? '10px' : '0'};">
+          <div>
+            <div class="qual-meta">${p.label}</div>
+            <div class="qual-teams">${p.a}<span class="vs">vs</span>${p.b}</div>
+          </div>
+          <div class="qual-meta">${p.stage} &middot; ${p.dates}</div>
         </div>
-        <div class="qual-meta">${p.stage} &middot; ${p.dates}</div>
+        ${tieOdds ? probabilityBar([
+            {label: p.a, prob: tieOdds.prob_a, color: teamColor(p.a)},
+            {label: p.b, prob: tieOdds.prob_b, color: teamColor(p.b)},
+          ]) : ''}
       </div>
-    `).join('');
+    `;
+    }).join('');
 }
 
 function renderRankings(){
@@ -521,17 +619,51 @@ function renderRankings(){
     return;
   }
   const sorted = [...teams].sort((a,b) => (b.prob_top8||0) - (a.prob_top8||0));
-  const rows = sorted.map(t => `
-    <tr>
-      <td class="team-name">${t.name}</td>
-      <td class="num">${t.elo}</td>
-      <td><span class="rank-bar-track"><span class="rank-bar-fill" style="width:${Math.round((t.prob_top8||0)*100)}%;"></span></span> ${Math.round((t.prob_top8||0)*100)}%</td>
-      <td><span class="rank-bar-track"><span class="rank-bar-fill" style="width:${Math.round((t.prob_top24||0)*100)}%;"></span></span> ${Math.round((t.prob_top24||0)*100)}%</td>
-    </tr>
-  `).join('');
-  el.innerHTML = `<p class="sub" style="margin-bottom:18px;">Elo rating seeded on UEFA coefficient, updated after every result, run through a ${3000}-simulation Monte Carlo of the remaining fixtures.</p>
-    <div class="table-wrap fade-in"><table><thead><tr><th>Team</th><th style="text-align:right;">Elo</th><th>Top-8 odds</th><th>Top-24 odds</th></tr></thead>
-    <tbody>${rows}</tbody></table></div>`;
+  const rows = sorted.map(t => {
+    const form = t.form_adjustment || 0;
+    const formTag = form !== 0
+      ? `<span style="font-family:'IBM Plex Mono',monospace; font-size:10px; padding:2px 6px; border-radius:3px; margin-left:6px; background:${form > 0 ? 'rgba(217,184,74,0.15)' : 'rgba(224,84,107,0.12)'}; color:${form > 0 ? 'var(--gold-soft)' : 'var(--red-soft)'};">${form > 0 ? '+' : ''}${form} form</span>`
+      : '';
+    return `
+    <div class="standings-row">
+      <div class="standings-row-top">
+        ${crestOrChipHTML(t.name, 22)}
+        <span class="team-name">${t.name}</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);">Elo ${t.elo}${formTag}</span>
+      </div>
+      <div style="padding-left:2px;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim); margin-bottom:2px;">Top-8 &nbsp;${Math.round((t.prob_top8||0)*100)}%</div>
+        <div class="single-bar-track" style="margin-bottom:8px;"><div class="single-bar-fill" style="width:${Math.round((t.prob_top8||0)*100)}%; background:var(--gold);"></div></div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim); margin-bottom:2px;">Top-24 ${Math.round((t.prob_top24||0)*100)}%</div>
+        <div class="single-bar-track"><div class="single-bar-fill" style="width:${Math.round((t.prob_top24||0)*100)}%; background:var(--ice);"></div></div>
+      </div>
+    </div>`;
+  }).join('');
+  el.innerHTML = `<p class="sub" style="margin-bottom:18px;">Elo rating seeded on UEFA coefficient, updated after every result, run through a ${20000}-simulation Monte Carlo of the remaining fixtures.</p>
+    <div class="fade-in">${rows}</div>`;
+}
+
+function renderTeamSwitcher(){
+  const el = document.getElementById('team-switcher');
+  if (!el) return;
+  const locked = STANDINGS ? !STANDINGS.all_teams_confirmed : true;
+  const selectedName = localStorage.getItem('cl-tracker-team');
+
+  if (locked){
+    el.innerHTML = `<div class="team-switcher locked" onclick="openPicker()">Favourites unlock 27 Aug</div>`;
+    return;
+  }
+
+  if (!selectedName || selectedName === '__none__'){
+    el.innerHTML = `<div class="team-switcher" onclick="openPicker()">
+      <span class="dot" style="background:var(--line);"></span>Select team<span class="caret">▾</span>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = `<div class="team-switcher" onclick="openPicker()">
+    ${crestOrChipHTML(selectedName, 20, 'circle')}${selectedName}<span class="caret">▾</span>
+  </div>`;
 }
 
 function renderAll(){
@@ -548,6 +680,7 @@ function renderAll(){
       });
     });
   }
+  renderTeamSwitcher();
   renderFocusPanel(localStorage.getItem('cl-tracker-team'));
   renderStandings();
   renderMatches();
