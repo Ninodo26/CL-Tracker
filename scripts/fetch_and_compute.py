@@ -116,6 +116,40 @@ STARTING_COEFFICIENTS = {
 }
 DEFAULT_COEFFICIENT = 15.0  # fallback for any of the 7 late qualifiers not listed above
 
+# Real 2026 coefficients for teams still in the qualifying rounds, so tie
+# odds reflect actual strength gaps instead of defaulting every qualifier
+# to the same DEFAULT_COEFFICIENT (which would make every tie ~50/50).
+QUALIFYING_COEFFICIENTS = {
+    "Celtic": 44.0, "AEK Athens": 24.0, "LASK": 21.0, "Viking": 8.247,
+    "Dinamo Zagreb": 46.5, "Kauno Zalgiris": 13.6,
+    "Slovan Bratislava": 36.0, "Mjallby AIF": 5.9,
+    "Kairat Almaty": 11.0, "Levski Sofia": 7.0,
+    "AGF Aarhus": 8.4, "Sabah FK": 6.0,
+    "NK Celje": 23.0, "Ararat-Armenia": 7.0,
+    "Red Star Belgrade": 46.5, "Vikingur Reykjavik": 11.75,
+    "Olympiacos": 62.25, "NEC Nijmegen": 13.6,
+    "Bodo/Glimt": 64.0, "Union Saint-Gilloise": 48.0,
+    "Fenerbahce": 57.75, "Sturm Graz": 28.0,
+    "Lyon": 65.75, "Sparta Prague": 38.25,
+}
+
+# The 10 third-qualifying-round ties, from the 20 July draw. Same manual-
+# update caveat as the frontend's copy of this data — see README. Kept
+# here too because tie-odds need Elo, which only exists on the backend.
+QUALIFYING_TIES = [
+    {"label": "Champions Path — CP1", "a": "Dinamo Zagreb", "b": "Kauno Zalgiris"},
+    {"label": "Champions Path — CP2", "a": "Slovan Bratislava", "b": "Mjallby AIF"},
+    {"label": "Champions Path — CP3", "a": "Kairat Almaty", "b": "Levski Sofia"},
+    {"label": "Champions Path — CP4", "a": "AGF Aarhus", "b": "Sabah FK"},
+    {"label": "Champions Path — CP5", "a": "NK Celje", "b": "Ararat-Armenia"},
+    {"label": "Champions Path — CP6", "a": "Red Star Belgrade", "b": "Vikingur Reykjavik"},
+    {"label": "League Path — LP1", "a": "Olympiacos", "b": "NEC Nijmegen"},
+    {"label": "League Path — LP2", "a": "Bodo/Glimt", "b": "Union Saint-Gilloise"},
+    {"label": "League Path — LP3", "a": "Fenerbahce", "b": "Sturm Graz"},
+    {"label": "League Path — LP4", "a": "Lyon", "b": "Sparta Prague"},
+]
+TIE_SIMULATIONS = 5000  # smaller than the season sim — only 2 matches per tie, not 8
+
 
 FD_FINISHED_STATUSES = {"FINISHED", "AWARDED"}
 
@@ -362,7 +396,10 @@ def build_table(fixtures, form_adjustments):
 
 
 def seed_elo(team_name, form_adjustments):
-    coef = STARTING_COEFFICIENTS.get(team_name, DEFAULT_COEFFICIENT)
+    coef = STARTING_COEFFICIENTS.get(
+        team_name,
+        QUALIFYING_COEFFICIENTS.get(team_name, DEFAULT_COEFFICIENT),
+    )
     return ELO_BASE + coef * ELO_COEF_SCALE + form_adjustments.get(team_name, 0)
 
 
@@ -477,6 +514,68 @@ def run_monte_carlo(teams, remaining_fixtures):
         teams[tid]["prob_top24"] = round(top24_count[tid] / MONTE_CARLO_SIMULATIONS, 3)
 
 
+def simulate_two_legged_tie(name_a, name_b, sims=TIE_SIMULATIONS):
+    """
+    Monte Carlo simulation of a two-legged qualifying tie: team A hosts
+    leg 1, team B hosts leg 2, aggregate score decides it. If level on
+    aggregate, extra time/penalties are modeled as a coin flip nudged
+    slightly toward the higher-rated side — a simplification, not a real
+    penalty-shootout model, since shootouts are close to 50/50 regardless
+    of league form.
+    """
+    elo_a = seed_elo(name_a, {})
+    elo_b = seed_elo(name_b, {})
+    a_advances = 0
+
+    for _ in range(sims):
+        agg = 0  # from team A's perspective
+
+        # Leg 1: A at home
+        p_a, p_d, p_b = outcome_probabilities(elo_a, elo_b)
+        roll = random.random()
+        if roll < p_a:
+            agg += random.choice([1, 1, 2, 2, 3])
+        elif roll >= p_a + p_d:
+            agg -= random.choice([1, 1, 2, 2, 3])
+
+        # Leg 2: B at home (home advantage flips sides)
+        p_b2, p_d2, p_a2 = outcome_probabilities(elo_b, elo_a)
+        roll = random.random()
+        if roll < p_b2:
+            agg -= random.choice([1, 1, 2, 2, 3])
+        elif roll >= p_b2 + p_d2:
+            agg += random.choice([1, 1, 2, 2, 3])
+
+        if agg > 0:
+            a_advances += 1
+        elif agg < 0:
+            pass
+        else:
+            # Level on aggregate — extra time/penalties, weighted only
+            # slightly by rating rather than the full match model, since
+            # shootouts are much closer to a coin flip than open play.
+            tiebreak_prob_a = 0.5 + (elo_a - elo_b) / 4000
+            if random.random() < tiebreak_prob_a:
+                a_advances += 1
+
+    return round(a_advances / sims, 3)
+
+
+def build_qualifying_odds():
+    """Advance probability for each third-qualifying-round tie, Monte
+    Carlo simulated over two legs. Independent of league-phase fixtures —
+    uses the hardcoded QUALIFYING_TIES list, same manual-update caveat as
+    the frontend's copy of this bracket."""
+    odds = []
+    for tie in QUALIFYING_TIES:
+        prob_a = simulate_two_legged_tie(tie["a"], tie["b"])
+        odds.append({
+            "label": tie["label"], "a": tie["a"], "b": tie["b"],
+            "prob_a": prob_a, "prob_b": round(1 - prob_a, 3),
+        })
+    return odds
+
+
 def build_remaining_fixtures(fixtures):
     remaining = []
     for fx in fixtures:
@@ -489,12 +588,25 @@ def build_remaining_fixtures(fixtures):
     return remaining
 
 
-def build_match_list(fixtures):
-    """Full match list for the Matches page — every league-phase fixture."""
+def build_match_list(fixtures, teams):
+    """
+    Full match list for the Matches page — every league-phase fixture,
+    with win/draw/loss odds attached to unplayed ones. This is a direct
+    Elo calculation per match, not a simulation — no Monte Carlo needed
+    for a single match's odds, only for something aggregate like season
+    standings or a multi-leg tie.
+    """
     matches = []
     for fx in fixtures:
         status = fx["fixture"]["status"]["short"]
         played = status in ("FT", "AET", "PEN")
+        home_id, away_id = fx["teams"]["home"]["id"], fx["teams"]["away"]["id"]
+
+        odds = None
+        if not played and home_id in teams and away_id in teams:
+            p_h, p_d, p_a = outcome_probabilities(teams[home_id]["elo"], teams[away_id]["elo"])
+            odds = {"home": round(p_h, 3), "draw": round(p_d, 3), "away": round(p_a, 3)}
+
         matches.append({
             "matchday": fx["league"].get("round", ""),
             "date": fx["fixture"]["date"],
@@ -502,6 +614,7 @@ def build_match_list(fixtures):
             "away": fx["teams"]["away"]["name"],
             "played": played,
             "score": f"{fx['goals']['home']}-{fx['goals']['away']}" if played else None,
+            "odds": odds,
         })
     matches.sort(key=lambda m: m["date"])
     return matches
@@ -518,7 +631,8 @@ def main():
         run_monte_carlo(teams, remaining_fixtures)
 
     ranked = compute_scenarios(teams)
-    matches = build_match_list(fixtures)
+    matches = build_match_list(fixtures, teams)
+    qualifying_odds = build_qualifying_odds()
 
     for t in ranked:
         t.pop("fixtures", None)  # next_fixture already covers the per-team need
@@ -533,11 +647,13 @@ def main():
         "all_teams_confirmed": len(ranked) >= 36,
         "teams": ranked,
         "matches": matches,
+        "qualifying_odds": qualifying_odds,
     }
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(output, indent=2))
-    print(f"Wrote {len(ranked)} teams and {len(matches)} matches to {OUT_PATH}")
+    print(f"Wrote {len(ranked)} teams, {len(matches)} matches, "
+          f"{len(qualifying_odds)} qualifying ties to {OUT_PATH}")
 
 
 if __name__ == "__main__":
