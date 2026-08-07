@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T15:55:12.644676Z",
+  "generated_at": "2026-08-07T18:55:37.180993Z",
   "league_phase_matchdays": 8,
   "top_auto_r16": 8,
   "top_playoff_cutoff": 24,
@@ -11,57 +11,57 @@
       "label": "Champions Path \u2014 CP1",
       "a": "Dinamo Zagreb",
       "b": "Kauno Zalgiris",
-      "prob_a": 0.671,
-      "prob_b": 0.329
+      "prob_a": 0.67,
+      "prob_b": 0.33
     },
     {
       "label": "Champions Path \u2014 CP2",
       "a": "Slovan Bratislava",
       "b": "Mjallby AIF",
-      "prob_a": 0.649,
-      "prob_b": 0.351
+      "prob_a": 0.647,
+      "prob_b": 0.353
     },
     {
       "label": "Champions Path \u2014 CP3",
       "a": "Kairat Almaty",
       "b": "Levski Sofia",
-      "prob_a": 0.528,
-      "prob_b": 0.472
+      "prob_a": 0.52,
+      "prob_b": 0.48
     },
     {
       "label": "Champions Path \u2014 CP4",
       "a": "AGF Aarhus",
       "b": "Sabah FK",
-      "prob_a": 0.509,
-      "prob_b": 0.491
+      "prob_a": 0.502,
+      "prob_b": 0.498
     },
     {
       "label": "Champions Path \u2014 CP5",
       "a": "NK Celje",
       "b": "Ararat-Armenia",
-      "prob_a": 0.576,
-      "prob_b": 0.424
+      "prob_a": 0.589,
+      "prob_b": 0.411
     },
     {
       "label": "Champions Path \u2014 CP6",
       "a": "Red Star Belgrade",
       "b": "Vikingur Reykjavik",
-      "prob_a": 0.664,
-      "prob_b": 0.336
+      "prob_a": 0.676,
+      "prob_b": 0.324
     },
     {
       "label": "League Path \u2014 LP1",
       "a": "Olympiacos",
       "b": "NEC Nijmegen",
-      "prob_a": 0.74,
-      "prob_b": 0.26
+      "prob_a": 0.728,
+      "prob_b": 0.272
     },
     {
       "label": "League Path \u2014 LP2",
       "a": "Bodo/Glimt",
       "b": "Union Saint-Gilloise",
-      "prob_a": 0.587,
-      "prob_b": 0.413
+      "prob_a": 0.581,
+      "prob_b": 0.419
     },
     {
       "label": "League Path \u2014 LP3",
@@ -74,8 +74,8 @@
       "label": "League Path \u2014 LP4",
       "a": "Lyon",
       "b": "Sparta Prague",
-      "prob_a": 0.636,
-      "prob_b": 0.364
+      "prob_a": 0.643,
+      "prob_b": 0.357
     }
   ]
 }
