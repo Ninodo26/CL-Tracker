@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T18:39:10.983101Z",
+  "generated_at": "2026-08-09T21:31:31.807935Z",
   "league_phase_matchdays": 8,
   "top_auto_r16": 8,
   "top_playoff_cutoff": 24,
@@ -11,71 +11,71 @@
       "label": "Champions Path \u2014 CP1",
       "a": "Dinamo Zagreb",
       "b": "Kauno Zalgiris",
-      "prob_a": 0.668,
-      "prob_b": 0.332
+      "prob_a": 0.662,
+      "prob_b": 0.338
     },
     {
       "label": "Champions Path \u2014 CP2",
       "a": "Slovan Bratislava",
       "b": "Mjallby AIF",
-      "prob_a": 0.649,
-      "prob_b": 0.351
+      "prob_a": 0.638,
+      "prob_b": 0.362
     },
     {
       "label": "Champions Path \u2014 CP3",
       "a": "Kairat Almaty",
       "b": "Levski Sofia",
-      "prob_a": 0.528,
-      "prob_b": 0.472
+      "prob_a": 0.505,
+      "prob_b": 0.495
     },
     {
       "label": "Champions Path \u2014 CP4",
       "a": "AGF Aarhus",
       "b": "Sabah FK",
-      "prob_a": 0.51,
-      "prob_b": 0.49
+      "prob_a": 0.52,
+      "prob_b": 0.48
     },
     {
       "label": "Champions Path \u2014 CP5",
       "a": "NK Celje",
       "b": "Ararat-Armenia",
-      "prob_a": 0.583,
-      "prob_b": 0.417
+      "prob_a": 0.58,
+      "prob_b": 0.42
     },
     {
       "label": "Champions Path \u2014 CP6",
       "a": "Red Star Belgrade",
       "b": "Vikingur Reykjavik",
-      "prob_a": 0.675,
-      "prob_b": 0.325
+      "prob_a": 0.671,
+      "prob_b": 0.329
     },
     {
       "label": "League Path \u2014 LP1",
       "a": "Olympiacos",
       "b": "NEC Nijmegen",
-      "prob_a": 0.73,
-      "prob_b": 0.27
+      "prob_a": 0.714,
+      "prob_b": 0.286
     },
     {
       "label": "League Path \u2014 LP2",
       "a": "Bodo/Glimt",
       "b": "Union Saint-Gilloise",
-      "prob_a": 0.581,
-      "prob_b": 0.419
+      "prob_a": 0.587,
+      "prob_b": 0.413
     },
     {
       "label": "League Path \u2014 LP3",
       "a": "Fenerbahce",
       "b": "Sturm Graz",
-      "prob_a": 0.648,
-      "prob_b": 0.352
+      "prob_a": 0.645,
+      "prob_b": 0.355
     },
     {
       "label": "League Path \u2014 LP4",
       "a": "Lyon",
       "b": "Sparta Prague",
-      "prob_a": 0.645,
-      "prob_b": 0.355
+      "prob_a": 0.639,
+      "prob_b": 0.361
     }
   ]
 }
