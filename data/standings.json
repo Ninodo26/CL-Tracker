@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15T03:37:47.480395Z",
+  "generated_at": "2026-08-15T06:36:22.449132Z",
   "league_phase_matchdays": 8,
   "top_auto_r16": 8,
   "top_playoff_cutoff": 24,
@@ -18,64 +18,64 @@
       "label": "Champions Path \u2014 CP2",
       "a": "Slovan Bratislava",
       "b": "Mjallby AIF",
-      "prob_a": 0.651,
-      "prob_b": 0.349
+      "prob_a": 0.652,
+      "prob_b": 0.348
     },
     {
       "label": "Champions Path \u2014 CP3",
       "a": "Kairat Almaty",
       "b": "Levski Sofia",
-      "prob_a": 0.526,
-      "prob_b": 0.474
+      "prob_a": 0.533,
+      "prob_b": 0.467
     },
     {
       "label": "Champions Path \u2014 CP4",
       "a": "AGF Aarhus",
       "b": "Sabah FK",
-      "prob_a": 0.5,
-      "prob_b": 0.5
+      "prob_a": 0.509,
+      "prob_b": 0.491
     },
     {
       "label": "Champions Path \u2014 CP5",
       "a": "NK Celje",
       "b": "Ararat-Armenia",
-      "prob_a": 0.575,
-      "prob_b": 0.425
+      "prob_a": 0.581,
+      "prob_b": 0.419
     },
     {
       "label": "Champions Path \u2014 CP6",
       "a": "Red Star Belgrade",
       "b": "Vikingur Reykjavik",
-      "prob_a": 0.66,
-      "prob_b": 0.34
+      "prob_a": 0.669,
+      "prob_b": 0.331
     },
     {
       "label": "League Path \u2014 LP1",
       "a": "Olympiacos",
       "b": "NEC Nijmegen",
-      "prob_a": 0.735,
-      "prob_b": 0.265
+      "prob_a": 0.729,
+      "prob_b": 0.271
     },
     {
       "label": "League Path \u2014 LP2",
       "a": "Bodo/Glimt",
       "b": "Union Saint-Gilloise",
-      "prob_a": 0.599,
-      "prob_b": 0.401
+      "prob_a": 0.586,
+      "prob_b": 0.414
     },
     {
       "label": "League Path \u2014 LP3",
       "a": "Fenerbahce",
       "b": "Sturm Graz",
-      "prob_a": 0.651,
-      "prob_b": 0.349
+      "prob_a": 0.657,
+      "prob_b": 0.343
     },
     {
       "label": "League Path \u2014 LP4",
       "a": "Lyon",
       "b": "Sparta Prague",
-      "prob_a": 0.649,
-      "prob_b": 0.351
+      "prob_a": 0.639,
+      "prob_b": 0.361
     }
   ]
 }
