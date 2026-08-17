@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T03:49:41.084472Z",
+  "generated_at": "2026-08-17T06:53:44.275514Z",
   "league_phase_matchdays": 8,
   "top_auto_r16": 8,
   "top_playoff_cutoff": 24,
@@ -11,22 +11,22 @@
       "label": "Champions Path \u2014 CP1",
       "a": "Dinamo Zagreb",
       "b": "Kauno Zalgiris",
-      "prob_a": 0.671,
-      "prob_b": 0.329
+      "prob_a": 0.662,
+      "prob_b": 0.338
     },
     {
       "label": "Champions Path \u2014 CP2",
       "a": "Slovan Bratislava",
       "b": "Mjallby AIF",
-      "prob_a": 0.657,
-      "prob_b": 0.343
+      "prob_a": 0.645,
+      "prob_b": 0.355
     },
     {
       "label": "Champions Path \u2014 CP3",
       "a": "Kairat Almaty",
       "b": "Levski Sofia",
-      "prob_a": 0.531,
-      "prob_b": 0.469
+      "prob_a": 0.528,
+      "prob_b": 0.472
     },
     {
       "label": "Champions Path \u2014 CP4",
@@ -39,43 +39,43 @@
       "label": "Champions Path \u2014 CP5",
       "a": "NK Celje",
       "b": "Ararat-Armenia",
-      "prob_a": 0.582,
-      "prob_b": 0.418
+      "prob_a": 0.573,
+      "prob_b": 0.427
     },
     {
       "label": "Champions Path \u2014 CP6",
       "a": "Red Star Belgrade",
       "b": "Vikingur Reykjavik",
-      "prob_a": 0.68,
-      "prob_b": 0.32
+      "prob_a": 0.676,
+      "prob_b": 0.324
     },
     {
       "label": "League Path \u2014 LP1",
       "a": "Olympiacos",
       "b": "NEC Nijmegen",
-      "prob_a": 0.736,
-      "prob_b": 0.264
+      "prob_a": 0.722,
+      "prob_b": 0.278
     },
     {
       "label": "League Path \u2014 LP2",
       "a": "Bodo/Glimt",
       "b": "Union Saint-Gilloise",
-      "prob_a": 0.578,
-      "prob_b": 0.422
+      "prob_a": 0.584,
+      "prob_b": 0.416
     },
     {
       "label": "League Path \u2014 LP3",
       "a": "Fenerbahce",
       "b": "Sturm Graz",
-      "prob_a": 0.641,
-      "prob_b": 0.359
+      "prob_a": 0.651,
+      "prob_b": 0.349
     },
     {
       "label": "League Path \u2014 LP4",
       "a": "Lyon",
       "b": "Sparta Prague",
-      "prob_a": 0.644,
-      "prob_b": 0.356
+      "prob_a": 0.639,
+      "prob_b": 0.361
     }
   ]
 }
