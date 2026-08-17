@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T18:38:05.433412Z",
+  "generated_at": "2026-08-17T21:25:15.205525Z",
   "league_phase_matchdays": 8,
   "top_auto_r16": 8,
   "top_playoff_cutoff": 24,
@@ -11,57 +11,57 @@
       "label": "Champions Path \u2014 CP1",
       "a": "Dinamo Zagreb",
       "b": "Kauno Zalgiris",
-      "prob_a": 0.67,
-      "prob_b": 0.33
+      "prob_a": 0.659,
+      "prob_b": 0.341
     },
     {
       "label": "Champions Path \u2014 CP2",
       "a": "Slovan Bratislava",
       "b": "Mjallby AIF",
-      "prob_a": 0.645,
-      "prob_b": 0.355
+      "prob_a": 0.656,
+      "prob_b": 0.344
     },
     {
       "label": "Champions Path \u2014 CP3",
       "a": "Kairat Almaty",
       "b": "Levski Sofia",
-      "prob_a": 0.522,
-      "prob_b": 0.478
+      "prob_a": 0.531,
+      "prob_b": 0.469
     },
     {
       "label": "Champions Path \u2014 CP4",
       "a": "AGF Aarhus",
       "b": "Sabah FK",
-      "prob_a": 0.517,
-      "prob_b": 0.483
+      "prob_a": 0.507,
+      "prob_b": 0.493
     },
     {
       "label": "Champions Path \u2014 CP5",
       "a": "NK Celje",
       "b": "Ararat-Armenia",
-      "prob_a": 0.584,
-      "prob_b": 0.416
+      "prob_a": 0.587,
+      "prob_b": 0.413
     },
     {
       "label": "Champions Path \u2014 CP6",
       "a": "Red Star Belgrade",
       "b": "Vikingur Reykjavik",
-      "prob_a": 0.666,
-      "prob_b": 0.334
+      "prob_a": 0.675,
+      "prob_b": 0.325
     },
     {
       "label": "League Path \u2014 LP1",
       "a": "Olympiacos",
       "b": "NEC Nijmegen",
-      "prob_a": 0.733,
-      "prob_b": 0.267
+      "prob_a": 0.73,
+      "prob_b": 0.27
     },
     {
       "label": "League Path \u2014 LP2",
       "a": "Bodo/Glimt",
       "b": "Union Saint-Gilloise",
-      "prob_a": 0.584,
-      "prob_b": 0.416
+      "prob_a": 0.581,
+      "prob_b": 0.419
     },
     {
       "label": "League Path \u2014 LP3",
@@ -74,8 +74,8 @@
       "label": "League Path \u2014 LP4",
       "a": "Lyon",
       "b": "Sparta Prague",
-      "prob_a": 0.627,
-      "prob_b": 0.373
+      "prob_a": 0.647,
+      "prob_b": 0.353
     }
   ]
 }
