@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-18T03:43:11.041625Z",
+  "generated_at": "2026-08-18T06:41:12.063719Z",
   "league_phase_matchdays": 8,
   "top_auto_r16": 8,
   "top_playoff_cutoff": 24,
@@ -11,15 +11,15 @@
       "label": "Champions Path \u2014 CP1",
       "a": "Dinamo Zagreb",
       "b": "Kauno Zalgiris",
-      "prob_a": 0.674,
-      "prob_b": 0.326
+      "prob_a": 0.665,
+      "prob_b": 0.335
     },
     {
       "label": "Champions Path \u2014 CP2",
       "a": "Slovan Bratislava",
       "b": "Mjallby AIF",
-      "prob_a": 0.649,
-      "prob_b": 0.351
+      "prob_a": 0.654,
+      "prob_b": 0.346
     },
     {
       "label": "Champions Path \u2014 CP3",
@@ -32,22 +32,22 @@
       "label": "Champions Path \u2014 CP4",
       "a": "AGF Aarhus",
       "b": "Sabah FK",
-      "prob_a": 0.519,
-      "prob_b": 0.481
+      "prob_a": 0.5,
+      "prob_b": 0.5
     },
     {
       "label": "Champions Path \u2014 CP5",
       "a": "NK Celje",
       "b": "Ararat-Armenia",
-      "prob_a": 0.581,
-      "prob_b": 0.419
+      "prob_a": 0.59,
+      "prob_b": 0.41
     },
     {
       "label": "Champions Path \u2014 CP6",
       "a": "Red Star Belgrade",
       "b": "Vikingur Reykjavik",
-      "prob_a": 0.666,
-      "prob_b": 0.334
+      "prob_a": 0.684,
+      "prob_b": 0.316
     },
     {
       "label": "League Path \u2014 LP1",
@@ -60,22 +60,22 @@
       "label": "League Path \u2014 LP2",
       "a": "Bodo/Glimt",
       "b": "Union Saint-Gilloise",
-      "prob_a": 0.588,
-      "prob_b": 0.412
+      "prob_a": 0.577,
+      "prob_b": 0.423
     },
     {
       "label": "League Path \u2014 LP3",
       "a": "Fenerbahce",
       "b": "Sturm Graz",
-      "prob_a": 0.657,
-      "prob_b": 0.343
+      "prob_a": 0.648,
+      "prob_b": 0.352
     },
     {
       "label": "League Path \u2014 LP4",
       "a": "Lyon",
       "b": "Sparta Prague",
-      "prob_a": 0.647,
-      "prob_b": 0.353
+      "prob_a": 0.639,
+      "prob_b": 0.361
     }
   ]
 }
