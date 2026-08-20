@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T18:37:53.535197Z",
+  "generated_at": "2026-08-20T21:26:39.427845Z",
   "league_phase_matchdays": 8,
   "top_auto_r16": 8,
   "top_playoff_cutoff": 24,
@@ -11,36 +11,36 @@
       "label": "Champions Path \u2014 CP1",
       "a": "Dinamo Zagreb",
       "b": "Kauno Zalgiris",
-      "prob_a": 0.662,
-      "prob_b": 0.338
+      "prob_a": 0.674,
+      "prob_b": 0.326
     },
     {
       "label": "Champions Path \u2014 CP2",
       "a": "Slovan Bratislava",
       "b": "Mjallby AIF",
-      "prob_a": 0.662,
-      "prob_b": 0.338
+      "prob_a": 0.652,
+      "prob_b": 0.348
     },
     {
       "label": "Champions Path \u2014 CP3",
       "a": "Kairat Almaty",
       "b": "Levski Sofia",
-      "prob_a": 0.518,
-      "prob_b": 0.482
+      "prob_a": 0.512,
+      "prob_b": 0.488
     },
     {
       "label": "Champions Path \u2014 CP4",
       "a": "AGF Aarhus",
       "b": "Sabah FK",
-      "prob_a": 0.509,
-      "prob_b": 0.491
+      "prob_a": 0.516,
+      "prob_b": 0.484
     },
     {
       "label": "Champions Path \u2014 CP5",
       "a": "NK Celje",
       "b": "Ararat-Armenia",
-      "prob_a": 0.594,
-      "prob_b": 0.406
+      "prob_a": 0.576,
+      "prob_b": 0.424
     },
     {
       "label": "Champions Path \u2014 CP6",
@@ -53,29 +53,29 @@
       "label": "League Path \u2014 LP1",
       "a": "Olympiacos",
       "b": "NEC Nijmegen",
-      "prob_a": 0.737,
-      "prob_b": 0.263
+      "prob_a": 0.727,
+      "prob_b": 0.273
     },
     {
       "label": "League Path \u2014 LP2",
       "a": "Bodo/Glimt",
       "b": "Union Saint-Gilloise",
-      "prob_a": 0.582,
-      "prob_b": 0.418
+      "prob_a": 0.588,
+      "prob_b": 0.412
     },
     {
       "label": "League Path \u2014 LP3",
       "a": "Fenerbahce",
       "b": "Sturm Graz",
-      "prob_a": 0.645,
-      "prob_b": 0.355
+      "prob_a": 0.648,
+      "prob_b": 0.352
     },
     {
       "label": "League Path \u2014 LP4",
       "a": "Lyon",
       "b": "Sparta Prague",
-      "prob_a": 0.639,
-      "prob_b": 0.361
+      "prob_a": 0.638,
+      "prob_b": 0.362
     }
   ]
 }
