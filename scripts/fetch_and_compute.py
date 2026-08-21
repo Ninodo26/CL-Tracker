@@ -77,8 +77,8 @@ MONTE_CARLO_SIMULATIONS = 20000  # ~4s at this count on typical GitHub Actions h
 # Coefficient alone is a 5-year lagging average — it can't see that a team's
 # actual current squad is stronger or weaker than their CL history implies.
 # This blends in current-season domestic league form as a second signal.
-FORM_ELO_SCALE = 60      # Elo points per 1 standard deviation of domestic form
-FORM_ELO_CAP = 150       # maximum adjustment in either direction, regardless of z-score
+FORM_ELO_SCALE = 90      # Elo points per 1 standard deviation of domestic form
+FORM_ELO_CAP = 250       # maximum adjustment in either direction, regardless of z-score
 FORM_MIN_GAMES = 3       # don't trust a form signal from fewer than this many domestic games played
 
 # Domestic league competition codes available on football-data.org's free
@@ -142,13 +142,39 @@ QUALIFYING_TIES = [
     {"label": "Champions Path — CP3", "a": "Kairat Almaty", "b": "Levski Sofia"},
     {"label": "Champions Path — CP4", "a": "AGF Aarhus", "b": "Sabah FK"},
     {"label": "Champions Path — CP5", "a": "NK Celje", "b": "Ararat-Armenia"},
-    {"label": "Champions Path — CP6", "a": "Red Star Belgrade", "b": "Vikingur Reykjavik"},
+    {"label": "Champions Path — CP6", "a": "Red Star Belgrade", "b": "Hapoel Beer Sheva"},
     {"label": "League Path — LP1", "a": "Olympiacos", "b": "NEC Nijmegen"},
     {"label": "League Path — LP2", "a": "Bodo/Glimt", "b": "Union Saint-Gilloise"},
     {"label": "League Path — LP3", "a": "Fenerbahce", "b": "Sturm Graz"},
     {"label": "League Path — LP4", "a": "Lyon", "b": "Sparta Prague"},
 ]
 TIE_SIMULATIONS = 5000  # smaller than the season sim — only 2 matches per tie, not 8
+
+# First-leg results, third qualifying round, 4-5 Aug 2026. Manually
+# entered (same "manual for v1" caveat as QUALIFYING_TIES itself) —
+# needs updating again after second legs (11 Aug). margin_for_a is the
+# current aggregate goal difference in team "a"'s favor from legs played
+# so far; positive means a is ahead, negative means b is ahead.
+KNOWN_LEG_RESULTS = {
+    "Champions Path — CP1": {"margin_for_a": 5, "note": "Dinamo Zagreb 5-0 Kauno Zalgiris"},
+    "Champions Path — CP2": {"margin_for_a": 1, "note": "Slovan Bratislava 2-1 Mjallby AIF"},
+    "Champions Path — CP3": {"margin_for_a": -1, "note": "Levski Sofia 1-0 Kairat Almaty"},
+    "Champions Path — CP5": {"margin_for_a": -1, "note": "Ararat-Armenia 2-1 NK Celje"},
+    "League Path — LP1": {"margin_for_a": 0, "note": "Olympiacos 0-0 NEC Nijmegen"},
+    "League Path — LP2": {"margin_for_a": 0, "note": "Bodo/Glimt 3-3 Union Saint-Gilloise"},
+    "League Path — LP3": {"margin_for_a": 0, "note": "Fenerbahce 0-0 Sturm Graz"},
+}
+
+# Ties with a confirmed final winner (round is fully over for these three —
+# the other 7 only have a first-leg result, see KNOWN_LEG_RESULTS above;
+# second legs were played 11 Aug but not all 10 final aggregates have been
+# tracked down yet, so those 7 still show a live-simulated estimate rather
+# than a confirmed final outcome). "winner" is "a" or "b" per QUALIFYING_TIES.
+RESOLVED_TIES = {
+    "Champions Path — CP4": {"winner": "b", "note": "Final: Sabah FK won 5-2 on aggregate"},
+    "Champions Path — CP6": {"winner": "b", "note": "Final: Hapoel Beer Sheva won 3-0 on aggregate"},
+    "League Path — LP4": {"winner": "a", "note": "Final: Lyon won 4-2 on aggregate"},
+}
 
 
 FD_FINISHED_STATUSES = {"FINISHED", "AWARDED"}
@@ -235,14 +261,13 @@ def _ppg_to_elo_adjustments(ppg_by_team):
     return adjustments
 
 
-def fetch_domestic_form():
+def fetch_domestic_form(season):
     """
-    Pulls current-season standings for each domestic league on
+    Pulls standings for the given season for each domestic league on
     football-data.org's free tier, converts each team's points-per-game
     into a within-league z-score (so a good points-per-game in a weaker
     league doesn't get treated the same as one in a stronger league), then
-    scales that into an Elo adjustment. Also pulls the 4 leagues not on
-    the free tier via API-Football, if API_FOOTBALL_KEY is set.
+    scales that into an Elo adjustment.
 
     Returns {team_name: elo_adjustment}. Teams with no coverage, or fewer
     than FORM_MIN_GAMES played, get no entry — callers default missing
@@ -254,12 +279,13 @@ def fetch_domestic_form():
         try:
             resp = requests.get(
                 f"{BASE_URL}/competitions/{code}/standings",
-                headers=HEADERS, params={"season": SEASON}, timeout=30,
+                headers=HEADERS, params={"season": season}, timeout=30,
             )
             resp.raise_for_status()
             data = resp.json()
         except requests.RequestException as e:
-            print(f"WARNING: couldn't fetch domestic standings for {code}: {e}")
+            print(f"WARNING: couldn't fetch domestic standings for {code} "
+                  f"(season {season}): {e}")
             continue
 
         total_table = next(
@@ -274,15 +300,15 @@ def fetch_domestic_form():
         adjustments.update(_ppg_to_elo_adjustments(ppg_by_team))
 
     if API_FOOTBALL_KEY:
-        adjustments.update(fetch_supplemental_form())
-    else:
+        adjustments.update(fetch_supplemental_form(season))
+    elif season == SEASON:
         print("INFO: API_FOOTBALL_KEY not set — Club Brugge, Galatasaray, "
               "Shakhtar Donetsk, Slavia Praha will use coefficient-only Elo.")
 
     return adjustments
 
 
-def fetch_supplemental_form():
+def fetch_supplemental_form(season):
     """
     Covers the 4 domestic leagues football-data.org's free tier doesn't
     include, via API-Football. League IDs are looked up by name each run
@@ -309,7 +335,7 @@ def fetch_supplemental_form():
             standings_resp = requests.get(
                 f"{API_FOOTBALL_BASE_URL}/standings",
                 headers=API_FOOTBALL_HEADERS,
-                params={"league": league_id, "season": SEASON},
+                params={"league": league_id, "season": season},
                 timeout=30,
             )
             standings_resp.raise_for_status()
@@ -320,7 +346,7 @@ def fetch_supplemental_form():
 
         except (requests.RequestException, KeyError, IndexError) as e:
             print(f"WARNING: couldn't fetch supplemental standings for "
-                  f"{league_name}: {e}")
+                  f"{league_name} (season {season}): {e}")
             continue
 
         ppg_by_team = {
@@ -561,17 +587,69 @@ def simulate_two_legged_tie(name_a, name_b, sims=TIE_SIMULATIONS):
     return round(a_advances / sims, 3)
 
 
+def simulate_remaining_leg(name_a, name_b, margin_for_a, sims=TIE_SIMULATIONS):
+    """
+    One leg already played — margin_for_a is the current aggregate goal
+    difference in team A's favor. Simulates only the remaining leg rather
+    than both, since one result is already real, not projected. Venue for
+    the remaining leg isn't tracked in our data, so no home advantage is
+    applied to either side here — a reasonable simplification given what
+    we actually know.
+    """
+    elo_a = seed_elo(name_a, {})
+    elo_b = seed_elo(name_b, {})
+    a_advances = 0
+
+    for _ in range(sims):
+        agg = margin_for_a
+        p_a, p_d, p_b = outcome_probabilities(elo_a, elo_b)
+        roll = random.random()
+        if roll < p_a:
+            agg += random.choice([1, 1, 2, 2, 3])
+        elif roll >= p_a + p_d:
+            agg -= random.choice([1, 1, 2, 2, 3])
+
+        if agg > 0:
+            a_advances += 1
+        elif agg < 0:
+            pass
+        else:
+            tiebreak_prob_a = 0.5 + (elo_a - elo_b) / 4000
+            if random.random() < tiebreak_prob_a:
+                a_advances += 1
+
+    return round(a_advances / sims, 3)
+
+
 def build_qualifying_odds():
-    """Advance probability for each third-qualifying-round tie, Monte
-    Carlo simulated over two legs. Independent of league-phase fixtures —
-    uses the hardcoded QUALIFYING_TIES list, same manual-update caveat as
-    the frontend's copy of this bracket."""
+    """Advance probability for each third-qualifying-round tie. Resolved
+    ties (RESOLVED_TIES) show the real, final outcome, not a simulation.
+    Ties with a known first-leg result (KNOWN_LEG_RESULTS) simulate only
+    the remaining leg using the real aggregate. Ties with no result at all
+    simulate both legs from scratch. Independent of league-phase
+    fixtures — same manual-update caveat as QUALIFYING_TIES itself."""
     odds = []
     for tie in QUALIFYING_TIES:
-        prob_a = simulate_two_legged_tie(tie["a"], tie["b"])
+        resolved = RESOLVED_TIES.get(tie["label"])
+        known = KNOWN_LEG_RESULTS.get(tie["label"])
+
+        if resolved:
+            prob_a = 1.0 if resolved["winner"] == "a" else 0.0
+            leg_note = resolved["note"]
+            is_resolved = True
+        elif known:
+            prob_a = simulate_remaining_leg(tie["a"], tie["b"], known["margin_for_a"])
+            leg_note = known["note"]
+            is_resolved = False
+        else:
+            prob_a = simulate_two_legged_tie(tie["a"], tie["b"])
+            leg_note = None
+            is_resolved = False
+
         odds.append({
             "label": tie["label"], "a": tie["a"], "b": tie["b"],
             "prob_a": prob_a, "prob_b": round(1 - prob_a, 3),
+            "leg_note": leg_note, "resolved": is_resolved,
         })
     return odds
 
@@ -620,8 +698,48 @@ def build_match_list(fixtures, teams):
     return matches
 
 
+def fetch_combined_form():
+    """
+    Combines two form signals: this season's in-progress form (only
+    non-empty once FORM_MIN_GAMES has been played — mostly not yet) and
+    last season's completed final standing (always available now, since
+    that season is already over). Current-season data takes priority per
+    team once it exists; last season is the fallback, not blended in
+    alongside it — a clean handoff rather than a permanent mix, so a
+    team's rating isn't perpetually dragged by a season that's over.
+    """
+    current = fetch_domestic_form(SEASON)
+    last_season = fetch_domestic_form(SEASON - 1)
+    combined = dict(last_season)
+    combined.update(current)  # current season overrides last season per team
+    return combined
+
+
+def build_provisional_standings(form_adjustments):
+    """
+    A real, data-driven pre-season ranking — coefficient blended with last
+    season's actual final domestic position, not just a raw coefficient
+    sort. Exists independently of live CL fixtures, so it's meaningful
+    immediately rather than waiting for the league phase draw.
+    """
+    rows = []
+    for name, coef in STARTING_COEFFICIENTS.items():
+        rows.append({
+            "name": name,
+            "coefficient": coef,
+            "form_adjustment": form_adjustments.get(name, 0),
+            "elo": round(seed_elo(name, form_adjustments)),
+        })
+    rows.sort(key=lambda r: -r["elo"])
+    for i, r in enumerate(rows, start=1):
+        r["rank"] = i
+    return rows
+
+
 def main():
-    form_adjustments = fetch_domestic_form()
+    form_adjustments = fetch_combined_form()
+    provisional_standings = build_provisional_standings(form_adjustments)
+
     fixtures = fetch_fixtures()
     teams = build_table(fixtures, form_adjustments)
     add_projections(teams)
@@ -648,13 +766,16 @@ def main():
         "teams": ranked,
         "matches": matches,
         "qualifying_odds": qualifying_odds,
+        "provisional_standings": provisional_standings,
     }
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(output, indent=2))
     print(f"Wrote {len(ranked)} teams, {len(matches)} matches, "
-          f"{len(qualifying_odds)} qualifying ties to {OUT_PATH}")
+          f"{len(qualifying_odds)} qualifying ties, "
+          f"{len(provisional_standings)} provisional standings to {OUT_PATH}")
 
 
 if __name__ == "__main__":
     main()
+
