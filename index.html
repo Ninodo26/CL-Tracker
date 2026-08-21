@@ -151,9 +151,20 @@
   .match-row{
     display:flex; justify-content:space-between; align-items:center;
     padding:11px 14px; border-bottom:1px solid var(--line-soft); font-size:13px; transition:background .15s ease;
+    cursor:pointer;
   }
   .match-row:last-child{border-bottom:none;}
   .match-row:hover{background:var(--bg-2);}
+  .match-detail{
+    display:none; padding:16px 14px; background:var(--bg-2); border-bottom:1px solid var(--line-soft);
+  }
+  .match-detail.open{display:block;}
+  .match-detail-teams{display:flex; justify-content:space-between; align-items:flex-start; gap:12px;}
+  .match-detail-team{flex:1; text-align:center;}
+  .match-detail-team .name{font-weight:600; font-size:12px; margin:8px 0 4px;}
+  .match-detail-team .stat{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim); line-height:1.6;}
+  .match-detail-vs{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim); padding-top:30px; flex-shrink:0;}
+  .match-detail-note{font-size:12px; color:var(--ivory-dim); text-align:center; margin-top:12px; padding-top:12px; border-top:1px solid var(--line-soft);}
   .match-score{font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--gold-soft); background:var(--gold-glow); padding:3px 9px; border-radius:4px;}
   .match-date{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);}
 
@@ -276,7 +287,7 @@ const QUALIFYING_PATHS = [
   {label:"Champions Path — CP3", a:"Kairat Almaty", b:"Levski Sofia", stage:"3rd qual. round", dates:"4–11 Aug"},
   {label:"Champions Path — CP4", a:"AGF Aarhus", b:"Sabah FK", stage:"3rd qual. round", dates:"4–11 Aug"},
   {label:"Champions Path — CP5", a:"NK Celje", b:"Ararat-Armenia", stage:"3rd qual. round", dates:"4–11 Aug"},
-  {label:"Champions Path — CP6", a:"Red Star Belgrade", b:"Víkingur Reykjavík", stage:"3rd qual. round (2nd leg pending)", dates:"4–11 Aug"},
+  {label:"Champions Path — CP6", a:"Red Star Belgrade", b:"Hapoel Beer Sheva", stage:"3rd qual. round", dates:"4–11 Aug"},
   {label:"League Path — LP1", a:"Olympiacos", b:"NEC Nijmegen", stage:"3rd qual. round", dates:"4–11 Aug"},
   {label:"League Path — LP2", a:"Bodø/Glimt", b:"Union Saint-Gilloise", stage:"3rd qual. round", dates:"4–11 Aug"},
   {label:"League Path — LP3", a:"Fenerbahçe", b:"Sturm Graz", stage:"3rd qual. round", dates:"4–11 Aug"},
@@ -285,7 +296,7 @@ const QUALIFYING_PATHS = [
 const QUALIFYING_STILL_ALIVE = [
   "Celtic","AEK Athens","LASK","Viking","Dinamo Zagreb","Kauno Žalgiris",
   "Slovan Bratislava","Mjällby AIF","Kairat Almaty","Levski Sofia","AGF Aarhus",
-  "Sabah FK","NK Celje","Ararat-Armenia","Red Star Belgrade","Víkingur Reykjavík",
+  "Sabah FK","NK Celje","Ararat-Armenia","Red Star Belgrade","Hapoel Beer Sheva",
   "Olympiacos","NEC Nijmegen","Bodø/Glimt","Union Saint-Gilloise","Fenerbahçe",
   "Sturm Graz","Lyon","Sparta Prague",
 ];
@@ -336,14 +347,14 @@ function crestOrChipHTML(name, sizePx, shape){
  * (rounding is fine, tiny gaps/overlaps are invisible at this width).
  */
 function probabilityBar(segments){
-  const bar = segments.map(s =>
-    `<div style="width:${Math.max(0, s.prob * 100)}%; background:${s.color};" title="${s.label}: ${Math.round(s.prob*100)}%"></div>`
+  const bar = segments.map((s, i) =>
+    `<div style="width:${Math.max(0, s.prob * 100)}%; background:${s.color}; ${i < segments.length - 1 ? 'border-right:2px solid var(--bg-0);' : ''}" title="${s.label}: ${Math.round(s.prob*100)}%"></div>`
   ).join('');
   const labels = segments.map(s =>
     `<span style="color:${s.color};">${Math.round(s.prob*100)}%</span>`
   ).join(' <span style="color:var(--ivory-dim);">/</span> ');
   return `<div>
-    <div style="display:flex; height:8px; border-radius:4px; overflow:hidden; margin-bottom:4px;">${bar}</div>
+    <div style="display:flex; height:10px; border-radius:4px; overflow:hidden; margin-bottom:4px; box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08);">${bar}</div>
     <div style="font-family:'IBM Plex Mono',monospace; font-size:10px;">${labels}</div>
   </div>`;
 }
@@ -496,9 +507,40 @@ function renderStandings(){
   const teams = STANDINGS.teams || [];
 
   if (teams.length === 0){
-    const provisional = [...CONFIRMED_TEAMS].sort((a,b) => b.coef - a.coef);
-    const maxCoef = provisional[0].coef;
-    const rows = provisional.map((t,i) => `
+    const provisional = STANDINGS.provisional_standings;
+
+    if (provisional && provisional.length){
+      const maxElo = provisional[0].elo;
+      const rows = provisional.map((t) => {
+        const form = t.form_adjustment || 0;
+        const formTag = form !== 0
+          ? `<span style="font-family:'IBM Plex Mono',monospace; font-size:10px; padding:2px 6px; border-radius:3px; margin-left:6px; background:${form > 0 ? 'rgba(217,184,74,0.15)' : 'rgba(224,84,107,0.12)'}; color:${form > 0 ? 'var(--gold-soft)' : 'var(--red-soft)'};">${form > 0 ? '+' : ''}${form}</span>`
+          : '';
+        return `
+        <div class="standings-row">
+          <div class="standings-row-top">
+            <span class="rank">${t.rank}</span>
+            ${crestOrChipHTML(t.name, 20, 'circle')}
+            <span class="team-name">${t.name}</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ivory-dim);">${t.coefficient.toFixed(1)}${formTag}</span>
+          </div>
+          <div style="padding-left:62px;">
+            <div class="single-bar-track"><div class="single-bar-fill" style="width:${(t.elo/maxElo*100).toFixed(1)}%; background:${teamColor(t.name)};"></div></div>
+          </div>
+        </div>`;
+      }).join('');
+      const openRows = Array.from({length:7}, (_,i) => `
+        <div class="standings-row open-slot">${30+i}. Open — decided by qualifying</div>`).join('');
+
+      el.innerHTML = `<div class="provisional-note">Provisional seeding — UEFA coefficient blended with last season's final domestic position (tag shows the adjustment). Real standings begin Matchday 1 (8 Sept).</div>
+        <div class="fade-in">${rows}${openRows}</div>`;
+      return;
+    }
+
+    // Fallback if the backend hasn't run with this field yet — coefficient-only, same as before.
+    const fallback = [...CONFIRMED_TEAMS].sort((a,b) => b.coef - a.coef);
+    const maxCoef = fallback[0].coef;
+    const rows = fallback.map((t,i) => `
       <div class="standings-row">
         <div class="standings-row-top">
           <span class="rank">${i+1}</span>
@@ -537,12 +579,16 @@ function renderStandings(){
         ${crestOrChipHTML(t.name, 20, 'circle')}
         <span class="team-name">${t.name}${isYours ? ' <span style="color:var(--gold-soft);">&bull;</span>' : ''}</span>
         <span class="pts">${t.points} pts</span>
+        <div style="width:44px; height:8px; border-radius:4px; overflow:hidden; box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08); flex-shrink:0;">
+          <div style="width:${(t.points/maxPoints*100).toFixed(1)}%; height:100%; background:${teamColor(t.name)};"></div>
+        </div>
       </div>
       <div style="padding-left:62px;">
-        <div class="single-bar-track" style="margin-bottom:6px;"><div class="single-bar-fill" style="width:${(t.points/maxPoints*100).toFixed(1)}%; background:${teamColor(t.name)};"></div></div>
         <div class="standings-row-stats">
           <span>${t.played} played</span>
           <span>${t.won}-${t.drawn}-${t.lost}</span>
+          <span>${t.gf}<span style="color:var(--ivory-dim);">GS</span></span>
+          <span>${t.ga}<span style="color:var(--ivory-dim);">GC</span></span>
           <span>${t.gd > 0 ? '+' : ''}${t.gd} GD</span>
           ${pill(t.status_top8)}
           ${pill(t.status_top24)}
@@ -551,6 +597,23 @@ function renderStandings(){
     </div>`;
   });
   el.innerHTML = `<div class="fade-in">${rows}</div>`;
+}
+
+function toggleMatchDetail(id){
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+function matchDetailTeamHTML(name){
+  const t = (STANDINGS.teams || []).find(x => x.name === name);
+  const stats = t
+    ? `<div class="stat">#${t.rank} of 36</div><div class="stat">${t.points} pts &middot; Elo ${t.elo}</div>`
+    : `<div class="stat">No standings data yet</div>`;
+  return `<div class="match-detail-team">
+    ${crestOrChipHTML(name, 36, 'circle')}
+    <div class="name">${name}</div>
+    ${stats}
+  </div>`;
 }
 
 function renderMatches(){
@@ -564,22 +627,34 @@ function renderMatches(){
   const groups = {};
   matches.forEach(m => { (groups[m.matchday] = groups[m.matchday] || []).push(m); });
 
+  let counter = 0;
   el.innerHTML = '<div class="fade-in">' + Object.entries(groups).map(([md, ms]) => `
     <div class="matchday-group">
       <div class="matchday-label">${md}</div>
-      ${ms.map(m => `<div class="match-row" style="${m.odds ? 'flex-direction:column; align-items:stretch; gap:8px;' : ''}">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <span>${m.home} vs ${m.away}</span>
-          ${m.played
-            ? `<span class="match-score">${m.score}</span>`
-            : `<span class="match-date">${new Date(m.date).toDateString()}</span>`}
+      ${ms.map(m => {
+        const detailId = `match-detail-${counter++}`;
+        return `<div class="match-row" style="${m.odds ? 'flex-direction:column; align-items:stretch; gap:8px;' : ''}" onclick="toggleMatchDetail('${detailId}')">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span>${m.home} vs ${m.away}</span>
+            ${m.played
+              ? `<span class="match-score">${m.score}</span>`
+              : `<span class="match-date">${new Date(m.date).toDateString()}</span>`}
+          </div>
+          ${(!m.played && m.odds) ? probabilityBar([
+              {label: m.home, prob: m.odds.home, color: teamColor(m.home)},
+              {label: 'Draw', prob: m.odds.draw, color: 'var(--ivory-dim)'},
+              {label: m.away, prob: m.odds.away, color: teamColor(m.away)},
+            ]) : ''}
         </div>
-        ${(!m.played && m.odds) ? probabilityBar([
-            {label: m.home, prob: m.odds.home, color: teamColor(m.home)},
-            {label: 'Draw', prob: m.odds.draw, color: 'var(--ivory-dim)'},
-            {label: m.away, prob: m.odds.away, color: teamColor(m.away)},
-          ]) : ''}
-      </div>`).join('')}
+        <div class="match-detail" id="${detailId}">
+          <div class="match-detail-teams">
+            ${matchDetailTeamHTML(m.home)}
+            <div class="match-detail-vs">vs</div>
+            ${matchDetailTeamHTML(m.away)}
+          </div>
+          <div class="match-detail-note">${new Date(m.date).toLocaleString(undefined, {weekday:'long', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'})}${m.played ? ' &middot; Final: ' + m.score : ''}</div>
+        </div>`;
+      }).join('')}
     </div>
   `).join('') + '</div>';
 }
@@ -589,22 +664,31 @@ function renderQualifying(){
   if (!el) return;
   const odds = STANDINGS.qualifying_odds || [];
 
-  el.innerHTML = `<p class="sub" style="margin-bottom:20px;">Ten ties, third qualifying round (4&ndash;11 Aug), decide who joins the play-off round. Five Champions Path winners plus Celtic/AEK Athens/LASK/Viking fight for 5 spots; two League Path winners plus Lyon/Bodø/Olympiacos's bracket fight for 2. Ties are fixed manually after each round; odds are simulated live from current Elo.</p>` +
+  el.innerHTML = `<p class="sub" style="margin-bottom:20px;">Ten ties, third qualifying round (4&ndash;11 Aug) — the round is over, play-off round is next (18&ndash;26 Aug). Gold-bordered ties below have a confirmed final result; the rest show the last known aggregate with odds re-simulated for the remaining leg, still pending full confirmation.</p>` +
     QUALIFYING_PATHS.map(p => {
       const tieOdds = odds.find(o => o.label === p.label);
-      return `
-      <div class="qual-path" style="flex-direction:column; align-items:stretch;">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:${tieOdds ? '10px' : '0'};">
-          <div>
-            <div class="qual-meta">${p.label}</div>
-            <div class="qual-teams">${p.a}<span class="vs">vs</span>${p.b}</div>
+      const resolved = tieOdds && tieOdds.resolved;
+      const smallBar = (tieOdds && !resolved) ? `
+        <div style="width:90px; flex-shrink:0;">
+          <div style="display:flex; height:8px; border-radius:4px; overflow:hidden; box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08); margin-bottom:3px;">
+            <div style="width:${tieOdds.prob_a*100}%; background:${teamColor(p.a)}; border-right:2px solid var(--bg-0);"></div>
+            <div style="width:${tieOdds.prob_b*100}%; background:${teamColor(p.b)};"></div>
           </div>
-          <div class="qual-meta">${p.stage} &middot; ${p.dates}</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:9px; text-align:right; color:var(--ivory-dim);">${Math.round(tieOdds.prob_a*100)}/${Math.round(tieOdds.prob_b*100)}</div>
+        </div>` : '';
+      const winnerTag = resolved ? `
+        <div style="flex-shrink:0; font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; padding:4px 10px; border-radius:3px; background:rgba(217,184,74,0.15); color:var(--gold-soft); border:1px solid var(--gold);">
+          ${tieOdds.prob_a > 0.5 ? p.a : p.b} through
+        </div>` : '';
+
+      return `
+      <div class="qual-path" style="align-items:flex-start; ${resolved ? 'border-color:var(--gold);' : ''}">
+        <div style="flex:1; min-width:0;">
+          <div class="qual-meta">${p.label} &middot; ${p.stage} &middot; ${p.dates}</div>
+          <div class="qual-teams">${p.a}<span class="vs">vs</span>${p.b}</div>
+          ${tieOdds && tieOdds.leg_note ? `<div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold-soft); margin-top:4px;">${tieOdds.leg_note}</div>` : ''}
         </div>
-        ${tieOdds ? probabilityBar([
-            {label: p.a, prob: tieOdds.prob_a, color: teamColor(p.a)},
-            {label: p.b, prob: tieOdds.prob_b, color: teamColor(p.b)},
-          ]) : ''}
+        ${winnerTag}${smallBar}
       </div>
     `;
     }).join('');
