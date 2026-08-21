@@ -2,8 +2,13 @@ name: Update standings
 
 on:
   schedule:
+    # Every 3 hours. football-data.org's free tier is 10 requests/minute,
+    # not a daily cap — this script makes about 8 calls per run (1 for CL
+    # fixtures, up to 7 for domestic league standings), comfortably under
+    # the limit even run back-to-back.
+    # enormous headroom even if you tighten this a lot.
     - cron: "0 */3 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch: {}   # lets you trigger a manual run from the Actions tab
 
 permissions:
   contents: write
@@ -24,7 +29,6 @@ jobs:
       - name: Fetch and compute standings
         env:
           FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: python scripts/fetch_and_compute.py
 
       - name: Commit updated data
