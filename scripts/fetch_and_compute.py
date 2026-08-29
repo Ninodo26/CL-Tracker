@@ -16,6 +16,7 @@ import math
 import os
 import random
 import sys
+import time
 from pathlib import Path
 
 import requests
@@ -26,6 +27,27 @@ if not API_KEY:
 
 BASE_URL = "https://api.football-data.org/v4"
 HEADERS = {"X-Auth-Token": API_KEY}
+
+# football-data.org's free tier is 10 requests/minute. Domestic form now
+# pulls two seasons (current + last) across 7 leagues, plus the CL fixtures
+# call itself — that's ~15 calls a run, comfortably over 10/min if fired
+# back-to-back, which is exactly what caused real 429 crashes in
+# production. FD_REQUEST_DELAY throttles every call below that limit;
+# fd_get() also retries once on a 429 rather than crashing the run.
+FD_REQUEST_DELAY = 6.5  # seconds between calls — keeps us under 10/min with margin
+
+
+def fd_get(url, params, timeout=30):
+    """Wraps requests.get for football-data.org with rate-limit throttling
+    and one retry on a 429, so a burst of calls degrades gracefully
+    instead of crashing main()."""
+    time.sleep(FD_REQUEST_DELAY)
+    resp = requests.get(url, headers=HEADERS, params=params, timeout=timeout)
+    if resp.status_code == 429:
+        print(f"WARNING: rate limited on {url} — waiting 60s and retrying once")
+        time.sleep(60)
+        resp = requests.get(url, headers=HEADERS, params=params, timeout=timeout)
+    return resp
 COMPETITION_CODE = "CL"  # a stable short code, not a numeric ID to verify
 
 # Optional second source, only for the 4 domestic leagues football-data.org's
@@ -193,11 +215,9 @@ def fetch_fixtures():
     a normal "nothing exists yet" state, not a real failure, so it's
     handled here rather than left to crash the whole script.
     """
-    resp = requests.get(
+    resp = fd_get(
         f"{BASE_URL}/competitions/{COMPETITION_CODE}/matches",
-        headers=HEADERS,
         params={"season": SEASON},
-        timeout=30,
     )
     if resp.status_code == 404:
         print("INFO: no fixtures available yet for this season (expected "
@@ -277,9 +297,9 @@ def fetch_domestic_form(season):
 
     for code in DOMESTIC_LEAGUES:
         try:
-            resp = requests.get(
+            resp = fd_get(
                 f"{BASE_URL}/competitions/{code}/standings",
-                headers=HEADERS, params={"season": season}, timeout=30,
+                params={"season": season},
             )
             resp.raise_for_status()
             data = resp.json()
@@ -778,4 +798,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
