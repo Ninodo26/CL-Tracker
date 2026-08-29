@@ -302,6 +302,113 @@ const QUALIFYING_STILL_ALIVE = [
 ];
 
 let STANDINGS = null;
+let simulatedTable = null;  // null = showing real standings; set = showing one simulated rollout
+
+// Mirrors scripts/fetch_and_compute.py exactly, so a simulated season uses
+// the same math as the real Power Rankings probabilities — not a separate,
+// simplified toy version.
+const HOME_ADVANTAGE = 70;
+const BASE_DRAW_PROB = 0.24;
+const DRAW_CLOSENESS_BONUS = 0.06;
+
+function eloExpected(eloA, eloB, homeBonus){
+  const diff = (eloA + (homeBonus||0)) - eloB;
+  return 1 / (1 + Math.pow(10, -diff / 400));
+}
+
+function outcomeProbabilitiesJS(eloHome, eloAway){
+  const expectedHome = eloExpected(eloHome, eloAway, HOME_ADVANTAGE);
+  const diff = Math.abs((eloHome + HOME_ADVANTAGE) - eloAway);
+  const closeness = Math.max(0, 1 - diff / 800);
+  const drawProb = BASE_DRAW_PROB + DRAW_CLOSENESS_BONUS * closeness;
+  const remaining = 1 - drawProb;
+  return [remaining * expectedHome, drawProb, remaining * (1 - expectedHome)];
+}
+
+function randomMargin(){
+  const options = [1, 1, 2, 2, 3];
+  return options[Math.floor(Math.random() * options.length)];
+}
+
+/** Rolls ONE random full-season outcome using real current Elo and the
+ * real remaining fixture list — same model as the backend's 20,000-run
+ * Monte Carlo, just showing a single draw instead of the aggregate odds. */
+function simulateOneSeason(){
+  const teams = STANDINGS.teams || [];
+  const matches = STANDINGS.matches || [];
+  if (!teams.length || !matches.length) return null;
+
+  const eloByName = {};
+  teams.forEach(t => eloByName[t.name] = t.elo);
+
+  const state = {};
+  teams.forEach(t => state[t.name] = {
+    name: t.name, points: t.points, gf: t.played ? (t.gd + 0) : 0, gd: t.gd,
+  });
+
+  matches.filter(m => !m.played).forEach(m => {
+    const eloHome = eloByName[m.home], eloAway = eloByName[m.away];
+    if (eloHome === undefined || eloAway === undefined) return;
+    const [pHome, pDraw, pAway] = outcomeProbabilitiesJS(eloHome, eloAway);
+    const roll = Math.random();
+    if (roll < pHome){
+      state[m.home].points += 3;
+      const margin = randomMargin();
+      state[m.home].gd += margin; state[m.away].gd -= margin;
+    } else if (roll < pHome + pDraw){
+      state[m.home].points += 1; state[m.away].points += 1;
+    } else {
+      state[m.away].points += 3;
+      const margin = randomMargin();
+      state[m.away].gd += margin; state[m.home].gd -= margin;
+    }
+  });
+
+  const result = Object.values(state).sort((a,b) => b.points - a.points || b.gd - a.gd);
+  result.forEach((r, i) => r.rank = i + 1);
+
+  const headline = buildSurpriseHeadline(result, teams);
+  return {table: result, headline};
+}
+
+/**
+ * Finds whichever outcome in this roll was most statistically surprising,
+ * using each team's REAL season-long probability from the backend's
+ * 20,000-run Monte Carlo (prob_top8) — not estimated from this one roll.
+ * Compares "made top 8 in this roll" (true/false) against how likely that
+ * actually was, and headlines whichever team has the biggest gap.
+ */
+function buildSurpriseHeadline(result, teams){
+  const probByName = {};
+  teams.forEach(t => probByName[t.name] = t.prob_top8 !== undefined ? t.prob_top8 : null);
+
+  let best = null;
+  result.forEach(r => {
+    const prob = probByName[r.name];
+    if (prob === null || prob === undefined) return;
+    const madeTop8 = r.rank <= 8;
+    // Surprise size: how far the actual outcome was from what was likely.
+    // Missing out despite a high prob_top8, or making it despite a low one,
+    // are both surprises — measured the same way, just opposite direction.
+    const surprise = madeTop8 ? (1 - prob) : prob;
+    if (surprise < 0.15) return;  // not actually surprising, skip
+    if (!best || surprise > best.surprise){
+      best = {name: r.name, madeTop8, prob, surprise};
+    }
+  });
+
+  if (!best) return null;
+
+  const actualOutcomeProb = best.madeTop8 ? best.prob : (1 - best.prob);
+  const oddsAgainst = Math.round(1 / actualOutcomeProb);
+  const pct = actualOutcomeProb * 100;
+  const pctLabel = pct < 0.1 ? '0.1% or less' : `${pct.toFixed(1)}%`;
+
+  if (best.madeTop8){
+    return `One-in-${oddsAgainst} season: ${best.name} make the automatic top 8 (${pctLabel} chance).`;
+  }
+  return `One-in-${oddsAgainst} season: ${best.name} miss out entirely (${pctLabel} chance).`;
+}
 
 function initials(name){
   return name.replace(/[^A-Za-zÀ-ÿ0-9\s]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
@@ -425,6 +532,7 @@ boot();
 
   <div class="tab-panel active" id="panel-standings">
     <div id="focus"></div>
+    <div id="simulate-controls"></div>
     <div id="standings-content"></div>
   </div>
 
@@ -501,10 +609,63 @@ function renderFocusPanel(selectedName){
   </div>`;
 }
 
+function renderSimulateControls(){
+  const el = document.getElementById('simulate-controls');
+  if (!el) return;
+  const teams = STANDINGS.teams || [];
+  const matches = STANDINGS.matches || [];
+  const hasRemaining = matches.some(m => !m.played);
+
+  if (!teams.length || !hasRemaining){
+    el.innerHTML = '';  // nothing to simulate yet — pre-season or season over
+    return;
+  }
+
+  el.innerHTML = `<div style="display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap;">
+    <button class="none-btn" style="width:auto; margin-top:0; padding:10px 18px;" onclick="runSimulation()">🎲 Simulate season</button>
+    ${simulatedTable ? `<button class="none-btn" style="width:auto; margin-top:0; padding:10px 18px;" onclick="clearSimulation()">← Back to real table</button>` : ''}
+  </div>`;
+}
+
+function runSimulation(){
+  simulatedTable = simulateOneSeason();
+  renderSimulateControls();
+  renderStandings();
+}
+
+function clearSimulation(){
+  simulatedTable = null;
+  renderSimulateControls();
+  renderStandings();
+}
+
 function renderStandings(){
   const el = document.getElementById('standings-content');
   if (!el) return;
   const teams = STANDINGS.teams || [];
+
+  if (simulatedTable){
+    const table = simulatedTable.table;
+    const maxPoints = Math.max(...table.map(t => t.points), 1);
+    const rows = table.map(t => `
+      <div class="standings-row">
+        <div class="standings-row-top">
+          <span class="rank">${t.rank}</span>
+          ${crestOrChipHTML(t.name, 20, 'circle')}
+          <span class="team-name">${t.name}</span>
+          <span class="pts">${t.points} pts</span>
+          <div style="width:44px; height:8px; border-radius:4px; overflow:hidden; box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08); flex-shrink:0;">
+            <div style="width:${(t.points/maxPoints*100).toFixed(1)}%; height:100%; background:${teamColor(t.name)};"></div>
+          </div>
+        </div>
+      </div>`).join('');
+    const headlineHTML = simulatedTable.headline
+      ? `<div class="provisional-note" style="background:rgba(217,184,74,0.15); border-color:var(--gold); color:var(--gold-soft); font-weight:600; margin-bottom:10px;">⚡ ${simulatedTable.headline}</div>`
+      : '';
+    el.innerHTML = `${headlineHTML}<div class="provisional-note" style="background:rgba(94,200,242,0.12); border-color:var(--ice); color:var(--ice);">🎲 One simulated outcome — rolled using real current form, not the average. Press "Simulate season" again for a different roll.</div>
+    <div class="fade-in">${rows}</div>`;
+    return;
+  }
 
   if (teams.length === 0){
     const provisional = STANDINGS.provisional_standings;
@@ -766,6 +927,7 @@ function renderAll(){
   }
   renderTeamSwitcher();
   renderFocusPanel(localStorage.getItem('cl-tracker-team'));
+  renderSimulateControls();
   renderStandings();
   renderMatches();
   renderQualifying();
