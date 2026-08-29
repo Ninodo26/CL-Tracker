@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T07:03:35.841212Z",
+  "generated_at": "2026-08-29T12:47:32.651573Z",
   "league_phase_matchdays": 8,
   "top_auto_r16": 8,
   "top_playoff_cutoff": 24,
@@ -11,79 +11,99 @@
       "label": "Champions Path \u2014 CP1",
       "a": "Dinamo Zagreb",
       "b": "Kauno Zalgiris",
-      "prob_a": 0.65,
-      "prob_b": 0.35
+      "prob_a": 1.0,
+      "prob_b": 0.0,
+      "leg_note": "Dinamo Zagreb 5-0 Kauno Zalgiris",
+      "resolved": false
     },
     {
       "label": "Champions Path \u2014 CP2",
       "a": "Slovan Bratislava",
       "b": "Mjallby AIF",
-      "prob_a": 0.643,
-      "prob_b": 0.357
+      "prob_a": 0.848,
+      "prob_b": 0.152,
+      "leg_note": "Slovan Bratislava 2-1 Mjallby AIF",
+      "resolved": false
     },
     {
       "label": "Champions Path \u2014 CP3",
       "a": "Kairat Almaty",
       "b": "Levski Sofia",
-      "prob_a": 0.503,
-      "prob_b": 0.497
+      "prob_a": 0.345,
+      "prob_b": 0.655,
+      "leg_note": "Levski Sofia 1-0 Kairat Almaty",
+      "resolved": false
     },
     {
       "label": "Champions Path \u2014 CP4",
       "a": "AGF Aarhus",
       "b": "Sabah FK",
-      "prob_a": 0.518,
-      "prob_b": 0.482
+      "prob_a": 0.0,
+      "prob_b": 1.0,
+      "leg_note": "Final: Sabah FK won 5-2 on aggregate",
+      "resolved": true
     },
     {
       "label": "Champions Path \u2014 CP5",
       "a": "NK Celje",
       "b": "Ararat-Armenia",
-      "prob_a": 0.59,
-      "prob_b": 0.41
+      "prob_a": 0.398,
+      "prob_b": 0.602,
+      "leg_note": "Ararat-Armenia 2-1 NK Celje",
+      "resolved": false
     },
     {
       "label": "Champions Path \u2014 CP6",
       "a": "Red Star Belgrade",
-      "b": "Vikingur Reykjavik",
-      "prob_a": 0.679,
-      "prob_b": 0.321
+      "b": "Hapoel Beer Sheva",
+      "prob_a": 0.0,
+      "prob_b": 1.0,
+      "leg_note": "Final: Hapoel Beer Sheva won 3-0 on aggregate",
+      "resolved": true
     },
     {
       "label": "League Path \u2014 LP1",
       "a": "Olympiacos",
       "b": "NEC Nijmegen",
-      "prob_a": 0.741,
-      "prob_b": 0.259
+      "prob_a": 0.738,
+      "prob_b": 0.262,
+      "leg_note": "Olympiacos 0-0 NEC Nijmegen",
+      "resolved": false
     },
     {
       "label": "League Path \u2014 LP2",
       "a": "Bodo/Glimt",
       "b": "Union Saint-Gilloise",
-      "prob_a": 0.587,
-      "prob_b": 0.413
+      "prob_a": 0.647,
+      "prob_b": 0.353,
+      "leg_note": "Bodo/Glimt 3-3 Union Saint-Gilloise",
+      "resolved": false
     },
     {
       "label": "League Path \u2014 LP3",
       "a": "Fenerbahce",
       "b": "Sturm Graz",
-      "prob_a": 0.652,
-      "prob_b": 0.348
+      "prob_a": 0.681,
+      "prob_b": 0.319,
+      "leg_note": "Fenerbahce 0-0 Sturm Graz",
+      "resolved": false
     },
     {
       "label": "League Path \u2014 LP4",
       "a": "Lyon",
       "b": "Sparta Prague",
-      "prob_a": 0.632,
-      "prob_b": 0.368
+      "prob_a": 1.0,
+      "prob_b": 0.0,
+      "leg_note": "Final: Lyon won 4-2 on aggregate",
+      "resolved": true
     }
   ],
   "provisional_standings": [
     {
       "name": "Bayern Munich",
       "coefficient": 147.5,
-      "form_adjustment": 101,
-      "elo": 2191,
+      "form_adjustment": 0,
+      "elo": 2090,
       "rank": 1
     },
     {
@@ -94,192 +114,192 @@
       "rank": 2
     },
     {
+      "name": "Borussia Dortmund",
+      "coefficient": 100.75,
+      "form_adjustment": 137,
+      "elo": 2040,
+      "rank": 3
+    },
+    {
       "name": "Paris Saint-Germain",
       "coefficient": 132.0,
       "form_adjustment": 0,
       "elo": 2028,
-      "rank": 3
+      "rank": 4
     },
     {
       "name": "Liverpool",
       "coefficient": 130.0,
       "form_adjustment": 0,
       "elo": 2020,
-      "rank": 4
+      "rank": 5
     },
     {
       "name": "Inter",
       "coefficient": 127.0,
       "form_adjustment": 0,
       "elo": 2008,
-      "rank": 5
+      "rank": 6
     },
     {
       "name": "Manchester City",
       "coefficient": 125.5,
       "form_adjustment": 0,
       "elo": 2002,
-      "rank": 6
+      "rank": 7
     },
     {
       "name": "Arsenal",
       "coefficient": 119.0,
       "form_adjustment": 0,
       "elo": 1976,
-      "rank": 7
+      "rank": 8
     },
     {
       "name": "Barcelona",
       "coefficient": 113.25,
       "form_adjustment": 0,
       "elo": 1953,
-      "rank": 8
+      "rank": 9
     },
     {
       "name": "Atletico Madrid",
       "coefficient": 104.75,
       "form_adjustment": 0,
       "elo": 1919,
-      "rank": 9
+      "rank": 10
     },
     {
       "name": "Roma",
       "coefficient": 97.75,
       "form_adjustment": 0,
       "elo": 1891,
-      "rank": 10
+      "rank": 11
     },
     {
-      "name": "Borussia Dortmund",
-      "coefficient": 100.75,
-      "form_adjustment": -16,
-      "elo": 1887,
-      "rank": 11
+      "name": "RB Leipzig",
+      "coefficient": 61.0,
+      "form_adjustment": 95,
+      "elo": 1839,
+      "rank": 12
     },
     {
       "name": "Sporting CP",
       "coefficient": 84.0,
       "form_adjustment": 0,
       "elo": 1836,
-      "rank": 12
+      "rank": 13
     },
     {
       "name": "Aston Villa",
       "coefficient": 83.0,
       "form_adjustment": 0,
       "elo": 1832,
-      "rank": 13
+      "rank": 14
     },
     {
       "name": "Porto",
       "coefficient": 80.75,
       "form_adjustment": 0,
       "elo": 1823,
-      "rank": 14
+      "rank": 15
     },
     {
       "name": "Manchester United",
       "coefficient": 76.5,
       "form_adjustment": 0,
       "elo": 1806,
-      "rank": 15
+      "rank": 16
     },
     {
       "name": "Club Brugge",
       "coefficient": 75.25,
       "form_adjustment": 0,
       "elo": 1801,
-      "rank": 16
+      "rank": 17
     },
     {
       "name": "Real Betis",
       "coefficient": 74.5,
       "form_adjustment": 0,
       "elo": 1798,
-      "rank": 17
+      "rank": 18
     },
     {
       "name": "PSV Eindhoven",
       "coefficient": 71.25,
       "form_adjustment": 0,
       "elo": 1785,
-      "rank": 18
+      "rank": 19
     },
     {
       "name": "Feyenoord",
       "coefficient": 71.0,
       "form_adjustment": 0,
       "elo": 1784,
-      "rank": 19
+      "rank": 20
     },
     {
       "name": "Lille",
       "coefficient": 68.75,
       "form_adjustment": 0,
       "elo": 1775,
-      "rank": 20
+      "rank": 21
     },
     {
       "name": "Napoli",
       "coefficient": 63.0,
       "form_adjustment": 0,
       "elo": 1752,
-      "rank": 21
+      "rank": 22
     },
     {
       "name": "Villarreal",
       "coefficient": 59.0,
       "form_adjustment": 0,
       "elo": 1736,
-      "rank": 22
+      "rank": 23
     },
     {
       "name": "Shakhtar Donetsk",
       "coefficient": 56.25,
       "form_adjustment": 0,
       "elo": 1725,
-      "rank": 23
+      "rank": 24
     },
     {
-      "name": "RB Leipzig",
-      "coefficient": 61.0,
-      "form_adjustment": -30,
-      "elo": 1714,
-      "rank": 24
+      "name": "VfB Stuttgart",
+      "coefficient": 27.5,
+      "form_adjustment": 80,
+      "elo": 1690,
+      "rank": 25
     },
     {
       "name": "Galatasaray",
       "coefficient": 46.5,
       "form_adjustment": 0,
       "elo": 1686,
-      "rank": 25
+      "rank": 26
     },
     {
       "name": "Slavia Praha",
       "coefficient": 44.0,
       "form_adjustment": 0,
       "elo": 1676,
-      "rank": 26
+      "rank": 27
     },
     {
       "name": "Como",
       "coefficient": 19.989,
       "form_adjustment": 0,
       "elo": 1580,
-      "rank": 27
+      "rank": 28
     },
     {
       "name": "Lens",
       "coefficient": 16.699,
       "form_adjustment": 0,
       "elo": 1567,
-      "rank": 28
-    },
-    {
-      "name": "VfB Stuttgart",
-      "coefficient": 27.5,
-      "form_adjustment": -55,
-      "elo": 1555,
       "rank": 29
     }
   ]
