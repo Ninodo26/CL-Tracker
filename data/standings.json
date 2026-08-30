@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T03:54:39.559848Z",
+  "generated_at": "2026-08-30T11:22:21.623897Z",
   "league_phase_matchdays": 8,
   "top_auto_r16": 8,
   "top_playoff_cutoff": 24,
@@ -20,8 +20,8 @@
       "label": "Champions Path \u2014 CP2",
       "a": "Slovan Bratislava",
       "b": "Mjallby AIF",
-      "prob_a": 0.863,
-      "prob_b": 0.137,
+      "prob_a": 0.852,
+      "prob_b": 0.148,
       "leg_note": "Slovan Bratislava 2-1 Mjallby AIF",
       "resolved": false
     },
@@ -29,8 +29,8 @@
       "label": "Champions Path \u2014 CP3",
       "a": "Kairat Almaty",
       "b": "Levski Sofia",
-      "prob_a": 0.351,
-      "prob_b": 0.649,
+      "prob_a": 0.352,
+      "prob_b": 0.648,
       "leg_note": "Levski Sofia 1-0 Kairat Almaty",
       "resolved": false
     },
@@ -65,8 +65,8 @@
       "label": "League Path \u2014 LP1",
       "a": "Olympiacos",
       "b": "NEC Nijmegen",
-      "prob_a": 0.744,
-      "prob_b": 0.256,
+      "prob_a": 0.745,
+      "prob_b": 0.255,
       "leg_note": "Olympiacos 0-0 NEC Nijmegen",
       "resolved": false
     },
@@ -74,8 +74,8 @@
       "label": "League Path \u2014 LP2",
       "a": "Bodo/Glimt",
       "b": "Union Saint-Gilloise",
-      "prob_a": 0.645,
-      "prob_b": 0.355,
+      "prob_a": 0.628,
+      "prob_b": 0.372,
       "leg_note": "Bodo/Glimt 3-3 Union Saint-Gilloise",
       "resolved": false
     },
@@ -83,8 +83,8 @@
       "label": "League Path \u2014 LP3",
       "a": "Fenerbahce",
       "b": "Sturm Graz",
-      "prob_a": 0.684,
-      "prob_b": 0.316,
+      "prob_a": 0.675,
+      "prob_b": 0.325,
       "leg_note": "Fenerbahce 0-0 Sturm Graz",
       "resolved": false
     },
