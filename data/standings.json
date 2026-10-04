@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T04:33:49.065898Z",
+  "generated_at": "2026-10-04T11:52:04.611087Z",
   "league_phase_matchdays": 8,
   "top_auto_r16": 8,
   "top_playoff_cutoff": 24,
@@ -28,8 +28,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.257,
-      "prob_top24": 0.814,
+      "prob_top8": 0.261,
+      "prob_top24": 0.82,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 1
@@ -57,8 +57,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.495,
-      "prob_top24": 0.933,
+      "prob_top8": 0.502,
+      "prob_top24": 0.932,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 2
@@ -86,7 +86,7 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.736,
+      "prob_top8": 0.733,
       "prob_top24": 0.984,
       "status_top8": "alive",
       "status_top24": "alive",
@@ -115,8 +115,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.095,
-      "prob_top24": 0.582,
+      "prob_top8": 0.097,
+      "prob_top24": 0.583,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 4
@@ -144,8 +144,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.332,
-      "prob_top24": 0.871,
+      "prob_top8": 0.339,
+      "prob_top24": 0.87,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 5
@@ -173,8 +173,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.161,
-      "prob_top24": 0.705,
+      "prob_top8": 0.163,
+      "prob_top24": 0.707,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 6
@@ -202,8 +202,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.366,
-      "prob_top24": 0.889,
+      "prob_top8": 0.37,
+      "prob_top24": 0.891,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 7
@@ -231,8 +231,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.687,
-      "prob_top24": 0.982,
+      "prob_top8": 0.688,
+      "prob_top24": 0.98,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 8
@@ -260,8 +260,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.097,
-      "prob_top24": 0.612,
+      "prob_top8": 0.092,
+      "prob_top24": 0.614,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 9
@@ -289,7 +289,7 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.966,
+      "prob_top8": 0.965,
       "prob_top24": 1.0,
       "status_top8": "alive",
       "status_top24": "alive",
@@ -318,8 +318,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.305,
-      "prob_top24": 0.848,
+      "prob_top8": 0.306,
+      "prob_top24": 0.849,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 11
@@ -348,7 +348,7 @@
         "score": null
       },
       "prob_top8": 0.078,
-      "prob_top24": 0.551,
+      "prob_top24": 0.544,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 12
@@ -376,8 +376,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.374,
-      "prob_top24": 0.881,
+      "prob_top8": 0.371,
+      "prob_top24": 0.879,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 13
@@ -405,8 +405,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.373,
-      "prob_top24": 0.884,
+      "prob_top8": 0.379,
+      "prob_top24": 0.883,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 14
@@ -434,8 +434,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.105,
-      "prob_top24": 0.624,
+      "prob_top8": 0.1,
+      "prob_top24": 0.625,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 15
@@ -463,8 +463,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.367,
-      "prob_top24": 0.888,
+      "prob_top8": 0.35,
+      "prob_top24": 0.886,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 16
@@ -492,8 +492,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.125,
-      "prob_top24": 0.635,
+      "prob_top8": 0.12,
+      "prob_top24": 0.625,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 17
@@ -521,7 +521,7 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.322,
+      "prob_top8": 0.32,
       "prob_top24": 0.84,
       "status_top8": "alive",
       "status_top24": "alive",
@@ -551,7 +551,7 @@
         "score": null
       },
       "prob_top8": 0.162,
-      "prob_top24": 0.699,
+      "prob_top24": 0.698,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 19
@@ -579,8 +579,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.082,
-      "prob_top24": 0.537,
+      "prob_top8": 0.083,
+      "prob_top24": 0.538,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 20
@@ -608,8 +608,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.053,
-      "prob_top24": 0.448,
+      "prob_top8": 0.049,
+      "prob_top24": 0.449,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 21
@@ -637,8 +637,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.071,
-      "prob_top24": 0.511,
+      "prob_top8": 0.072,
+      "prob_top24": 0.506,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 22
@@ -666,7 +666,7 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.118,
+      "prob_top8": 0.115,
       "prob_top24": 0.619,
       "status_top8": "alive",
       "status_top24": "alive",
@@ -695,8 +695,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.035,
-      "prob_top24": 0.386,
+      "prob_top8": 0.039,
+      "prob_top24": 0.389,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 24
@@ -725,7 +725,7 @@
         "score": null
       },
       "prob_top8": 0.143,
-      "prob_top24": 0.699,
+      "prob_top24": 0.701,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 25
@@ -753,8 +753,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.234,
-      "prob_top24": 0.78,
+      "prob_top8": 0.241,
+      "prob_top24": 0.784,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 26
@@ -782,8 +782,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.046,
-      "prob_top24": 0.411,
+      "prob_top8": 0.044,
+      "prob_top24": 0.408,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 27
@@ -811,8 +811,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.042,
-      "prob_top24": 0.431,
+      "prob_top8": 0.043,
+      "prob_top24": 0.434,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 28
@@ -840,8 +840,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.046,
-      "prob_top24": 0.422,
+      "prob_top8": 0.047,
+      "prob_top24": 0.424,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 29
@@ -869,8 +869,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.043,
-      "prob_top24": 0.411,
+      "prob_top8": 0.042,
+      "prob_top24": 0.403,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 30
@@ -898,8 +898,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.269,
-      "prob_top24": 0.815,
+      "prob_top8": 0.266,
+      "prob_top24": 0.813,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 31
@@ -927,8 +927,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.229,
-      "prob_top24": 0.785,
+      "prob_top8": 0.232,
+      "prob_top24": 0.787,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 32
@@ -956,8 +956,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.113,
-      "prob_top24": 0.605,
+      "prob_top8": 0.111,
+      "prob_top24": 0.598,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 33
@@ -985,8 +985,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.01,
-      "prob_top24": 0.215,
+      "prob_top8": 0.011,
+      "prob_top24": 0.216,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 34
@@ -1014,8 +1014,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.034,
-      "prob_top24": 0.359,
+      "prob_top8": 0.039,
+      "prob_top24": 0.368,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 35
@@ -1043,8 +1043,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.03,
-      "prob_top24": 0.345,
+      "prob_top8": 0.027,
+      "prob_top24": 0.35,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 36
@@ -2866,8 +2866,8 @@
       "label": "Champions Path \u2014 CP2",
       "a": "Slovan Bratislava",
       "b": "Mjallby AIF",
-      "prob_a": 0.858,
-      "prob_b": 0.142,
+      "prob_a": 0.87,
+      "prob_b": 0.13,
       "leg_note": "Slovan Bratislava 2-1 Mjallby AIF",
       "resolved": false
     },
@@ -2875,8 +2875,8 @@
       "label": "Champions Path \u2014 CP3",
       "a": "Kairat Almaty",
       "b": "Levski Sofia",
-      "prob_a": 0.349,
-      "prob_b": 0.651,
+      "prob_a": 0.342,
+      "prob_b": 0.658,
       "leg_note": "Levski Sofia 1-0 Kairat Almaty",
       "resolved": false
     },
@@ -2893,8 +2893,8 @@
       "label": "Champions Path \u2014 CP5",
       "a": "NK Celje",
       "b": "Ararat-Armenia",
-      "prob_a": 0.388,
-      "prob_b": 0.612,
+      "prob_a": 0.396,
+      "prob_b": 0.604,
       "leg_note": "Ararat-Armenia 2-1 NK Celje",
       "resolved": false
     },
@@ -2911,8 +2911,8 @@
       "label": "League Path \u2014 LP1",
       "a": "Olympiacos",
       "b": "NEC Nijmegen",
-      "prob_a": 0.741,
-      "prob_b": 0.259,
+      "prob_a": 0.749,
+      "prob_b": 0.251,
       "leg_note": "Olympiacos 0-0 NEC Nijmegen",
       "resolved": false
     },
@@ -2920,8 +2920,8 @@
       "label": "League Path \u2014 LP2",
       "a": "Bodo/Glimt",
       "b": "Union Saint-Gilloise",
-      "prob_a": 0.64,
-      "prob_b": 0.36,
+      "prob_a": 0.629,
+      "prob_b": 0.371,
       "leg_note": "Bodo/Glimt 3-3 Union Saint-Gilloise",
       "resolved": false
     },
@@ -2929,8 +2929,8 @@
       "label": "League Path \u2014 LP3",
       "a": "Fenerbahce",
       "b": "Sturm Graz",
-      "prob_a": 0.685,
-      "prob_b": 0.315,
+      "prob_a": 0.679,
+      "prob_b": 0.321,
       "leg_note": "Fenerbahce 0-0 Sturm Graz",
       "resolved": false
     },
