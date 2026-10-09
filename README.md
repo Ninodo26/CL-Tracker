@@ -102,6 +102,10 @@ Real modeling choices, not just implementation details:
   declined since. Form alone is noisy over a handful of games. Blending
   both is deliberately closer to how real prediction models handle it
   than either signal on its own.
+- API team spellings pass through one canonical alias map before coefficient
+  lookup. A confirmed league-phase club without a configured coefficient
+  stops the run with a clear error; only unlisted qualifying opponents may
+  use the explicitly warned estimate in `DEFAULT_COEFFICIENT`.
 - Domestic form only covers 7 of the ~11 countries in the 29 confirmed
   clubs — England, Spain, Germany, Italy, France, Netherlands, Portugal
   (`DOMESTIC_LEAGUES`). Belgium, Turkey, Ukraine, and Czechia aren't on
@@ -119,8 +123,9 @@ Real modeling choices, not just implementation details:
   other assumptions can really support.
 - Draw probability is highest between evenly-matched teams and shrinks
   as the rating gap widens. The win/draw/loss conversion preserves the
-  Elo expected score (`P(win) + 0.5 × P(draw)`) and caps draws when the
-  rating gap makes a larger draw probability mathematically impossible.
+  Elo expected score (`P(win) + 0.5 × P(draw)`). It scales the closeness
+  curve by the normalized variance of Elo expected score so all three
+  outcomes stay feasible as the rating gap grows.
   The curve is not fit to historical CL data.
 - The percentage shown is how often a team lands in the top 8 / top 24
   across all 20,000 simulated seasons
