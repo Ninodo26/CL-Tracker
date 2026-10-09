@@ -320,8 +320,10 @@ function outcomeProbabilitiesJS(eloHome, eloAway){
   const expectedHome = eloExpected(eloHome, eloAway, HOME_ADVANTAGE);
   const diff = Math.abs((eloHome + HOME_ADVANTAGE) - eloAway);
   const closeness = Math.max(0, 1 - diff / 800);
-  let drawProb = BASE_DRAW_PROB + DRAW_CLOSENESS_BONUS * closeness;
-  drawProb = Math.min(drawProb, 2 * Math.min(expectedHome, 1 - expectedHome));
+  const maximumDrawProb = BASE_DRAW_PROB + DRAW_CLOSENESS_BONUS * closeness;
+  // Match the backend: scale draw mass by normalized Elo-score variance,
+  // then allocate win/loss around E so P(win) + 0.5*P(draw) remains E.
+  const drawProb = maximumDrawProb * 4 * expectedHome * (1 - expectedHome);
   return [expectedHome - drawProb / 2, drawProb, 1 - expectedHome - drawProb / 2];
 }
 
