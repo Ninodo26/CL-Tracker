@@ -19,6 +19,7 @@ import sys
 import time
 import re
 import unicodedata
+import warnings
 from pathlib import Path
 
 import requests
@@ -122,9 +123,9 @@ OUT_PATH = Path(__file__).resolve().parent.parent / "data" / "standings.json"
 
 # 2026 UEFA club coefficients for the 29 confirmed teams, used to seed each
 # team's starting Elo rating before any league-phase match has been played.
-# Source: UEFA coefficient rankings, as of the 2026/27 season. Update this
-# if a team's coefficient changes materially or a name doesn't match the
-# API's spelling — matching is exact-string, see seed_elo() below.
+# Source: UEFA coefficient rankings, as of the 2026/27 season. Keep these
+# keys canonical; API spellings are normalized through TEAM_ALIASES before
+# lookup. A missing coefficient for a confirmed team is an error, not a fallback.
 STARTING_COEFFICIENTS = {
     "Paris Saint-Germain": 132.0, "Bayern Munich": 147.5, "Real Madrid": 144.5,
     "Liverpool": 130.0, "Inter": 127.0, "Manchester City": 125.5,
@@ -136,7 +137,9 @@ STARTING_COEFFICIENTS = {
     "Villarreal": 59.0, "Shakhtar Donetsk": 56.25, "Slavia Praha": 44.0,
     "VfB Stuttgart": 27.5, "Galatasaray": 46.5, "Como": 19.989, "Lens": 16.699,
 }
-DEFAULT_COEFFICIENT = 15.0  # fallback for any of the 7 late qualifiers not listed above
+# Explicit estimate used only for an unconfirmed qualifying opponent with no
+# published coefficient. Confirmed league-phase teams never use this value.
+DEFAULT_COEFFICIENT = 15.0
 
 # Real 2026 coefficients for teams still in the qualifying rounds, so tie
 # odds reflect actual strength gaps instead of defaulting every qualifier
@@ -205,35 +208,54 @@ FD_CANCELLED_STATUSES = {"CANCELLED"}
 # Normalize spelling/diacritics at every boundary. Explicit aliases cover
 # common API naming variants that are not simple accent/punctuation changes.
 TEAM_ALIASES = {
+    "1 fc union berlin": "Union Berlin",
+    "arsenal fc": "Arsenal",
+    "aston villa fc": "Aston Villa",
+    "atletico": "Atletico Madrid",
+    "atletico de madrid": "Atletico Madrid",
+    "atletico madrid cf": "Atletico Madrid",
+    "as roma": "Roma",
+    "bayern munchen": "Bayern Munich",
     "bodo glimt": "Bodo/Glimt",
-    "fk bodo glimt": "Bodo/Glimt",
-    "atletico": "Atletico Madrid", "atletico de madrid": "Atletico Madrid",
-    "atletico madrid cf": "Atletico Madrid", "fc barcelona": "Barcelona",
+    "borussia dortmund": "Borussia Dortmund",
+    "bvb": "Borussia Dortmund",
     "club atletico de madrid": "Atletico Madrid",
-    "real madrid cf": "Real Madrid", "fc bayern munchen": "Bayern Munich",
-    "bayern munchen": "Bayern Munich", "paris saint germain fc": "Paris Saint-Germain",
-    "liverpool fc": "Liverpool", "arsenal fc": "Arsenal",
-    "fenerbahce sk": "Fenerbahce", "pae aek": "AEK Athens",
-    "aston villa fc": "Aston Villa", "manchester city fc": "Manchester City",
-    "manchester united fc": "Manchester United", "fc porto": "Porto",
-    "club brugge kv": "Club Brugge", "psv": "PSV Eindhoven",
-    "ssc napoli": "Napoli", "as roma": "Roma", "losc lille": "Lille",
-    "rc lens": "Lens", "racing club de lens": "Lens", "como 1907": "Como",
-    "real betis balompie": "Real Betis",
-    "fc shakhtar donetsk": "Shakhtar Donetsk", "fk shakhtar donetsk": "Shakhtar Donetsk",
+    "club brugge kv": "Club Brugge",
+    "como 1907": "Como",
+    "fc barcelona": "Barcelona",
+    "fc bayern munchen": "Bayern Munich",
     "fc inter milan": "Inter",
-    "fc internazionale milano": "Inter", "sk slavia praha": "Slavia Praha",
-    "vfb stuttgart": "VfB Stuttgart", "lask linz": "LASK",
-    "viking fk": "Viking", "galatasaray sk": "Galatasaray",
-    "villarreal cf": "Villarreal", "lille osc": "Lille",
-    "feyenoord rotterdam": "Feyenoord", "sk slovan bratislava": "Slovan Bratislava",
-    "internazionale": "Inter", "fc internazionale milano": "Inter",
-    "paris saint germain": "Paris Saint-Germain", "psg": "Paris Saint-Germain",
-    "manchester united fc": "Manchester United", "manchester city fc": "Manchester City",
-    "borussia dortmund": "Borussia Dortmund", "bvb": "Borussia Dortmund",
-    "sporting clube de portugal": "Sporting CP", "sporting lisbon": "Sporting CP",
-    "slavia praha": "Slavia Praha", "1. fc union berlin": "Union Berlin",
-    "club brugge kv": "Club Brugge", "rb leipzig": "RB Leipzig",
+    "fc internazionale milano": "Inter",
+    "fc porto": "Porto",
+    "fc shakhtar donetsk": "Shakhtar Donetsk",
+    "fenerbahce sk": "Fenerbahce",
+    "feyenoord rotterdam": "Feyenoord",
+    "fk bodo glimt": "Bodo/Glimt",
+    "fk shakhtar donetsk": "Shakhtar Donetsk",
+    "galatasaray sk": "Galatasaray",
+    "internazionale": "Inter",
+    "lask linz": "LASK",
+    "liverpool fc": "Liverpool",
+    "lille osc": "Lille",
+    "losc lille": "Lille",
+    "manchester city fc": "Manchester City",
+    "manchester united fc": "Manchester United",
+    "pae aek": "AEK Athens",
+    "paris saint germain": "Paris Saint-Germain",
+    "paris saint germain fc": "Paris Saint-Germain",
+    "psg": "Paris Saint-Germain",
+    "psv": "PSV Eindhoven",
+    "racing club de lens": "Lens",
+    "rc lens": "Lens",
+    "real betis balompie": "Real Betis",
+    "real madrid cf": "Real Madrid",
+    "sk slavia praha": "Slavia Praha",
+    "sk slovan bratislava": "Slovan Bratislava",
+    "sporting clube de portugal": "Sporting CP",
+    "sporting lisbon": "Sporting CP",
+    "ssc napoli": "Napoli",
+    "viking fk": "Viking",
+    "villarreal cf": "Villarreal",
 }
 
 
@@ -506,14 +528,40 @@ def build_table(fixtures, form_adjustments):
     return teams
 
 
-def seed_elo(team_name, form_adjustments):
+def seed_elo(team_name, form_adjustments, *, allow_unlisted=False):
     team_name = normalize_team_name(team_name)
     form_adjustments = _normalize_adjustments(form_adjustments)
-    coef = STARTING_COEFFICIENTS.get(
-        team_name,
-        QUALIFYING_COEFFICIENTS.get(team_name, DEFAULT_COEFFICIENT),
-    )
+    coef = coefficient_for_team(team_name, allow_unlisted=allow_unlisted)
     return ELO_BASE + coef * ELO_COEF_SCALE + form_adjustments.get(team_name, 0)
+
+
+class MissingCoefficientError(ValueError):
+    """Raised when a team has no explicit UEFA coefficient configured."""
+
+
+def coefficient_for_team(team_name, *, allow_unlisted=False):
+    """Resolve a canonical coefficient, refusing silent guesses by default.
+
+    ``allow_unlisted`` is reserved for qualifying-tie opponents that are not
+    among the confirmed league-phase clubs. Those estimates emit a warning.
+    """
+    canonical = normalize_team_name(team_name)
+    if canonical in STARTING_COEFFICIENTS:
+        return STARTING_COEFFICIENTS[canonical]
+    if canonical in QUALIFYING_COEFFICIENTS:
+        return QUALIFYING_COEFFICIENTS[canonical]
+    if allow_unlisted:
+        warnings.warn(
+            f"No UEFA coefficient for unlisted qualifying opponent {team_name!r}; "
+            f"using explicit estimate {DEFAULT_COEFFICIENT}",
+            RuntimeWarning,
+            stacklevel=2,
+        )
+        return DEFAULT_COEFFICIENT
+    raise MissingCoefficientError(
+        f"No UEFA coefficient configured for {team_name!r} "
+        f"(normalized as {canonical!r}); add its canonical coefficient or alias."
+    )
 
 
 def elo_expected(elo_a, elo_b, home_bonus=0):
@@ -522,21 +570,31 @@ def elo_expected(elo_a, elo_b, home_bonus=0):
     return 1.0 / (1.0 + 10 ** (-diff / 400.0))
 
 
+def elo_tiebreak_probability(elo_a, elo_b):
+    """Return the bounded, deliberately mild rating tilt for a shootout."""
+    return max(0.0, min(1.0, 0.5 + (elo_a - elo_b) / 4000.0))
+
+
 def outcome_probabilities(elo_home, elo_away, home_bonus=HOME_ADVANTAGE):
     """
-    Three-way (home win / draw / away win) probabilities from an Elo gap.
-    Draw probability is highest when teams are evenly matched and shrinks
-    as the gap widens — a simplification of how real bookmaker models
-    handle draws, not a precise fit to historical CL data.
+    Return home-win, draw, and away-win probabilities.
+
+    Elo's logistic expected score is E = P(win) + 0.5*P(draw), not P(win).
+    A hand-designed closeness curve supplies a maximum draw rate; multiplying
+    it by 4*E*(1-E), the normalized variance of the decisive Elo expectation,
+    makes draw probability fall as one side becomes dominant while keeping
+    win and loss probabilities feasible. We then allocate outcomes around E,
+    preserving that expected score. These draw assumptions are not calibrated
+    to historical CL data.
     """
     expected_home = elo_expected(elo_home, elo_away, home_bonus=home_bonus)
     diff = abs((elo_home + home_bonus) - elo_away)
     closeness = max(0.0, 1 - diff / 800.0)
-    draw_prob = BASE_DRAW_PROB + DRAW_CLOSENESS_BONUS * closeness
+    maximum_draw_prob = BASE_DRAW_PROB + DRAW_CLOSENESS_BONUS * closeness
+    draw_prob = maximum_draw_prob * 4 * expected_home * (1 - expected_home)
     # Elo's expected score is p(win) + 0.5*p(draw). Allocate draw mass
-    # symmetrically while preserving that expected score. A large rating gap
-    # can support fewer draws, so cap draw probability at the feasible bound.
-    draw_prob = min(draw_prob, 2 * min(expected_home, 1 - expected_home))
+    # symmetrically around that score; the normalized-variance factor above
+    # keeps both decisive outcomes non-negative for any finite Elo gap.
     home_win_prob = expected_home - draw_prob / 2
     away_win_prob = 1 - expected_home - draw_prob / 2
     return home_win_prob, draw_prob, away_win_prob
@@ -646,8 +704,10 @@ def simulate_two_legged_tie(name_a, name_b, sims=TIE_SIMULATIONS):
     penalty-shootout model, since shootouts are close to 50/50 regardless
     of league form.
     """
-    elo_a = seed_elo(name_a, {})
-    elo_b = seed_elo(name_b, {})
+    if sims <= 0:
+        raise ValueError("sims must be a positive integer")
+    elo_a = seed_elo(name_a, {}, allow_unlisted=True)
+    elo_b = seed_elo(name_b, {}, allow_unlisted=True)
     a_advances = 0
 
     for _ in range(sims):
@@ -677,7 +737,7 @@ def simulate_two_legged_tie(name_a, name_b, sims=TIE_SIMULATIONS):
             # Level on aggregate — extra time/penalties, weighted only
             # slightly by rating rather than the full match model, since
             # shootouts are much closer to a coin flip than open play.
-            tiebreak_prob_a = 0.5 + (elo_a - elo_b) / 4000
+            tiebreak_prob_a = elo_tiebreak_probability(elo_a, elo_b)
             if random.random() < tiebreak_prob_a:
                 a_advances += 1
 
@@ -693,8 +753,10 @@ def simulate_remaining_leg(name_a, name_b, margin_for_a, sims=TIE_SIMULATIONS):
     applied to either side here — a reasonable simplification given what
     we actually know.
     """
-    elo_a = seed_elo(name_a, {})
-    elo_b = seed_elo(name_b, {})
+    if sims <= 0:
+        raise ValueError("sims must be a positive integer")
+    elo_a = seed_elo(name_a, {}, allow_unlisted=True)
+    elo_b = seed_elo(name_b, {}, allow_unlisted=True)
     a_advances = 0
 
     for _ in range(sims):
@@ -711,7 +773,7 @@ def simulate_remaining_leg(name_a, name_b, margin_for_a, sims=TIE_SIMULATIONS):
         elif agg < 0:
             pass
         else:
-            tiebreak_prob_a = 0.5 + (elo_a - elo_b) / 4000
+            tiebreak_prob_a = elo_tiebreak_probability(elo_a, elo_b)
             if random.random() < tiebreak_prob_a:
                 a_advances += 1
 
