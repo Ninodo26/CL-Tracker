@@ -248,6 +248,7 @@
 
 <div class="wrap" id="main-wrap" style="display:none;"></div>
 
+<script src="scripts/snapshot_validation.js"></script>
 <script>
 const CONFIRMED_TEAMS = [
   {name:"Paris Saint-Germain", color:"#004170", coef:132.0},
@@ -320,9 +321,11 @@ function outcomeProbabilitiesJS(eloHome, eloAway){
   const expectedHome = eloExpected(eloHome, eloAway, HOME_ADVANTAGE);
   const diff = Math.abs((eloHome + HOME_ADVANTAGE) - eloAway);
   const closeness = Math.max(0, 1 - diff / 800);
-  const drawProb = BASE_DRAW_PROB + DRAW_CLOSENESS_BONUS * closeness;
-  const remaining = 1 - drawProb;
-  return [remaining * expectedHome, drawProb, remaining * (1 - expectedHome)];
+  const maximumDrawProb = BASE_DRAW_PROB + DRAW_CLOSENESS_BONUS * closeness;
+  // Match the backend: scale draw mass by normalized Elo-score variance,
+  // then allocate win/loss around E so P(win) + 0.5*P(draw) remains E.
+  const drawProb = maximumDrawProb * 4 * expectedHome * (1 - expectedHome);
+  return [expectedHome - drawProb / 2, drawProb, 1 - expectedHome - drawProb / 2];
 }
 
 function randomMargin(){
@@ -336,14 +339,14 @@ function randomMargin(){
 function simulateOneSeason(){
   const teams = STANDINGS.teams || [];
   const matches = STANDINGS.matches || [];
-  if (!teams.length || !matches.length) return null;
+  if (!hasCompleteLeaguePhaseSchedule(STANDINGS) || !teams.length || !matches.length) return null;
 
   const eloByName = {};
   teams.forEach(t => eloByName[t.name] = t.elo);
 
   const state = {};
   teams.forEach(t => state[t.name] = {
-    name: t.name, points: t.points, gf: t.played ? (t.gd + 0) : 0, gd: t.gd,
+    name: t.name, points: t.points, gf: t.gf || 0, gd: t.gd,
   });
 
   matches.filter(m => !m.played).forEach(m => {
@@ -354,17 +357,19 @@ function simulateOneSeason(){
     if (roll < pHome){
       state[m.home].points += 3;
       const margin = randomMargin();
-      state[m.home].gd += margin; state[m.away].gd -= margin;
+      state[m.home].gd += margin; state[m.away].gd -= margin; state[m.home].gf += margin;
     } else if (roll < pHome + pDraw){
       state[m.home].points += 1; state[m.away].points += 1;
+      const goals = [0,1,1,2,2,3][Math.floor(Math.random()*6)];
+      state[m.home].gf += goals; state[m.away].gf += goals;
     } else {
       state[m.away].points += 3;
       const margin = randomMargin();
-      state[m.away].gd += margin; state[m.home].gd -= margin;
+      state[m.away].gd += margin; state[m.home].gd -= margin; state[m.away].gf += margin;
     }
   });
 
-  const result = Object.values(state).sort((a,b) => b.points - a.points || b.gd - a.gd);
+  const result = Object.values(state).sort((a,b) => b.points - a.points || b.gd - a.gd || b.gf - a.gf);
   result.forEach((r, i) => r.rank = i + 1);
 
   const headline = buildSurpriseHeadline(result, teams);
@@ -557,6 +562,7 @@ boot();
 
 <script>
 function narrativeFor(team){
+  if (team.status_top8 === 'pending') return `Qualification probabilities and clinch status are waiting for the complete league-phase schedule.`;
   if (team.status_top8 === 'clinched') return `Locked in. ${team.name} have clinched an automatic top-8 finish — straight to the Round of 16, no play-off needed.`;
   if (team.status_top24 === 'eliminated') return `Eliminated. Even winning every remaining game can't get ${team.name} into the top 24 — Champions League qualification is over for this campaign.`;
   if (team.status_top8 === 'eliminated' && team.status_top24 === 'clinched') return `Safety net secured. The automatic top-8 spot is out of reach, but ${team.name} have already clinched at least a play-off spot (9th–24th).`;
@@ -566,6 +572,7 @@ function narrativeFor(team){
 }
 
 function pill(status){
+  if (status === 'pending') return `<span class="status-alive">Pending</span>`;
   const cls = status === 'clinched' ? 'status-clinched' : status === 'eliminated' ? 'status-eliminated' : 'status-alive';
   const text = status === 'clinched' ? 'Clinched' : status === 'eliminated' ? 'Out' : 'Alive';
   return `<span class="status-pill ${cls}">${text}</span>`;
@@ -602,7 +609,7 @@ function renderFocusPanel(selectedName){
       <div class="stat-box"><span class="val">${team.points}</span><span class="lbl">points</span></div>
       <div class="stat-box"><span class="val">${team.played}/8</span><span class="lbl">played</span></div>
       <div class="stat-box"><span class="val">${team.gd > 0 ? '+' : ''}${team.gd}</span><span class="lbl">goal diff</span></div>
-      <div class="stat-box"><span class="val">${Math.round((team.prob_top8||0)*100)}%</span><span class="lbl">top-8 odds</span></div>
+      <div class="stat-box"><span class="val">${Number.isFinite(team.prob_top8) ? `${Math.round(team.prob_top8*100)}%` : '—'}</span><span class="lbl">top-8 odds</span></div>
     </div>
     <p class="focus-narrative">${narrativeFor(team)}</p>
     <div class="focus-next">${nextLine}</div>
@@ -616,7 +623,7 @@ function renderSimulateControls(){
   const matches = STANDINGS.matches || [];
   const hasRemaining = matches.some(m => !m.played);
 
-  if (!teams.length || !hasRemaining){
+  if (!teams.length || !hasRemaining || !hasCompleteLeaguePhaseSchedule(STANDINGS)){
     el.innerHTML = '';  // nothing to simulate yet — pre-season or season over
     return;
   }
@@ -643,6 +650,11 @@ function renderStandings(){
   const el = document.getElementById('standings-content');
   if (!el) return;
   const teams = STANDINGS.teams || [];
+  if (STANDINGS.generated_at){
+    const generatedAt = new Date(STANDINGS.generated_at);
+    const ageHours = (Date.now() - generatedAt.getTime()) / 3600000;
+    document.getElementById('updated-line').textContent = 'Last updated: ' + generatedAt.toUTCString() + (ageHours > 24 ? ' — DATA MAY BE STALE' : '');
+  }
 
   if (simulatedTable){
     const table = simulatedTable.table;
@@ -721,7 +733,6 @@ function renderStandings(){
     return;
   }
 
-  document.getElementById('updated-line').textContent = 'Last updated: ' + new Date(STANDINGS.generated_at).toUTCString();
   const selectedName = localStorage.getItem('cl-tracker-team');
   const maxPoints = Math.max(...teams.map(t => t.points), 1);
   let rows = '';
@@ -863,7 +874,12 @@ function renderRankings(){
     el.innerHTML = `<div class="empty"><strong>Available once the league phase begins</strong>Probabilities need real fixtures to simulate against — check back after the 27 August draw.</div>`;
     return;
   }
-  const sorted = [...teams].sort((a,b) => (b.prob_top8||0) - (a.prob_top8||0));
+  const hasOdds = hasValidQualificationOdds(STANDINGS);
+  const sorted = [...teams].sort((a,b) => (b.prob_top8 ?? -1) - (a.prob_top8 ?? -1));
+  if (!hasOdds){
+    el.innerHTML = `<div class="provisional-note">Qualification odds and clinch status are withheld until the complete 36-team, 144-fixture league-phase schedule is available. Current fixture data contains ${teams.length} teams and ${(STANDINGS.matches || []).length} matches.</div>`;
+    return;
+  }
   const rows = sorted.map(t => {
     const form = t.form_adjustment || 0;
     const formTag = form !== 0
@@ -877,10 +893,10 @@ function renderRankings(){
         <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);">Elo ${t.elo}${formTag}</span>
       </div>
       <div style="padding-left:2px;">
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim); margin-bottom:2px;">Top-8 &nbsp;${Math.round((t.prob_top8||0)*100)}%</div>
-        <div class="single-bar-track" style="margin-bottom:8px;"><div class="single-bar-fill" style="width:${Math.round((t.prob_top8||0)*100)}%; background:var(--gold);"></div></div>
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim); margin-bottom:2px;">Top-24 ${Math.round((t.prob_top24||0)*100)}%</div>
-        <div class="single-bar-track"><div class="single-bar-fill" style="width:${Math.round((t.prob_top24||0)*100)}%; background:var(--ice);"></div></div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim); margin-bottom:2px;">Top-8 &nbsp;${Math.round(t.prob_top8*100)}%</div>
+        <div class="single-bar-track" style="margin-bottom:8px;"><div class="single-bar-fill" style="width:${Math.round(t.prob_top8*100)}%; background:var(--gold);"></div></div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim); margin-bottom:2px;">Top-24 ${Math.round(t.prob_top24*100)}%</div>
+        <div class="single-bar-track"><div class="single-bar-fill" style="width:${Math.round(t.prob_top24*100)}%; background:var(--ice);"></div></div>
       </div>
     </div>`;
   }).join('');
