@@ -23,6 +23,55 @@ class ModelTests(unittest.TestCase):
         self.assertEqual(model.normalize_team_name("FC Bayern M\u00fcnchen"), "Bayern Munich")
         self.assertEqual(model.normalize_team_name("SSC Napoli"), "Napoli")
 
+    def test_api_football_disabled_makes_zero_requests_without_a_key(self):
+        original_env = model.os.environ.copy()
+        original_key = model.API_FOOTBALL_KEY
+        original_get = model.requests.get
+        original_fd_get = model.fd_get
+        class Response:
+            status_code = 200
+            def raise_for_status(self): pass
+            def json(self): return {"standings": []}
+        calls = []
+        try:
+            model.os.environ.pop("ENABLE_API_FOOTBALL", None)
+            model.API_FOOTBALL_KEY = None
+            model.fd_get = lambda *args, **kwargs: Response()
+            model.requests.get = lambda *args, **kwargs: calls.append(args) or Response()
+            model.fetch_domestic_form(model.SEASON)
+            self.assertEqual(calls, [])
+            model.os.environ["ENABLE_API_FOOTBALL"] = "false"
+            model.fetch_supplemental_form(model.SEASON)
+            self.assertEqual(calls, [])
+        finally:
+            model.os.environ.clear()
+            model.os.environ.update(original_env)
+            model.API_FOOTBALL_KEY = original_key
+            model.requests.get = original_get
+            model.fd_get = original_fd_get
+
+    def test_api_football_explicit_enable_requires_key_before_request(self):
+        original_env = model.os.environ.copy()
+        original_key = model.API_FOOTBALL_KEY
+        original_fd_get = model.fd_get
+        fd_calls = []
+        class Response:
+            status_code = 200
+            def raise_for_status(self): pass
+            def json(self): return {"standings": []}
+        try:
+            model.os.environ["ENABLE_API_FOOTBALL"] = "true"
+            model.API_FOOTBALL_KEY = None
+            model.fd_get = lambda *args, **kwargs: fd_calls.append(args) or Response()
+            with self.assertRaisesRegex(RuntimeError, "API_FOOTBALL_KEY is not configured"):
+                model.fetch_domestic_form(model.SEASON)
+            self.assertEqual(fd_calls, [])
+        finally:
+            model.os.environ.clear()
+            model.os.environ.update(original_env)
+            model.API_FOOTBALL_KEY = original_key
+            model.fd_get = original_fd_get
+
     def test_form_normalization_reaches_coefficient_seed(self):
         baseline = model.seed_elo("Borussia Dortmund", {})
         adjusted = model.seed_elo("BORUSSIA DORTMUND", {"borussia dortmund": 50})
@@ -240,4 +289,3 @@ class ModelTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -53,18 +53,20 @@ COMPETITION_CODE = "CL"  # a stable short code, not a numeric ID to verify
 
 # Optional second source, only for the 4 domestic leagues football-data.org's
 # free tier doesn't cover (Belgium, Turkey, Ukraine, Czechia). Entirely
-# optional — if this isn't set, those 4 clubs just get coefficient-only
-# Elo, same as before this was added. Sign up free at api-football.com.
+# opt-in — if disabled, those 4 clubs receive no supplemental form adjustment.
 API_FOOTBALL_KEY = os.environ.get("API_FOOTBALL_KEY")
 API_FOOTBALL_BASE_URL = "https://v3.football.api-sports.io"
-API_FOOTBALL_HEADERS = {"x-apisports-key": API_FOOTBALL_KEY or ""}
+
+
+def api_football_enabled():
+    """API-Football is opt-in; a configured key alone never triggers calls."""
+    return os.environ.get("ENABLE_API_FOOTBALL", "").strip().casefold() in {"1", "true", "yes"}
 
 # (league search name, country name) -> confirmed clubs playing in it.
 # Unlike football-data.org's competition codes, API-Football uses numeric
 # league IDs that aren't documented anywhere stable enough to hardcode with
-# confidence — so these are looked up by name at runtime via /leagues each
-# run instead of trusting a guessed number. Costs one extra call per league
-# per run (4 total), comfortably inside API-Football's 100/day free tier.
+# confidence — so these are looked up by name at runtime via /leagues when
+# explicitly enabled. The full optional path makes 16 calls per generation.
 SUPPLEMENTAL_LEAGUES = {
     ("Jupiler Pro League", "Belgium"): ["Club Brugge"],
     ("Super Lig", "Turkey"): ["Galatasaray"],
@@ -106,9 +108,9 @@ FORM_MIN_GAMES = 3       # don't trust a form signal from fewer than this many d
 
 # Domestic league competition codes available on football-data.org's free
 # tier, mapped to the confirmed clubs playing in each. Covers 7 of the ~11
-# countries in the 29 confirmed teams — the other 4 (Belgium, Turkey,
-# Ukraine, Czechia) are covered separately via SUPPLEMENTAL_LEAGUES below,
-# if API_FOOTBALL_KEY is set; otherwise those 4 clubs get coefficient only.
+# countries represented by confirmed clubs — Belgium, Turkey, Ukraine and
+# Czechia can receive supplemental form only when API-Football is explicitly
+# enabled through ENABLE_API_FOOTBALL.
 DOMESTIC_LEAGUES = {
     "PL": ["Arsenal", "Manchester City", "Manchester United", "Aston Villa", "Liverpool"],
     "PD": ["Barcelona", "Real Madrid", "Villarreal", "Atletico Madrid", "Real Betis"],
@@ -378,6 +380,9 @@ def fetch_domestic_form(season):
     than FORM_MIN_GAMES played, get no entry — callers default missing
     teams to 0, not a guess.
     """
+    if api_football_enabled() and not API_FOOTBALL_KEY:
+        raise RuntimeError("ENABLE_API_FOOTBALL is enabled but API_FOOTBALL_KEY is not configured")
+
     adjustments = {}
 
     for code in DOMESTIC_LEAGUES:
@@ -404,11 +409,11 @@ def fetch_domestic_form(season):
         }
         adjustments.update(_ppg_to_elo_adjustments({normalize_team_name(n): p for n, p in ppg_by_team.items()}))
 
-    if API_FOOTBALL_KEY:
+    if api_football_enabled():
         adjustments.update(fetch_supplemental_form(season))
     elif season == SEASON:
-        print("INFO: API_FOOTBALL_KEY not set — Club Brugge, Galatasaray, "
-              "Shakhtar Donetsk, Slavia Praha will use coefficient-only Elo.")
+        print("INFO: API-Football integration disabled; supplemental domestic-form "
+              "clubs will use coefficient-only Elo.")
 
     return adjustments
 
@@ -419,13 +424,19 @@ def fetch_supplemental_form(season):
     include, via API-Football. League IDs are looked up by name each run
     rather than hardcoded — see the note on SUPPLEMENTAL_LEAGUES for why.
     """
+    if not api_football_enabled():
+        return {}
+    if not API_FOOTBALL_KEY:
+        raise RuntimeError("ENABLE_API_FOOTBALL is enabled but API_FOOTBALL_KEY is not configured")
+
+    headers = {"x-apisports-key": API_FOOTBALL_KEY}
     adjustments = {}
 
     for (league_name, country), club_names in SUPPLEMENTAL_LEAGUES.items():
         try:
             search_resp = requests.get(
                 f"{API_FOOTBALL_BASE_URL}/leagues",
-                headers=API_FOOTBALL_HEADERS,
+                headers=headers,
                 params={"name": league_name, "country": country},
                 timeout=30,
             )
@@ -439,7 +450,7 @@ def fetch_supplemental_form(season):
 
             standings_resp = requests.get(
                 f"{API_FOOTBALL_BASE_URL}/standings",
-                headers=API_FOOTBALL_HEADERS,
+                headers=headers,
                 params={"league": league_id, "season": season},
                 timeout=30,
             )
@@ -986,4 +997,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

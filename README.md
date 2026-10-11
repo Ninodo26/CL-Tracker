@@ -8,20 +8,33 @@ Champions League league phase, updating itself via GitHub Actions.
 ### 1. Get a football-data.org key
 - Sign up free at https://www.football-data.org/client/register
 - Free tier: 10 requests/minute (a rate limit, not a daily cap), covers
-  12 competitions including the Champions League. This project makes
-  up to 15 calls per run (1 for CL fixtures plus up to 7 domestic leagues
-  across the current and previous seasons), throttled by the script.
+  12 competitions including the Champions League. The generator makes 15
+  calls per run (1 for CL fixtures plus 7 domestic leagues across each of
+  the current and previous seasons), throttled by the script.
 
-### 1b. (Optional) Get an API-Football key too
-Covers domestic form for the 4 leagues football-data.org's free tier
-doesn't include — Belgium (Club Brugge), Turkey (Galatasaray), Ukraine
-(Shakhtar Donetsk), Czechia (Slavia Praha). Skip this entirely and those
-4 clubs just get coefficient-only Elo, same as before this existed —
-nothing else breaks.
-- Sign up free at https://www.api-football.com — free tier is 100
-  requests/day, this adds ~8 calls per run (2 per league × 4 leagues)
-- Add it as a repo secret named `API_FOOTBALL_KEY` alongside
-  `FOOTBALL_DATA_KEY` in step 4 below. The workflow passes both secrets.
+### 1b. (Optional) Enable API-Football domestic form
+This optional source covers Belgium (Club Brugge), Turkey (Galatasaray),
+Ukraine (Shakhtar Donetsk), and Czechia (Slavia Praha). It is disabled by
+default. When disabled, the generator makes zero API-Football requests and
+does not need `API_FOOTBALL_KEY`; those clubs receive no domestic-form
+adjustment.
+
+If you choose to enable it, configure the repository Actions variable
+`ENABLE_API_FOOTBALL` as `true` and add `API_FOOTBALL_KEY` as a repository
+secret. The current implementation makes 16 calls per generation (four
+leagues × a league lookup and standings request × current and previous
+seasons). At the existing eight scheduled runs per day that would be up to
+128 API-Football calls/day, so confirm the provider plan supports that budget.
+Do not enable it by adding the secret alone.
+
+### Provider request budgets
+- **football-data.org:** 15 requests per normal run: one Champions League
+  fixture request plus seven domestic league standings requests for each of
+  the current and previous seasons. Each initial request waits 6.5 seconds;
+  one 429 retry waits 60 seconds. No API-Football calls are part of the
+  default run.
+- **API-Football:** zero requests by default; 16 per run only when explicitly
+  enabled as described above.
 
 ### 2. Confirm the league-phase stage name
 The script assumes matches use `"stage": "LEAGUE_STAGE"` for the 36-team
@@ -150,5 +163,3 @@ resolves. Automating this against football-data.org's qualifying-round data
 is a reasonable v2 — it wasn't done here to keep the first working
 version shippable rather than stalled on edge cases in how the API
 represents pre-league-phase rounds.
-
-

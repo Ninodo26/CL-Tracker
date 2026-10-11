@@ -248,6 +248,7 @@
 
 <div class="wrap" id="main-wrap" style="display:none;"></div>
 
+<script src="scripts/snapshot_validation.js"></script>
 <script>
 const CONFIRMED_TEAMS = [
   {name:"Paris Saint-Germain", color:"#004170", coef:132.0},
@@ -338,7 +339,7 @@ function randomMargin(){
 function simulateOneSeason(){
   const teams = STANDINGS.teams || [];
   const matches = STANDINGS.matches || [];
-  if (!STANDINGS.schedule_complete || !teams.length || !matches.length) return null;
+  if (!hasCompleteLeaguePhaseSchedule(STANDINGS) || !teams.length || !matches.length) return null;
 
   const eloByName = {};
   teams.forEach(t => eloByName[t.name] = t.elo);
@@ -622,7 +623,7 @@ function renderSimulateControls(){
   const matches = STANDINGS.matches || [];
   const hasRemaining = matches.some(m => !m.played);
 
-  if (!teams.length || !hasRemaining || !STANDINGS.schedule_complete){
+  if (!teams.length || !hasRemaining || !hasCompleteLeaguePhaseSchedule(STANDINGS)){
     el.innerHTML = '';  // nothing to simulate yet — pre-season or season over
     return;
   }
@@ -873,7 +874,7 @@ function renderRankings(){
     el.innerHTML = `<div class="empty"><strong>Available once the league phase begins</strong>Probabilities need real fixtures to simulate against — check back after the 27 August draw.</div>`;
     return;
   }
-  const hasOdds = STANDINGS.schedule_complete && teams.some(t => Number.isFinite(t.prob_top8));
+  const hasOdds = hasValidQualificationOdds(STANDINGS);
   const sorted = [...teams].sort((a,b) => (b.prob_top8 ?? -1) - (a.prob_top8 ?? -1));
   if (!hasOdds){
     el.innerHTML = `<div class="provisional-note">Qualification odds and clinch status are withheld until the complete 36-team, 144-fixture league-phase schedule is available. Current fixture data contains ${teams.length} teams and ${(STANDINGS.matches || []).length} matches.</div>`;
@@ -951,4 +952,3 @@ function renderAll(){
 </script>
 </body>
 </html>
-
