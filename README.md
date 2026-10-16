@@ -8,20 +8,33 @@ Champions League league phase, updating itself via GitHub Actions.
 ### 1. Get a football-data.org key
 - Sign up free at https://www.football-data.org/client/register
 - Free tier: 10 requests/minute (a rate limit, not a daily cap), covers
-  12 competitions including the Champions League. This project makes
-  about 8 calls per run (1 for CL fixtures, up to 7 for domestic league
-  standings used in the form model below) — comfortably under the limit.
+  12 competitions including the Champions League. The generator makes 15
+  calls per run (1 for CL fixtures plus 7 domestic leagues across each of
+  the current and previous seasons), throttled by the script.
 
-### 1b. (Optional) Get an API-Football key too
-Covers domestic form for the 4 leagues football-data.org's free tier
-doesn't include — Belgium (Club Brugge), Turkey (Galatasaray), Ukraine
-(Shakhtar Donetsk), Czechia (Slavia Praha). Skip this entirely and those
-4 clubs just get coefficient-only Elo, same as before this existed —
-nothing else breaks.
-- Sign up free at https://www.api-football.com — free tier is 100
-  requests/day, this adds ~8 calls per run (2 per league × 4 leagues)
-- Add it as a repo secret named `API_FOOTBALL_KEY` alongside
-  `FOOTBALL_DATA_KEY` in step 4 below
+### 1b. (Optional) Enable API-Football domestic form
+This optional source covers Belgium (Club Brugge), Turkey (Galatasaray),
+Ukraine (Shakhtar Donetsk), and Czechia (Slavia Praha). It is disabled by
+default. When disabled, the generator makes zero API-Football requests and
+does not need `API_FOOTBALL_KEY`; those clubs receive no domestic-form
+adjustment.
+
+If you choose to enable it, configure the repository Actions variable
+`ENABLE_API_FOOTBALL` as `true` and add `API_FOOTBALL_KEY` as a repository
+secret. The current implementation makes 16 calls per generation (four
+leagues × a league lookup and standings request × current and previous
+seasons). At the existing eight scheduled runs per day that would be up to
+128 API-Football calls/day, so confirm the provider plan supports that budget.
+Do not enable it by adding the secret alone.
+
+### Provider request budgets
+- **football-data.org:** 15 requests per normal run: one Champions League
+  fixture request plus seven domestic league standings requests for each of
+  the current and previous seasons. Each initial request waits 6.5 seconds;
+  one 429 retry waits 60 seconds. No API-Football calls are part of the
+  default run.
+- **API-Football:** zero requests by default; 16 per run only when explicitly
+  enabled as described above.
 
 ### 2. Confirm the league-phase stage name
 The script assumes matches use `"stage": "LEAGUE_STAGE"` for the 36-team
@@ -96,12 +109,16 @@ Real modeling choices, not just implementation details:
 
 - Each team's Elo rating starts from two blended signals: their 2026 UEFA
   coefficient (`STARTING_COEFFICIENTS`) and their current-season domestic
-  league form, z-scored against their own league and capped at ±150 Elo
+  league form, z-scored against their own league and capped at ±250 Elo
   (`FORM_ELO_SCALE`, `FORM_ELO_CAP`). Coefficient alone is a 5-year
   lagging average — it can't see that a squad has visibly improved or
   declined since. Form alone is noisy over a handful of games. Blending
   both is deliberately closer to how real prediction models handle it
   than either signal on its own.
+- API team spellings pass through one canonical alias map before coefficient
+  lookup. A confirmed league-phase club without a configured coefficient
+  stops the run with a clear error; only unlisted qualifying opponents may
+  use the explicitly warned estimate in `DEFAULT_COEFFICIENT`.
 - Domestic form only covers 7 of the ~11 countries in the 29 confirmed
   clubs — England, Spain, Germany, Italy, France, Netherlands, Portugal
   (`DOMESTIC_LEAGUES`). Belgium, Turkey, Ukraine, and Czechia aren't on
@@ -118,16 +135,24 @@ Real modeling choices, not just implementation details:
   budget at this cron schedule, for precision past the point the model's
   other assumptions can really support.
 - Draw probability is highest between evenly-matched teams and shrinks
-  as the rating gap widens — not fit to real historical CL data, just a
-  reasonable curve
+  as the rating gap widens. The win/draw/loss conversion preserves the
+  Elo expected score (`P(win) + 0.5 × P(draw)`). It scales the closeness
+  curve by the normalized variance of Elo expected score so all three
+  outcomes stay feasible as the rating gap grows.
+  The curve is not fit to historical CL data.
 - The percentage shown is how often a team lands in the top 8 / top 24
   across all 20,000 simulated seasons
 
-None of the constants (`ELO_K_FACTOR`, `HOME_ADVANTAGE`, `BASE_DRAW_PROB`,
-`FORM_ELO_SCALE`) are tuned against real results — they're reasonable
-starting values. If the model's predictions look consistently off once
-real results come in, that's the first place to adjust, not a sign the
-whole approach is broken.
+The pipeline withholds qualification odds and clinch calls until all 36
+distinct clubs and 144 unique fixtures (eight per club, four home and four
+away) are present. An
+empty API response cannot replace a previously populated snapshot. The
+simulation approximates tied positions with points, goal difference, and
+simulated goals scored; it does not model the full UEFA tie-break order.
+The Elo scale and constants (`ELO_K_FACTOR`, `HOME_ADVANTAGE`,
+`BASE_DRAW_PROB`, `FORM_ELO_SCALE`) remain uncalibrated against historical
+results and need backtesting before these probabilities should be treated
+as well calibrated.
 
 ## Qualifying tab — manual for v1
 
@@ -138,4 +163,3 @@ resolves. Automating this against football-data.org's qualifying-round data
 is a reasonable v2 — it wasn't done here to keep the first working
 version shippable rather than stalled on edge cases in how the API
 represents pre-league-phase rounds.
-

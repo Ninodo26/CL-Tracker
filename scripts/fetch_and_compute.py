@@ -17,13 +17,14 @@ import os
 import random
 import sys
 import time
+import re
+import unicodedata
+import warnings
 from pathlib import Path
 
 import requests
 
 API_KEY = os.environ.get("FOOTBALL_DATA_KEY")
-if not API_KEY:
-    sys.exit("Missing FOOTBALL_DATA_KEY env var")
 
 BASE_URL = "https://api.football-data.org/v4"
 HEADERS = {"X-Auth-Token": API_KEY}
@@ -52,18 +53,20 @@ COMPETITION_CODE = "CL"  # a stable short code, not a numeric ID to verify
 
 # Optional second source, only for the 4 domestic leagues football-data.org's
 # free tier doesn't cover (Belgium, Turkey, Ukraine, Czechia). Entirely
-# optional — if this isn't set, those 4 clubs just get coefficient-only
-# Elo, same as before this was added. Sign up free at api-football.com.
+# opt-in — if disabled, those 4 clubs receive no supplemental form adjustment.
 API_FOOTBALL_KEY = os.environ.get("API_FOOTBALL_KEY")
 API_FOOTBALL_BASE_URL = "https://v3.football.api-sports.io"
-API_FOOTBALL_HEADERS = {"x-apisports-key": API_FOOTBALL_KEY or ""}
+
+
+def api_football_enabled():
+    """API-Football is opt-in; a configured key alone never triggers calls."""
+    return os.environ.get("ENABLE_API_FOOTBALL", "").strip().casefold() in {"1", "true", "yes"}
 
 # (league search name, country name) -> confirmed clubs playing in it.
 # Unlike football-data.org's competition codes, API-Football uses numeric
 # league IDs that aren't documented anywhere stable enough to hardcode with
-# confidence — so these are looked up by name at runtime via /leagues each
-# run instead of trusting a guessed number. Costs one extra call per league
-# per run (4 total), comfortably inside API-Football's 100/day free tier.
+# confidence — so these are looked up by name at runtime via /leagues when
+# explicitly enabled. The full optional path makes 16 calls per generation.
 SUPPLEMENTAL_LEAGUES = {
     ("Jupiler Pro League", "Belgium"): ["Club Brugge"],
     ("Super Lig", "Turkey"): ["Galatasaray"],
@@ -105,9 +108,9 @@ FORM_MIN_GAMES = 3       # don't trust a form signal from fewer than this many d
 
 # Domestic league competition codes available on football-data.org's free
 # tier, mapped to the confirmed clubs playing in each. Covers 7 of the ~11
-# countries in the 29 confirmed teams — the other 4 (Belgium, Turkey,
-# Ukraine, Czechia) are covered separately via SUPPLEMENTAL_LEAGUES below,
-# if API_FOOTBALL_KEY is set; otherwise those 4 clubs get coefficient only.
+# countries represented by confirmed clubs — Belgium, Turkey, Ukraine and
+# Czechia can receive supplemental form only when API-Football is explicitly
+# enabled through ENABLE_API_FOOTBALL.
 DOMESTIC_LEAGUES = {
     "PL": ["Arsenal", "Manchester City", "Manchester United", "Aston Villa", "Liverpool"],
     "PD": ["Barcelona", "Real Madrid", "Villarreal", "Atletico Madrid", "Real Betis"],
@@ -122,9 +125,9 @@ OUT_PATH = Path(__file__).resolve().parent.parent / "data" / "standings.json"
 
 # 2026 UEFA club coefficients for the 29 confirmed teams, used to seed each
 # team's starting Elo rating before any league-phase match has been played.
-# Source: UEFA coefficient rankings, as of the 2026/27 season. Update this
-# if a team's coefficient changes materially or a name doesn't match the
-# API's spelling — matching is exact-string, see seed_elo() below.
+# Source: UEFA coefficient rankings, as of the 2026/27 season. Keep these
+# keys canonical; API spellings are normalized through TEAM_ALIASES before
+# lookup. A missing coefficient for a confirmed team is an error, not a fallback.
 STARTING_COEFFICIENTS = {
     "Paris Saint-Germain": 132.0, "Bayern Munich": 147.5, "Real Madrid": 144.5,
     "Liverpool": 130.0, "Inter": 127.0, "Manchester City": 125.5,
@@ -136,7 +139,9 @@ STARTING_COEFFICIENTS = {
     "Villarreal": 59.0, "Shakhtar Donetsk": 56.25, "Slavia Praha": 44.0,
     "VfB Stuttgart": 27.5, "Galatasaray": 46.5, "Como": 19.989, "Lens": 16.699,
 }
-DEFAULT_COEFFICIENT = 15.0  # fallback for any of the 7 late qualifiers not listed above
+# Explicit estimate used only for an unconfirmed qualifying opponent with no
+# published coefficient. Confirmed league-phase teams never use this value.
+DEFAULT_COEFFICIENT = 15.0
 
 # Real 2026 coefficients for teams still in the qualifying rounds, so tie
 # odds reflect actual strength gaps instead of defaulting every qualifier
@@ -200,6 +205,83 @@ RESOLVED_TIES = {
 
 
 FD_FINISHED_STATUSES = {"FINISHED", "AWARDED"}
+FD_CANCELLED_STATUSES = {"CANCELLED"}
+
+# Normalize spelling/diacritics at every boundary. Explicit aliases cover
+# common API naming variants that are not simple accent/punctuation changes.
+TEAM_ALIASES = {
+    "1 fc union berlin": "Union Berlin",
+    "arsenal fc": "Arsenal",
+    "aston villa fc": "Aston Villa",
+    "atletico": "Atletico Madrid",
+    "atletico de madrid": "Atletico Madrid",
+    "atletico madrid cf": "Atletico Madrid",
+    "as roma": "Roma",
+    "bayern munchen": "Bayern Munich",
+    "bodo glimt": "Bodo/Glimt",
+    "borussia dortmund": "Borussia Dortmund",
+    "bvb": "Borussia Dortmund",
+    "club atletico de madrid": "Atletico Madrid",
+    "club brugge kv": "Club Brugge",
+    "como 1907": "Como",
+    "fc barcelona": "Barcelona",
+    "fc bayern munchen": "Bayern Munich",
+    "fc inter milan": "Inter",
+    "fc internazionale milano": "Inter",
+    "fc porto": "Porto",
+    "fc shakhtar donetsk": "Shakhtar Donetsk",
+    "fenerbahce sk": "Fenerbahce",
+    "feyenoord rotterdam": "Feyenoord",
+    "fk bodo glimt": "Bodo/Glimt",
+    "fk shakhtar donetsk": "Shakhtar Donetsk",
+    "galatasaray sk": "Galatasaray",
+    "internazionale": "Inter",
+    "lask linz": "LASK",
+    "liverpool fc": "Liverpool",
+    "lille osc": "Lille",
+    "losc lille": "Lille",
+    "manchester city fc": "Manchester City",
+    "manchester united fc": "Manchester United",
+    "pae aek": "AEK Athens",
+    "paris saint germain": "Paris Saint-Germain",
+    "paris saint germain fc": "Paris Saint-Germain",
+    "psg": "Paris Saint-Germain",
+    "psv": "PSV Eindhoven",
+    "racing club de lens": "Lens",
+    "rc lens": "Lens",
+    "real betis balompie": "Real Betis",
+    "real madrid cf": "Real Madrid",
+    "sk slavia praha": "Slavia Praha",
+    "sk slovan bratislava": "Slovan Bratislava",
+    "sporting clube de portugal": "Sporting CP",
+    "sporting lisbon": "Sporting CP",
+    "ssc napoli": "Napoli",
+    "viking fk": "Viking",
+    "villarreal cf": "Villarreal",
+}
+
+
+def normalize_team_name(name):
+    """Return a stable canonical team spelling (accents/case/punctuation-insensitive)."""
+    if not isinstance(name, str) or not name.strip():
+        raise ValueError(f"Invalid team name: {name!r}")
+    transliterated = name.translate(str.maketrans({"ø": "o", "Ø": "O", "ł": "l", "Ł": "L", "đ": "d", "Đ": "D"}))
+    decomposed = unicodedata.normalize("NFKD", transliterated)
+    plain = "".join(c for c in decomposed if not unicodedata.combining(c))
+    key = re.sub(r"[^a-z0-9]+", " ", plain.casefold()).strip()
+    alias = TEAM_ALIASES.get(key)
+    if alias:
+        return alias
+    # Preserve canonical names from our internal coefficient table.
+    for canonical in (*STARTING_COEFFICIENTS.keys(), *QUALIFYING_COEFFICIENTS.keys()):
+        ckey = re.sub(r"[^a-z0-9]+", " ", unicodedata.normalize("NFKD", canonical).encode("ascii", "ignore").decode().casefold()).strip()
+        if key == ckey:
+            return canonical
+    return " ".join(word.capitalize() for word in key.split())
+
+
+def _normalize_adjustments(adjustments):
+    return {normalize_team_name(name): value for name, value in adjustments.items()}
 
 
 def fetch_fixtures():
@@ -227,10 +309,15 @@ def fetch_fixtures():
     data = resp.json()
     matches = data.get("matches", [])
 
+    stages = {m.get("stage") for m in matches}
     league_phase = [m for m in matches if m.get("stage") == LEAGUE_PHASE_STAGE]
+    if matches and not league_phase:
+        raise ValueError(f"No {LEAGUE_PHASE_STAGE!r} fixtures found; API stages were {sorted(str(s) for s in stages)}")
 
     normalized = []
     for m in league_phase:
+        if m.get("status") in FD_CANCELLED_STATUSES:
+            continue
         finished = m["status"] in FD_FINISHED_STATUSES
         full_time = m.get("score", {}).get("fullTime", {})
         normalized.append({
@@ -241,11 +328,11 @@ def fetch_fixtures():
             "league": {"round": f"League Stage - {m.get('matchday', '?')}"},
             "teams": {
                 "home": {
-                    "id": m["homeTeam"]["id"], "name": m["homeTeam"]["name"],
+                    "id": m["homeTeam"]["id"], "name": normalize_team_name(m["homeTeam"]["name"]),
                     "crest": m["homeTeam"].get("crest"),
                 },
                 "away": {
-                    "id": m["awayTeam"]["id"], "name": m["awayTeam"]["name"],
+                    "id": m["awayTeam"]["id"], "name": normalize_team_name(m["awayTeam"]["name"]),
                     "crest": m["awayTeam"].get("crest"),
                 },
             },
@@ -293,6 +380,9 @@ def fetch_domestic_form(season):
     than FORM_MIN_GAMES played, get no entry — callers default missing
     teams to 0, not a guess.
     """
+    if api_football_enabled() and not API_FOOTBALL_KEY:
+        raise RuntimeError("ENABLE_API_FOOTBALL is enabled but API_FOOTBALL_KEY is not configured")
+
     adjustments = {}
 
     for code in DOMESTIC_LEAGUES:
@@ -317,13 +407,13 @@ def fetch_domestic_form(season):
             for row in total_table
             if row.get("playedGames", 0) >= FORM_MIN_GAMES
         }
-        adjustments.update(_ppg_to_elo_adjustments(ppg_by_team))
+        adjustments.update(_ppg_to_elo_adjustments({normalize_team_name(n): p for n, p in ppg_by_team.items()}))
 
-    if API_FOOTBALL_KEY:
+    if api_football_enabled():
         adjustments.update(fetch_supplemental_form(season))
     elif season == SEASON:
-        print("INFO: API_FOOTBALL_KEY not set — Club Brugge, Galatasaray, "
-              "Shakhtar Donetsk, Slavia Praha will use coefficient-only Elo.")
+        print("INFO: API-Football integration disabled; supplemental domestic-form "
+              "clubs will use coefficient-only Elo.")
 
     return adjustments
 
@@ -334,13 +424,19 @@ def fetch_supplemental_form(season):
     include, via API-Football. League IDs are looked up by name each run
     rather than hardcoded — see the note on SUPPLEMENTAL_LEAGUES for why.
     """
+    if not api_football_enabled():
+        return {}
+    if not API_FOOTBALL_KEY:
+        raise RuntimeError("ENABLE_API_FOOTBALL is enabled but API_FOOTBALL_KEY is not configured")
+
+    headers = {"x-apisports-key": API_FOOTBALL_KEY}
     adjustments = {}
 
     for (league_name, country), club_names in SUPPLEMENTAL_LEAGUES.items():
         try:
             search_resp = requests.get(
                 f"{API_FOOTBALL_BASE_URL}/leagues",
-                headers=API_FOOTBALL_HEADERS,
+                headers=headers,
                 params={"name": league_name, "country": country},
                 timeout=30,
             )
@@ -354,7 +450,7 @@ def fetch_supplemental_form(season):
 
             standings_resp = requests.get(
                 f"{API_FOOTBALL_BASE_URL}/standings",
-                headers=API_FOOTBALL_HEADERS,
+                headers=headers,
                 params={"league": league_id, "season": season},
                 timeout=30,
             )
@@ -374,24 +470,26 @@ def fetch_supplemental_form(season):
             for row in table
             if row.get("all", {}).get("played", 0) >= FORM_MIN_GAMES
         }
-        adjustments.update(_ppg_to_elo_adjustments(ppg_by_team))
+        adjustments.update(_ppg_to_elo_adjustments({normalize_team_name(n): p for n, p in ppg_by_team.items()}))
 
     return adjustments
 
 
 def build_table(fixtures, form_adjustments):
     teams = {}
+    form_adjustments = _normalize_adjustments(form_adjustments)
 
     def ensure(team):
         tid = team["id"]
+        name = normalize_team_name(team["name"])
         if tid not in teams:
             teams[tid] = {
-                "id": tid, "name": team["name"],
+                "id": tid, "name": name,
                 "crest": team.get("crest"),
                 "played": 0, "won": 0, "drawn": 0, "lost": 0,
                 "gf": 0, "ga": 0, "points": 0, "fixtures": [],
-                "elo": seed_elo(team["name"], form_adjustments),
-                "form_adjustment": form_adjustments.get(team["name"], 0),
+                "elo": seed_elo(name, form_adjustments),
+                "form_adjustment": form_adjustments.get(name, 0),
             }
         return teams[tid]
 
@@ -441,12 +539,40 @@ def build_table(fixtures, form_adjustments):
     return teams
 
 
-def seed_elo(team_name, form_adjustments):
-    coef = STARTING_COEFFICIENTS.get(
-        team_name,
-        QUALIFYING_COEFFICIENTS.get(team_name, DEFAULT_COEFFICIENT),
-    )
+def seed_elo(team_name, form_adjustments, *, allow_unlisted=False):
+    team_name = normalize_team_name(team_name)
+    form_adjustments = _normalize_adjustments(form_adjustments)
+    coef = coefficient_for_team(team_name, allow_unlisted=allow_unlisted)
     return ELO_BASE + coef * ELO_COEF_SCALE + form_adjustments.get(team_name, 0)
+
+
+class MissingCoefficientError(ValueError):
+    """Raised when a team has no explicit UEFA coefficient configured."""
+
+
+def coefficient_for_team(team_name, *, allow_unlisted=False):
+    """Resolve a canonical coefficient, refusing silent guesses by default.
+
+    ``allow_unlisted`` is reserved for qualifying-tie opponents that are not
+    among the confirmed league-phase clubs. Those estimates emit a warning.
+    """
+    canonical = normalize_team_name(team_name)
+    if canonical in STARTING_COEFFICIENTS:
+        return STARTING_COEFFICIENTS[canonical]
+    if canonical in QUALIFYING_COEFFICIENTS:
+        return QUALIFYING_COEFFICIENTS[canonical]
+    if allow_unlisted:
+        warnings.warn(
+            f"No UEFA coefficient for unlisted qualifying opponent {team_name!r}; "
+            f"using explicit estimate {DEFAULT_COEFFICIENT}",
+            RuntimeWarning,
+            stacklevel=2,
+        )
+        return DEFAULT_COEFFICIENT
+    raise MissingCoefficientError(
+        f"No UEFA coefficient configured for {team_name!r} "
+        f"(normalized as {canonical!r}); add its canonical coefficient or alias."
+    )
 
 
 def elo_expected(elo_a, elo_b, home_bonus=0):
@@ -455,20 +581,33 @@ def elo_expected(elo_a, elo_b, home_bonus=0):
     return 1.0 / (1.0 + 10 ** (-diff / 400.0))
 
 
-def outcome_probabilities(elo_home, elo_away):
+def elo_tiebreak_probability(elo_a, elo_b):
+    """Return the bounded, deliberately mild rating tilt for a shootout."""
+    return max(0.0, min(1.0, 0.5 + (elo_a - elo_b) / 4000.0))
+
+
+def outcome_probabilities(elo_home, elo_away, home_bonus=HOME_ADVANTAGE):
     """
-    Three-way (home win / draw / away win) probabilities from an Elo gap.
-    Draw probability is highest when teams are evenly matched and shrinks
-    as the gap widens — a simplification of how real bookmaker models
-    handle draws, not a precise fit to historical CL data.
+    Return home-win, draw, and away-win probabilities.
+
+    Elo's logistic expected score is E = P(win) + 0.5*P(draw), not P(win).
+    A hand-designed closeness curve supplies a maximum draw rate; multiplying
+    it by 4*E*(1-E), the normalized variance of the decisive Elo expectation,
+    makes draw probability fall as one side becomes dominant while keeping
+    win and loss probabilities feasible. We then allocate outcomes around E,
+    preserving that expected score. These draw assumptions are not calibrated
+    to historical CL data.
     """
-    expected_home = elo_expected(elo_home, elo_away, home_bonus=HOME_ADVANTAGE)
-    diff = abs((elo_home + HOME_ADVANTAGE) - elo_away)
+    expected_home = elo_expected(elo_home, elo_away, home_bonus=home_bonus)
+    diff = abs((elo_home + home_bonus) - elo_away)
     closeness = max(0.0, 1 - diff / 800.0)
-    draw_prob = BASE_DRAW_PROB + DRAW_CLOSENESS_BONUS * closeness
-    remaining = 1 - draw_prob
-    home_win_prob = remaining * expected_home
-    away_win_prob = remaining * (1 - expected_home)
+    maximum_draw_prob = BASE_DRAW_PROB + DRAW_CLOSENESS_BONUS * closeness
+    draw_prob = maximum_draw_prob * 4 * expected_home * (1 - expected_home)
+    # Elo's expected score is p(win) + 0.5*p(draw). Allocate draw mass
+    # symmetrically around that score; the normalized-variance factor above
+    # keeps both decisive outcomes non-negative for any finite Elo gap.
+    home_win_prob = expected_home - draw_prob / 2
+    away_win_prob = 1 - expected_home - draw_prob / 2
     return home_win_prob, draw_prob, away_win_prob
 
 
@@ -518,6 +657,8 @@ def run_monte_carlo(teams, remaining_fixtures):
     simulations landing in the top 8 / top 24 / outside.
     """
     team_ids = list(teams.keys())
+    if len(team_ids) != 36:
+        raise ValueError("Monte Carlo requires a complete 36-team league-phase dataset")
     top8_count = {tid: 0 for tid in team_ids}
     top24_count = {tid: 0 for tid in team_ids}
 
@@ -528,6 +669,7 @@ def run_monte_carlo(teams, remaining_fixtures):
     for _ in range(MONTE_CARLO_SIMULATIONS):
         points = dict(base_points)
         gd = {tid: base_gf[tid] - base_ga[tid] for tid in team_ids}
+        gf = dict(base_gf)
 
         for fx in remaining_fixtures:
             h_id, a_id = fx["home_id"], fx["away_id"]
@@ -541,14 +683,18 @@ def run_monte_carlo(teams, remaining_fixtures):
                 points[h_id] += 3
                 margin = random.choice([1, 1, 2, 2, 3])
                 gd[h_id] += margin; gd[a_id] -= margin
+                gf[h_id] += margin
             elif roll < p_home + p_draw:
                 points[h_id] += 1; points[a_id] += 1
+                goals = random.choice([0, 1, 1, 2, 2, 3])
+                gf[h_id] += goals; gf[a_id] += goals
             else:
                 points[a_id] += 3
                 margin = random.choice([1, 1, 2, 2, 3])
                 gd[a_id] += margin; gd[h_id] -= margin
+                gf[a_id] += margin
 
-        ranked = sorted(team_ids, key=lambda tid: (-points[tid], -gd[tid]))
+        ranked = sorted(team_ids, key=lambda tid: (-points[tid], -gd[tid], -gf[tid]))
         for i, tid in enumerate(ranked, start=1):
             if i <= TOP_AUTO_R16:
                 top8_count[tid] += 1
@@ -569,8 +715,10 @@ def simulate_two_legged_tie(name_a, name_b, sims=TIE_SIMULATIONS):
     penalty-shootout model, since shootouts are close to 50/50 regardless
     of league form.
     """
-    elo_a = seed_elo(name_a, {})
-    elo_b = seed_elo(name_b, {})
+    if sims <= 0:
+        raise ValueError("sims must be a positive integer")
+    elo_a = seed_elo(name_a, {}, allow_unlisted=True)
+    elo_b = seed_elo(name_b, {}, allow_unlisted=True)
     a_advances = 0
 
     for _ in range(sims):
@@ -600,7 +748,7 @@ def simulate_two_legged_tie(name_a, name_b, sims=TIE_SIMULATIONS):
             # Level on aggregate — extra time/penalties, weighted only
             # slightly by rating rather than the full match model, since
             # shootouts are much closer to a coin flip than open play.
-            tiebreak_prob_a = 0.5 + (elo_a - elo_b) / 4000
+            tiebreak_prob_a = elo_tiebreak_probability(elo_a, elo_b)
             if random.random() < tiebreak_prob_a:
                 a_advances += 1
 
@@ -616,13 +764,15 @@ def simulate_remaining_leg(name_a, name_b, margin_for_a, sims=TIE_SIMULATIONS):
     applied to either side here — a reasonable simplification given what
     we actually know.
     """
-    elo_a = seed_elo(name_a, {})
-    elo_b = seed_elo(name_b, {})
+    if sims <= 0:
+        raise ValueError("sims must be a positive integer")
+    elo_a = seed_elo(name_a, {}, allow_unlisted=True)
+    elo_b = seed_elo(name_b, {}, allow_unlisted=True)
     a_advances = 0
 
     for _ in range(sims):
         agg = margin_for_a
-        p_a, p_d, p_b = outcome_probabilities(elo_a, elo_b)
+        p_a, p_d, p_b = outcome_probabilities(elo_a, elo_b, home_bonus=0)
         roll = random.random()
         if roll < p_a:
             agg += random.choice([1, 1, 2, 2, 3])
@@ -634,7 +784,7 @@ def simulate_remaining_leg(name_a, name_b, margin_for_a, sims=TIE_SIMULATIONS):
         elif agg < 0:
             pass
         else:
-            tiebreak_prob_a = 0.5 + (elo_a - elo_b) / 4000
+            tiebreak_prob_a = elo_tiebreak_probability(elo_a, elo_b)
             if random.random() < tiebreak_prob_a:
                 a_advances += 1
 
@@ -684,6 +834,36 @@ def build_remaining_fixtures(fixtures):
             "away_id": fx["teams"]["away"]["id"],
         })
     return remaining
+
+
+def league_phase_schedule_is_complete(fixtures, teams):
+    """Require all 36 clubs and exactly eight fixtures per club."""
+    if len(teams) != 36 or len(fixtures) != 144:
+        return False
+    if len({normalize_team_name(t["name"]) for t in teams.values()}) != 36:
+        return False
+    counts = {tid: 0 for tid in teams}
+    home_counts = {tid: 0 for tid in teams}
+    away_counts = {tid: 0 for tid in teams}
+    pairs = set()
+    for fx in fixtures:
+        home_id = fx["teams"]["home"]["id"]
+        away_id = fx["teams"]["away"]["id"]
+        if home_id == away_id or home_id not in counts or away_id not in counts:
+            return False
+        pair = frozenset((home_id, away_id))
+        if pair in pairs:
+            return False
+        pairs.add(pair)
+        counts[home_id] += 1
+        counts[away_id] += 1
+        home_counts[home_id] += 1
+        away_counts[away_id] += 1
+    return (
+        all(count == LEAGUE_PHASE_MATCHDAYS for count in counts.values())
+        and all(count == LEAGUE_PHASE_MATCHDAYS // 2 for count in home_counts.values())
+        and all(count == LEAGUE_PHASE_MATCHDAYS // 2 for count in away_counts.values())
+    )
 
 
 def build_match_list(fixtures, teams):
@@ -757,18 +937,36 @@ def build_provisional_standings(form_adjustments):
 
 
 def main():
+    if not API_KEY:
+        sys.exit("Missing FOOTBALL_DATA_KEY env var")
     form_adjustments = fetch_combined_form()
     provisional_standings = build_provisional_standings(form_adjustments)
 
     fixtures = fetch_fixtures()
+    if not fixtures and OUT_PATH.exists():
+        try:
+            previous = json.loads(OUT_PATH.read_text())
+        except (OSError, json.JSONDecodeError):
+            previous = {}
+        if previous.get("teams") or previous.get("matches"):
+            raise RuntimeError("API returned no league-phase fixtures while published data exists; refusing to replace it with an empty snapshot")
     teams = build_table(fixtures, form_adjustments)
     add_projections(teams)
 
     remaining_fixtures = build_remaining_fixtures(fixtures)
-    if teams:
+    schedule_complete = league_phase_schedule_is_complete(fixtures, teams)
+    if schedule_complete:
         run_monte_carlo(teams, remaining_fixtures)
+    else:
+        print(f"WARNING: incomplete league-phase schedule ({len(teams)} teams, {len(fixtures)} fixtures); qualification probabilities withheld")
 
     ranked = compute_scenarios(teams)
+    if not schedule_complete:
+        for team in ranked:
+            team["status_top8"] = "pending"
+            team["status_top24"] = "pending"
+            team["prob_top8"] = None
+            team["prob_top24"] = None
     matches = build_match_list(fixtures, teams)
     qualifying_odds = build_qualifying_odds()
 
@@ -782,7 +980,8 @@ def main():
         "league_phase_matchdays": LEAGUE_PHASE_MATCHDAYS,
         "top_auto_r16": TOP_AUTO_R16,
         "top_playoff_cutoff": TOP_PLAYOFF_CUTOFF,
-        "all_teams_confirmed": len(ranked) >= 36,
+        "all_teams_confirmed": len({normalize_team_name(t["name"]) for t in ranked}) == 36,
+        "schedule_complete": schedule_complete,
         "teams": ranked,
         "matches": matches,
         "qualifying_odds": qualifying_odds,
