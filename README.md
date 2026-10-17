@@ -154,6 +154,21 @@ The Elo scale and constants (`ELO_K_FACTOR`, `HOME_ADVANTAGE`,
 results and need backtesting before these probabilities should be treated
 as well calibrated.
 
+## Offline Verification & Historical Backtesting
+
+Run unit tests without network calls:
+
+```bash
+python -B -m unittest discover -s tests -v
+node --test tests/test_snapshot_validation.js
+```
+
+Run the historical backtest on prospective pre-match predictions from Matchdays 1 & 2:
+
+```bash
+python scripts/backtest.py
+```
+
 ## Qualifying tab — manual for v1
 
 The third qualifying round and play-off round bracket
@@ -163,3 +178,4 @@ resolves. Automating this against football-data.org's qualifying-round data
 is a reasonable v2 — it wasn't done here to keep the first working
 version shippable rather than stalled on edge cases in how the API
 represents pre-league-phase rounds.
+

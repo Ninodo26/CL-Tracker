@@ -1,0 +1,655 @@
+{
+  "description": "Prospective pre-match predictions and verified match outcomes for 2026/27 Champions League Matchdays 1 & 2",
+  "season": 2026,
+  "total_matches": 36,
+  "matches": [
+    {
+      "matchday": 1,
+      "date": "2026-09-08T16:45:00Z",
+      "home": "AEK Athens",
+      "away": "LASK",
+      "home_raw": "PAE AEK",
+      "away_raw": "LASK Linz",
+      "elo_home": 1560,
+      "elo_away": 1560,
+      "published_odds": {
+        "home": 0.423,
+        "draw": 0.295,
+        "away": 0.283
+      },
+      "score": "1-0",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-08T16:45:00Z",
+      "home": "Club Brugge",
+      "away": "Aston Villa",
+      "home_raw": "Club Brugge KV",
+      "away_raw": "Aston Villa FC",
+      "elo_home": 1560,
+      "elo_away": 1637,
+      "published_odds": {
+        "home": 0.343,
+        "draw": 0.299,
+        "away": 0.357
+      },
+      "score": "2-3",
+      "actual": "away",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-08T19:00:00Z",
+      "home": "Borussia Dortmund",
+      "away": "Villarreal",
+      "home_raw": "Borussia Dortmund",
+      "away_raw": "Villarreal CF",
+      "elo_home": 2040,
+      "elo_away": 1484,
+      "published_odds": {
+        "home": 0.727,
+        "draw": 0.253,
+        "away": 0.02
+      },
+      "score": "3-2",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-08T19:00:00Z",
+      "home": "Lille",
+      "away": "Real Betis",
+      "home_raw": "Lille OSC",
+      "away_raw": "Real Betis Balompi\u00e9",
+      "elo_home": 1630,
+      "elo_away": 1656,
+      "published_odds": {
+        "home": 0.396,
+        "draw": 0.297,
+        "away": 0.307
+      },
+      "score": "2-3",
+      "actual": "away",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-08T19:00:00Z",
+      "home": "Porto",
+      "away": "Manchester City",
+      "home_raw": "FC Porto",
+      "away_raw": "Manchester City FC",
+      "elo_home": 1725,
+      "elo_away": 1713,
+      "published_odds": {
+        "home": 0.435,
+        "draw": 0.294,
+        "away": 0.271
+      },
+      "score": "0-2",
+      "actual": "away",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-08T19:00:00Z",
+      "home": "Real Madrid",
+      "away": "Inter",
+      "home_raw": "Real Madrid CF",
+      "away_raw": "FC Internazionale Milano",
+      "elo_home": 1656,
+      "elo_away": 1737,
+      "published_odds": {
+        "home": 0.339,
+        "draw": 0.299,
+        "away": 0.362
+      },
+      "score": "2-1",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-09T16:45:00Z",
+      "home": "Barcelona",
+      "away": "Feyenoord",
+      "home_raw": "FC Barcelona",
+      "away_raw": "Feyenoord Rotterdam",
+      "elo_home": 1738,
+      "elo_away": 1621,
+      "published_odds": {
+        "home": 0.533,
+        "draw": 0.286,
+        "away": 0.181
+      },
+      "score": "5-1",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-09T16:45:00Z",
+      "home": "VfB Stuttgart",
+      "away": "Viking",
+      "home_raw": "VfB Stuttgart",
+      "away_raw": "Viking FK",
+      "elo_home": 1690,
+      "elo_away": 1560,
+      "published_odds": {
+        "home": 0.543,
+        "draw": 0.285,
+        "away": 0.172
+      },
+      "score": "3-1",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-09T19:00:00Z",
+      "home": "Liverpool",
+      "away": "Atletico Madrid",
+      "home_raw": "Liverpool FC",
+      "away_raw": "Club Atl\u00e9tico de Madrid",
+      "elo_home": 1650,
+      "elo_away": 1666,
+      "published_odds": {
+        "home": 0.406,
+        "draw": 0.296,
+        "away": 0.298
+      },
+      "score": "2-1",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-09T19:00:00Z",
+      "home": "Napoli",
+      "away": "Arsenal",
+      "home_raw": "SSC Napoli",
+      "away_raw": "Arsenal FC",
+      "elo_home": 1681,
+      "elo_away": 1754,
+      "published_odds": {
+        "home": 0.347,
+        "draw": 0.3,
+        "away": 0.353
+      },
+      "score": "0-1",
+      "actual": "away",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-09T19:00:00Z",
+      "home": "Paris Saint-Germain",
+      "away": "Slovan Bratislava",
+      "home_raw": "Paris Saint-Germain FC",
+      "away_raw": "\u0160K Slovan Bratislava",
+      "elo_home": 1499,
+      "elo_away": 1560,
+      "published_odds": {
+        "home": 0.359,
+        "draw": 0.299,
+        "away": 0.341
+      },
+      "score": "6-1",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-09T19:00:00Z",
+      "home": "Sporting CP",
+      "away": "Galatasaray",
+      "home_raw": "Sporting Clube de Portugal",
+      "away_raw": "Galatasaray SK",
+      "elo_home": 1675,
+      "elo_away": 1560,
+      "published_odds": {
+        "home": 0.531,
+        "draw": 0.286,
+        "away": 0.183
+      },
+      "score": "3-1",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-10T16:45:00Z",
+      "home": "Fenerbahce",
+      "away": "Roma",
+      "home_raw": "Fenerbah\u00e7e SK",
+      "away_raw": "AS Roma",
+      "elo_home": 1560,
+      "elo_away": 1666,
+      "published_odds": {
+        "home": 0.315,
+        "draw": 0.297,
+        "away": 0.388
+      },
+      "score": "1-1",
+      "actual": "draw",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-10T16:45:00Z",
+      "home": "PSV Eindhoven",
+      "away": "Shakhtar Donetsk",
+      "home_raw": "PSV",
+      "away_raw": "FK Shakhtar Donetsk",
+      "elo_home": 1674,
+      "elo_away": 1560,
+      "published_odds": {
+        "home": 0.53,
+        "draw": 0.286,
+        "away": 0.184
+      },
+      "score": "1-1",
+      "actual": "draw",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-10T19:00:00Z",
+      "home": "Bayern Munich",
+      "away": "Bodo/Glimt",
+      "home_raw": "FC Bayern M\u00fcnchen",
+      "away_raw": "FK Bod\u00f8/Glimt",
+      "elo_home": 1781,
+      "elo_away": 1560,
+      "published_odds": {
+        "home": 0.608,
+        "draw": 0.278,
+        "away": 0.114
+      },
+      "score": "5-0",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-10T19:00:00Z",
+      "home": "Como",
+      "away": "RB Leipzig",
+      "home_raw": "Como 1907",
+      "away_raw": "RB Leipzig",
+      "elo_home": 1650,
+      "elo_away": 1839,
+      "published_odds": {
+        "home": 0.238,
+        "draw": 0.291,
+        "away": 0.471
+      },
+      "score": "4-1",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-10T19:00:00Z",
+      "home": "Manchester United",
+      "away": "Sabah FK",
+      "home_raw": "Manchester United FC",
+      "away_raw": "Sabah FK",
+      "elo_home": 1672,
+      "elo_away": 1524,
+      "published_odds": {
+        "home": 0.557,
+        "draw": 0.284,
+        "away": 0.159
+      },
+      "score": "4-0",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 1,
+      "date": "2026-09-10T19:00:00Z",
+      "home": "Slavia Praha",
+      "away": "Lens",
+      "home_raw": "SK Slavia Praha",
+      "away_raw": "Racing Club de Lens",
+      "elo_home": 1560,
+      "elo_away": 1695,
+      "published_odds": {
+        "home": 0.287,
+        "draw": 0.295,
+        "away": 0.418
+      },
+      "score": "2-3",
+      "actual": "away",
+      "prediction_committed_at": "2026-09-05T03:11:06.987676Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-13T16:45:00Z",
+      "home": "Lens",
+      "away": "Sporting CP",
+      "home_raw": "Racing Club de Lens",
+      "away_raw": "Sporting Clube de Portugal",
+      "elo_home": 1536,
+      "elo_away": 1696,
+      "published_odds": {
+        "home": 0.264,
+        "draw": 0.293,
+        "away": 0.443
+      },
+      "score": "0-2",
+      "actual": "away",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-13T16:45:00Z",
+      "home": "Sabah FK",
+      "away": "Slavia Praha",
+      "home_raw": "Sabah FK",
+      "away_raw": "SK Slavia Praha",
+      "elo_home": 1516,
+      "elo_away": 1546,
+      "published_odds": {
+        "home": 0.392,
+        "draw": 0.297,
+        "away": 0.311
+      },
+      "score": "2-0",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-13T19:00:00Z",
+      "home": "Arsenal",
+      "away": "Lille",
+      "home_raw": "Arsenal FC",
+      "away_raw": "Lille OSC",
+      "elo_home": 1745,
+      "elo_away": 1652,
+      "published_odds": {
+        "home": 0.512,
+        "draw": 0.288,
+        "away": 0.2
+      },
+      "score": "3-0",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-13T19:00:00Z",
+      "home": "Atletico Madrid",
+      "away": "Manchester United",
+      "home_raw": "Club Atl\u00e9tico de Madrid",
+      "away_raw": "Manchester United FC",
+      "elo_home": 1595,
+      "elo_away": 1568,
+      "published_odds": {
+        "home": 0.45,
+        "draw": 0.293,
+        "away": 0.257
+      },
+      "score": "2-0",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-13T19:00:00Z",
+      "home": "Galatasaray",
+      "away": "Barcelona",
+      "home_raw": "Galatasaray SK",
+      "away_raw": "FC Barcelona",
+      "elo_home": 1555,
+      "elo_away": 1759,
+      "published_odds": {
+        "home": 0.224,
+        "draw": 0.29,
+        "away": 0.486
+      },
+      "score": "1-4",
+      "actual": "away",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-13T19:00:00Z",
+      "home": "Inter",
+      "away": "Club Brugge",
+      "home_raw": "FC Internazionale Milano",
+      "away_raw": "Club Brugge KV",
+      "elo_home": 1687,
+      "elo_away": 1544,
+      "published_odds": {
+        "home": 0.554,
+        "draw": 0.284,
+        "away": 0.162
+      },
+      "score": "3-4",
+      "actual": "away",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-13T19:00:00Z",
+      "home": "RB Leipzig",
+      "away": "PSV Eindhoven",
+      "home_raw": "RB Leipzig",
+      "away_raw": "PSV",
+      "elo_home": 1824,
+      "elo_away": 1689,
+      "published_odds": {
+        "home": 0.547,
+        "draw": 0.285,
+        "away": 0.168
+      },
+      "score": "1-0",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-13T19:00:00Z",
+      "home": "Viking",
+      "away": "Bayern Munich",
+      "home_raw": "Viking FK",
+      "away_raw": "FC Bayern M\u00fcnchen",
+      "elo_home": 1555,
+      "elo_away": 1784,
+      "published_odds": {
+        "home": 0.203,
+        "draw": 0.288,
+        "away": 0.509
+      },
+      "score": "3-3",
+      "actual": "draw",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-13T19:00:00Z",
+      "home": "Villarreal",
+      "away": "Napoli",
+      "home_raw": "Villarreal CF",
+      "away_raw": "SSC Napoli",
+      "elo_home": 1456,
+      "elo_away": 1515,
+      "published_odds": {
+        "home": 0.361,
+        "draw": 0.299,
+        "away": 0.34
+      },
+      "score": "3-1",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-14T16:45:00Z",
+      "home": "Feyenoord",
+      "away": "Como",
+      "home_raw": "Feyenoord Rotterdam",
+      "away_raw": "Como 1907",
+      "elo_home": 1645,
+      "elo_away": 1654,
+      "published_odds": {
+        "home": 0.414,
+        "draw": 0.295,
+        "away": 0.291
+      },
+      "score": "3-2",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-14T16:45:00Z",
+      "home": "LASK",
+      "away": "Liverpool",
+      "home_raw": "LASK Linz",
+      "away_raw": "Liverpool FC",
+      "elo_home": 1551,
+      "elo_away": 1605,
+      "published_odds": {
+        "home": 0.367,
+        "draw": 0.299,
+        "away": 0.334
+      },
+      "score": "3-6",
+      "actual": "away",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-14T19:00:00Z",
+      "home": "Aston Villa",
+      "away": "Fenerbahce",
+      "home_raw": "Aston Villa FC",
+      "away_raw": "Fenerbah\u00e7e SK",
+      "elo_home": 1469,
+      "elo_away": 1562,
+      "published_odds": {
+        "home": 0.328,
+        "draw": 0.298,
+        "away": 0.374
+      },
+      "score": "6-0",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-14T19:00:00Z",
+      "home": "Bodo/Glimt",
+      "away": "Borussia Dortmund",
+      "home_raw": "FK Bod\u00f8/Glimt",
+      "away_raw": "Borussia Dortmund",
+      "elo_home": 1557,
+      "elo_away": 2040,
+      "published_odds": {
+        "home": 0.062,
+        "draw": 0.269,
+        "away": 0.669
+      },
+      "score": "1-0",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-14T19:00:00Z",
+      "home": "Manchester City",
+      "away": "Paris Saint-Germain",
+      "home_raw": "Manchester City FC",
+      "away_raw": "Paris Saint-Germain FC",
+      "elo_home": 1751,
+      "elo_away": 1498,
+      "published_odds": {
+        "home": 0.627,
+        "draw": 0.276,
+        "away": 0.098
+      },
+      "score": "2-4",
+      "actual": "away",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-14T19:00:00Z",
+      "home": "Real Betis",
+      "away": "Porto",
+      "home_raw": "Real Betis Balompi\u00e9",
+      "away_raw": "FC Porto",
+      "elo_home": 1677,
+      "elo_away": 1721,
+      "published_odds": {
+        "home": 0.377,
+        "draw": 0.298,
+        "away": 0.324
+      },
+      "score": "3-2",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-14T19:00:00Z",
+      "home": "Roma",
+      "away": "Real Madrid",
+      "home_raw": "AS Roma",
+      "away_raw": "Real Madrid CF",
+      "elo_home": 1695,
+      "elo_away": 1674,
+      "published_odds": {
+        "home": 0.444,
+        "draw": 0.293,
+        "away": 0.263
+      },
+      "score": "3-4",
+      "actual": "away",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-14T19:00:00Z",
+      "home": "Shakhtar Donetsk",
+      "away": "AEK Athens",
+      "home_raw": "FK Shakhtar Donetsk",
+      "away_raw": "PAE AEK",
+      "elo_home": 1566,
+      "elo_away": 1569,
+      "published_odds": {
+        "home": 0.42,
+        "draw": 0.295,
+        "away": 0.285
+      },
+      "score": "3-1",
+      "actual": "home",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    },
+    {
+      "matchday": 2,
+      "date": "2026-10-14T19:00:00Z",
+      "home": "Slovan Bratislava",
+      "away": "VfB Stuttgart",
+      "home_raw": "\u0160K Slovan Bratislava",
+      "away_raw": "VfB Stuttgart",
+      "elo_home": 1549,
+      "elo_away": 1695,
+      "published_odds": {
+        "home": 0.277,
+        "draw": 0.294,
+        "away": 0.429
+      },
+      "score": "0-3",
+      "actual": "away",
+      "prediction_committed_at": "2026-09-10T22:58:37.219865Z"
+    }
+  ]
+}
