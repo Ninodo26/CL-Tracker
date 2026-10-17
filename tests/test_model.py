@@ -125,7 +125,19 @@ class ModelTests(unittest.TestCase):
                     model.STARTING_COEFFICIENTS | model.QUALIFYING_COEFFICIENTS,
                 )
                 coefficient = model.coefficient_for_team(api_name)
-                self.assertEqual(model.seed_elo(api_name, {}), model.ELO_BASE + coefficient * model.ELO_COEF_SCALE)
+                mv_adj = model.market_value_adjustment(api_name)
+                self.assertEqual(model.seed_elo(api_name, {}), model.ELO_BASE + coefficient * model.ELO_COEF_SCALE + mv_adj)
+
+    def test_market_value_adjustments_are_bounded_and_monotonic(self):
+        real_madrid_adj = model.market_value_adjustment("Real Madrid")
+        dortmund_adj = model.market_value_adjustment("Borussia Dortmund")
+        slovan_adj = model.market_value_adjustment("Slovan Bratislava")
+        self.assertGreater(real_madrid_adj, dortmund_adj)
+        self.assertGreater(dortmund_adj, slovan_adj)
+        self.assertGreater(real_madrid_adj, 0)
+        self.assertLess(slovan_adj, 0)
+        self.assertLessEqual(real_madrid_adj, model.MARKET_VALUE_CAP)
+        self.assertGreaterEqual(slovan_adj, -model.MARKET_VALUE_CAP)
 
     def test_missing_coefficient_is_an_error_unless_explicit_fallback_is_requested(self):
         with self.assertRaisesRegex(model.MissingCoefficientError, "No UEFA coefficient configured"):

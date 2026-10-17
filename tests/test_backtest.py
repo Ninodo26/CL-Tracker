@@ -52,6 +52,7 @@ class BacktestTests(unittest.TestCase):
         unif_brier = results["baseline_uniform"]["brier"]
 
         self.assertLess(model_brier, unif_brier, "Model Brier score must outperform uniform baseline")
+        self.assertLess(model_brier, results["pre_market_value"]["brier"], "Calibrated model must outperform pre-MV baseline")
         self.assertLess(model_brier, 0.60, "Model Brier score should be under 0.60 on this test set")
         self.assertGreater(results["model"]["accuracy"], 0.60, "Model pick accuracy should exceed 60%")
 

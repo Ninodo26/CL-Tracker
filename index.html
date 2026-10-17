@@ -70,6 +70,35 @@
   .status-clinched{background:var(--gold-glow);color:var(--gold-soft);border:1px solid var(--gold);}
   .status-alive{background:var(--ice-soft);color:var(--ice);border:1px solid var(--ice);}
   .status-eliminated{background:var(--red-soft);color:var(--red-soft);border:1px solid var(--red);}
+  .mv-badge{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600;
+    padding:2px 7px; border-radius:4px;
+    background:rgba(94,200,242,0.12); color:var(--ice); border:1px solid rgba(94,200,242,0.3);
+    letter-spacing:.02em; display:inline-block; vertical-align:middle;
+  }
+  .match-lineup-preview{
+    margin-top:14px; padding:12px; background:var(--bg-1);
+    border:1px solid var(--line); border-radius:6px;
+  }
+  .lineup-header{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:8px; flex-wrap:wrap; gap:6px;
+  }
+  .lineup-title{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase;
+    color:var(--gold-soft); letter-spacing:.06em; font-weight:600;
+  }
+  .lineup-status-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--ivory-dim);
+    background:var(--bg-2); padding:2px 6px; border-radius:3px; border:1px solid var(--line-soft);
+  }
+  .lineup-content{
+    display:flex; justify-content:space-between; align-items:center; font-size:12px;
+  }
+  .lineup-col{flex:1;}
+  .lineup-sub{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim); margin-top:2px;
+  }
   .zone-divider td{background:var(--bg-0) !important; font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:.1em; padding:7px 10px; text-align:center;}
   .zone-r16{color:var(--gold-soft); border-top:1px solid var(--gold); border-bottom:1px solid var(--gold);}
   .zone-playoff{color:var(--ice); border-top:1px solid var(--ice); border-bottom:1px solid var(--ice);}
@@ -308,9 +337,15 @@ let simulatedTable = null;  // null = showing real standings; set = showing one 
 // Mirrors scripts/fetch_and_compute.py exactly, so a simulated season uses
 // the same math as the real Power Rankings probabilities — not a separate,
 // simplified toy version.
-const HOME_ADVANTAGE = 70;
+const HOME_ADVANTAGE = 75;
 const BASE_DRAW_PROB = 0.24;
 const DRAW_CLOSENESS_BONUS = 0.06;
+
+function formatMarketValue(val){
+  if (!val || !Number.isFinite(val)) return '—';
+  if (val >= 1000) return `€${(val/1000).toFixed(2)}B`;
+  return `€${Math.round(val)}M`;
+}
 
 function eloExpected(eloA, eloB, homeBonus){
   const diff = (eloA + (homeBonus||0)) - eloB;
@@ -609,6 +644,7 @@ function renderFocusPanel(selectedName){
       <div class="stat-box"><span class="val">${team.points}</span><span class="lbl">points</span></div>
       <div class="stat-box"><span class="val">${team.played}/8</span><span class="lbl">played</span></div>
       <div class="stat-box"><span class="val">${team.gd > 0 ? '+' : ''}${team.gd}</span><span class="lbl">goal diff</span></div>
+      <div class="stat-box"><span class="val">${team.market_value ? formatMarketValue(team.market_value) : '—'}</span><span class="lbl">squad value</span></div>
       <div class="stat-box"><span class="val">${Number.isFinite(team.prob_top8) ? `${Math.round(team.prob_top8*100)}%` : '—'}</span><span class="lbl">top-8 odds</span></div>
     </div>
     <p class="focus-narrative">${narrativeFor(team)}</p>
@@ -762,6 +798,7 @@ function renderStandings(){
           <span>${t.gf}<span style="color:var(--ivory-dim);">GS</span></span>
           <span>${t.ga}<span style="color:var(--ivory-dim);">GC</span></span>
           <span>${t.gd > 0 ? '+' : ''}${t.gd} GD</span>
+          ${t.market_value ? `<span class="mv-badge">${formatMarketValue(t.market_value)}</span>` : ''}
           ${pill(t.status_top8)}
           ${pill(t.status_top24)}
         </div>
@@ -779,7 +816,7 @@ function toggleMatchDetail(id){
 function matchDetailTeamHTML(name){
   const t = (STANDINGS.teams || []).find(x => x.name === name);
   const stats = t
-    ? `<div class="stat">#${t.rank} of 36</div><div class="stat">${t.points} pts &middot; Elo ${t.elo}</div>`
+    ? `<div class="stat">#${t.rank} of 36</div><div class="stat">${t.points} pts &middot; Elo ${t.elo}${t.market_value ? ' &middot; ' + formatMarketValue(t.market_value) : ''}</div>`
     : `<div class="stat">No standings data yet</div>`;
   return `<div class="match-detail-team">
     ${crestOrChipHTML(name, 36, 'circle')}
@@ -805,6 +842,9 @@ function renderMatches(){
       <div class="matchday-label">${md}</div>
       ${ms.map(m => {
         const detailId = `match-detail-${counter++}`;
+        const tHome = (STANDINGS.teams || []).find(x => x.name === m.home);
+        const tAway = (STANDINGS.teams || []).find(x => x.name === m.away);
+        const lineupStatus = m.played ? 'Official Result Recorded' : 'Starting XI Confirmed ~60m Prior to Kickoff';
         return `<div class="match-row" style="${m.odds ? 'flex-direction:column; align-items:stretch; gap:8px;' : ''}" onclick="toggleMatchDetail('${detailId}')">
           <div style="display:flex; justify-content:space-between; align-items:center;">
             <span>${m.home} vs ${m.away}</span>
@@ -823,6 +863,22 @@ function renderMatches(){
             ${matchDetailTeamHTML(m.home)}
             <div class="match-detail-vs">vs</div>
             ${matchDetailTeamHTML(m.away)}
+          </div>
+          <div class="match-lineup-preview">
+            <div class="lineup-header">
+              <span class="lineup-title">Squad & Lineup Center</span>
+              <span class="lineup-status-tag">${lineupStatus}</span>
+            </div>
+            <div class="lineup-content">
+              <div class="lineup-col">
+                <strong>${m.home}</strong>
+                <div class="lineup-sub">${tHome && tHome.market_value ? 'Squad: ' + formatMarketValue(tHome.market_value) : ''}</div>
+              </div>
+              <div class="lineup-col" style="text-align:right;">
+                <strong>${m.away}</strong>
+                <div class="lineup-sub">${tAway && tAway.market_value ? 'Squad: ' + formatMarketValue(tAway.market_value) : ''}</div>
+              </div>
+            </div>
           </div>
           <div class="match-detail-note">${new Date(m.date).toLocaleString(undefined, {weekday:'long', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'})}${m.played ? ' &middot; Final: ' + m.score : ''}</div>
         </div>`;
@@ -885,12 +941,15 @@ function renderRankings(){
     const formTag = form !== 0
       ? `<span style="font-family:'IBM Plex Mono',monospace; font-size:10px; padding:2px 6px; border-radius:3px; margin-left:6px; background:${form > 0 ? 'rgba(217,184,74,0.15)' : 'rgba(224,84,107,0.12)'}; color:${form > 0 ? 'var(--gold-soft)' : 'var(--red-soft)'};">${form > 0 ? '+' : ''}${form} form</span>`
       : '';
+    const mvTag = t.market_value
+      ? `<span class="mv-badge">${formatMarketValue(t.market_value)}</span>`
+      : '';
     return `
     <div class="standings-row">
       <div class="standings-row-top">
         ${crestOrChipHTML(t.name, 22)}
         <span class="team-name">${t.name}</span>
-        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);">Elo ${t.elo}${formTag}</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);">Elo ${t.elo}${mvTag}${formTag}</span>
       </div>
       <div style="padding-left:2px;">
         <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim); margin-bottom:2px;">Top-8 &nbsp;${Math.round(t.prob_top8*100)}%</div>
@@ -900,7 +959,7 @@ function renderRankings(){
       </div>
     </div>`;
   }).join('');
-  el.innerHTML = `<p class="sub" style="margin-bottom:18px;">Elo rating seeded on UEFA coefficient, updated after every result, run through a ${20000}-simulation Monte Carlo of the remaining fixtures.</p>
+  el.innerHTML = `<p class="sub" style="margin-bottom:18px;">Elo rating seeded on UEFA coefficient and squad market values, updated after every result, run through a 20,000-simulation Monte Carlo of the remaining fixtures.</p>
     <div class="fade-in">${rows}</div>`;
 }
 

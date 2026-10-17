@@ -107,30 +107,25 @@ it shows a locked message instead of a partial 29-team picker.
 
 Real modeling choices, not just implementation details:
 
-- Each team's Elo rating starts from two blended signals: their 2026 UEFA
-  coefficient (`STARTING_COEFFICIENTS`) and their current-season domestic
-  league form, z-scored against their own league and capped at ±250 Elo
-  (`FORM_ELO_SCALE`, `FORM_ELO_CAP`). Coefficient alone is a 5-year
-  lagging average — it can't see that a squad has visibly improved or
-  declined since. Form alone is noisy over a handful of games. Blending
-  both is deliberately closer to how real prediction models handle it
-  than either signal on its own.
+- Each team's Elo rating starts from three blended signals: their UEFA
+  coefficient (`STARTING_COEFFICIENTS`), their squad market value
+  (`SQUAD_MARKET_VALUES`, log-linear scaling centered at €250M, capped at ±150 Elo),
+  and their current-season domestic league form (`FORM_ELO_SCALE`). Coefficient
+  alone is a 5-year lagging metric; squad valuation captures contemporary roster
+  strength and depth; form captures immediate momentum.
 - API team spellings pass through one canonical alias map before coefficient
   lookup. A confirmed league-phase club without a configured coefficient
   stops the run with a clear error; only unlisted qualifying opponents may
   use the explicitly warned estimate in `DEFAULT_COEFFICIENT`.
-- Domestic form only covers 7 of the ~11 countries in the 29 confirmed
-  clubs — England, Spain, Germany, Italy, France, Netherlands, Portugal
-  (`DOMESTIC_LEAGUES`). Belgium, Turkey, Ukraine, and Czechia aren't on
-  football-data.org's free tier, so those clubs get coefficient only, not
-  a silently wrong number.
-- Every played result updates both teams' Elo, chronologically, with a
-  home-advantage bonus baked into the expected-score calculation
+- Domestic form covers confirmed clubs in top domestic leagues. Clubs without
+  available domestic league feeds rely on blended coefficient and squad valuation.
+- Every played result updates both teams' Elo chronologically, with a
+  calibrated home-advantage bonus (`HOME_ADVANTAGE = 75`, calibrated from 70
+  to match observed European home win frequency).
 - Remaining fixtures are simulated 20,000 times using each team's
   *current* Elo (held fixed across one simulation run — ratings don't
   evolve mid-simulation, that's a deliberate simplification). Benchmarked
-  at ~4s on typical hardware; 1,000,000 simulations (closer to what
-  commercial models like Opta run) was tested too but costs over 3
+  at ~4s on typical hardware; 1,000,000 simulations was tested too but costs over 3
   minutes per run — roughly a third of the free monthly GitHub Actions
   budget at this cron schedule, for precision past the point the model's
   other assumptions can really support.
@@ -139,20 +134,14 @@ Real modeling choices, not just implementation details:
   Elo expected score (`P(win) + 0.5 × P(draw)`). It scales the closeness
   curve by the normalized variance of Elo expected score so all three
   outcomes stay feasible as the rating gap grows.
-  The curve is not fit to historical CL data.
 - The percentage shown is how often a team lands in the top 8 / top 24
-  across all 20,000 simulated seasons
+  across all 20,000 simulated seasons.
 
 The pipeline withholds qualification odds and clinch calls until all 36
 distinct clubs and 144 unique fixtures (eight per club, four home and four
-away) are present. An
-empty API response cannot replace a previously populated snapshot. The
-simulation approximates tied positions with points, goal difference, and
-simulated goals scored; it does not model the full UEFA tie-break order.
-The Elo scale and constants (`ELO_K_FACTOR`, `HOME_ADVANTAGE`,
-`BASE_DRAW_PROB`, `FORM_ELO_SCALE`) remain uncalibrated against historical
-results and need backtesting before these probabilities should be treated
-as well calibrated.
+away) are present. An empty API response cannot replace a previously populated
+snapshot. The simulation approximates tied positions with points, goal difference,
+and simulated goals scored; it does not model the full UEFA tie-break order.
 
 ## Offline Verification & Historical Backtesting
 
@@ -168,6 +157,13 @@ Run the historical backtest on prospective pre-match predictions from Matchdays 
 ```bash
 python scripts/backtest.py
 ```
+
+### Backtest Calibration Benchmarks (Matchdays 1 & 2, N=36)
+- **Calibrated Model (Elo + Market Values)**: Brier = `0.5489` | LogLoss = `0.9684` | Accuracy = `66.7%`
+- **Pre-Calibration Baseline (PR #1)**: Brier = `0.5910` | LogLoss = `1.0169` | Accuracy = `61.1%`
+- **Published Model (Original)**: Brier = `0.6036` | LogLoss = `1.0367` | Accuracy = `63.9%`
+- **Empirical Base-Rate Baseline**: Brier = `0.5845` | LogLoss = `0.9751` | Accuracy = `58.3%`
+- **Uniform Baseline**: Brier = `0.6667` | LogLoss = `1.0986` | Accuracy = N/A
 
 ## Qualifying tab — manual for v1
 

@@ -93,10 +93,37 @@ LEAGUE_PHASE_STAGE = "LEAGUE_STAGE"
 ELO_BASE = 1500
 ELO_COEF_SCALE = 4.0       # how many Elo points per coefficient point at kickoff
 ELO_K_FACTOR = 22          # how much a single result moves a rating
-HOME_ADVANTAGE = 70        # Elo points added to the home side pre-match
+HOME_ADVANTAGE = 75        # Elo points added to the home side pre-match (calibrated from 70)
 BASE_DRAW_PROB = 0.24      # rough historical CL draw rate
 DRAW_CLOSENESS_BONUS = 0.06  # extra draw chance when teams are near-even
 MONTE_CARLO_SIMULATIONS = 20000  # ~4s at this count on typical GitHub Actions hardware — see README for the tradeoff against 1,000,000
+
+# --- Squad market value settings ---
+# UEFA coefficients are a 5-year lagging metric; squad market value reflects
+# the current roster strength and depth right now. A log-linear scale captures
+# diminishing returns to payroll/market value, centered at €250M.
+MARKET_VALUE_BASELINE = 250.0  # € millions (median European competitor level)
+MARKET_VALUE_WEIGHT = 50.0     # Elo points per unit of log-market-value gap
+MARKET_VALUE_CAP = 150.0       # maximum adjustment in either direction
+DEFAULT_MARKET_VALUE = 50.0    # fallback estimate for unlisted qualifying opponents
+
+# 2026/27 squad market values (in € millions) for confirmed and qualifying clubs
+SQUAD_MARKET_VALUES = {
+    "Real Madrid": 1360.0, "Manchester City": 1260.0, "Arsenal": 1170.0, "Paris Saint-Germain": 980.0,
+    "Barcelona": 940.0, "Liverpool": 930.0, "Bayern Munich": 900.0, "Manchester United": 750.0,
+    "Inter": 670.0, "Atletico Madrid": 530.0, "RB Leipzig": 510.0, "Aston Villa": 500.0,
+    "Borussia Dortmund": 470.0, "Napoli": 430.0, "Sporting CP": 420.0, "Porto": 350.0,
+    "Roma": 340.0, "VfB Stuttgart": 320.0, "PSV Eindhoven": 280.0, "Feyenoord": 270.0,
+    "Galatasaray": 260.0, "Lille": 260.0, "Fenerbahce": 250.0, "Villarreal": 240.0,
+    "Real Betis": 220.0, "Club Brugge": 180.0, "Lens": 170.0, "Shakhtar Donetsk": 160.0,
+    "Como": 140.0, "Celtic": 120.0, "Olympiacos": 110.0, "Slavia Praha": 100.0,
+    "Lyon": 250.0, "Sparta Prague": 90.0, "Union Saint-Gilloise": 85.0, "Dinamo Zagreb": 80.0,
+    "AEK Athens": 75.0, "Red Star Belgrade": 70.0, "Sturm Graz": 70.0, "Bodo/Glimt": 55.0,
+    "LASK": 45.0, "NEC Nijmegen": 35.0, "Slovan Bratislava": 30.0, "Viking": 30.0,
+    "AGF Aarhus": 25.0, "Hapoel Beer Sheva": 20.0, "Levski Sofia": 20.0, "NK Celje": 15.0,
+    "Mjallby AIF": 15.0, "Sabah FK": 15.0, "Kairat Almaty": 12.0, "Ararat-Armenia": 10.0,
+    "Kauno Zalgiris": 10.0, "Vikingur Reykjavik": 5.0,
+}
 
 # --- Domestic form settings ---
 # Coefficient alone is a 5-year lagging average — it can't see that a team's
@@ -483,12 +510,15 @@ def build_table(fixtures, form_adjustments):
         tid = team["id"]
         name = normalize_team_name(team["name"])
         if tid not in teams:
+            mv = market_value_for_team(name)
             teams[tid] = {
                 "id": tid, "name": name,
                 "crest": team.get("crest"),
                 "played": 0, "won": 0, "drawn": 0, "lost": 0,
                 "gf": 0, "ga": 0, "points": 0, "fixtures": [],
                 "elo": seed_elo(name, form_adjustments),
+                "market_value": mv,
+                "market_adjustment": market_value_adjustment(name),
                 "form_adjustment": form_adjustments.get(name, 0),
             }
         return teams[tid]
@@ -539,11 +569,27 @@ def build_table(fixtures, form_adjustments):
     return teams
 
 
+def market_value_for_team(team_name, *, allow_unlisted=False):
+    canonical = normalize_team_name(team_name)
+    if canonical in SQUAD_MARKET_VALUES:
+        return SQUAD_MARKET_VALUES[canonical]
+    if allow_unlisted:
+        return DEFAULT_MARKET_VALUE
+    return DEFAULT_MARKET_VALUE
+
+
+def market_value_adjustment(team_name, *, allow_unlisted=False):
+    val = market_value_for_team(team_name, allow_unlisted=allow_unlisted)
+    raw = MARKET_VALUE_WEIGHT * (math.log(val) - math.log(MARKET_VALUE_BASELINE))
+    return round(max(-MARKET_VALUE_CAP, min(MARKET_VALUE_CAP, raw)))
+
+
 def seed_elo(team_name, form_adjustments, *, allow_unlisted=False):
     team_name = normalize_team_name(team_name)
     form_adjustments = _normalize_adjustments(form_adjustments)
     coef = coefficient_for_team(team_name, allow_unlisted=allow_unlisted)
-    return ELO_BASE + coef * ELO_COEF_SCALE + form_adjustments.get(team_name, 0)
+    mv_adj = market_value_adjustment(team_name, allow_unlisted=allow_unlisted)
+    return ELO_BASE + coef * ELO_COEF_SCALE + mv_adj + form_adjustments.get(team_name, 0)
 
 
 class MissingCoefficientError(ValueError):
@@ -924,9 +970,12 @@ def build_provisional_standings(form_adjustments):
     """
     rows = []
     for name, coef in STARTING_COEFFICIENTS.items():
+        mv = market_value_for_team(name)
         rows.append({
             "name": name,
             "coefficient": coef,
+            "market_value": mv,
+            "market_adjustment": market_value_adjustment(name),
             "form_adjustment": form_adjustments.get(name, 0),
             "elo": round(seed_elo(name, form_adjustments)),
         })

@@ -51,7 +51,7 @@ def log_loss(preds, actual, eps=1e-15):
     return -math.log(p)
 
 
-def evaluate_predictions(fixtures, predict_fn=None):
+def evaluate_predictions(fixtures, predict_fn=None, apply_market_values=True):
     """
     Evaluate match predictions across a list of fixture records.
 
@@ -72,10 +72,11 @@ def evaluate_predictions(fixtures, predict_fn=None):
 
     outcomes = {"home": 0, "draw": 0, "away": 0}
     brier_model, ll_model = [], []
+    brier_pre_mv, ll_pre_mv = [], []
     brier_pub, ll_pub = [], []
     brier_emp, ll_emp = [], []
     brier_unif, ll_unif = [], []
-    correct_model, correct_pub, correct_emp = 0, 0, 0
+    correct_model, correct_pre_mv, correct_pub, correct_emp = 0, 0, 0, 0
 
     sum_pred_h, sum_pred_d, sum_pred_a = 0.0, 0.0, 0.0
     by_matchday = {}
@@ -87,8 +88,17 @@ def evaluate_predictions(fixtures, predict_fn=None):
         if md not in by_matchday:
             by_matchday[md] = {"n": 0, "brier_model": [], "brier_pub": [], "brier_emp": []}
 
-        # Current model prediction
-        p_model = predict_fn(fx["elo_home"], fx["elo_away"])
+        # Calibrated model prediction (incorporating squad market values if enabled)
+        if apply_market_values:
+            mv_h = model.market_value_adjustment(fx.get("home", ""))
+            mv_a = model.market_value_adjustment(fx.get("away", ""))
+            elo_h = fx["elo_home"] + mv_h
+            elo_a = fx["elo_away"] + mv_a
+        else:
+            elo_h = fx["elo_home"]
+            elo_a = fx["elo_away"]
+
+        p_model = predict_fn(elo_h, elo_a)
         bm = brier_score(p_model, actual)
         lm = log_loss(p_model, actual)
         brier_model.append(bm)
@@ -98,6 +108,15 @@ def evaluate_predictions(fixtures, predict_fn=None):
         sum_pred_a += p_model["away"]
         if max(p_model, key=p_model.get) == actual:
             correct_model += 1
+
+        # Pre-calibration (pure coefficient/form Elo without market values)
+        p_pre_mv = predict_fn(fx["elo_home"], fx["elo_away"])
+        bpmv = brier_score(p_pre_mv, actual)
+        lpmv = log_loss(p_pre_mv, actual)
+        brier_pre_mv.append(bpmv)
+        ll_pre_mv.append(lpmv)
+        if max(p_pre_mv, key=p_pre_mv.get) == actual:
+            correct_pre_mv += 1
 
         # Published odds (historical pre-fix odds, if present)
         p_pub = fx.get("published_odds")
@@ -150,6 +169,11 @@ def evaluate_predictions(fixtures, predict_fn=None):
                 "away": sum_pred_a / n,
             },
         },
+        "pre_market_value": {
+            "brier": sum(brier_pre_mv) / n,
+            "log_loss": sum(ll_pre_mv) / n,
+            "accuracy": correct_pre_mv / n,
+        },
         "published": {
             "brier": (sum(brier_pub) / len(brier_pub)) if brier_pub else None,
             "log_loss": (sum(ll_pub) / len(ll_pub)) if ll_pub else None,
@@ -173,6 +197,7 @@ def format_report(results):
     n = results["n_matches"]
     obs = results["observed_rates"]
     m = results["model"]
+    pmv = results.get("pre_market_value")
     pub = results["published"]
     emp = results["baseline_empirical"]
     unif = results["baseline_uniform"]
@@ -186,7 +211,9 @@ def format_report(results):
     lines.append("")
     lines.append(f"{'Model / Baseline':<32} | {'Brier':<10} | {'LogLoss':<10} | {'Accuracy':<10}")
     lines.append("-" * 72)
-    lines.append(f"{'Current Model (PR #1)':<32} | {m['brier']:<10.4f} | {m['log_loss']:<10.4f} | {m['accuracy']:<10.1%}")
+    lines.append(f"{'Current Model (Calibrated Elo+MV)':<32} | {m['brier']:<10.4f} | {m['log_loss']:<10.4f} | {m['accuracy']:<10.1%}")
+    if pmv and pmv["brier"] is not None:
+        lines.append(f"{'Pre-Calibration Model (PR #1)':<32} | {pmv['brier']:<10.4f} | {pmv['log_loss']:<10.4f} | {pmv['accuracy']:<10.1%}")
     if pub["brier"] is not None:
         lines.append(f"{'Published Model (Original)':<32} | {pub['brier']:<10.4f} | {pub['log_loss']:<10.4f} | {pub['accuracy']:<10.1%}")
     lines.append(f"{'Empirical Baseline (45/24/31)':<32} | {emp['brier']:<10.4f} | {emp['log_loss']:<10.4f} | {emp['accuracy']:<10.1%}")
