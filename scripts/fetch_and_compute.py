@@ -96,9 +96,9 @@ BASE_DRAW_PROB = 0.24      # rough historical CL draw rate
 DRAW_CLOSENESS_BONUS = 0.06  # extra draw chance when teams are near-even
 MONTE_CARLO_SIMULATIONS = 20000  # ~4s at this count on typical GitHub Actions hardware — see README for the tradeoff against 1,000,000
 
-# Validated enhancements from historical backtesting
-USE_CALIBRATED_ELO = False  # Set True to blend squad valuation and league quality
-USE_GOAL_MARGIN = False     # Set True to scale Elo K-factor by victory margin
+# Validated enhancements from historical backtesting (configurable via env vars or code)
+USE_CALIBRATED_ELO = os.environ.get("USE_CALIBRATED_ELO", "0").lower() in ("1", "true")
+USE_GOAL_MARGIN = os.environ.get("USE_GOAL_MARGIN", "0").lower() in ("1", "true")
 
 # --- Domestic form settings ---
 # Coefficient alone is a 5-year lagging average — it can't see that a team's

@@ -1210,7 +1210,7 @@ function renderStandings(){
     const champHTML = (simulatedTable.knockout && simulatedTable.knockout.champion)
       ? `<div class="provisional-note" style="background:linear-gradient(135deg, rgba(217,184,74,0.18), rgba(18,28,64,0.85)); border-color:var(--gold); color:var(--gold-soft); margin-bottom:12px; display:block; padding:12px 16px;">
           <div style="font-size:15px; font-weight:700; margin-bottom:4px;">🏆 Simulated Tournament Champion: <strong>${simulatedTable.knockout.champion}</strong></div>
-          <div style="font-size:11px; color:var(--ivory-dim);">Defeated ${simulatedTable.knockout.runnerUp} in the Final after 20,000 Monte Carlo tournament rollouts.</div>
+          <div style="font-size:11px; color:var(--ivory-dim);">Defeated ${simulatedTable.knockout.runnerUp} in the Final (Single illustrative tournament rollout based on current Elo ratings).</div>
         </div>`
       : '';
     const headlineHTML = simulatedTable.headline

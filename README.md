@@ -3,54 +3,15 @@
 Live table + clinch/elimination scenario tracking for the 2026/27
 Champions League league phase, updating itself via GitHub Actions.
 
-## Setup (do this before Matchday 1, 8 Sept 2026)
+## Campaign Status & Architecture (2026/27 Season)
 
-### 1. Get a football-data.org key
-- Sign up free at https://www.football-data.org/client/register
-- Free tier: 10 requests/minute (a rate limit, not a daily cap), covers
-  12 competitions including the Champions League. This project makes
-  up to 15 calls per run (1 for CL fixtures plus up to 7 domestic leagues
-  across the current and previous seasons), throttled by the script.
+* **Current Status**: Active League Phase — **Matchday 3 Completed** (54 matches played, 90 remaining).
+* **Automated Pipeline**: Runs every 3 hours via GitHub Actions (`.github/workflows/update.yml`) syncing real match scores, re-computing Elo, and rolling 20,000 Monte Carlo tournament brackets.
+* **Rate Limits**: Uses `football-data.org` free tier (10 req/min limit). Script enforces a strict 6.5s delay between calls ($pprox 9.2$ req/min) making 8 calls per run, with automated retry on HTTP 429.
 
-### 1b. (Optional) Get an API-Football key too
-Covers domestic form for the 4 leagues football-data.org's free tier
-doesn't include — Belgium (Club Brugge), Turkey (Galatasaray), Ukraine
-(Shakhtar Donetsk), Czechia (Slavia Praha). Skip this entirely and those
-4 clubs just get coefficient-only Elo, same as before this existed —
-nothing else breaks.
-- Sign up free at https://www.api-football.com — free tier is 100
-  requests/day, this adds ~8 calls per run (2 per league × 4 leagues)
-- Add it as a repo secret named `API_FOOTBALL_KEY` alongside
-  `FOOTBALL_DATA_KEY` in step 4 below. The workflow passes both secrets.
-
-### 2. Confirm the league-phase stage name
-The script assumes matches use `"stage": "LEAGUE_STAGE"` for the 36-team
-format. Confirm it once you have a key:
-
-    curl -H "X-Auth-Token: YOUR_KEY" \
-      "https://api.football-data.org/v4/competitions/CL/matches?season=2026" \
-      | python3 -c "import json,sys; print(set(m['stage'] for m in json.load(sys.stdin)['matches']))"
-
-If `LEAGUE_STAGE` isn't in that set, update `LEAGUE_PHASE_STAGE` in
-`scripts/fetch_and_compute.py` to whatever value actually appears.
-
-### 3. Create the GitHub repo
-- Push this folder as a new repo (public, since GitHub Pages needs that
-  on the free tier — or use a private repo + Pro if you want it private)
-
-### 4. Add the API key as a secret
-Repo → Settings → Secrets and variables → Actions → New repository secret
-- Name: `FOOTBALL_DATA_KEY`
-- Value: your key
-
-### 5. Enable GitHub Pages
-Repo → Settings → Pages → Source: Deploy from branch → `main` / root
-
-### 6. Test it manually
-Repo → Actions → "Update standings" → Run workflow (the `workflow_dispatch`
-trigger lets you fire it on demand instead of waiting for the cron).
-Check that `data/standings.json` gets committed with real data once
-matches exist.
+### API Configuration & Secrets
+1. **FOOTBALL_DATA_KEY**: Required repository secret for live scores and domestic standings across England, Spain, Germany, Italy, France, Netherlands, and Portugal.
+2. **API_FOOTBALL_KEY**: (Optional) Covers domestic form for Belgium (Club Brugge), Turkey (Galatasaray), Ukraine (Shakhtar Donetsk), and Czechia (Slavia Praha). If omitted, those 4 clubs default cleanly to coefficient Elo.
 
 ## How the scenario logic works
 
