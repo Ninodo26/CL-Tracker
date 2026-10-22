@@ -437,6 +437,26 @@
   .coef-card:hover{background:var(--bg-2); border-color:var(--gold-soft);}
   .coef-card.top-slot{border-left:4px solid var(--gold);}
 
+  
+  /* Competition Dropdown */
+  .competition-select-wrap{
+    display:inline-flex; align-items:center; position:relative;
+  }
+  .competition-dropdown{
+    background:linear-gradient(135deg, var(--bg-2), var(--bg-3));
+    color:var(--gold-soft); border:1px solid var(--gold); border-radius:6px;
+    padding:6px 30px 6px 12px; font-family:'IBM Plex Mono',monospace;
+    font-size:12px; font-weight:600; cursor:pointer; outline:none;
+    appearance:none; -webkit-appearance:none;
+    background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d9b84a'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 8px center; background-size:16px;
+    transition:var(--transition); box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  }
+  .competition-dropdown:hover{
+    background-color:var(--bg-3); border-color:var(--ivory); color:var(--ivory);
+    box-shadow:0 4px 14px rgba(217,184,74,0.3);
+  }
+
   footer{margin-top:50px;padding:24px 0 50px;border-top:1px solid var(--line);color:var(--ivory-dim);font-size:11px;font-family:'IBM Plex Mono',monospace; line-height:1.6;}
   footer span{display:block;margin-top:6px;}
 </style>
@@ -926,6 +946,7 @@ let DOSSIERS = {};
 let LINEUPS_DATA = {};
 let STATS_DATA = {};
 let COEFFICIENTS_DATA = {};
+let COMPETITIONS_DATA = {};
 
 async function boot(){
   try{
@@ -958,6 +979,12 @@ async function boot(){
   } catch(e){
     COEFFICIENTS_DATA = {};
   }
+  try{
+    const resComp = await fetch('data/competitions_data.json', {cache:'no-store'});
+    COMPETITIONS_DATA = await resComp.json();
+  } catch(e){
+    COMPETITIONS_DATA = {};
+  }
 
   document.getElementById('main-wrap').style.display = 'block';
   renderAll();
@@ -968,14 +995,23 @@ boot();
 
 <script id="main-content-template" type="text/template">
 <header>
-    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
       <div>
-        <h1 style="margin-bottom:2px;">Champions League Tracker</h1>
-        <div class="eyebrow" style="margin-bottom:0;">Evidence-Based Analytics &amp; Monte Carlo Scenarios</div>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <h1 style="margin-bottom:2px;" id="main-app-title">Champions League Tracker</h1>
+          <div class="competition-select-wrap">
+            <select id="competition-select" class="competition-dropdown" onchange="switchCompetition(this.value)" title="Switch European Competition">
+              <option value="ucl" selected>🏆 UEFA Champions League</option>
+              <option value="uel">🥈 UEFA Europa League</option>
+              <option value="uecl">🥉 UEFA Conference League</option>
+            </select>
+          </div>
+        </div>
+        <div class="eyebrow" style="margin-bottom:0;" id="main-app-subtitle">Evidence-Based Analytics &amp; Monte Carlo Scenarios</div>
       </div>
       <div id="team-switcher"></div>
     </div>
-    <nav class="tabs">
+    <nav class="tabs" id="main-nav-tabs">
       <button class="tab-btn active" data-tab="standings">Standings</button>
       <button class="tab-btn" data-tab="matches">Matches</button>
       <button class="tab-btn" data-tab="rankings">Power Rankings</button>
@@ -984,6 +1020,8 @@ boot();
       <button class="tab-btn" data-tab="accuracy">Model Accuracy &amp; Backtest</button>
     </nav>
 </header>
+
+  <div id="other-competition-view" style="display:none; margin-top:20px;"></div>
 
   <div class="tab-panel active" id="panel-standings">
     <div id="focus"></div>
@@ -1548,25 +1586,54 @@ function openTeamModal(name){
     `;
   }).join('') : `<div class="empty" style="padding:20px;">No remaining league-phase fixtures.</div>`;
 
-  const keyPlayersHTML = (dossier.key_players || []).map(p => `
-    <div class="player-pill">
-      <strong>${p.name}</strong> <span style="color:var(--ivory-dim);">${p.role}</span>
-    </div>
-  `).join('');
-
   const rankBadge = team ? `<span class="stat-box" style="padding:5px 10px; font-size:12px; min-width:auto;">#${team.rank} in Table</span>` : '';
   const ptsBadge = team ? `<span class="stat-box" style="padding:5px 10px; font-size:12px; min-width:auto;">${team.points} pts (${team.played}/8 played)</span>` : '';
   const eloBadge = team ? `<span class="stat-box" style="padding:5px 10px; font-size:12px; min-width:auto;">Elo ${team.elo}</span>` : '';
   const top8Badge = team && Number.isFinite(team.prob_top8) ? `<span class="stat-box" style="padding:5px 10px; font-size:12px; min-width:auto; color:var(--gold-soft);">Top-8: ${formatProb(team.prob_top8, team.status_top8)}</span>` : '';
   const top24Badge = team && Number.isFinite(team.prob_top24) ? `<span class="stat-box" style="padding:5px 10px; font-size:12px; min-width:auto; color:var(--ice);">Top-24: ${formatProb(team.prob_top24, team.status_top24)}</span>` : '';
 
+  const whyGoodParagraphs = (dossier.why_good || '').split('\n\n').map(p => `
+    <p style="margin:0 0 10px; font-size:13px; line-height:1.65; color:var(--ivory);">${p}</p>
+  `).join('');
+
+  const strengthsHTML = (dossier.key_strengths && dossier.key_strengths.length) ? `
+    <div style="margin-top:14px; display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px;">
+      <div style="background:rgba(217,184,74,0.06); border:1px solid rgba(217,184,74,0.3); border-radius:6px; padding:12px 14px;">
+        <div style="font-family:'Anton',sans-serif; font-size:12px; text-transform:uppercase; color:var(--gold-soft); letter-spacing:0.04em; margin-bottom:8px;">
+          ✓ Key Tactical Strengths
+        </div>
+        <ul style="margin:0; padding-left:18px; font-size:12px; color:var(--ivory); line-height:1.55;">
+          ${dossier.key_strengths.map(s => `<li style="margin-bottom:4px;">${s}</li>`).join('')}
+        </ul>
+      </div>
+      <div style="background:rgba(224,84,107,0.06); border:1px solid rgba(224,84,107,0.3); border-radius:6px; padding:12px 14px;">
+        <div style="font-family:'Anton',sans-serif; font-size:12px; text-transform:uppercase; color:var(--red-soft); letter-spacing:0.04em; margin-bottom:8px;">
+          ⚠️ Known Vulnerabilities
+        </div>
+        <ul style="margin:0; padding-left:18px; font-size:12px; color:var(--ivory-dim); line-height:1.55;">
+          ${(dossier.known_vulnerabilities || []).map(v => `<li style="margin-bottom:4px;">${v}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+  ` : '';
+
+  const keyPlayersCards = (dossier.key_players || []).map(p => `
+    <div style="background:var(--bg-3); border:1px solid var(--line); border-radius:6px; padding:12px 14px;">
+      <div style="font-weight:700; font-size:13px; color:var(--gold-soft); margin-bottom:2px;">${p.name}</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ice); margin-bottom:6px;">${p.role}</div>
+      ${p.impact ? `<div style="font-size:11px; color:var(--ivory-dim); line-height:1.45;">${p.impact}</div>` : ''}
+    </div>
+  `).join('');
+
   body.innerHTML = `
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:14px;">
       <div style="display:flex; align-items:center; gap:14px;">
-        ${crestOrChipHTML(name, 48, 'circle')}
+        ${crestOrChipHTML(name, 50, 'circle')}
         <div>
-          <h2 style="font-family:'Anton',sans-serif; font-size:26px; text-transform:uppercase; margin:0; line-height:1.1;">${name}</h2>
-          <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold-soft); margin-top:2px;">${dossier.league || 'European Contender'}</div>
+          <h2 style="font-family:'Anton',sans-serif; font-size:28px; text-transform:uppercase; margin:0; line-height:1.1;">${name}</h2>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold-soft); margin-top:2px;">
+            ${dossier.league || 'European Contender'} &middot; <span style="color:var(--ice);">${dossier.formation || 'Tactical System'}</span>${dossier.manager ? ` &middot; Manager: <strong style="color:var(--ivory);">${dossier.manager}</strong>` : ''}
+          </div>
         </div>
       </div>
       <button class="none-btn" style="width:auto; margin:0; padding:8px 16px; font-size:11px; border-color:var(--gold); color:var(--gold-soft);" onclick="openTikTokCard('team', {name:'${name.replace(/'/g, "\\'")}'})">📱 Export ${name} Card to TikTok / Story</button>
@@ -1577,19 +1644,20 @@ function openTeamModal(name){
     </div>
 
     <div class="dossier-section">
-      <div class="dossier-heading gold">⚡ Tactical DNA &amp; Why They're Good</div>
-      <p style="margin:0; font-size:13px; line-height:1.6; color:var(--ivory);">${dossier.why_good}</p>
-      <div style="margin-top:14px;">
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; color:var(--ivory-dim); letter-spacing:0.06em; margin-bottom:6px;">Key Players &amp; Game Changers</div>
-        <div class="player-pills">${keyPlayersHTML}</div>
+      <div class="dossier-heading gold">⚡ Tactical Blueprint &amp; Playing Identity</div>
+      ${whyGoodParagraphs}
+      ${strengthsHTML}
+      <div style="margin-top:16px;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; color:var(--ivory-dim); letter-spacing:0.06em; margin-bottom:8px;">Star Players &amp; Key Tactical Metrics</div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px;">${keyPlayersCards}</div>
       </div>
     </div>
 
     <div class="dossier-section" style="border-left:3px solid var(--gold);">
-      <div class="dossier-heading gold">🎙️ Fan Pulse &amp; Survival Outlook</div>
-      <p style="margin:0 0 10px; font-size:13px; line-height:1.6; color:var(--ivory);">${dossier.fan_perspective}</p>
-      <div style="background:var(--bg-3); border-radius:4px; padding:10px 12px; font-size:12px; color:var(--gold-soft); font-family:'IBM Plex Mono',monospace;">
-        <strong>Path to Advancement:</strong> ${dossier.needs_to_advance}
+      <div class="dossier-heading gold">🎙️ Fan Pulse &amp; Ultra Culture</div>
+      <p style="margin:0 0 10px; font-size:13px; line-height:1.65; color:var(--ivory);">${dossier.fan_perspective}</p>
+      <div style="background:var(--bg-3); border-radius:4px; padding:12px 14px; font-size:12px; color:var(--gold-soft); font-family:'IBM Plex Mono',monospace; border:1px solid var(--line);">
+        <strong>🎯 Knockout Advancement Roadmap:</strong> ${dossier.needs_to_advance}
       </div>
     </div>
 
@@ -2445,6 +2513,187 @@ function showTikTokToast(msg){
   if (!toast) return;
   toast.textContent = msg;
   setTimeout(() => { if (toast.textContent === msg) toast.textContent = ''; }, 3500);
+}
+
+
+
+// -------------------------------------------------------------
+// COMPETITION SWITCHER (UCL, UEL, UECL)
+// -------------------------------------------------------------
+
+let currentCompetition = 'ucl';
+let COMPETITIONS_DATA = {};
+
+function switchCompetition(compId){
+  currentCompetition = compId;
+  const otherView = document.getElementById('other-competition-view');
+  const navTabs = document.getElementById('main-nav-tabs');
+  const panels = document.querySelectorAll('.tab-panel');
+  const title = document.getElementById('main-app-title');
+  const sub = document.getElementById('main-app-subtitle');
+  const select = document.getElementById('competition-select');
+
+  if (select && select.value !== compId){
+    select.value = compId;
+  }
+
+  if (compId === 'ucl'){
+    if (otherView) otherView.style.display = 'none';
+    if (navTabs) navTabs.style.display = 'flex';
+    panels.forEach(p => {
+      // restore active state
+      if (p.id === 'panel-standings') p.classList.add('active');
+    });
+    if (title) title.textContent = 'Champions League Tracker';
+    if (sub) sub.textContent = 'Evidence-Based Analytics & Monte Carlo Scenarios';
+    return;
+  }
+
+  // UEL or UECL
+  if (navTabs) navTabs.style.display = 'none';
+  panels.forEach(p => p.classList.remove('active'));
+  if (otherView){
+    otherView.style.display = 'block';
+    renderOtherCompetition(compId);
+  }
+
+  if (compId === 'uel'){
+    if (title) title.textContent = 'Europa League Tracker';
+    if (sub) sub.textContent = '36-Club Swiss Model & Direct Champions League Berth Race';
+  } else {
+    if (title) title.textContent = 'Conference League Tracker';
+    if (sub) sub.textContent = '36-Club Continental Battle & 6-Matchday Swiss Model';
+  }
+}
+
+function renderOtherCompetition(compId){
+  const el = document.getElementById('other-competition-view');
+  if (!el) return;
+  const comp = COMPETITIONS_DATA[compId];
+  if (!comp){
+    el.innerHTML = `<div class="empty">Loading competition data...</div>`;
+    return;
+  }
+
+  const isUel = compId === 'uel';
+  const cutoffTop8 = isUel ? '15-16 Points' : '13-14 Points';
+  const cutoffTop24 = isUel ? '9-10 Points' : '7-8 Points';
+
+  const rows = (comp.table || []).map((t, idx) => {
+    const isTop8 = idx < 8;
+    const isPlayoff = idx >= 8 && idx < 24;
+    const borderStyle = isTop8
+      ? 'border-left:3px solid var(--gold); background:rgba(217,184,74,0.04);'
+      : isPlayoff
+      ? 'border-left:3px solid var(--ice); background:rgba(94,200,242,0.03);'
+      : 'opacity:0.85;';
+
+    const p8Pct = Math.round(t.prob_top8 * 100);
+    const p24Pct = Math.round(t.prob_top24 * 100);
+
+    return `
+      <div class="standings-row" style="${borderStyle} margin-bottom:6px;">
+        <div class="standings-row-top" style="flex-wrap:wrap; gap:8px;">
+          <span class="rank" style="${isTop8 ? 'color:var(--gold-soft); font-weight:700;' : ''}">${t.rank}</span>
+          <span style="font-size:16px;">${t.flag}</span>
+          <span class="team-name" style="font-size:13px; font-weight:600;">${t.name}</span>
+          <span class="tag-tier" style="margin-left:auto;">${t.status}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding:6px 0 2px 28px; font-family:'IBM Plex Mono',monospace; font-size:11px;">
+          <div style="display:flex; gap:12px; color:var(--ivory-dim);">
+            <span>P: <strong>${t.p}</strong></span>
+            <span>W-D-L: <strong>${t.w}-${t.d}-${t.l}</strong></span>
+            <span>GD: <strong style="color:${t.gd >= 0 ? 'var(--gold-soft)' : 'var(--red-soft)'};">${t.gd > 0 ? '+' : ''}${t.gd}</strong></span>
+            <span>PTS: <strong style="color:var(--ivory); font-size:13px;">${t.pts}</strong></span>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <span style="color:var(--gold-soft);">Top 8: ${p8Pct}%</span>
+            <span style="color:var(--ice);">Playoff: ${p24Pct}%</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const fixturesHTML = (comp.key_fixtures || []).map(f => {
+    const pHome = Math.round(f.prob_home * 100);
+    const pDraw = Math.round(f.prob_draw * 100);
+    const pAway = Math.round(f.prob_away * 100);
+    return `
+      <div class="upcoming-match-card" style="margin-bottom:8px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; font-family:'IBM Plex Mono',monospace; font-size:11px; margin-bottom:6px; color:var(--ivory-dim);">
+          <span>${f.date}</span>
+          <span style="color:var(--gold-soft);">Monte Carlo Odds</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <strong>${f.home}</strong>
+          <span style="font-size:11px; color:var(--ivory-dim);">vs</span>
+          <strong>${f.away}</strong>
+        </div>
+        <div class="single-bar-track" style="height:12px; display:flex; border-radius:3px; overflow:hidden;">
+          <div style="width:${pHome}%; background:var(--gold);" title="${f.home} Win: ${pHome}%"></div>
+          <div style="width:${pDraw}%; background:var(--ivory-dim);" title="Draw: ${pDraw}%"></div>
+          <div style="width:${pAway}%; background:var(--ice);" title="${f.away} Win: ${pAway}%"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim); margin-top:3px;">
+          <span>${pHome}% ${f.home.split(' ').pop()}</span>
+          <span>${pDraw}% Draw</span>
+          <span>${pAway}% ${f.away.split(' ').pop()}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="fade-in">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+        <div>
+          <div class="focus-eyebrow" style="color:var(--gold-soft);">${comp.badge} ${comp.name}</div>
+          <h2 style="font-family:'Anton',sans-serif; font-size:clamp(24px,3.5vw,32px); text-transform:uppercase; margin:0 0 4px;">
+            ${comp.name} League Phase
+          </h2>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);">${comp.tagline}</div>
+        </div>
+        <button class="none-btn" style="width:auto; margin:0; padding:8px 18px; border-color:var(--gold); color:var(--gold-soft);" onclick="switchCompetition('ucl')">
+          ← Return to Champions League
+        </button>
+      </div>
+
+      <div class="acc-card" style="border-left:3px solid var(--gold); margin-bottom:20px;">
+        <div style="font-family:'Anton',sans-serif; font-size:14px; text-transform:uppercase; color:var(--gold-soft); margin-bottom:6px;">
+          ⚡ Qualification Targets &amp; Swiss Model Cutoffs
+        </div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory);">
+          <div><strong>Automatic Round of 16 Bye (Top 8):</strong> <span style="color:var(--gold-soft);">${cutoffTop8}</span></div>
+          <div><strong>Playoff Round Floor (Top 24):</strong> <span style="color:var(--ice);">${cutoffTop24}</span></div>
+          <div><strong>Format:</strong> ${comp.format}</div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px;">
+        <div>
+          <div style="font-family:'Anton',sans-serif; font-size:16px; text-transform:uppercase; color:var(--ivory); margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+            <span>📋</span> Standings &amp; Monte Carlo Cutoffs
+          </div>
+          <div>${rows}</div>
+        </div>
+
+        <div>
+          <div style="font-family:'Anton',sans-serif; font-size:16px; text-transform:uppercase; color:var(--ivory); margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+            <span>⚡</span> Marquee Clashes &amp; Win Probabilities
+          </div>
+          <div>${fixturesHTML}</div>
+
+          <div class="stat-card gold-top" style="margin-top:16px;">
+            <div class="stat-card-title"><span>🌍</span> UEFA Coefficient Impact</div>
+            <p style="margin:0; font-size:12px; color:var(--ivory-dim); line-height:1.5;">
+              Every victory in the Europa League and Conference League earns <strong>2.0 association coefficient points</strong> (draws earn 1.0 point), counting equally alongside the Champions League toward each country's European Performance Spot race for 2027/28!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 

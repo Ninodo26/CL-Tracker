@@ -92,6 +92,20 @@ Six comprehensive sections designed to compete with world-class sports analytics
 5. **5th Spot Race (EPS)** — Tracking the UEFA European Performance Spots battle (England, Italy, Spain, Germany, France) for the two additional automatic Champions League berths in 2027/28.
 6. **Model Accuracy & Backtest** — Empirical validation scorecard comparing CL Tracker against the Opta Supercomputer and ground truth from the completed 2024/25 season.
 
+### 🏆 Multi-Competition Switcher
+- Instant dropdown menu in the header next to the title allowing users to switch between:
+  - **🏆 UEFA Champions League**: Full live 36-team Swiss model tracker, matchday navigation, and Monte Carlo scenarios.
+  - **🥈 UEFA Europa League**: 36-club league phase standings, Top-8 direct Round of 16 bye cutoffs (15-16 pts), playoff floors (9-10 pts), and marquee clash odds.
+  - **🥉 UEFA Conference League**: 36-club continental standings (6 matchdays), qualification thresholds (13 pts Top-8, 7 pts Top-24), and clash probabilities.
+
+### 🔍 Extended Tactical Dossiers & Scouting Reports
+- Every participating club features a comprehensive, multi-paragraph tactical scouting report:
+  - **Tactical Blueprint & Playing Identity**: Build-up structures, pressing traps, half-space overloads, and defensive rest-defense.
+  - **Key Tactical Strengths vs Known Vulnerabilities**: Specific analytical breakdowns of what makes them dangerous and how opponents can exploit them.
+  - **Star Players & Tactical Impact**: In-depth profiles detailing player roles, signature attributes, and qualitative/quantitative metrics.
+  - **Fan Pulse & Ultra Culture**: Real supporter sentiment, stadium atmosphere, European expectations, and historical weight.
+  - **Knockout Advancement Roadmap**: Exact points calculations and fixture analysis required for automatic top-8 byes or playoff survival.
+
 ### 📱 TikTok & Social Media Card Generator
 - Client-side high-resolution HTML5 Canvas rendering engine.
 - Formats: **9:16 Vertical (1080×1920)** for TikTok / Instagram Stories / Reels and **1:1 Square (1080×1080)** for Twitter/X / Instagram feed posts.
