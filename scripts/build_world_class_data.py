@@ -8,7 +8,7 @@ import json
 LINEUPS = {
     "Real Madrid": {
         "formation": "4-3-3",
-        "manager": "Carlo Ancelotti",
+        "manager": "José Mourinho",
         "starting_xi": [
             {"name": "Thibaut Courtois", "num": 1, "pos": "GK", "x": 50, "y": 8},
             {"name": "Dani Carvajal", "num": 2, "pos": "RB", "x": 84, "y": 24},
@@ -24,7 +24,7 @@ LINEUPS = {
         ],
         "subs": ["Luka Modrić", "Brahim Díaz", "Eduardo Camavinga", "Arda Güler", "Lucas Vázquez", "Andriy Lunin"],
         "injuries": [{"player": "David Alaba", "status": "Doubtful"}, {"player": "Dani Carvajal", "status": "Out"}],
-        "tactical_brief": "Direct vertical transition with inverted wing overloads. Mbappé and Vinícius exploit space behind high defensive lines while Bellingham arrives late into the box."
+        "tactical_brief": "Mourinho's second-stint Madrid blueprint: pragmatic defensive compactness combined with lethal transition punch. Mbappé and Vinícius exploit vertical channels while Valverde and Bellingham dominate midfield duels."
     },
     "Paris Saint-Germain": {
         "formation": "4-3-3",
@@ -48,7 +48,7 @@ LINEUPS = {
     },
     "Liverpool": {
         "formation": "4-2-3-1",
-        "manager": "Arne Slot",
+        "manager": "Andoni Iraola",
         "starting_xi": [
             {"name": "Alisson Becker", "num": 1, "pos": "GK", "x": 50, "y": 8},
             {"name": "Trent Alexander-Arnold", "num": 66, "pos": "RB", "x": 84, "y": 24},
@@ -64,11 +64,11 @@ LINEUPS = {
         ],
         "subs": ["Cody Gakpo", "Curtis Jones", "Harvey Elliott", "Diogo Jota", "Kostas Tsimikas", "Caoimhín Kelleher"],
         "injuries": [{"player": "Alisson Becker", "status": "Doubtful"}],
-        "tactical_brief": "Controlled possession combined with ferocious counter-pressing. Gravenberch controls the double pivot while Salah operates as the primary outlet."
+        "tactical_brief": "Iraola's trademark ultra-high pressing intensity and ferocious front-foot transitions. Salah and Díaz attack space directly while Gravenberch and Mac Allister suffocate opposition buildup."
     },
     "Manchester City": {
         "formation": "4-1-4-1",
-        "manager": "Pep Guardiola",
+        "manager": "Enzo Maresca",
         "starting_xi": [
             {"name": "Ederson", "num": 31, "pos": "GK", "x": 50, "y": 8},
             {"name": "Kyle Walker", "num": 2, "pos": "RB", "x": 84, "y": 22},
@@ -84,7 +84,7 @@ LINEUPS = {
         ],
         "subs": ["Jack Grealish", "İlkay Gündoğan", "Savinho", "John Stones", "Nathan Aké", "Stefan Ortega"],
         "injuries": [{"player": "Rodri", "status": "Out"}],
-        "tactical_brief": "Positional mastery with 3-2-4-1 buildup structure. Gvardiol pushes high, creating numerical superiorities while Haaland provides devastating box finishing."
+        "tactical_brief": "Maresca's structured inverted wing-back system with rapid vertical acceleration into the final third. Gvardiol and Lewis invert into midfield while Haaland spearheads devastating box runs."
     },
     "Barcelona": {
         "formation": "4-2-3-1",
@@ -228,7 +228,7 @@ LINEUPS = {
     },
     "Sporting CP": {
         "formation": "3-4-2-1",
-        "manager": "Rúben Amorim",
+        "manager": "Rui Borges",
         "starting_xi": [
             {"name": "Franco Israel", "num": 1, "pos": "GK", "x": 50, "y": 8},
             {"name": "Zeno Debast", "num": 6, "pos": "RCB", "x": 75, "y": 22},
@@ -244,7 +244,7 @@ LINEUPS = {
         ],
         "subs": ["Marcus Edwards", "Geny Catamo", "Daniel Bragança", "Matheus Reis", "Conrad Harder", "Vladan Kovačević"],
         "injuries": [{"player": "Pedro Gonçalves", "status": "Doubtful"}],
-        "tactical_brief": "High-intensity 3-4-2-1 system built around Viktor Gyökeres's relentless power running and Morten Hjulmand's midfield bite."
+        "tactical_brief": "Rui Borges's high-tempo pressing structure, maintaining the lethal 3-4-2-1 shape around Viktor Gyökeres's unmatched physical running and Hjulmand's ball recoveries."
     },
     "Real Betis": {
         "formation": "4-2-3-1",
@@ -328,7 +328,7 @@ LINEUPS = {
     },
     "Roma": {
         "formation": "3-4-2-1",
-        "manager": "Ivan Jurić",
+        "manager": "Gian Piero Gasperini",
         "starting_xi": [
             {"name": "Mile Svilar", "num": 99, "pos": "GK", "x": 50, "y": 8},
             {"name": "Gianluca Mancini", "num": 23, "pos": "RCB", "x": 75, "y": 22},
@@ -344,7 +344,7 @@ LINEUPS = {
         ],
         "subs": ["Matías Soulé", "Tommaso Baldanzi", "Enzo Le Fée", "Mario Hermoso", "Stephan El Shaarawy", "Mathew Ryan"],
         "injuries": [{"player": "Alexis Saelemaekers", "status": "Out"}],
-        "tactical_brief": "Aggressive man-to-man pressing across all zones. Paulo Dybala delivers game-breaking brilliance while Artem Dovbyk acts as an aerially dominant focal point."
+        "tactical_brief": "Gasperini's revolutionary man-oriented high press and overlapping wing-backs. Dybala floats with total creative freedom while Dovbyk anchors the front line."
     },
     "Shakhtar Donetsk": {
         "formation": "4-3-3",
@@ -408,7 +408,7 @@ LINEUPS = {
     },
     "Manchester United": {
         "formation": "4-2-3-1",
-        "manager": "Erik ten Hag",
+        "manager": "Michael Carrick",
         "starting_xi": [
             {"name": "André Onana", "num": 24, "pos": "GK", "x": 50, "y": 8},
             {"name": "Noussair Mazraoui", "num": 3, "pos": "RB", "x": 84, "y": 24},
@@ -424,7 +424,7 @@ LINEUPS = {
         ],
         "subs": ["Marcus Rashford", "Joshua Zirkzee", "Manuel Ugarte", "Christian Eriksen", "Harry Maguire", "Altay Bayındır"],
         "injuries": [{"player": "Luke Shaw", "status": "Out"}, {"player": "Mason Mount", "status": "Doubtful"}],
-        "tactical_brief": "Direct vertical transitions driven by Bruno Fernandes's defense-splitting passes and Garnacho's direct running into the channels."
+        "tactical_brief": "Carrick's pragmatic transitional structure. Mainoo and Casemiro provide a stabilized double pivot, releasing Bruno Fernandes to unlock defenses for Garnacho and Højlund."
     },
     "Napoli": {
         "formation": "4-3-3",
@@ -688,7 +688,7 @@ LINEUPS = {
     },
     "Fenerbahce": {
         "formation": "4-2-3-1",
-        "manager": "José Mourinho",
+        "manager": "İsmail Kartal",
         "starting_xi": [
             {"name": "Dominik Livaković", "num": 40, "pos": "GK", "x": 50, "y": 8},
             {"name": "Mert Müldür", "num": 16, "pos": "RB", "x": 84, "y": 24},
@@ -704,7 +704,7 @@ LINEUPS = {
         ],
         "subs": ["Youssef En-Nesyri", "İrfan Can Kahveci", "Cengiz Ünder", "İsmail Yüksek", "Çağlar Söyüncü", "İrfan Can Eğribayat"],
         "injuries": [{"player": "Jayden Oosterwolde", "status": "Out"}],
-        "tactical_brief": "Mourinho's pragmatic tournament blueprint. Amrabat and Fred provide an unbreakable engine room while Tadić and Saint-Maximin create chances for Džeko."
+        "tactical_brief": "İsmail Kartal's high-energy attacking 4-2-3-1 setup. Amrabat and Fred command the center of the pitch while Tadić, Saint-Maximin, and Džeko lead explosive forward overloads."
     },
     "Galatasaray": {
         "formation": "3-4-1-2",
