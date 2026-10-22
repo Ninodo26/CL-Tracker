@@ -243,6 +243,60 @@
   .tag-miss{background:rgba(224,84,107,0.12); color:var(--red-soft); border:1px solid var(--red); border-radius:3px; padding:2px 7px; font-size:10px; font-weight:600;}
   .tag-tier{background:var(--bg-3); color:var(--ice); border:1px solid var(--line); border-radius:3px; padding:2px 6px; font-size:10px;}
 
+  /* Team Modal */
+  .team-modal-overlay{
+    position:fixed; inset:0; z-index:100;
+    background:rgba(4,7,20,0.85);
+    backdrop-filter:blur(8px);
+    overflow-y:auto; padding:36px 16px 80px;
+    animation:fadeIn .25s ease-out forwards;
+  }
+  .team-modal-content{
+    max-width:740px; margin:0 auto; background:linear-gradient(155deg, var(--bg-1), var(--bg-0));
+    border:1px solid var(--line); border-top:3px solid var(--gold); border-radius:8px;
+    padding:28px 22px; position:relative; box-shadow:0 24px 60px rgba(0,0,0,0.6);
+  }
+  .modal-close-btn{
+    position:absolute; top:16px; right:16px; background:var(--bg-2); border:1px solid var(--line);
+    color:var(--ivory-dim); border-radius:50%; width:32px; height:32px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; font-size:16px; transition:var(--transition);
+  }
+  .modal-close-btn:hover{color:var(--ivory); border-color:var(--gold); background:var(--bg-3);}
+  .dossier-section{margin-bottom:18px; background:var(--bg-2); border:1px solid var(--line-soft); border-radius:6px; padding:16px 18px;}
+  .dossier-heading{font-family:'Anton',sans-serif; font-size:15px; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px; display:flex; align-items:center; gap:8px;}
+  .dossier-heading.gold{color:var(--gold-soft);}
+  .dossier-heading.ice{color:var(--ice);}
+  .player-pills{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
+  .player-pill{background:var(--bg-3); border:1px solid var(--line); border-radius:18px; padding:6px 12px; font-size:11px;}
+  .player-pill strong{color:var(--gold-soft); margin-right:4px;}
+  .upcoming-match-card{background:var(--bg-1); border:1px solid var(--line); border-radius:6px; padding:12px 14px; margin-bottom:10px;}
+  .clickable-row{cursor:pointer; transition:background .15s ease, border-color .15s ease; border-radius:4px;}
+  .clickable-row:hover{background:rgba(217,184,74,0.08) !important; border-color:var(--gold-soft) !important;}
+
+  /* Matches layout & Quick-nav */
+  .current-md-banner{
+    background:linear-gradient(90deg, rgba(217,184,74,0.18), rgba(94,200,242,0.1));
+    border:1px solid var(--gold); border-radius:6px; padding:12px 16px; margin:20px 0 14px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  }
+  .scroll-up-indicator{
+    background:var(--bg-2); border:1px dashed var(--line); border-radius:6px;
+    padding:9px 14px; margin-bottom:18px; text-align:center; font-family:'IBM Plex Mono',monospace;
+    font-size:11px; color:var(--gold-soft); cursor:pointer; transition:var(--transition);
+  }
+  .scroll-up-indicator:hover{background:var(--bg-3); border-color:var(--gold);}
+  .md-quicknav{
+    display:flex; gap:6px; margin-bottom:18px; overflow-x:auto; padding-bottom:6px; scrollbar-width:none;
+  }
+  .md-quicknav::-webkit-scrollbar{display:none;}
+  .md-quicknav-btn{
+    background:var(--bg-1); border:1px solid var(--line); color:var(--ivory-dim);
+    padding:6px 12px; border-radius:4px; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    cursor:pointer; white-space:nowrap; transition:var(--transition);
+  }
+  .md-quicknav-btn:hover{color:var(--ivory); border-color:var(--ice); background:var(--bg-2);}
+  .md-quicknav-btn.active-md{border-color:var(--gold); color:var(--gold-soft); background:var(--gold-glow); font-weight:700;}
+
   footer{margin-top:50px;padding:24px 0 50px;border-top:1px solid var(--line);color:var(--ivory-dim);font-size:11px;font-family:'IBM Plex Mono',monospace; line-height:1.6;}
   footer span{display:block;margin-top:6px;}
 </style>
@@ -544,9 +598,9 @@ function probabilityBar(segments){
 function buildPicker(){
   const el = document.getElementById('picker-confirmed');
   if (!el) return;
-  const all = CONFIRMED_TEAMS.map(t => t.name).concat(
-    QUALIFYING_STILL_ALIVE.filter(n => !CONFIRMED_TEAMS.some(c => c.name === n))
-  );
+  const all = (STANDINGS && STANDINGS.teams && STANDINGS.teams.length)
+    ? STANDINGS.teams.map(t => t.name)
+    : CONFIRMED_TEAMS.map(t => t.name);
   el.innerHTML = all.map(name => `<button class="team-btn" onclick="selectTeam('${name.replace(/'/g,"\\'")}')">
       ${crestOrChipHTML(name, 24)}
       ${name}
@@ -573,12 +627,20 @@ function closePicker(){
 
 const savedTeam = localStorage.getItem('cl-tracker-team');
 
+let DOSSIERS = {};
+
 async function boot(){
   try{
     const res = await fetch('data/standings.json', {cache:'no-store'});
     STANDINGS = await res.json();
   } catch(e){
     STANDINGS = {teams:[], matches:[], all_teams_confirmed:false};
+  }
+  try{
+    const resD = await fetch('data/team_dossiers.json', {cache:'no-store'});
+    DOSSIERS = await resD.json();
+  } catch(e){
+    DOSSIERS = {};
   }
 
   document.getElementById('main-wrap').style.display = 'block';
@@ -601,7 +663,6 @@ boot();
       <button class="tab-btn active" data-tab="standings">Standings</button>
       <button class="tab-btn" data-tab="matches">Matches</button>
       <button class="tab-btn" data-tab="rankings">Power Rankings</button>
-      <button class="tab-btn" data-tab="qualifying">Qualifying</button>
       <button class="tab-btn" data-tab="accuracy">Model Accuracy &amp; Backtest</button>
     </nav>
 </header>
@@ -620,12 +681,15 @@ boot();
     <div id="rankings-content"></div>
   </div>
 
-  <div class="tab-panel" id="panel-qualifying">
-    <div id="qualifying-content"></div>
-  </div>
-
   <div class="tab-panel" id="panel-accuracy">
     <div id="accuracy-content"></div>
+  </div>
+
+  <div id="team-modal" class="team-modal-overlay" style="display:none;" onclick="closeTeamModal()">
+    <div class="team-modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeTeamModal()" title="Close">&times;</button>
+      <div id="team-modal-body"></div>
+    </div>
   </div>
 
   <footer>
@@ -663,8 +727,8 @@ function renderFocusPanel(selectedName){
     const stillQualifying = QUALIFYING_STILL_ALIVE.some(n => n.toLowerCase() === selectedName.toLowerCase());
     focusEl.innerHTML = `<div class="empty">
       <strong>${selectedName}</strong>
-      ${stillQualifying ? `Still fighting through qualifying — check the Qualifying tab for tie progress.`
-        : `Not showing up in the league phase field yet — the season may not have started.`}
+      ${stillQualifying ? `Still fighting through preliminary rounds &mdash; check back once the 36-club league phase field is finalized.`
+        : `Not showing up in the league phase field yet &mdash; the season may not have started.`}
     </div>`;
     return;
   }
@@ -684,10 +748,13 @@ function renderFocusPanel(selectedName){
       <div class="stat-box"><span class="val">${team.points}</span><span class="lbl">points</span></div>
       <div class="stat-box"><span class="val">${team.played}/8</span><span class="lbl">played</span></div>
       <div class="stat-box"><span class="val">${team.gd > 0 ? '+' : ''}${team.gd}</span><span class="lbl">goal diff</span></div>
-      <div class="stat-box"><span class="val">${Number.isFinite(team.prob_top8) ? `${Math.round(team.prob_top8*100)}%` : '—'}</span><span class="lbl">top-8 odds</span></div>
+      <div class="stat-box"><span class="val">${Number.isFinite(team.prob_top8) ? formatProb(team.prob_top8, team.status_top8) : '—'}</span><span class="lbl">top-8 odds</span></div>
     </div>
     <p class="focus-narrative">${narrativeFor(team)}</p>
     <div class="focus-next">${nextLine}</div>
+    <div style="margin-top:14px;">
+      <button class="none-btn" style="width:auto; margin-top:0; padding:8px 16px; font-size:11px;" onclick="openTeamModal('${team.name.replace(/'/g, "\\'")}')">🔍 View ${team.name} Tactical Dossier &amp; Upcoming Match Odds &rarr;</button>
+    </div>
   </div>`;
 }
 
@@ -826,7 +893,7 @@ function renderStandings(){
       rows += `<div class="zone-divider zone-elim" style="padding:7px 4px;">Eliminated</div>`;
     }
     const isYours = selectedName && t.name.toLowerCase() === selectedName.toLowerCase();
-    rows += `<div class="standings-row" style="${isYours ? 'background:rgba(217,184,74,0.08);' : ''}">
+    rows += `<div class="standings-row clickable-row" style="${isYours ? 'background:rgba(217,184,74,0.08);' : ''}" onclick="openTeamModal('${t.name.replace(/'/g, "\\'")}')" title="Click to view ${t.name} tactical dossier, key players & upcoming fixtures">
       <div class="standings-row-top">
         <span class="rank">${t.rank}</span>
         ${crestOrChipHTML(t.name, 20, 'circle')}
@@ -845,11 +912,14 @@ function renderStandings(){
           <span>${t.gd > 0 ? '+' : ''}${t.gd} GD</span>
           ${pill(t.status_top8)}
           ${pill(t.status_top24)}
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--gold-soft); margin-left:auto;">Dossier &rarr;</span>
         </div>
       </div>
     </div>`;
   });
-  el.innerHTML = `<div class="fade-in">${rows}</div>`;
+  el.innerHTML = `<div class="provisional-note" style="margin-bottom:14px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+    <span>💡 <strong>Interactive:</strong> Click any club row to view tactical dossier, key players, fan survival outlook, and upcoming match win probabilities.</span>
+  </div><div class="fade-in">${rows}</div>`;
 }
 
 function toggleMatchDetail(id){
@@ -869,6 +939,43 @@ function matchDetailTeamHTML(name){
   </div>`;
 }
 
+function formatProb(prob, status){
+  if (prob === undefined || prob === null || !Number.isFinite(prob)) return '—';
+  const pct = prob * 100;
+  if (pct >= 99.5) {
+    return status === 'clinched' ? 'Clinched (100%)' : '>99%';
+  }
+  if (pct <= 0.5) {
+    return status === 'eliminated' ? 'Out (0%)' : '<1%';
+  }
+  if (pct > 99) return '>99%';
+  if (pct < 1) return '<1%';
+  return Math.round(pct) + '%';
+}
+
+function formatBarWidth(prob, status){
+  if (!Number.isFinite(prob)) return 0;
+  const pct = prob * 100;
+  if (pct >= 99.5) return status === 'clinched' ? 100 : 98;
+  if (pct <= 0.5) return status === 'eliminated' ? 0 : 2;
+  return Math.max(2, Math.min(98, Math.round(pct)));
+}
+
+function scrollToMatchday(id){
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function scrollToTopPastMatches(){
+  const el = document.getElementById('past-matchdays-section');
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function scrollToCurrentRound(){
+  const el = document.getElementById('current-round-anchor');
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
 function renderMatches(){
   const el = document.getElementById('matches-content');
   if (!el) return;
@@ -880,71 +987,243 @@ function renderMatches(){
   const groups = {};
   matches.forEach(m => { (groups[m.matchday] = groups[m.matchday] || []).push(m); });
 
+  const allMds = Object.keys(groups);
+  const currentMd = allMds.find(md => groups[md].some(m => !m.played)) || allMds[allMds.length - 1];
+  const currentIdx = allMds.indexOf(currentMd);
+  const pastMds = allMds.slice(0, currentIdx);
+  const currentAndFutureMds = allMds.slice(currentIdx);
+
+  const quickNavHTML = `<div class="md-quicknav">` + allMds.map((md, idx) => {
+    const isCur = md === currentMd;
+    const isPast = idx < currentIdx;
+    const label = md.replace('League Stage - ', 'MD ');
+    return `<button class="md-quicknav-btn ${isCur ? 'active-md' : ''}" onclick="scrollToMatchday('md-group-${idx}')">${isCur ? '⚡ ' : isPast ? '✓ ' : ''}${label}</button>`;
+  }).join('') + `</div>`;
+
   let counter = 0;
-  el.innerHTML = '<div class="fade-in">' + Object.entries(groups).map(([md, ms]) => `
-    <div class="matchday-group">
-      <div class="matchday-label">${md}</div>
-      ${ms.map(m => {
-        const detailId = `match-detail-${counter++}`;
-        return `<div class="match-row" style="${m.odds ? 'flex-direction:column; align-items:stretch; gap:8px;' : ''}" onclick="toggleMatchDetail('${detailId}')">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span>${m.home} vs ${m.away}</span>
-            ${m.played
-              ? `<span class="match-score">${m.score}</span>`
-              : `<span class="match-date">${new Date(m.date).toDateString()}</span>`}
-          </div>
-          ${(!m.played && m.odds) ? probabilityBar([
-              {label: m.home, prob: m.odds.home, color: teamColor(m.home)},
-              {label: 'Draw', prob: m.odds.draw, color: 'var(--ivory-dim)'},
-              {label: m.away, prob: m.odds.away, color: teamColor(m.away)},
-            ]) : ''}
+  const renderMatchGroup = (md, isCurrent, idx) => {
+    const ms = groups[md];
+    const mdId = `md-group-${idx}`;
+    const isPast = idx < currentIdx;
+    return `
+      <div class="matchday-group" id="${mdId}" style="${isCurrent ? 'border:1px solid var(--gold); box-shadow:0 0 16px rgba(217,184,74,0.18);' : ''}">
+        <div class="matchday-label" style="display:flex; justify-content:space-between; align-items:center; ${isCurrent ? 'background:linear-gradient(90deg, var(--bg-2), var(--bg-3)); border-bottom-color:var(--gold);' : ''}">
+          <span style="${isCurrent ? 'color:var(--gold-soft); font-weight:700;' : ''}">${isCurrent ? '⚡ ' : ''}${md.replace('League Stage - ', 'Matchday ')}${isCurrent ? ' &mdash; CURRENT ROUND' : isPast ? ' (Completed)' : ' (Upcoming)'}</span>
+          <span style="font-size:10px; color:var(--ivory-dim);">${ms.filter(m=>m.played).length}/${ms.length} played</span>
         </div>
-        <div class="match-detail" id="${detailId}">
-          <div class="match-detail-teams">
-            ${matchDetailTeamHTML(m.home)}
-            <div class="match-detail-vs">vs</div>
-            ${matchDetailTeamHTML(m.away)}
+        ${ms.map(m => {
+          const detailId = `match-detail-${counter++}`;
+          return `
+          <div class="match-row" style="${m.odds ? 'flex-direction:column; align-items:stretch; gap:8px;' : ''}" onclick="toggleMatchDetail('${detailId}')">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span onclick="event.stopPropagation(); openTeamModal('${m.home.replace(/'/g, "\\'")}')" style="cursor:pointer; font-weight:600;" title="Click to view ${m.home} dossier">${m.home}</span>
+                <span style="color:var(--ivory-dim); font-size:11px;">vs</span>
+                <span onclick="event.stopPropagation(); openTeamModal('${m.away.replace(/'/g, "\\'")}')" style="cursor:pointer; font-weight:600;" title="Click to view ${m.away} dossier">${m.away}</span>
+              </div>
+              ${m.played
+                ? `<span class="match-score">${m.score}</span>`
+                : `<span class="match-date">${new Date(m.date).toLocaleDateString(undefined, {month:'short', day:'numeric'})}</span>`}
+            </div>
+            ${(!m.played && m.odds) ? probabilityBar([
+                {label: m.home, prob: m.odds.home, color: teamColor(m.home)},
+                {label: 'Draw', prob: m.odds.draw, color: 'var(--ivory-dim)'},
+                {label: m.away, prob: m.odds.away, color: teamColor(m.away)},
+              ]) : ''}
           </div>
-          <div class="match-detail-note">${new Date(m.date).toLocaleString(undefined, {weekday:'long', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'})}${m.played ? ' &middot; Final: ' + m.score : ''}</div>
-        </div>`;
-      }).join('')}
-    </div>
-  `).join('') + '</div>';
-}
-
-function renderQualifying(){
-  const el = document.getElementById('qualifying-content');
-  if (!el) return;
-  const odds = STANDINGS.qualifying_odds || [];
-
-  el.innerHTML = `<p class="sub" style="margin-bottom:20px;">Qualifying ties determine the final teams entering the 36-club league phase. Gold-bordered ties have confirmed results; unbordered ties show live simulated odds from team Elo ratings.</p>` +
-    QUALIFYING_PATHS.map(p => {
-      const tieOdds = odds.find(o => o.label === p.label);
-      const resolved = tieOdds && tieOdds.resolved;
-      const smallBar = (tieOdds && !resolved) ? `
-        <div style="width:90px; flex-shrink:0;">
-          <div style="display:flex; height:8px; border-radius:4px; overflow:hidden; box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08); margin-bottom:3px;">
-            <div style="width:${tieOdds.prob_a*100}%; background:${teamColor(p.a)}; border-right:2px solid var(--bg-0);"></div>
-            <div style="width:${tieOdds.prob_b*100}%; background:${teamColor(p.b)};"></div>
-          </div>
-          <div style="font-family:'IBM Plex Mono',monospace; font-size:9px; text-align:right; color:var(--ivory-dim);">${Math.round(tieOdds.prob_a*100)}/${Math.round(tieOdds.prob_b*100)}</div>
-        </div>` : '';
-      const winnerTag = resolved ? `
-        <div style="flex-shrink:0; font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; padding:4px 10px; border-radius:3px; background:rgba(217,184,74,0.15); color:var(--gold-soft); border:1px solid var(--gold);">
-          ${tieOdds.prob_a > 0.5 ? p.a : p.b} through
-        </div>` : '';
-
-      return `
-      <div class="qual-path" style="align-items:flex-start; ${resolved ? 'border-color:var(--gold);' : ''}">
-        <div style="flex:1; min-width:0;">
-          <div class="qual-meta">${p.label} &middot; ${p.stage} &middot; ${p.dates}</div>
-          <div class="qual-teams">${p.a}<span class="vs">vs</span>${p.b}</div>
-          ${tieOdds && tieOdds.leg_note ? `<div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold-soft); margin-top:4px;">${tieOdds.leg_note}</div>` : ''}
-        </div>
-        ${winnerTag}${smallBar}
+          <div class="match-detail" id="${detailId}">
+            <div class="match-detail-teams">
+              <div style="cursor:pointer;" onclick="openTeamModal('${m.home.replace(/'/g, "\\'")}')">${matchDetailTeamHTML(m.home)}</div>
+              <div class="match-detail-vs">vs</div>
+              <div style="cursor:pointer;" onclick="openTeamModal('${m.away.replace(/'/g, "\\'")}')">${matchDetailTeamHTML(m.away)}</div>
+            </div>
+            <div class="match-detail-note">
+              ${new Date(m.date).toLocaleString(undefined, {weekday:'long', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'})}${m.played ? ' &middot; Final: ' + m.score : ''}
+              <div style="margin-top:8px;">
+                <button class="none-btn" style="width:auto; display:inline-block; margin:0 4px; padding:4px 10px; font-size:10px;" onclick="event.stopPropagation(); openTeamModal('${m.home.replace(/'/g, "\\'")}')">View ${m.home} Dossier</button>
+                <button class="none-btn" style="width:auto; display:inline-block; margin:0 4px; padding:4px 10px; font-size:10px;" onclick="event.stopPropagation(); openTeamModal('${m.away.replace(/'/g, "\\'")}')">View ${m.away} Dossier</button>
+              </div>
+            </div>
+          </div>`;
+        }).join('')}
       </div>
     `;
-    }).join('');
+  };
+
+  const pastHTML = pastMds.length ? `
+    <div id="past-matchdays-section">
+      ${pastMds.map(md => renderMatchGroup(md, false, allMds.indexOf(md))).join('')}
+    </div>
+    <div class="scroll-up-indicator" onclick="scrollToTopPastMatches()" title="Click to scroll to Matchday 1">
+      &uarr; Scroll up to view previous completed matchdays (MD 1&ndash;${pastMds.length}) &uarr;
+    </div>
+  ` : '';
+
+  const currentBanner = `
+    <div id="current-round-anchor" class="current-md-banner">
+      <div>
+        <span style="font-family:'Anton',sans-serif; font-size:18px; text-transform:uppercase; color:var(--gold-soft);">
+          ⚡ Current Round &middot; ${currentMd.replace('League Stage - ', 'Matchday ')}
+        </span>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim); margin-top:2px;">
+          Upcoming European fixtures &middot; Scroll up (&uarr;) for past rounds, scroll down (&darr;) for future matchdays
+        </div>
+      </div>
+      ${pastMds.length ? `<button class="none-btn" style="width:auto; margin:0; padding:6px 14px; font-size:10px;" onclick="scrollToTopPastMatches()">&uarr; Past Matchdays (1&ndash;${pastMds.length})</button>` : ''}
+    </div>
+  `;
+
+  const upcomingHTML = currentAndFutureMds.map(md => renderMatchGroup(md, md === currentMd, allMds.indexOf(md))).join('');
+
+  el.innerHTML = '<div class="fade-in">' + quickNavHTML + pastHTML + currentBanner + upcomingHTML + '</div>';
+}
+
+function getDynamicDossier(name, team){
+  const pts = team ? team.points : 0;
+  const rank = team ? team.rank : 18;
+  const elo = team ? team.elo : 1600;
+  return {
+    league: "UEFA Champions League",
+    why_good: `${name} have proven their quality to reach the 36-team Champions League league phase with a current Elo rating of ${elo}. Their tactical structure balances disciplined defensive organization with high-intensity transition attacks.`,
+    key_players: [
+      {name: "Team Talisman", role: "Primary attacking focal point & creator"},
+      {name: "Midfield General", role: "Tactical anchor & tempo controller"},
+      {name: "Defensive Leader", role: "Commanding central defender"}
+    ],
+    fan_perspective: pts >= 6 
+      ? `Supporters are thrilled with an impressive ${pts}-point start in the league phase and firmly believe a knockout round berth is within reach.`
+      : `Fans know every point from here is crucial and are rallying behind the club to fight for top-24 playoff qualification.`,
+    needs_to_advance: pts >= 6
+      ? `With ${pts} points banked, approximately ${Math.max(0, 16 - pts)} more points are needed for an automatic top-8 bye, while ${Math.max(0, 10 - pts)} points ensures the playoff round.`
+      : `Currently on ${pts} points, target fixtures in the remaining rounds are essential to reach the 9-to-10 point playoff cut-off.`
+  };
+}
+
+function openTeamModal(name){
+  const team = (STANDINGS && STANDINGS.teams || []).find(t => t.name.toLowerCase() === name.toLowerCase());
+  const modal = document.getElementById('team-modal');
+  const body = document.getElementById('team-modal-body');
+  if (!modal || !body) return;
+
+  const dossier = DOSSIERS[name] || getDynamicDossier(name, team);
+  const teamElo = team ? team.elo : 1600;
+
+  const upcomingMatches = (STANDINGS && STANDINGS.matches || []).filter(m => 
+    !m.played && (m.home.toLowerCase() === name.toLowerCase() || m.away.toLowerCase() === name.toLowerCase())
+  );
+
+  const upcomingHTML = upcomingMatches.length ? upcomingMatches.map(m => {
+    const isHome = m.home.toLowerCase() === name.toLowerCase();
+    const oppName = isHome ? m.away : m.home;
+    const oppTeam = (STANDINGS.teams || []).find(t => t.name.toLowerCase() === oppName.toLowerCase());
+    const oppElo = oppTeam ? oppTeam.elo : 1600;
+    
+    let pHome, pDraw, pAway;
+    if (m.odds){
+      pHome = m.odds.home; pDraw = m.odds.draw; pAway = m.odds.away;
+    } else {
+      [pHome, pDraw, pAway] = outcomeProbabilitiesJS(isHome ? teamElo : oppElo, isHome ? oppElo : teamElo);
+    }
+    const winProb = isHome ? pHome : pAway;
+    const drawProb = pDraw;
+    const lossProb = isHome ? pAway : pHome;
+    const winPct = formatProb(winProb);
+    const drawPct = formatProb(drawProb);
+    const lossPct = formatProb(lossProb);
+
+    const winRatingTag = winProb >= 0.55
+      ? `<span class="tag-hit" style="font-size:10px;">Favorite (${winPct})</span>`
+      : winProb <= 0.30
+      ? `<span class="tag-miss" style="font-size:10px;">Underdog (${winPct})</span>`
+      : `<span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ice); background:var(--ice-soft); padding:2px 6px; border-radius:3px;">Contested (${winPct})</span>`;
+
+    return `
+      <div class="upcoming-match-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; color:var(--gold-soft); font-weight:600;">${m.matchday.replace('League Stage - ', 'Matchday ')}</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim);">&middot; ${new Date(m.date).toLocaleDateString(undefined, {month:'short', day:'numeric'})}</span>
+          </div>
+          ${winRatingTag}
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            ${crestOrChipHTML(name, 22, 'circle')}
+            <strong style="font-size:13px; color:${teamColor(name)};">${name}</strong>
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);">${isHome ? 'vs (Home)' : '@ (Away)'}</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:13px;">${oppName}</span>
+            ${crestOrChipHTML(oppName, 22, 'circle')}
+          </div>
+        </div>
+        <div style="margin-top:6px;">
+          ${probabilityBar([
+            {label: name + ' Win', prob: winProb, color: teamColor(name)},
+            {label: 'Draw', prob: drawProb, color: 'var(--ivory-dim)'},
+            {label: oppName + ' Win', prob: lossProb, color: teamColor(oppName)}
+          ])}
+        </div>
+      </div>
+    `;
+  }).join('') : `<div class="empty" style="padding:20px;">No remaining league-phase fixtures.</div>`;
+
+  const keyPlayersHTML = (dossier.key_players || []).map(p => `
+    <div class="player-pill">
+      <strong>${p.name}</strong> <span style="color:var(--ivory-dim);">${p.role}</span>
+    </div>
+  `).join('');
+
+  const rankBadge = team ? `<span class="stat-box" style="padding:5px 10px; font-size:12px; min-width:auto;">#${team.rank} in Table</span>` : '';
+  const ptsBadge = team ? `<span class="stat-box" style="padding:5px 10px; font-size:12px; min-width:auto;">${team.points} pts (${team.played}/8 played)</span>` : '';
+  const eloBadge = team ? `<span class="stat-box" style="padding:5px 10px; font-size:12px; min-width:auto;">Elo ${team.elo}</span>` : '';
+  const top8Badge = team && Number.isFinite(team.prob_top8) ? `<span class="stat-box" style="padding:5px 10px; font-size:12px; min-width:auto; color:var(--gold-soft);">Top-8: ${formatProb(team.prob_top8, team.status_top8)}</span>` : '';
+  const top24Badge = team && Number.isFinite(team.prob_top24) ? `<span class="stat-box" style="padding:5px 10px; font-size:12px; min-width:auto; color:var(--ice);">Top-24: ${formatProb(team.prob_top24, team.status_top24)}</span>` : '';
+
+  body.innerHTML = `
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:14px; flex-wrap:wrap;">
+      ${crestOrChipHTML(name, 48, 'circle')}
+      <div>
+        <h2 style="font-family:'Anton',sans-serif; font-size:26px; text-transform:uppercase; margin:0; line-height:1.1;">${name}</h2>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold-soft); margin-top:2px;">${dossier.league || 'European Contender'}</div>
+      </div>
+    </div>
+    
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;">
+      ${rankBadge} ${ptsBadge} ${eloBadge} ${top8Badge} ${top24Badge}
+    </div>
+
+    <div class="dossier-section">
+      <div class="dossier-heading gold">⚡ Tactical DNA &amp; Why They're Good</div>
+      <p style="margin:0; font-size:13px; line-height:1.6; color:var(--ivory);">${dossier.why_good}</p>
+      <div style="margin-top:14px;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; color:var(--ivory-dim); letter-spacing:0.06em; margin-bottom:6px;">Key Players &amp; Game Changers</div>
+        <div class="player-pills">${keyPlayersHTML}</div>
+      </div>
+    </div>
+
+    <div class="dossier-section" style="border-left:3px solid var(--gold);">
+      <div class="dossier-heading gold">🎙️ Fan Pulse &amp; Survival Outlook</div>
+      <p style="margin:0 0 10px; font-size:13px; line-height:1.6; color:var(--ivory);">${dossier.fan_perspective}</p>
+      <div style="background:var(--bg-3); border-radius:4px; padding:10px 12px; font-size:12px; color:var(--gold-soft); font-family:'IBM Plex Mono',monospace;">
+        <strong>Path to Advancement:</strong> ${dossier.needs_to_advance}
+      </div>
+    </div>
+
+    <div style="margin-top:24px;">
+      <div class="dossier-heading ice" style="margin-bottom:12px;">📅 Remaining League Phase Matches &amp; Win Probabilities</div>
+      ${upcomingHTML}
+    </div>
+  `;
+
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTeamModal(){
+  const modal = document.getElementById('team-modal');
+  if (modal) modal.style.display = 'none';
+  document.body.style.overflow = '';
 }
 
 function renderRankings(){
@@ -962,12 +1241,13 @@ function renderRankings(){
           ? `<span style="font-family:'IBM Plex Mono',monospace; font-size:10px; padding:2px 6px; border-radius:3px; margin-left:6px; background:${form > 0 ? 'rgba(217,184,74,0.15)' : 'rgba(224,84,107,0.12)'}; color:${form > 0 ? 'var(--gold-soft)' : 'var(--red-soft)'};">${form > 0 ? '+' : ''}${form}</span>`
           : '';
         return `
-        <div class="standings-row">
+        <div class="standings-row clickable-row" onclick="openTeamModal('${t.name.replace(/'/g, "\\'")}')">
           <div class="standings-row-top">
             <span class="rank">${idx + 1}</span>
             ${crestOrChipHTML(t.name, 22, 'circle')}
             <span class="team-name">${t.name}</span>
             <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);">Elo ${t.elo}${formTag}</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--gold-soft); margin-left:auto;">Dossier &rarr;</span>
           </div>
           <div style="padding-left:34px;">
             <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim); margin-bottom:3px;">
@@ -986,12 +1266,13 @@ function renderRankings(){
     const fallback = [...CONFIRMED_TEAMS].sort((a,b) => b.coef - a.coef);
     const maxCoef = fallback[0].coef;
     const rows = fallback.map((t, i) => `
-      <div class="standings-row">
+      <div class="standings-row clickable-row" onclick="openTeamModal('${t.name.replace(/'/g, "\\'")}')">
         <div class="standings-row-top">
           <span class="rank">${i+1}</span>
           ${crestOrChipHTML(t.name, 22, 'circle')}
           <span class="team-name">${t.name}</span>
           <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);">${t.coef.toFixed(1)} Coef</span>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--gold-soft); margin-left:auto;">Dossier &rarr;</span>
         </div>
         <div style="padding-left:34px;">
           <div class="single-bar-track"><div class="single-bar-fill" style="width:${(t.coef/maxCoef*100).toFixed(1)}%; background:${t.color};"></div></div>
@@ -1003,10 +1284,23 @@ function renderRankings(){
   }
 
   const hasOdds = STANDINGS.schedule_complete && teams.some(t => Number.isFinite(t.prob_top8));
+
+  // Comprehensive Power Ranking:
+  // Balances title odds (prob_champion), direct top 8 qualification (prob_top8),
+  // playoff survival (prob_top24), and underlying Elo strength:
   const sorted = [...teams].sort((a,b) => {
-    const champDiff = (b.prob_champion ?? 0) - (a.prob_champion ?? 0);
-    if (Math.abs(champDiff) > 0.001) return champDiff;
-    return (b.prob_top8 ?? -1) - (a.prob_top8 ?? -1);
+    const champA = a.prob_champion || 0;
+    const champB = b.prob_champion || 0;
+    const top8A = a.prob_top8 || 0;
+    const top8B = b.prob_top8 || 0;
+    const top24A = a.prob_top24 || 0;
+    const top24B = b.prob_top24 || 0;
+    const eloA = a.elo || 1500;
+    const eloB = b.elo || 1500;
+
+    const scoreA = (champA * 15.0) + (top8A * 3.0) + (top24A * 1.5) + (eloA / 4000.0);
+    const scoreB = (champB * 15.0) + (top8B * 3.0) + (top24B * 1.5) + (eloB / 4000.0);
+    return scoreB - scoreA;
   });
 
   if (!hasOdds){
@@ -1020,33 +1314,36 @@ function renderRankings(){
       ? `<span style="font-family:'IBM Plex Mono',monospace; font-size:10px; padding:2px 6px; border-radius:3px; margin-left:6px; background:${form > 0 ? 'rgba(217,184,74,0.15)' : 'rgba(224,84,107,0.12)'}; color:${form > 0 ? 'var(--gold-soft)' : 'var(--red-soft)'};">${form > 0 ? '+' : ''}${form} form</span>`
       : '';
     const hasKnockout = Number.isFinite(t.prob_champion) && Number.isFinite(t.prob_final);
-    const champPct = hasKnockout ? (t.prob_champion * 100).toFixed(1) : null;
-    const finalPct = hasKnockout ? (t.prob_final * 100).toFixed(1) : null;
-    const top8Pct = Math.round((t.prob_top8 || 0) * 100);
-    const top24Pct = Math.round((t.prob_top24 || 0) * 100);
+    const champPct = hasKnockout ? formatProb(t.prob_champion) : null;
+    const finalPct = hasKnockout ? formatProb(t.prob_final) : null;
+    const top8Text = formatProb(t.prob_top8, t.status_top8);
+    const top24Text = formatProb(t.prob_top24, t.status_top24);
+    const top8Width = formatBarWidth(t.prob_top8, t.status_top8);
+    const top24Width = formatBarWidth(t.prob_top24, t.status_top24);
 
     return `
-    <div class="standings-row">
+    <div class="standings-row clickable-row" onclick="openTeamModal('${t.name.replace(/'/g, "\\'")}')" title="Click to view ${t.name} tactical dossier, key players & upcoming match probabilities">
       <div class="standings-row-top">
         <span class="rank">${idx + 1}</span>
         ${crestOrChipHTML(t.name, 22, 'circle')}
         <span class="team-name">${t.name}</span>
         <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);">Elo ${t.elo}${formTag}</span>
-        ${hasKnockout && t.prob_champion >= 0.04 ? `<span class="tag-hit" style="margin-left:auto;">🏆 ${champPct}% Champ</span>` : ''}
+        ${hasKnockout && t.prob_champion >= 0.04 ? `<span class="tag-hit" style="margin-left:auto;">🏆 ${champPct} Champ</span>` : ''}
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--gold-soft); margin-left:auto;">Dossier &rarr;</span>
       </div>
       <div style="padding-left:34px;">
         <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim); margin-bottom:2px; flex-wrap:wrap; gap:6px;">
-          <span>Top 8 (Auto R16): <strong style="color:var(--gold-soft);">${top8Pct}%</strong></span>
-          <span>Top 24 (Playoffs): <strong style="color:var(--ice);">${top24Pct}%</strong></span>
-          ${hasKnockout ? `<span>Finalist: <strong style="color:var(--ivory);">${finalPct}%</strong></span>` : ''}
+          <span>Top 8 (Auto R16): <strong style="color:var(--gold-soft);">${top8Text}</strong></span>
+          <span>Top 24 (Playoffs): <strong style="color:var(--ice);">${top24Text}</strong></span>
+          ${hasKnockout ? `<span>Finalist: <strong style="color:var(--ivory);">${finalPct}</strong></span>` : ''}
         </div>
-        <div class="single-bar-track" style="margin-bottom:6px;"><div class="single-bar-fill" style="width:${top8Pct}%; background:var(--gold);"></div></div>
-        <div class="single-bar-track"><div class="single-bar-fill" style="width:${top24Pct}%; background:var(--ice);"></div></div>
+        <div class="single-bar-track" style="margin-bottom:6px;"><div class="single-bar-fill" style="width:${top8Width}%; background:var(--gold);"></div></div>
+        <div class="single-bar-track"><div class="single-bar-fill" style="width:${top24Width}%; background:var(--ice);"></div></div>
       </div>
     </div>`;
   }).join('');
 
-  el.innerHTML = `<p class="sub" style="margin-bottom:18px;">Empirical Power Rankings powered by 20,000 Monte Carlo simulations of remaining league-phase fixtures and full knockout tournament (Playoffs &rarr; R16 &rarr; QF &rarr; SF &rarr; Final).</p>
+  el.innerHTML = `<p class="sub" style="margin-bottom:18px;">Empirical Power Rankings combining title odds, automatic Round of 16 qualification, playoff survival, and underlying Elo strength. Click any club for tactical dossiers and upcoming match win probabilities.</p>
     <div class="fade-in">${rows}</div>`;
 }
 
@@ -1362,7 +1659,13 @@ function renderAll(){
         wrap.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         wrap.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
         btn.classList.add('active');
-        document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+        const targetPanel = document.getElementById('panel-' + btn.dataset.tab);
+        if (targetPanel) {
+          targetPanel.classList.add('active');
+          if (btn.dataset.tab === 'matches') {
+            setTimeout(scrollToCurrentRound, 60);
+          }
+        }
       });
     });
   }
@@ -1372,9 +1675,12 @@ function renderAll(){
   renderStandings();
   renderMatches();
   renderRankings();
-  renderQualifying();
   renderAccuracy();
 }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeTeamModal();
+});
 </script>
 </body>
 </html>

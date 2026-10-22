@@ -79,14 +79,13 @@ second, sparser cron for the rest of the week.
 
 ## Site structure
 
-Five tabs:
-1. **Standings** — Live league-phase table, clinch and elimination scenario tracking, and one-click single season Monte Carlo simulation with full knockout championship rollout.
-2. **Matches** — Complete 144-match league-phase fixtures grouped by matchday, with head-to-head records and pre-match probability bars.
-3. **Power Rankings** — Multi-tier probabilities (Automatic Top 8, Playoff Top 24, Finalist, Champion) seeded on UEFA coefficients, squad valuations, and domestic league tiers.
-4. **Qualifying** — Track third qualifying round and play-off round ties for the final berths.
-5. **Model Accuracy & Backtest** — Empirical validation scorecard comparing CL Tracker against the Opta Supercomputer and ground truth from the completed 2024/25 season.
+Four principal sections:
+1. **Standings** — Live league-phase table, clinch and elimination scenario tracking, and one-click single season Monte Carlo simulation with full knockout championship rollout. Clicking any club opens their detailed tactical dossier, key players, fan survival outlook, and upcoming match win probabilities.
+2. **Matches** — Complete 144-match league-phase fixtures with the current active round displayed at the top, past matchdays accessible by scrolling up, and quick-jump navigation pills across all 8 matchdays.
+3. **Power Rankings** — Multi-tier power rankings properly balancing title odds, automatic Round of 16 qualification, playoff survival, and underlying Elo strength (with realistic non-100% probabilistic bounds).
+4. **Model Accuracy & Backtest** — Empirical validation scorecard comparing CL Tracker against the Opta Supercomputer and ground truth from the completed 2024/25 season.
 
-The favourite-team selector lets users track their club's table position, next fixture, and qualification scenario front and center.
+The favourite-team selector lets users track their club's table position, next fixture, and qualification scenario front and center. Click any team across Standings or Power Rankings to open their full LLM tactical dossier.
 
 ## The probability model (Power Rankings & Knockout Engine)
 
