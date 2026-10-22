@@ -1,0 +1,1327 @@
+{
+  "season": "2024/25",
+  "description": "Full backtest comparing CL Tracker model vs Opta Supercomputer and naive baseline on completed 2024/25 Champions League season",
+  "macro_league_phase_evaluation": {
+    "brier_score_top8": {
+      "cl_tracker": 0.2176,
+      "opta_supercomputer": 0.1561,
+      "naive_coefficient_seed": 0.3333
+    },
+    "brier_score_top24": {
+      "cl_tracker": 0.1654,
+      "opta_supercomputer": 0.1169,
+      "naive_coefficient_seed": 0.2222
+    },
+    "rank_correlation_rho": {
+      "cl_tracker": 0.5909,
+      "opta_supercomputer": 0.7287,
+      "naive_coefficient_seed": 0.5359
+    },
+    "points_mae": {
+      "cl_tracker": 4.12
+    }
+  },
+  "preseason_monte_carlo_table": {
+    "Manchester City": {
+      "name": "Manchester City",
+      "prob_top8": 0.9253,
+      "prob_top24": 0.9997,
+      "mean_points": 19.6,
+      "median_rank": 3,
+      "starting_elo": 2092.0
+    },
+    "Bayern Munich": {
+      "name": "Bayern Munich",
+      "prob_top8": 0.9254,
+      "prob_top24": 0.9996,
+      "mean_points": 19.67,
+      "median_rank": 3,
+      "starting_elo": 2076.0
+    },
+    "Real Madrid": {
+      "name": "Real Madrid",
+      "prob_top8": 0.892,
+      "prob_top24": 0.9993,
+      "mean_points": 19.03,
+      "median_rank": 3,
+      "starting_elo": 2044.0
+    },
+    "Paris Saint-Germain": {
+      "name": "Paris Saint-Germain",
+      "prob_top8": 0.5474,
+      "prob_top24": 0.9876,
+      "mean_points": 15.67,
+      "median_rank": 8,
+      "starting_elo": 1964.0
+    },
+    "Liverpool": {
+      "name": "Liverpool",
+      "prob_top8": 0.659,
+      "prob_top24": 0.9932,
+      "mean_points": 16.59,
+      "median_rank": 6,
+      "starting_elo": 1956.0
+    },
+    "Inter": {
+      "name": "Inter",
+      "prob_top8": 0.484,
+      "prob_top24": 0.9808,
+      "mean_points": 15.19,
+      "median_rank": 9,
+      "starting_elo": 1904.0
+    },
+    "Borussia Dortmund": {
+      "name": "Borussia Dortmund",
+      "prob_top8": 0.5344,
+      "prob_top24": 0.9831,
+      "mean_points": 15.52,
+      "median_rank": 8,
+      "starting_elo": 1888.0
+    },
+    "RB Leipzig": {
+      "name": "RB Leipzig",
+      "prob_top8": 0.4553,
+      "prob_top24": 0.9721,
+      "mean_points": 14.91,
+      "median_rank": 9,
+      "starting_elo": 1888.0
+    },
+    "Barcelona": {
+      "name": "Barcelona",
+      "prob_top8": 0.3514,
+      "prob_top24": 0.955,
+      "mean_points": 14.08,
+      "median_rank": 11,
+      "starting_elo": 1864.0
+    },
+    "Bayer Leverkusen": {
+      "name": "Bayer Leverkusen",
+      "prob_top8": 0.3645,
+      "prob_top24": 0.9553,
+      "mean_points": 14.15,
+      "median_rank": 11,
+      "starting_elo": 1860.0
+    },
+    "Atletico Madrid": {
+      "name": "Atletico Madrid",
+      "prob_top8": 0.3255,
+      "prob_top24": 0.9409,
+      "mean_points": 13.74,
+      "median_rank": 11,
+      "starting_elo": 1856.0
+    },
+    "Atalanta": {
+      "name": "Atalanta",
+      "prob_top8": 0.3204,
+      "prob_top24": 0.946,
+      "mean_points": 13.77,
+      "median_rank": 12,
+      "starting_elo": 1824.0
+    },
+    "Juventus": {
+      "name": "Juventus",
+      "prob_top8": 0.2188,
+      "prob_top24": 0.9001,
+      "mean_points": 12.73,
+      "median_rank": 14,
+      "starting_elo": 1820.0
+    },
+    "Benfica": {
+      "name": "Benfica",
+      "prob_top8": 0.1976,
+      "prob_top24": 0.8944,
+      "mean_points": 12.53,
+      "median_rank": 14,
+      "starting_elo": 1816.0
+    },
+    "Arsenal": {
+      "name": "Arsenal",
+      "prob_top8": 0.1688,
+      "prob_top24": 0.8579,
+      "mean_points": 12.04,
+      "median_rank": 15,
+      "starting_elo": 1788.0
+    },
+    "Club Brugge": {
+      "name": "Club Brugge",
+      "prob_top8": 0.1255,
+      "prob_top24": 0.8125,
+      "mean_points": 11.45,
+      "median_rank": 17,
+      "starting_elo": 1756.0
+    },
+    "Shakhtar Donetsk": {
+      "name": "Shakhtar Donetsk",
+      "prob_top8": 0.0898,
+      "prob_top24": 0.775,
+      "mean_points": 10.91,
+      "median_rank": 18,
+      "starting_elo": 1752.0
+    },
+    "Milan": {
+      "name": "Milan",
+      "prob_top8": 0.0649,
+      "prob_top24": 0.7147,
+      "mean_points": 10.28,
+      "median_rank": 20,
+      "starting_elo": 1736.0
+    },
+    "Feyenoord": {
+      "name": "Feyenoord",
+      "prob_top8": 0.0347,
+      "prob_top24": 0.6128,
+      "mean_points": 9.38,
+      "median_rank": 22,
+      "starting_elo": 1728.0
+    },
+    "Sporting CP": {
+      "name": "Sporting CP",
+      "prob_top8": 0.0553,
+      "prob_top24": 0.6769,
+      "mean_points": 9.95,
+      "median_rank": 21,
+      "starting_elo": 1718.0
+    },
+    "PSV Eindhoven": {
+      "name": "PSV Eindhoven",
+      "prob_top8": 0.064,
+      "prob_top24": 0.6973,
+      "mean_points": 10.16,
+      "median_rank": 20,
+      "starting_elo": 1716.0
+    },
+    "Dinamo Zagreb": {
+      "name": "Dinamo Zagreb",
+      "prob_top8": 0.0494,
+      "prob_top24": 0.6528,
+      "mean_points": 9.77,
+      "median_rank": 21,
+      "starting_elo": 1700.0
+    },
+    "Red Bull Salzburg": {
+      "name": "Red Bull Salzburg",
+      "prob_top8": 0.024,
+      "prob_top24": 0.5289,
+      "mean_points": 8.73,
+      "median_rank": 24,
+      "starting_elo": 1700.0
+    },
+    "Lille": {
+      "name": "Lille",
+      "prob_top8": 0.0199,
+      "prob_top24": 0.4956,
+      "mean_points": 8.47,
+      "median_rank": 25,
+      "starting_elo": 1688.0
+    },
+    "Red Star Belgrade": {
+      "name": "Red Star Belgrade",
+      "prob_top8": 0.0319,
+      "prob_top24": 0.5463,
+      "mean_points": 8.87,
+      "median_rank": 23,
+      "starting_elo": 1660.0
+    },
+    "Young Boys": {
+      "name": "Young Boys",
+      "prob_top8": 0.0222,
+      "prob_top24": 0.4929,
+      "mean_points": 8.45,
+      "median_rank": 25,
+      "starting_elo": 1638.0
+    },
+    "Celtic": {
+      "name": "Celtic",
+      "prob_top8": 0.0137,
+      "prob_top24": 0.4251,
+      "mean_points": 7.88,
+      "median_rank": 26,
+      "starting_elo": 1628.0
+    },
+    "Slovan Bratislava": {
+      "name": "Slovan Bratislava",
+      "prob_top8": 0.0061,
+      "prob_top24": 0.3603,
+      "mean_points": 7.38,
+      "median_rank": 27,
+      "starting_elo": 1622.0
+    },
+    "Monaco": {
+      "name": "Monaco",
+      "prob_top8": 0.0081,
+      "prob_top24": 0.3155,
+      "mean_points": 7.03,
+      "median_rank": 28,
+      "starting_elo": 1596.0
+    },
+    "Sparta Prague": {
+      "name": "Sparta Prague",
+      "prob_top8": 0.0027,
+      "prob_top24": 0.2299,
+      "mean_points": 6.3,
+      "median_rank": 30,
+      "starting_elo": 1590.0
+    },
+    "Aston Villa": {
+      "name": "Aston Villa",
+      "prob_top8": 0.0052,
+      "prob_top24": 0.2832,
+      "mean_points": 6.74,
+      "median_rank": 29,
+      "starting_elo": 1583.4
+    },
+    "Bologna": {
+      "name": "Bologna",
+      "prob_top8": 0.0027,
+      "prob_top24": 0.2299,
+      "mean_points": 6.23,
+      "median_rank": 30,
+      "starting_elo": 1572.2
+    },
+    "Girona": {
+      "name": "Girona",
+      "prob_top8": 0.0027,
+      "prob_top24": 0.2049,
+      "mean_points": 5.95,
+      "median_rank": 31,
+      "starting_elo": 1571.6
+    },
+    "VfB Stuttgart": {
+      "name": "VfB Stuttgart",
+      "prob_top8": 0.0026,
+      "prob_top24": 0.2016,
+      "mean_points": 5.98,
+      "median_rank": 31,
+      "starting_elo": 1569.3
+    },
+    "Sturm Graz": {
+      "name": "Sturm Graz",
+      "prob_top8": 0.0036,
+      "prob_top24": 0.2228,
+      "mean_points": 6.14,
+      "median_rank": 30,
+      "starting_elo": 1558.0
+    },
+    "Brest": {
+      "name": "Brest",
+      "prob_top8": 0.0013,
+      "prob_top24": 0.1562,
+      "mean_points": 5.53,
+      "median_rank": 32,
+      "starting_elo": 1553.4
+    }
+  },
+  "step_up_micro_evaluation": {
+    "standard_variant": {
+      "mean_log_loss": 0.9531,
+      "mean_brier_score": 0.2765,
+      "outcome_accuracy": 0.6389
+    },
+    "goal_margin_variant": {
+      "mean_log_loss": 0.9448,
+      "mean_brier_score": 0.2737,
+      "outcome_accuracy": 0.6458
+    }
+  },
+  "knockout_stage_predictions": {
+    "Liverpool": {
+      "name": "Liverpool",
+      "prob_r16": 1.0,
+      "prob_qf": 0.6881,
+      "prob_sf": 0.4642,
+      "prob_final": 0.2887,
+      "prob_champion": 0.1666
+    },
+    "Barcelona": {
+      "name": "Barcelona",
+      "prob_r16": 1.0,
+      "prob_qf": 0.5787,
+      "prob_sf": 0.3081,
+      "prob_final": 0.149,
+      "prob_champion": 0.0717
+    },
+    "Arsenal": {
+      "name": "Arsenal",
+      "prob_r16": 1.0,
+      "prob_qf": 0.4919,
+      "prob_sf": 0.2105,
+      "prob_final": 0.079,
+      "prob_champion": 0.0274
+    },
+    "Inter": {
+      "name": "Inter",
+      "prob_r16": 1.0,
+      "prob_qf": 0.6115,
+      "prob_sf": 0.3414,
+      "prob_final": 0.1815,
+      "prob_champion": 0.0866
+    },
+    "Atletico Madrid": {
+      "name": "Atletico Madrid",
+      "prob_r16": 1.0,
+      "prob_qf": 0.5299,
+      "prob_sf": 0.2517,
+      "prob_final": 0.1024,
+      "prob_champion": 0.0402
+    },
+    "Bayer Leverkusen": {
+      "name": "Bayer Leverkusen",
+      "prob_r16": 1.0,
+      "prob_qf": 0.5212,
+      "prob_sf": 0.2396,
+      "prob_final": 0.1,
+      "prob_champion": 0.0375
+    },
+    "Lille": {
+      "name": "Lille",
+      "prob_r16": 1.0,
+      "prob_qf": 0.3254,
+      "prob_sf": 0.0851,
+      "prob_final": 0.02,
+      "prob_champion": 0.0054
+    },
+    "Aston Villa": {
+      "name": "Aston Villa",
+      "prob_r16": 1.0,
+      "prob_qf": 0.2156,
+      "prob_sf": 0.0359,
+      "prob_final": 0.0059,
+      "prob_champion": 0.0012
+    },
+    "Atalanta": {
+      "name": "Atalanta",
+      "prob_r16": 0.6716,
+      "prob_qf": 0.3202,
+      "prob_sf": 0.1337,
+      "prob_final": 0.0464,
+      "prob_champion": 0.0163
+    },
+    "Borussia Dortmund": {
+      "name": "Borussia Dortmund",
+      "prob_r16": 0.7523,
+      "prob_qf": 0.3917,
+      "prob_sf": 0.1831,
+      "prob_final": 0.0758,
+      "prob_champion": 0.0294
+    },
+    "Bayern Munich": {
+      "name": "Bayern Munich",
+      "prob_r16": 0.5128,
+      "prob_qf": 0.3772,
+      "prob_sf": 0.27,
+      "prob_final": 0.1852,
+      "prob_champion": 0.116
+    },
+    "Real Madrid": {
+      "name": "Real Madrid",
+      "prob_r16": 0.9237,
+      "prob_qf": 0.6699,
+      "prob_sf": 0.4716,
+      "prob_final": 0.3039,
+      "prob_champion": 0.18
+    },
+    "Milan": {
+      "name": "Milan",
+      "prob_r16": 0.4001,
+      "prob_qf": 0.1382,
+      "prob_sf": 0.0414,
+      "prob_final": 0.0108,
+      "prob_champion": 0.0026
+    },
+    "PSV Eindhoven": {
+      "name": "PSV Eindhoven",
+      "prob_r16": 0.4967,
+      "prob_qf": 0.1638,
+      "prob_sf": 0.0423,
+      "prob_final": 0.0083,
+      "prob_champion": 0.0018
+    },
+    "Paris Saint-Germain": {
+      "name": "Paris Saint-Germain",
+      "prob_r16": 0.9188,
+      "prob_qf": 0.5872,
+      "prob_sf": 0.3386,
+      "prob_final": 0.1785,
+      "prob_champion": 0.0862
+    },
+    "Benfica": {
+      "name": "Benfica",
+      "prob_r16": 0.7945,
+      "prob_qf": 0.3535,
+      "prob_sf": 0.1347,
+      "prob_final": 0.0468,
+      "prob_champion": 0.0141
+    },
+    "Monaco": {
+      "name": "Monaco",
+      "prob_r16": 0.2055,
+      "prob_qf": 0.0403,
+      "prob_sf": 0.0057,
+      "prob_final": 0.0007,
+      "prob_champion": 0.0002
+    },
+    "Brest": {
+      "name": "Brest",
+      "prob_r16": 0.0812,
+      "prob_qf": 0.0131,
+      "prob_sf": 0.0023,
+      "prob_final": 0.0001,
+      "prob_champion": 0.0
+    },
+    "Feyenoord": {
+      "name": "Feyenoord",
+      "prob_r16": 0.5033,
+      "prob_qf": 0.164,
+      "prob_sf": 0.0429,
+      "prob_final": 0.0094,
+      "prob_champion": 0.0025
+    },
+    "Juventus": {
+      "name": "Juventus",
+      "prob_r16": 0.5999,
+      "prob_qf": 0.2626,
+      "prob_sf": 0.0936,
+      "prob_final": 0.0304,
+      "prob_champion": 0.009
+    },
+    "Celtic": {
+      "name": "Celtic",
+      "prob_r16": 0.0763,
+      "prob_qf": 0.0181,
+      "prob_sf": 0.0033,
+      "prob_final": 0.0006,
+      "prob_champion": 0.0003
+    },
+    "Manchester City": {
+      "name": "Manchester City",
+      "prob_r16": 0.4872,
+      "prob_qf": 0.3584,
+      "prob_sf": 0.2564,
+      "prob_final": 0.168,
+      "prob_champion": 0.1033
+    },
+    "Sporting CP": {
+      "name": "Sporting CP",
+      "prob_r16": 0.2477,
+      "prob_qf": 0.0739,
+      "prob_sf": 0.0168,
+      "prob_final": 0.0034,
+      "prob_champion": 0.0006
+    },
+    "Club Brugge": {
+      "name": "Club Brugge",
+      "prob_r16": 0.3284,
+      "prob_qf": 0.1056,
+      "prob_sf": 0.0271,
+      "prob_final": 0.0052,
+      "prob_champion": 0.0011
+    },
+    "Dinamo Zagreb": {
+      "name": "Dinamo Zagreb",
+      "prob_r16": 0.0,
+      "prob_qf": 0.0,
+      "prob_sf": 0.0,
+      "prob_final": 0.0,
+      "prob_champion": 0.0
+    },
+    "VfB Stuttgart": {
+      "name": "VfB Stuttgart",
+      "prob_r16": 0.0,
+      "prob_qf": 0.0,
+      "prob_sf": 0.0,
+      "prob_final": 0.0,
+      "prob_champion": 0.0
+    },
+    "Shakhtar Donetsk": {
+      "name": "Shakhtar Donetsk",
+      "prob_r16": 0.0,
+      "prob_qf": 0.0,
+      "prob_sf": 0.0,
+      "prob_final": 0.0,
+      "prob_champion": 0.0
+    },
+    "Bologna": {
+      "name": "Bologna",
+      "prob_r16": 0.0,
+      "prob_qf": 0.0,
+      "prob_sf": 0.0,
+      "prob_final": 0.0,
+      "prob_champion": 0.0
+    },
+    "Red Star Belgrade": {
+      "name": "Red Star Belgrade",
+      "prob_r16": 0.0,
+      "prob_qf": 0.0,
+      "prob_sf": 0.0,
+      "prob_final": 0.0,
+      "prob_champion": 0.0
+    },
+    "Sturm Graz": {
+      "name": "Sturm Graz",
+      "prob_r16": 0.0,
+      "prob_qf": 0.0,
+      "prob_sf": 0.0,
+      "prob_final": 0.0,
+      "prob_champion": 0.0
+    },
+    "Sparta Prague": {
+      "name": "Sparta Prague",
+      "prob_r16": 0.0,
+      "prob_qf": 0.0,
+      "prob_sf": 0.0,
+      "prob_final": 0.0,
+      "prob_champion": 0.0
+    },
+    "RB Leipzig": {
+      "name": "RB Leipzig",
+      "prob_r16": 0.0,
+      "prob_qf": 0.0,
+      "prob_sf": 0.0,
+      "prob_final": 0.0,
+      "prob_champion": 0.0
+    },
+    "Girona": {
+      "name": "Girona",
+      "prob_r16": 0.0,
+      "prob_qf": 0.0,
+      "prob_sf": 0.0,
+      "prob_final": 0.0,
+      "prob_champion": 0.0
+    },
+    "Red Bull Salzburg": {
+      "name": "Red Bull Salzburg",
+      "prob_r16": 0.0,
+      "prob_qf": 0.0,
+      "prob_sf": 0.0,
+      "prob_final": 0.0,
+      "prob_champion": 0.0
+    },
+    "Slovan Bratislava": {
+      "name": "Slovan Bratislava",
+      "prob_r16": 0.0,
+      "prob_qf": 0.0,
+      "prob_sf": 0.0,
+      "prob_final": 0.0,
+      "prob_champion": 0.0
+    },
+    "Young Boys": {
+      "name": "Young Boys",
+      "prob_r16": 0.0,
+      "prob_qf": 0.0,
+      "prob_sf": 0.0,
+      "prob_final": 0.0,
+      "prob_champion": 0.0
+    }
+  },
+  "actual_ground_truth": {
+    "league_phase_standings": [
+      {
+        "rank": 1,
+        "name": "Liverpool",
+        "played": 8,
+        "won": 7,
+        "drawn": 0,
+        "lost": 1,
+        "gf": 17,
+        "ga": 5,
+        "gd": 12,
+        "points": 21,
+        "top8_qualified": true,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 2,
+        "name": "Barcelona",
+        "played": 8,
+        "won": 6,
+        "drawn": 1,
+        "lost": 1,
+        "gf": 28,
+        "ga": 13,
+        "gd": 15,
+        "points": 19,
+        "top8_qualified": true,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 3,
+        "name": "Arsenal",
+        "played": 8,
+        "won": 6,
+        "drawn": 1,
+        "lost": 1,
+        "gf": 16,
+        "ga": 3,
+        "gd": 13,
+        "points": 19,
+        "top8_qualified": true,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 4,
+        "name": "Inter",
+        "played": 8,
+        "won": 6,
+        "drawn": 1,
+        "lost": 1,
+        "gf": 11,
+        "ga": 1,
+        "gd": 10,
+        "points": 19,
+        "top8_qualified": true,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 5,
+        "name": "Atletico Madrid",
+        "played": 8,
+        "won": 6,
+        "drawn": 0,
+        "lost": 2,
+        "gf": 20,
+        "ga": 12,
+        "gd": 8,
+        "points": 18,
+        "top8_qualified": true,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 6,
+        "name": "Bayer Leverkusen",
+        "played": 8,
+        "won": 5,
+        "drawn": 1,
+        "lost": 2,
+        "gf": 15,
+        "ga": 7,
+        "gd": 8,
+        "points": 16,
+        "top8_qualified": true,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 7,
+        "name": "Lille",
+        "played": 8,
+        "won": 5,
+        "drawn": 1,
+        "lost": 2,
+        "gf": 17,
+        "ga": 10,
+        "gd": 7,
+        "points": 16,
+        "top8_qualified": true,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 8,
+        "name": "Aston Villa",
+        "played": 8,
+        "won": 5,
+        "drawn": 1,
+        "lost": 2,
+        "gf": 13,
+        "ga": 6,
+        "gd": 7,
+        "points": 16,
+        "top8_qualified": true,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 9,
+        "name": "Atalanta",
+        "played": 8,
+        "won": 4,
+        "drawn": 3,
+        "lost": 1,
+        "gf": 20,
+        "ga": 6,
+        "gd": 14,
+        "points": 15,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 10,
+        "name": "Borussia Dortmund",
+        "played": 8,
+        "won": 5,
+        "drawn": 0,
+        "lost": 3,
+        "gf": 22,
+        "ga": 12,
+        "gd": 10,
+        "points": 15,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 11,
+        "name": "Bayern Munich",
+        "played": 8,
+        "won": 5,
+        "drawn": 0,
+        "lost": 3,
+        "gf": 20,
+        "ga": 12,
+        "gd": 8,
+        "points": 15,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 12,
+        "name": "Real Madrid",
+        "played": 8,
+        "won": 5,
+        "drawn": 0,
+        "lost": 3,
+        "gf": 20,
+        "ga": 12,
+        "gd": 8,
+        "points": 15,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 13,
+        "name": "Milan",
+        "played": 8,
+        "won": 5,
+        "drawn": 0,
+        "lost": 3,
+        "gf": 14,
+        "ga": 11,
+        "gd": 3,
+        "points": 15,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 14,
+        "name": "PSV Eindhoven",
+        "played": 8,
+        "won": 4,
+        "drawn": 2,
+        "lost": 2,
+        "gf": 16,
+        "ga": 12,
+        "gd": 4,
+        "points": 14,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 15,
+        "name": "Paris Saint-Germain",
+        "played": 8,
+        "won": 4,
+        "drawn": 1,
+        "lost": 3,
+        "gf": 14,
+        "ga": 9,
+        "gd": 5,
+        "points": 13,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 16,
+        "name": "Benfica",
+        "played": 8,
+        "won": 4,
+        "drawn": 1,
+        "lost": 3,
+        "gf": 16,
+        "ga": 12,
+        "gd": 4,
+        "points": 13,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 17,
+        "name": "Monaco",
+        "played": 8,
+        "won": 4,
+        "drawn": 1,
+        "lost": 3,
+        "gf": 13,
+        "ga": 13,
+        "gd": 0,
+        "points": 13,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 18,
+        "name": "Brest",
+        "played": 8,
+        "won": 4,
+        "drawn": 1,
+        "lost": 3,
+        "gf": 10,
+        "ga": 11,
+        "gd": -1,
+        "points": 13,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 19,
+        "name": "Feyenoord",
+        "played": 8,
+        "won": 4,
+        "drawn": 1,
+        "lost": 3,
+        "gf": 18,
+        "ga": 21,
+        "gd": -3,
+        "points": 13,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 20,
+        "name": "Juventus",
+        "played": 8,
+        "won": 3,
+        "drawn": 3,
+        "lost": 2,
+        "gf": 9,
+        "ga": 7,
+        "gd": 2,
+        "points": 12,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 21,
+        "name": "Celtic",
+        "played": 8,
+        "won": 3,
+        "drawn": 3,
+        "lost": 2,
+        "gf": 13,
+        "ga": 14,
+        "gd": -1,
+        "points": 12,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 22,
+        "name": "Manchester City",
+        "played": 8,
+        "won": 3,
+        "drawn": 2,
+        "lost": 3,
+        "gf": 18,
+        "ga": 14,
+        "gd": 4,
+        "points": 11,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 23,
+        "name": "Sporting CP",
+        "played": 8,
+        "won": 3,
+        "drawn": 2,
+        "lost": 3,
+        "gf": 13,
+        "ga": 12,
+        "gd": 1,
+        "points": 11,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 24,
+        "name": "Club Brugge",
+        "played": 8,
+        "won": 3,
+        "drawn": 2,
+        "lost": 3,
+        "gf": 7,
+        "ga": 11,
+        "gd": -4,
+        "points": 11,
+        "top8_qualified": false,
+        "top24_qualified": true,
+        "eliminated": false
+      },
+      {
+        "rank": 25,
+        "name": "Dinamo Zagreb",
+        "played": 8,
+        "won": 3,
+        "drawn": 2,
+        "lost": 3,
+        "gf": 12,
+        "ga": 19,
+        "gd": -7,
+        "points": 11,
+        "top8_qualified": false,
+        "top24_qualified": false,
+        "eliminated": true
+      },
+      {
+        "rank": 26,
+        "name": "VfB Stuttgart",
+        "played": 8,
+        "won": 3,
+        "drawn": 1,
+        "lost": 4,
+        "gf": 13,
+        "ga": 17,
+        "gd": -4,
+        "points": 10,
+        "top8_qualified": false,
+        "top24_qualified": false,
+        "eliminated": true
+      },
+      {
+        "rank": 27,
+        "name": "Shakhtar Donetsk",
+        "played": 8,
+        "won": 2,
+        "drawn": 1,
+        "lost": 5,
+        "gf": 8,
+        "ga": 16,
+        "gd": -8,
+        "points": 7,
+        "top8_qualified": false,
+        "top24_qualified": false,
+        "eliminated": true
+      },
+      {
+        "rank": 28,
+        "name": "Bologna",
+        "played": 8,
+        "won": 1,
+        "drawn": 3,
+        "lost": 4,
+        "gf": 4,
+        "ga": 9,
+        "gd": -5,
+        "points": 6,
+        "top8_qualified": false,
+        "top24_qualified": false,
+        "eliminated": true
+      },
+      {
+        "rank": 29,
+        "name": "Red Star Belgrade",
+        "played": 8,
+        "won": 2,
+        "drawn": 0,
+        "lost": 6,
+        "gf": 13,
+        "ga": 22,
+        "gd": -9,
+        "points": 6,
+        "top8_qualified": false,
+        "top24_qualified": false,
+        "eliminated": true
+      },
+      {
+        "rank": 30,
+        "name": "Sturm Graz",
+        "played": 8,
+        "won": 2,
+        "drawn": 0,
+        "lost": 6,
+        "gf": 5,
+        "ga": 14,
+        "gd": -9,
+        "points": 6,
+        "top8_qualified": false,
+        "top24_qualified": false,
+        "eliminated": true
+      },
+      {
+        "rank": 31,
+        "name": "Sparta Prague",
+        "played": 8,
+        "won": 1,
+        "drawn": 1,
+        "lost": 6,
+        "gf": 7,
+        "ga": 21,
+        "gd": -14,
+        "points": 4,
+        "top8_qualified": false,
+        "top24_qualified": false,
+        "eliminated": true
+      },
+      {
+        "rank": 32,
+        "name": "RB Leipzig",
+        "played": 8,
+        "won": 1,
+        "drawn": 0,
+        "lost": 7,
+        "gf": 8,
+        "ga": 15,
+        "gd": -7,
+        "points": 3,
+        "top8_qualified": false,
+        "top24_qualified": false,
+        "eliminated": true
+      },
+      {
+        "rank": 33,
+        "name": "Girona",
+        "played": 8,
+        "won": 1,
+        "drawn": 0,
+        "lost": 7,
+        "gf": 5,
+        "ga": 13,
+        "gd": -8,
+        "points": 3,
+        "top8_qualified": false,
+        "top24_qualified": false,
+        "eliminated": true
+      },
+      {
+        "rank": 34,
+        "name": "Red Bull Salzburg",
+        "played": 8,
+        "won": 1,
+        "drawn": 0,
+        "lost": 7,
+        "gf": 5,
+        "ga": 27,
+        "gd": -22,
+        "points": 3,
+        "top8_qualified": false,
+        "top24_qualified": false,
+        "eliminated": true
+      },
+      {
+        "rank": 35,
+        "name": "Slovan Bratislava",
+        "played": 8,
+        "won": 0,
+        "drawn": 0,
+        "lost": 8,
+        "gf": 7,
+        "ga": 27,
+        "gd": -20,
+        "points": 0,
+        "top8_qualified": false,
+        "top24_qualified": false,
+        "eliminated": true
+      },
+      {
+        "rank": 36,
+        "name": "Young Boys",
+        "played": 8,
+        "won": 0,
+        "drawn": 0,
+        "lost": 8,
+        "gf": 3,
+        "ga": 24,
+        "gd": -21,
+        "points": 0,
+        "top8_qualified": false,
+        "top24_qualified": false,
+        "eliminated": true
+      }
+    ],
+    "knockout_results": {
+      "playoffs": [
+        {
+          "seed_high": "Real Madrid",
+          "seed_low": "Manchester City",
+          "leg1": "2-3",
+          "leg2": "3-1",
+          "agg": "6-3",
+          "winner": "Real Madrid"
+        },
+        {
+          "seed_high": "Paris Saint-Germain",
+          "seed_low": "Brest",
+          "leg1": "3-0",
+          "leg2": "7-0",
+          "agg": "10-0",
+          "winner": "Paris Saint-Germain"
+        },
+        {
+          "seed_high": "Bayern Munich",
+          "seed_low": "Celtic",
+          "leg1": "1-1",
+          "leg2": "2-1",
+          "agg": "3-2",
+          "winner": "Bayern Munich"
+        },
+        {
+          "seed_high": "Borussia Dortmund",
+          "seed_low": "Sporting CP",
+          "leg1": "1-0",
+          "leg2": "2-0",
+          "agg": "3-0",
+          "winner": "Borussia Dortmund"
+        },
+        {
+          "seed_high": "PSV Eindhoven",
+          "seed_low": "Juventus",
+          "leg1": "2-2",
+          "leg2": "2-1",
+          "agg": "4-3",
+          "winner": "PSV Eindhoven"
+        },
+        {
+          "seed_high": "Feyenoord",
+          "seed_low": "Atalanta",
+          "leg1": "2-2",
+          "leg2": "3-2",
+          "agg": "5-4",
+          "winner": "Feyenoord"
+        },
+        {
+          "seed_high": "Benfica",
+          "seed_low": "Monaco",
+          "leg1": "2-2",
+          "leg2": "2-1",
+          "agg": "4-3",
+          "winner": "Benfica"
+        },
+        {
+          "seed_high": "Club Brugge",
+          "seed_low": "Milan",
+          "leg1": "1-1",
+          "leg2": "1-0",
+          "agg": "2-1",
+          "winner": "Club Brugge"
+        }
+      ],
+      "round_of_16": [
+        {
+          "team_a": "Paris Saint-Germain",
+          "team_b": "Liverpool",
+          "agg": "1-1 (pens 4-1)",
+          "winner": "Paris Saint-Germain"
+        },
+        {
+          "team_a": "Barcelona",
+          "team_b": "Benfica",
+          "agg": "5-0",
+          "winner": "Barcelona"
+        },
+        {
+          "team_a": "Arsenal",
+          "team_b": "PSV Eindhoven",
+          "agg": "9-3",
+          "winner": "Arsenal"
+        },
+        {
+          "team_a": "Inter",
+          "team_b": "Feyenoord",
+          "agg": "4-1",
+          "winner": "Inter"
+        },
+        {
+          "team_a": "Real Madrid",
+          "team_b": "Atletico Madrid",
+          "agg": "2-2 (pens 4-2)",
+          "winner": "Real Madrid"
+        },
+        {
+          "team_a": "Bayern Munich",
+          "team_b": "Bayer Leverkusen",
+          "agg": "5-0",
+          "winner": "Bayern Munich"
+        },
+        {
+          "team_a": "Borussia Dortmund",
+          "team_b": "Lille",
+          "agg": "3-2",
+          "winner": "Borussia Dortmund"
+        },
+        {
+          "team_a": "Aston Villa",
+          "team_b": "Club Brugge",
+          "agg": "6-1",
+          "winner": "Aston Villa"
+        }
+      ],
+      "quarter_finals": [
+        {
+          "team_a": "Arsenal",
+          "team_b": "Real Madrid",
+          "agg": "5-1",
+          "winner": "Arsenal"
+        },
+        {
+          "team_a": "Paris Saint-Germain",
+          "team_b": "Aston Villa",
+          "agg": "5-4",
+          "winner": "Paris Saint-Germain"
+        },
+        {
+          "team_a": "Barcelona",
+          "team_b": "Borussia Dortmund",
+          "agg": "5-3",
+          "winner": "Barcelona"
+        },
+        {
+          "team_a": "Inter",
+          "team_b": "Bayern Munich",
+          "agg": "4-3",
+          "winner": "Inter"
+        }
+      ],
+      "semi_finals": [
+        {
+          "team_a": "Paris Saint-Germain",
+          "team_b": "Arsenal",
+          "agg": "3-1",
+          "winner": "Paris Saint-Germain"
+        },
+        {
+          "team_a": "Inter",
+          "team_b": "Barcelona",
+          "agg": "7-6",
+          "winner": "Inter"
+        }
+      ],
+      "final": {
+        "venue": "Allianz Arena, Munich",
+        "date": "2025-05-31",
+        "team_a": "Paris Saint-Germain",
+        "team_b": "Inter",
+        "score": "5-0",
+        "champion": "Paris Saint-Germain",
+        "runner_up": "Inter"
+      }
+    }
+  }
+}

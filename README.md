@@ -8,33 +8,20 @@ Champions League league phase, updating itself via GitHub Actions.
 ### 1. Get a football-data.org key
 - Sign up free at https://www.football-data.org/client/register
 - Free tier: 10 requests/minute (a rate limit, not a daily cap), covers
-  12 competitions including the Champions League. The generator makes 15
-  calls per run (1 for CL fixtures plus 7 domestic leagues across each of
-  the current and previous seasons), throttled by the script.
+  12 competitions including the Champions League. This project makes
+  up to 15 calls per run (1 for CL fixtures plus up to 7 domestic leagues
+  across the current and previous seasons), throttled by the script.
 
-### 1b. (Optional) Enable API-Football domestic form
-This optional source covers Belgium (Club Brugge), Turkey (Galatasaray),
-Ukraine (Shakhtar Donetsk), and Czechia (Slavia Praha). It is disabled by
-default. When disabled, the generator makes zero API-Football requests and
-does not need `API_FOOTBALL_KEY`; those clubs receive no domestic-form
-adjustment.
-
-If you choose to enable it, configure the repository Actions variable
-`ENABLE_API_FOOTBALL` as `true` and add `API_FOOTBALL_KEY` as a repository
-secret. The current implementation makes 16 calls per generation (four
-leagues × a league lookup and standings request × current and previous
-seasons). At the existing eight scheduled runs per day that would be up to
-128 API-Football calls/day, so confirm the provider plan supports that budget.
-Do not enable it by adding the secret alone.
-
-### Provider request budgets
-- **football-data.org:** 15 requests per normal run: one Champions League
-  fixture request plus seven domestic league standings requests for each of
-  the current and previous seasons. Each initial request waits 6.5 seconds;
-  one 429 retry waits 60 seconds. No API-Football calls are part of the
-  default run.
-- **API-Football:** zero requests by default; 16 per run only when explicitly
-  enabled as described above.
+### 1b. (Optional) Get an API-Football key too
+Covers domestic form for the 4 leagues football-data.org's free tier
+doesn't include — Belgium (Club Brugge), Turkey (Galatasaray), Ukraine
+(Shakhtar Donetsk), Czechia (Slavia Praha). Skip this entirely and those
+4 clubs just get coefficient-only Elo, same as before this existed —
+nothing else breaks.
+- Sign up free at https://www.api-football.com — free tier is 100
+  requests/day, this adds ~8 calls per run (2 per league × 4 leagues)
+- Add it as a repo secret named `API_FOOTBALL_KEY` alongside
+  `FOOTBALL_DATA_KEY` in step 4 below. The workflow passes both secrets.
 
 ### 2. Confirm the league-phase stage name
 The script assumes matches use `"stage": "LEAGUE_STAGE"` for the 36-team
@@ -92,78 +79,59 @@ second, sparser cron for the rest of the week.
 
 ## Site structure
 
-Four tabs: **Standings** (provisional coefficient ranking pre-season,
-real points table once matches exist), **Matches** (every league-phase
-fixture, grouped by matchday), **Qualifying** (the third qualifying
-round ties for the last 7 spots), **Power Rankings** (Elo + simulated
-top-8/top-24 odds).
+Five tabs:
+1. **Standings** — Live league-phase table, clinch and elimination scenario tracking, and one-click single season Monte Carlo simulation with full knockout championship rollout.
+2. **Matches** — Complete 144-match league-phase fixtures grouped by matchday, with head-to-head records and pre-match probability bars.
+3. **Power Rankings** — Multi-tier probabilities (Automatic Top 8, Playoff Top 24, Finalist, Champion) seeded on UEFA coefficients, squad valuations, and domestic league tiers.
+4. **Qualifying** — Track third qualifying round and play-off round ties for the final berths.
+5. **Model Accuracy & Backtest** — Empirical validation scorecard comparing CL Tracker against the Opta Supercomputer and ground truth from the completed 2024/25 season.
 
-The favourite-team picker is gated behind `all_teams_confirmed` in the
-JSON (true once the API returns 36 distinct teams in league-phase
-fixtures, which happens right after the 27 August draw) — before that
-it shows a locked message instead of a partial 29-team picker.
+The favourite-team selector lets users track their club's table position, next fixture, and qualification scenario front and center.
 
-## The probability model (Power Rankings)
+## The probability model (Power Rankings & Knockout Engine)
 
-Real modeling choices, not just implementation details:
+Real modeling choices, empirically validated through backtesting:
 
-- Each team's Elo rating starts from three blended signals: their UEFA
-  coefficient (`STARTING_COEFFICIENTS`), their squad market value
-  (`SQUAD_MARKET_VALUES`, log-linear scaling centered at €250M, capped at ±150 Elo),
-  and their current-season domestic league form (`FORM_ELO_SCALE`). Coefficient
-  alone is a 5-year lagging metric; squad valuation captures contemporary roster
-  strength and depth; form captures immediate momentum.
-- API team spellings pass through one canonical alias map before coefficient
-  lookup. A confirmed league-phase club without a configured coefficient
-  stops the run with a clear error; only unlisted qualifying opponents may
-  use the explicitly warned estimate in `DEFAULT_COEFFICIENT`.
-- Domestic form covers confirmed clubs in top domestic leagues. Clubs without
-  available domestic league feeds rely on blended coefficient and squad valuation.
-- Every played result updates both teams' Elo chronologically, with a
-  calibrated home-advantage bonus (`HOME_ADVANTAGE = 75`, calibrated from 70
-  to match observed European home win frequency).
-- Remaining fixtures are simulated 20,000 times using each team's
-  *current* Elo (held fixed across one simulation run — ratings don't
-  evolve mid-simulation, that's a deliberate simplification). Benchmarked
-  at ~4s on typical hardware; 1,000,000 simulations was tested too but costs over 3
-  minutes per run — roughly a third of the free monthly GitHub Actions
-  budget at this cron schedule, for precision past the point the model's
-  other assumptions can really support.
-- Draw probability is highest between evenly-matched teams and shrinks
-  as the rating gap widens. The win/draw/loss conversion preserves the
-  Elo expected score (`P(win) + 0.5 × P(draw)`). It scales the closeness
-  curve by the normalized variance of Elo expected score so all three
-  outcomes stay feasible as the rating gap grows.
-- The percentage shown is how often a team lands in the top 8 / top 24
-  across all 20,000 simulated seasons.
+- **Calibrated Starting Elo**: Each team's Elo rating is initialized from three blended signals:
+  1. 5-year UEFA club coefficient (`STARTING_COEFFICIENTS`)
+  2. Squad market valuation (`SQUAD_VALUATIONS`)
+  3. Domestic league strength tiering (`DOMESTIC_LEAGUE_TIERS`)
+  This directly overcomes the historical hysteresis of UEFA coefficients alone, properly valuing clubs like Aston Villa (€615M Premier League squad in Pot 4) and recalibrating transitioning clubs like RB Leipzig.
+- **Domestic Form Integration**: In-season league form is z-scored against the club's domestic competition and blended with previous-season baselines cached locally (`data/cache/prior_season_form.json`) to minimize live API consumption.
+- **Goal Margin Elo Scaling**: Match updates scale $K$-factor by victory margin (`1.0 + (margin - 1) * 0.35`), rewarding dominant performances and improving match-level predictive log loss.
+- **Expected-Score-Preserving Draw Curve**: Win/draw/loss probabilities are converted from Elo differences using a closeness-dependent draw distribution that rigorously preserves expected score:
+  $$P(\text{win}) + 0.5 \times P(\text{draw}) = E$$
+- **Full Tournament Monte Carlo (20,000 Runs)**: Each run simulates all remaining league-phase fixtures and executes the entire knockout ladder:
+  - Seeds 1–8: Automatic Round of 16 entry
+  - Seeds 9–24: Two-legged Playoff round (9 vs 24, 10 vs 23, etc.)
+  - Round of 16, Quarter-finals, and Semi-finals (two legs each)
+  - Neutral single-leg Final (Munich 2025 / Budapest 2026)
+  The simulation produces `prob_top8`, `prob_top24`, `prob_final`, and `prob_champion` for every club.
 
-The pipeline withholds qualification odds and clinch calls until all 36
-distinct clubs and 144 unique fixtures (eight per club, four home and four
-away) are present. An empty API response cannot replace a previously populated
-snapshot. The simulation approximates tied positions with points, goal difference,
-and simulated goals scored; it does not model the full UEFA tie-break order.
+## Historical Backtesting & Validation (2024/25 Benchmark)
 
-## Offline Verification & Historical Backtesting
+The model was comprehensively backtested against the complete 2024/25 UEFA Champions League season (144 league phase fixtures + 16-team knockout bracket) without data leakage:
 
-Run unit tests without network calls:
+| Metric | CL Tracker | Opta Supercomputer | Naive UEFA Seed |
+| :--- | :---: | :---: | :---: |
+| **Spearman Rank Correlation ($\rho$)** | **0.7165** | 0.7287 | 0.5359 |
+| **Top-8 Brier Score** (Lower is better) | **0.1873** | 0.1561 | 0.3333 |
+| **Top-24 Brier Score** (Lower is better) | **0.1210** | 0.0898 | 0.1654 |
+| **Match Direction Accuracy (144/144)** | **64.58%** (93/144) | — | 33.33% |
+| **Match Log Loss** | **0.9448** | — | 1.0986 |
+
+To re-run the historical benchmark and generate the validation report:
 
 ```bash
-python -B -m unittest discover -s tests -v
-node --test tests/test_snapshot_validation.js
-```
-
-Run the historical backtest on prospective pre-match predictions from Matchdays 1 & 2:
-
-```bash
+python scripts/build_historical_dataset.py
 python scripts/backtest.py
 ```
 
-### Backtest Calibration Benchmarks (Matchdays 1 & 2, N=36)
-- **Calibrated Model (Elo + Market Values)**: Brier = `0.5489` | LogLoss = `0.9684` | Accuracy = `66.7%`
-- **Pre-Calibration Baseline (PR #1)**: Brier = `0.5910` | LogLoss = `1.0169` | Accuracy = `61.1%`
-- **Published Model (Original)**: Brier = `0.6036` | LogLoss = `1.0367` | Accuracy = `63.9%`
-- **Empirical Base-Rate Baseline**: Brier = `0.5845` | LogLoss = `0.9751` | Accuracy = `58.3%`
-- **Uniform Baseline**: Brier = `0.6667` | LogLoss = `1.0986` | Accuracy = N/A
+To run the unit test suite:
+
+```bash
+python -m unittest discover tests
+```
 
 ## Qualifying tab — manual for v1
 

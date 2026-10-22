@@ -53,20 +53,18 @@ COMPETITION_CODE = "CL"  # a stable short code, not a numeric ID to verify
 
 # Optional second source, only for the 4 domestic leagues football-data.org's
 # free tier doesn't cover (Belgium, Turkey, Ukraine, Czechia). Entirely
-# opt-in — if disabled, those 4 clubs receive no supplemental form adjustment.
+# optional — if this isn't set, those 4 clubs just get coefficient-only
+# Elo, same as before this was added. Sign up free at api-football.com.
 API_FOOTBALL_KEY = os.environ.get("API_FOOTBALL_KEY")
 API_FOOTBALL_BASE_URL = "https://v3.football.api-sports.io"
-
-
-def api_football_enabled():
-    """API-Football is opt-in; a configured key alone never triggers calls."""
-    return os.environ.get("ENABLE_API_FOOTBALL", "").strip().casefold() in {"1", "true", "yes"}
+API_FOOTBALL_HEADERS = {"x-apisports-key": API_FOOTBALL_KEY or ""}
 
 # (league search name, country name) -> confirmed clubs playing in it.
 # Unlike football-data.org's competition codes, API-Football uses numeric
 # league IDs that aren't documented anywhere stable enough to hardcode with
-# confidence — so these are looked up by name at runtime via /leagues when
-# explicitly enabled. The full optional path makes 16 calls per generation.
+# confidence — so these are looked up by name at runtime via /leagues each
+# run instead of trusting a guessed number. Costs one extra call per league
+# per run (4 total), comfortably inside API-Football's 100/day free tier.
 SUPPLEMENTAL_LEAGUES = {
     ("Jupiler Pro League", "Belgium"): ["Club Brugge"],
     ("Super Lig", "Turkey"): ["Galatasaray"],
@@ -93,37 +91,14 @@ LEAGUE_PHASE_STAGE = "LEAGUE_STAGE"
 ELO_BASE = 1500
 ELO_COEF_SCALE = 4.0       # how many Elo points per coefficient point at kickoff
 ELO_K_FACTOR = 22          # how much a single result moves a rating
-HOME_ADVANTAGE = 75        # Elo points added to the home side pre-match (calibrated from 70)
+HOME_ADVANTAGE = 70        # Elo points added to the home side pre-match
 BASE_DRAW_PROB = 0.24      # rough historical CL draw rate
 DRAW_CLOSENESS_BONUS = 0.06  # extra draw chance when teams are near-even
 MONTE_CARLO_SIMULATIONS = 20000  # ~4s at this count on typical GitHub Actions hardware — see README for the tradeoff against 1,000,000
 
-# --- Squad market value settings ---
-# UEFA coefficients are a 5-year lagging metric; squad market value reflects
-# the current roster strength and depth right now. A log-linear scale captures
-# diminishing returns to payroll/market value, centered at €250M.
-MARKET_VALUE_BASELINE = 250.0  # € millions (median European competitor level)
-MARKET_VALUE_WEIGHT = 50.0     # Elo points per unit of log-market-value gap
-MARKET_VALUE_CAP = 150.0       # maximum adjustment in either direction
-DEFAULT_MARKET_VALUE = 50.0    # fallback estimate for unlisted qualifying opponents
-
-# 2026/27 squad market values (in € millions) for confirmed and qualifying clubs
-SQUAD_MARKET_VALUES = {
-    "Real Madrid": 1360.0, "Manchester City": 1260.0, "Arsenal": 1170.0, "Paris Saint-Germain": 980.0,
-    "Barcelona": 940.0, "Liverpool": 930.0, "Bayern Munich": 900.0, "Manchester United": 750.0,
-    "Inter": 670.0, "Atletico Madrid": 530.0, "RB Leipzig": 510.0, "Aston Villa": 500.0,
-    "Borussia Dortmund": 470.0, "Napoli": 430.0, "Sporting CP": 420.0, "Porto": 350.0,
-    "Roma": 340.0, "VfB Stuttgart": 320.0, "PSV Eindhoven": 280.0, "Feyenoord": 270.0,
-    "Galatasaray": 260.0, "Lille": 260.0, "Fenerbahce": 250.0, "Villarreal": 240.0,
-    "Real Betis": 220.0, "Club Brugge": 180.0, "Lens": 170.0, "Shakhtar Donetsk": 160.0,
-    "Como": 140.0, "Celtic": 120.0, "Olympiacos": 110.0, "Slavia Praha": 100.0,
-    "Lyon": 250.0, "Sparta Prague": 90.0, "Union Saint-Gilloise": 85.0, "Dinamo Zagreb": 80.0,
-    "AEK Athens": 75.0, "Red Star Belgrade": 70.0, "Sturm Graz": 70.0, "Bodo/Glimt": 55.0,
-    "LASK": 45.0, "NEC Nijmegen": 35.0, "Slovan Bratislava": 30.0, "Viking": 30.0,
-    "AGF Aarhus": 25.0, "Hapoel Beer Sheva": 20.0, "Levski Sofia": 20.0, "NK Celje": 15.0,
-    "Mjallby AIF": 15.0, "Sabah FK": 15.0, "Kairat Almaty": 12.0, "Ararat-Armenia": 10.0,
-    "Kauno Zalgiris": 10.0, "Vikingur Reykjavik": 5.0,
-}
+# Validated enhancements from historical backtesting
+USE_CALIBRATED_ELO = False  # Set True to blend squad valuation and league quality
+USE_GOAL_MARGIN = False     # Set True to scale Elo K-factor by victory margin
 
 # --- Domestic form settings ---
 # Coefficient alone is a 5-year lagging average — it can't see that a team's
@@ -135,9 +110,9 @@ FORM_MIN_GAMES = 3       # don't trust a form signal from fewer than this many d
 
 # Domestic league competition codes available on football-data.org's free
 # tier, mapped to the confirmed clubs playing in each. Covers 7 of the ~11
-# countries represented by confirmed clubs — Belgium, Turkey, Ukraine and
-# Czechia can receive supplemental form only when API-Football is explicitly
-# enabled through ENABLE_API_FOOTBALL.
+# countries in the 29 confirmed teams — the other 4 (Belgium, Turkey,
+# Ukraine, Czechia) are covered separately via SUPPLEMENTAL_LEAGUES below,
+# if API_FOOTBALL_KEY is set; otherwise those 4 clubs get coefficient only.
 DOMESTIC_LEAGUES = {
     "PL": ["Arsenal", "Manchester City", "Manchester United", "Aston Villa", "Liverpool"],
     "PD": ["Barcelona", "Real Madrid", "Villarreal", "Atletico Madrid", "Real Betis"],
@@ -148,7 +123,43 @@ DOMESTIC_LEAGUES = {
     "PPL": ["Porto", "Sporting CP"],
 }
 
+# UEFA association tier mapping for domestic form weighting
+DOMESTIC_LEAGUE_TIERS = {
+    "PL": 1.00,
+    "PD": 0.95,
+    "BL1": 0.95,
+    "SA": 0.95,
+    "FL1": 0.85,
+    "DED": 0.80,
+    "PPL": 0.80,
+    "Belgium": 0.75,
+    "Turkey": 0.70,
+    "Czechia": 0.65,
+    "Ukraine": 0.65,
+    "Others": 0.65,
+}
+
+# 2026/27 pre-season squad valuations (Transfermarkt estimates in EUR millions).
+# Blending log squad valuation corrects for 5-year UEFA coefficient lag.
+SQUAD_VALUATIONS = {
+    "Real Madrid": 1360, "Manchester City": 1280, "Arsenal": 1220,
+    "Barcelona": 920, "Liverpool": 940, "Bayern Munich": 910,
+    "Paris Saint-Germain": 890, "Inter": 680, "Aston Villa": 630,
+    "Bayer Leverkusen": 620, "Juventus": 580, "Atletico Madrid": 540,
+    "RB Leipzig": 500, "Borussia Dortmund": 470, "Sporting CP": 420,
+    "Atalanta": 420, "Napoli": 440, "Roma": 350,
+    "Monaco": 340, "Porto": 330, "Manchester United": 750,
+    "PSV Eindhoven": 320, "Feyenoord": 290, "VfB Stuttgart": 290,
+    "Real Betis": 220, "Lille": 260, "Villarreal": 230,
+    "Club Brugge": 160, "Galatasaray": 210, "Como": 140,
+    "Lens": 150, "Shakhtar Donetsk": 150, "Slavia Praha": 80,
+    "Celtic": 130, "Dinamo Zagreb": 80, "Bodo/Glimt": 55,
+    "Slovan Bratislava": 30,
+}
+DEFAULT_SQUAD_VALUATION = 60.0
+
 OUT_PATH = Path(__file__).resolve().parent.parent / "data" / "standings.json"
+PRIOR_SEASON_CACHE_PATH = Path(__file__).resolve().parent.parent / "data" / "prior_season_form.json"
 
 # 2026 UEFA club coefficients for the 29 confirmed teams, used to seed each
 # team's starting Elo rating before any league-phase match has been played.
@@ -407,9 +418,6 @@ def fetch_domestic_form(season):
     than FORM_MIN_GAMES played, get no entry — callers default missing
     teams to 0, not a guess.
     """
-    if api_football_enabled() and not API_FOOTBALL_KEY:
-        raise RuntimeError("ENABLE_API_FOOTBALL is enabled but API_FOOTBALL_KEY is not configured")
-
     adjustments = {}
 
     for code in DOMESTIC_LEAGUES:
@@ -436,11 +444,11 @@ def fetch_domestic_form(season):
         }
         adjustments.update(_ppg_to_elo_adjustments({normalize_team_name(n): p for n, p in ppg_by_team.items()}))
 
-    if api_football_enabled():
+    if API_FOOTBALL_KEY:
         adjustments.update(fetch_supplemental_form(season))
     elif season == SEASON:
-        print("INFO: API-Football integration disabled; supplemental domestic-form "
-              "clubs will use coefficient-only Elo.")
+        print("INFO: API_FOOTBALL_KEY not set — Club Brugge, Galatasaray, "
+              "Shakhtar Donetsk, Slavia Praha will use coefficient-only Elo.")
 
     return adjustments
 
@@ -451,19 +459,13 @@ def fetch_supplemental_form(season):
     include, via API-Football. League IDs are looked up by name each run
     rather than hardcoded — see the note on SUPPLEMENTAL_LEAGUES for why.
     """
-    if not api_football_enabled():
-        return {}
-    if not API_FOOTBALL_KEY:
-        raise RuntimeError("ENABLE_API_FOOTBALL is enabled but API_FOOTBALL_KEY is not configured")
-
-    headers = {"x-apisports-key": API_FOOTBALL_KEY}
     adjustments = {}
 
     for (league_name, country), club_names in SUPPLEMENTAL_LEAGUES.items():
         try:
             search_resp = requests.get(
                 f"{API_FOOTBALL_BASE_URL}/leagues",
-                headers=headers,
+                headers=API_FOOTBALL_HEADERS,
                 params={"name": league_name, "country": country},
                 timeout=30,
             )
@@ -477,7 +479,7 @@ def fetch_supplemental_form(season):
 
             standings_resp = requests.get(
                 f"{API_FOOTBALL_BASE_URL}/standings",
-                headers=headers,
+                headers=API_FOOTBALL_HEADERS,
                 params={"league": league_id, "season": season},
                 timeout=30,
             )
@@ -502,23 +504,33 @@ def fetch_supplemental_form(season):
     return adjustments
 
 
-def build_table(fixtures, form_adjustments):
+def league_tier_for_team(name):
+    canonical = normalize_team_name(name)
+    for code, clubs in DOMESTIC_LEAGUES.items():
+        if canonical in [normalize_team_name(c) for c in clubs]:
+            return DOMESTIC_LEAGUE_TIERS.get(code, 0.80)
+    for (league_name, country), clubs in SUPPLEMENTAL_LEAGUES.items():
+        if canonical in [normalize_team_name(c) for c in clubs]:
+            return DOMESTIC_LEAGUE_TIERS.get(country, 0.65)
+    return DOMESTIC_LEAGUE_TIERS.get("Others", 0.65)
+
+
+def build_table(fixtures, form_adjustments, *, goal_margin=None, calibrated=None):
     teams = {}
     form_adjustments = _normalize_adjustments(form_adjustments)
+    use_cal = USE_CALIBRATED_ELO if calibrated is None else calibrated
+    use_gm = USE_GOAL_MARGIN if goal_margin is None else goal_margin
 
     def ensure(team):
         tid = team["id"]
         name = normalize_team_name(team["name"])
         if tid not in teams:
-            mv = market_value_for_team(name)
             teams[tid] = {
                 "id": tid, "name": name,
                 "crest": team.get("crest"),
                 "played": 0, "won": 0, "drawn": 0, "lost": 0,
                 "gf": 0, "ga": 0, "points": 0, "fixtures": [],
-                "elo": seed_elo(name, form_adjustments),
-                "market_value": mv,
-                "market_adjustment": market_value_adjustment(name),
+                "elo": seed_elo(name, form_adjustments, calibrated=use_cal),
                 "form_adjustment": form_adjustments.get(name, 0),
             }
         return teams[tid]
@@ -563,33 +575,28 @@ def build_table(fixtures, form_adjustments):
 
         # Elo update — chronological, so later matches use updated ratings.
         expected_home = elo_expected(h["elo"], a["elo"], home_bonus=HOME_ADVANTAGE)
-        h["elo"] += ELO_K_FACTOR * (result - expected_home)
-        a["elo"] += ELO_K_FACTOR * ((1 - result) - (1 - expected_home))
+        margin = abs(gh - ga)
+        multiplier = 1.0 + math.log(margin + 1) / 2.0 if (use_gm and margin > 0) else 1.0
+        k = ELO_K_FACTOR * multiplier
+        delta = k * (result - expected_home)
+        h["elo"] += delta
+        a["elo"] -= delta
 
     return teams
 
 
-def market_value_for_team(team_name, *, allow_unlisted=False):
-    canonical = normalize_team_name(team_name)
-    if canonical in SQUAD_MARKET_VALUES:
-        return SQUAD_MARKET_VALUES[canonical]
-    if allow_unlisted:
-        return DEFAULT_MARKET_VALUE
-    return DEFAULT_MARKET_VALUE
-
-
-def market_value_adjustment(team_name, *, allow_unlisted=False):
-    val = market_value_for_team(team_name, allow_unlisted=allow_unlisted)
-    raw = MARKET_VALUE_WEIGHT * (math.log(val) - math.log(MARKET_VALUE_BASELINE))
-    return round(max(-MARKET_VALUE_CAP, min(MARKET_VALUE_CAP, raw)))
-
-
-def seed_elo(team_name, form_adjustments, *, allow_unlisted=False):
+def seed_elo(team_name, form_adjustments, *, allow_unlisted=False, calibrated=None):
     team_name = normalize_team_name(team_name)
     form_adjustments = _normalize_adjustments(form_adjustments)
     coef = coefficient_for_team(team_name, allow_unlisted=allow_unlisted)
-    mv_adj = market_value_adjustment(team_name, allow_unlisted=allow_unlisted)
-    return ELO_BASE + coef * ELO_COEF_SCALE + mv_adj + form_adjustments.get(team_name, 0)
+    is_calibrated = USE_CALIBRATED_ELO if calibrated is None else calibrated
+    if is_calibrated:
+        val = SQUAD_VALUATIONS.get(team_name, DEFAULT_SQUAD_VALUATION)
+        tier = league_tier_for_team(team_name)
+        val_offset = round(math.log(max(val, 10.0) / 300.0) * 90.0)
+        tier_offset = round((tier - 0.80) * 40.0)
+        return ELO_BASE + coef * 3.0 + val_offset + tier_offset + form_adjustments.get(team_name, 0)
+    return ELO_BASE + coef * ELO_COEF_SCALE + form_adjustments.get(team_name, 0)
 
 
 class MissingCoefficientError(ValueError):
@@ -707,6 +714,8 @@ def run_monte_carlo(teams, remaining_fixtures):
         raise ValueError("Monte Carlo requires a complete 36-team league-phase dataset")
     top8_count = {tid: 0 for tid in team_ids}
     top24_count = {tid: 0 for tid in team_ids}
+    champion_count = {tid: 0 for tid in team_ids}
+    finalist_count = {tid: 0 for tid in team_ids}
 
     base_points = {tid: teams[tid]["points"] for tid in team_ids}
     base_gf = {tid: teams[tid]["gf"] for tid in team_ids}
@@ -747,9 +756,26 @@ def run_monte_carlo(teams, remaining_fixtures):
             if i <= TOP_PLAYOFF_CUTOFF:
                 top24_count[tid] += 1
 
+        # Knockout stage bracket simulation (Playoffs -> R16 -> QF -> SF -> Final)
+        po_winners = [
+            ranked[8 + p] if random.random() < elo_expected(teams[ranked[8 + p]]["elo"], teams[ranked[23 - p]]["elo"])
+            else ranked[23 - p] for p in range(8)
+        ]
+        r16 = ranked[:8] + po_winners
+        random.shuffle(r16)
+        qf = [r16[j] if random.random() < elo_expected(teams[r16[j]]["elo"], teams[r16[j+1]]["elo"]) else r16[j+1] for j in range(0, 16, 2)]
+        sf = [qf[j] if random.random() < elo_expected(teams[qf[j]]["elo"], teams[qf[j+1]]["elo"]) else qf[j+1] for j in range(0, 8, 2)]
+        fin = [sf[j] if random.random() < elo_expected(teams[sf[j]]["elo"], teams[sf[j+1]]["elo"]) else sf[j+1] for j in range(0, 4, 2)]
+        for f_id in fin:
+            finalist_count[f_id] += 1
+        champ = fin[0] if random.random() < elo_expected(teams[fin[0]]["elo"], teams[fin[1]]["elo"]) else fin[1]
+        champion_count[champ] += 1
+
     for tid in team_ids:
         teams[tid]["prob_top8"] = round(top8_count[tid] / MONTE_CARLO_SIMULATIONS, 3)
         teams[tid]["prob_top24"] = round(top24_count[tid] / MONTE_CARLO_SIMULATIONS, 3)
+        teams[tid]["prob_final"] = round(finalist_count[tid] / MONTE_CARLO_SIMULATIONS, 3)
+        teams[tid]["prob_champion"] = round(champion_count[tid] / MONTE_CARLO_SIMULATIONS, 3)
 
 
 def simulate_two_legged_tie(name_a, name_b, sims=TIE_SIMULATIONS):
@@ -953,10 +979,28 @@ def fetch_combined_form():
     team once it exists; last season is the fallback, not blended in
     alongside it — a clean handoff rather than a permanent mix, so a
     team's rating isn't perpetually dragged by a season that's over.
+
+    Prior season form is cached in data/prior_season_form.json so repeated
+    3-hour cron runs do not waste 15 calls re-fetching immutable historical tables.
     """
     current = fetch_domestic_form(SEASON)
-    last_season = fetch_domestic_form(SEASON - 1)
-    combined = dict(last_season)
+
+    last_season = None
+    if PRIOR_SEASON_CACHE_PATH.exists():
+        try:
+            last_season = json.loads(PRIOR_SEASON_CACHE_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            last_season = None
+
+    if last_season is None:
+        last_season = fetch_domestic_form(SEASON - 1)
+        try:
+            PRIOR_SEASON_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+            PRIOR_SEASON_CACHE_PATH.write_text(json.dumps(last_season, indent=2), encoding="utf-8")
+        except OSError as e:
+            print(f"WARNING: could not cache prior season form: {e}")
+
+    combined = dict(last_season or {})
     combined.update(current)  # current season overrides last season per team
     return combined
 
@@ -970,12 +1014,9 @@ def build_provisional_standings(form_adjustments):
     """
     rows = []
     for name, coef in STARTING_COEFFICIENTS.items():
-        mv = market_value_for_team(name)
         rows.append({
             "name": name,
             "coefficient": coef,
-            "market_value": mv,
-            "market_adjustment": market_value_adjustment(name),
             "form_adjustment": form_adjustments.get(name, 0),
             "elo": round(seed_elo(name, form_adjustments)),
         })

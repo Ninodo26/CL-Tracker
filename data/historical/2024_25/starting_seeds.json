@@ -1,0 +1,218 @@
+[
+  {
+    "name": "Manchester City",
+    "coefficient": 148.0,
+    "baseline_elo": 2092.0,
+    "seed_rank": 1
+  },
+  {
+    "name": "Bayern Munich",
+    "coefficient": 144.0,
+    "baseline_elo": 2076.0,
+    "seed_rank": 2
+  },
+  {
+    "name": "Real Madrid",
+    "coefficient": 136.0,
+    "baseline_elo": 2044.0,
+    "seed_rank": 3
+  },
+  {
+    "name": "Paris Saint-Germain",
+    "coefficient": 116.0,
+    "baseline_elo": 1964.0,
+    "seed_rank": 4
+  },
+  {
+    "name": "Liverpool",
+    "coefficient": 114.0,
+    "baseline_elo": 1956.0,
+    "seed_rank": 5
+  },
+  {
+    "name": "Inter",
+    "coefficient": 101.0,
+    "baseline_elo": 1904.0,
+    "seed_rank": 6
+  },
+  {
+    "name": "Borussia Dortmund",
+    "coefficient": 97.0,
+    "baseline_elo": 1888.0,
+    "seed_rank": 7
+  },
+  {
+    "name": "RB Leipzig",
+    "coefficient": 97.0,
+    "baseline_elo": 1888.0,
+    "seed_rank": 8
+  },
+  {
+    "name": "Barcelona",
+    "coefficient": 91.0,
+    "baseline_elo": 1864.0,
+    "seed_rank": 9
+  },
+  {
+    "name": "Bayer Leverkusen",
+    "coefficient": 90.0,
+    "baseline_elo": 1860.0,
+    "seed_rank": 10
+  },
+  {
+    "name": "Atletico Madrid",
+    "coefficient": 89.0,
+    "baseline_elo": 1856.0,
+    "seed_rank": 11
+  },
+  {
+    "name": "Atalanta",
+    "coefficient": 81.0,
+    "baseline_elo": 1824.0,
+    "seed_rank": 12
+  },
+  {
+    "name": "Juventus",
+    "coefficient": 80.0,
+    "baseline_elo": 1820.0,
+    "seed_rank": 13
+  },
+  {
+    "name": "Benfica",
+    "coefficient": 79.0,
+    "baseline_elo": 1816.0,
+    "seed_rank": 14
+  },
+  {
+    "name": "Arsenal",
+    "coefficient": 72.0,
+    "baseline_elo": 1788.0,
+    "seed_rank": 15
+  },
+  {
+    "name": "Club Brugge",
+    "coefficient": 64.0,
+    "baseline_elo": 1756.0,
+    "seed_rank": 16
+  },
+  {
+    "name": "Shakhtar Donetsk",
+    "coefficient": 63.0,
+    "baseline_elo": 1752.0,
+    "seed_rank": 17
+  },
+  {
+    "name": "Milan",
+    "coefficient": 59.0,
+    "baseline_elo": 1736.0,
+    "seed_rank": 18
+  },
+  {
+    "name": "Feyenoord",
+    "coefficient": 57.0,
+    "baseline_elo": 1728.0,
+    "seed_rank": 19
+  },
+  {
+    "name": "Sporting CP",
+    "coefficient": 54.5,
+    "baseline_elo": 1718.0,
+    "seed_rank": 20
+  },
+  {
+    "name": "PSV Eindhoven",
+    "coefficient": 54.0,
+    "baseline_elo": 1716.0,
+    "seed_rank": 21
+  },
+  {
+    "name": "Dinamo Zagreb",
+    "coefficient": 50.0,
+    "baseline_elo": 1700.0,
+    "seed_rank": 22
+  },
+  {
+    "name": "Red Bull Salzburg",
+    "coefficient": 50.0,
+    "baseline_elo": 1700.0,
+    "seed_rank": 23
+  },
+  {
+    "name": "Lille",
+    "coefficient": 47.0,
+    "baseline_elo": 1688.0,
+    "seed_rank": 24
+  },
+  {
+    "name": "Red Star Belgrade",
+    "coefficient": 40.0,
+    "baseline_elo": 1660.0,
+    "seed_rank": 25
+  },
+  {
+    "name": "Young Boys",
+    "coefficient": 34.5,
+    "baseline_elo": 1638.0,
+    "seed_rank": 26
+  },
+  {
+    "name": "Celtic",
+    "coefficient": 32.0,
+    "baseline_elo": 1628.0,
+    "seed_rank": 27
+  },
+  {
+    "name": "Slovan Bratislava",
+    "coefficient": 30.5,
+    "baseline_elo": 1622.0,
+    "seed_rank": 28
+  },
+  {
+    "name": "Monaco",
+    "coefficient": 24.0,
+    "baseline_elo": 1596.0,
+    "seed_rank": 29
+  },
+  {
+    "name": "Sparta Prague",
+    "coefficient": 22.5,
+    "baseline_elo": 1590.0,
+    "seed_rank": 30
+  },
+  {
+    "name": "Aston Villa",
+    "coefficient": 20.86,
+    "baseline_elo": 1583.4,
+    "seed_rank": 31
+  },
+  {
+    "name": "Bologna",
+    "coefficient": 18.056,
+    "baseline_elo": 1572.2,
+    "seed_rank": 32
+  },
+  {
+    "name": "Girona",
+    "coefficient": 17.897,
+    "baseline_elo": 1571.6,
+    "seed_rank": 33
+  },
+  {
+    "name": "VfB Stuttgart",
+    "coefficient": 17.324,
+    "baseline_elo": 1569.3,
+    "seed_rank": 34
+  },
+  {
+    "name": "Sturm Graz",
+    "coefficient": 14.5,
+    "baseline_elo": 1558.0,
+    "seed_rank": 35
+  },
+  {
+    "name": "Brest",
+    "coefficient": 13.358,
+    "baseline_elo": 1553.4,
+    "seed_rank": 36
+  }
+]

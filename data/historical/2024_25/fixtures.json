@@ -1,0 +1,1442 @@
+[
+  {
+    "match_id": 1,
+    "matchday": 1,
+    "date": "2024-09-17",
+    "home": "Young Boys",
+    "away": "Aston Villa",
+    "home_score": 0,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 2,
+    "matchday": 1,
+    "date": "2024-09-17",
+    "home": "Juventus",
+    "away": "PSV Eindhoven",
+    "home_score": 3,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 3,
+    "matchday": 1,
+    "date": "2024-09-17",
+    "home": "Milan",
+    "away": "Liverpool",
+    "home_score": 1,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 4,
+    "matchday": 1,
+    "date": "2024-09-17",
+    "home": "Bayern Munich",
+    "away": "Dinamo Zagreb",
+    "home_score": 9,
+    "away_score": 2,
+    "result": "H"
+  },
+  {
+    "match_id": 5,
+    "matchday": 1,
+    "date": "2024-09-17",
+    "home": "Real Madrid",
+    "away": "VfB Stuttgart",
+    "home_score": 3,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 6,
+    "matchday": 1,
+    "date": "2024-09-17",
+    "home": "Sporting CP",
+    "away": "Lille",
+    "home_score": 2,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 7,
+    "matchday": 1,
+    "date": "2024-09-18",
+    "home": "Sparta Prague",
+    "away": "Red Bull Salzburg",
+    "home_score": 3,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 8,
+    "matchday": 1,
+    "date": "2024-09-18",
+    "home": "Bologna",
+    "away": "Shakhtar Donetsk",
+    "home_score": 0,
+    "away_score": 0,
+    "result": "D"
+  },
+  {
+    "match_id": 9,
+    "matchday": 1,
+    "date": "2024-09-18",
+    "home": "Celtic",
+    "away": "Slovan Bratislava",
+    "home_score": 5,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 10,
+    "matchday": 1,
+    "date": "2024-09-18",
+    "home": "Club Brugge",
+    "away": "Borussia Dortmund",
+    "home_score": 0,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 11,
+    "matchday": 1,
+    "date": "2024-09-18",
+    "home": "Manchester City",
+    "away": "Inter",
+    "home_score": 0,
+    "away_score": 0,
+    "result": "D"
+  },
+  {
+    "match_id": 12,
+    "matchday": 1,
+    "date": "2024-09-18",
+    "home": "Paris Saint-Germain",
+    "away": "Girona",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 13,
+    "matchday": 1,
+    "date": "2024-09-19",
+    "home": "Feyenoord",
+    "away": "Bayer Leverkusen",
+    "home_score": 0,
+    "away_score": 4,
+    "result": "A"
+  },
+  {
+    "match_id": 14,
+    "matchday": 1,
+    "date": "2024-09-19",
+    "home": "Red Star Belgrade",
+    "away": "Benfica",
+    "home_score": 1,
+    "away_score": 2,
+    "result": "A"
+  },
+  {
+    "match_id": 15,
+    "matchday": 1,
+    "date": "2024-09-19",
+    "home": "Monaco",
+    "away": "Barcelona",
+    "home_score": 2,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 16,
+    "matchday": 1,
+    "date": "2024-09-19",
+    "home": "Atalanta",
+    "away": "Arsenal",
+    "home_score": 0,
+    "away_score": 0,
+    "result": "D"
+  },
+  {
+    "match_id": 17,
+    "matchday": 1,
+    "date": "2024-09-19",
+    "home": "Atletico Madrid",
+    "away": "RB Leipzig",
+    "home_score": 2,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 18,
+    "matchday": 1,
+    "date": "2024-09-19",
+    "home": "Brest",
+    "away": "Sturm Graz",
+    "home_score": 2,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 19,
+    "matchday": 2,
+    "date": "2024-10-01",
+    "home": "Red Bull Salzburg",
+    "away": "Brest",
+    "home_score": 0,
+    "away_score": 4,
+    "result": "A"
+  },
+  {
+    "match_id": 20,
+    "matchday": 2,
+    "date": "2024-10-01",
+    "home": "VfB Stuttgart",
+    "away": "Sparta Prague",
+    "home_score": 1,
+    "away_score": 1,
+    "result": "D"
+  },
+  {
+    "match_id": 21,
+    "matchday": 2,
+    "date": "2024-10-01",
+    "home": "Arsenal",
+    "away": "Paris Saint-Germain",
+    "home_score": 2,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 22,
+    "matchday": 2,
+    "date": "2024-10-01",
+    "home": "Bayer Leverkusen",
+    "away": "Milan",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 23,
+    "matchday": 2,
+    "date": "2024-10-01",
+    "home": "Borussia Dortmund",
+    "away": "Celtic",
+    "home_score": 7,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 24,
+    "matchday": 2,
+    "date": "2024-10-01",
+    "home": "Barcelona",
+    "away": "Young Boys",
+    "home_score": 5,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 25,
+    "matchday": 2,
+    "date": "2024-10-01",
+    "home": "Inter",
+    "away": "Red Star Belgrade",
+    "home_score": 4,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 26,
+    "matchday": 2,
+    "date": "2024-10-01",
+    "home": "PSV Eindhoven",
+    "away": "Sporting CP",
+    "home_score": 1,
+    "away_score": 1,
+    "result": "D"
+  },
+  {
+    "match_id": 27,
+    "matchday": 2,
+    "date": "2024-10-01",
+    "home": "Slovan Bratislava",
+    "away": "Manchester City",
+    "home_score": 0,
+    "away_score": 4,
+    "result": "A"
+  },
+  {
+    "match_id": 28,
+    "matchday": 2,
+    "date": "2024-10-02",
+    "home": "Shakhtar Donetsk",
+    "away": "Atalanta",
+    "home_score": 0,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 29,
+    "matchday": 2,
+    "date": "2024-10-02",
+    "home": "Girona",
+    "away": "Feyenoord",
+    "home_score": 2,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 30,
+    "matchday": 2,
+    "date": "2024-10-02",
+    "home": "Aston Villa",
+    "away": "Bayern Munich",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 31,
+    "matchday": 2,
+    "date": "2024-10-02",
+    "home": "Dinamo Zagreb",
+    "away": "Monaco",
+    "home_score": 2,
+    "away_score": 2,
+    "result": "D"
+  },
+  {
+    "match_id": 32,
+    "matchday": 2,
+    "date": "2024-10-02",
+    "home": "Liverpool",
+    "away": "Bologna",
+    "home_score": 2,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 33,
+    "matchday": 2,
+    "date": "2024-10-02",
+    "home": "Lille",
+    "away": "Real Madrid",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 34,
+    "matchday": 2,
+    "date": "2024-10-02",
+    "home": "RB Leipzig",
+    "away": "Juventus",
+    "home_score": 2,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 35,
+    "matchday": 2,
+    "date": "2024-10-02",
+    "home": "Sturm Graz",
+    "away": "Club Brugge",
+    "home_score": 0,
+    "away_score": 1,
+    "result": "A"
+  },
+  {
+    "match_id": 36,
+    "matchday": 2,
+    "date": "2024-10-02",
+    "home": "Benfica",
+    "away": "Atletico Madrid",
+    "home_score": 4,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 37,
+    "matchday": 3,
+    "date": "2024-10-22",
+    "home": "Milan",
+    "away": "Club Brugge",
+    "home_score": 3,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 38,
+    "matchday": 3,
+    "date": "2024-10-22",
+    "home": "Monaco",
+    "away": "Red Star Belgrade",
+    "home_score": 5,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 39,
+    "matchday": 3,
+    "date": "2024-10-22",
+    "home": "Arsenal",
+    "away": "Shakhtar Donetsk",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 40,
+    "matchday": 3,
+    "date": "2024-10-22",
+    "home": "Aston Villa",
+    "away": "Bologna",
+    "home_score": 2,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 41,
+    "matchday": 3,
+    "date": "2024-10-22",
+    "home": "Girona",
+    "away": "Slovan Bratislava",
+    "home_score": 2,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 42,
+    "matchday": 3,
+    "date": "2024-10-22",
+    "home": "Juventus",
+    "away": "VfB Stuttgart",
+    "home_score": 0,
+    "away_score": 1,
+    "result": "A"
+  },
+  {
+    "match_id": 43,
+    "matchday": 3,
+    "date": "2024-10-22",
+    "home": "Paris Saint-Germain",
+    "away": "PSV Eindhoven",
+    "home_score": 1,
+    "away_score": 1,
+    "result": "D"
+  },
+  {
+    "match_id": 44,
+    "matchday": 3,
+    "date": "2024-10-22",
+    "home": "Real Madrid",
+    "away": "Borussia Dortmund",
+    "home_score": 5,
+    "away_score": 2,
+    "result": "H"
+  },
+  {
+    "match_id": 45,
+    "matchday": 3,
+    "date": "2024-10-22",
+    "home": "Sturm Graz",
+    "away": "Sporting CP",
+    "home_score": 0,
+    "away_score": 2,
+    "result": "A"
+  },
+  {
+    "match_id": 46,
+    "matchday": 3,
+    "date": "2024-10-23",
+    "home": "Atalanta",
+    "away": "Celtic",
+    "home_score": 0,
+    "away_score": 0,
+    "result": "D"
+  },
+  {
+    "match_id": 47,
+    "matchday": 3,
+    "date": "2024-10-23",
+    "home": "Brest",
+    "away": "Bayer Leverkusen",
+    "home_score": 1,
+    "away_score": 1,
+    "result": "D"
+  },
+  {
+    "match_id": 48,
+    "matchday": 3,
+    "date": "2024-10-23",
+    "home": "Atletico Madrid",
+    "away": "Lille",
+    "home_score": 1,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 49,
+    "matchday": 3,
+    "date": "2024-10-23",
+    "home": "Young Boys",
+    "away": "Inter",
+    "home_score": 0,
+    "away_score": 1,
+    "result": "A"
+  },
+  {
+    "match_id": 50,
+    "matchday": 3,
+    "date": "2024-10-23",
+    "home": "Barcelona",
+    "away": "Bayern Munich",
+    "home_score": 4,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 51,
+    "matchday": 3,
+    "date": "2024-10-23",
+    "home": "Red Bull Salzburg",
+    "away": "Dinamo Zagreb",
+    "home_score": 0,
+    "away_score": 2,
+    "result": "A"
+  },
+  {
+    "match_id": 52,
+    "matchday": 3,
+    "date": "2024-10-23",
+    "home": "Manchester City",
+    "away": "Sparta Prague",
+    "home_score": 5,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 53,
+    "matchday": 3,
+    "date": "2024-10-23",
+    "home": "RB Leipzig",
+    "away": "Liverpool",
+    "home_score": 0,
+    "away_score": 1,
+    "result": "A"
+  },
+  {
+    "match_id": 54,
+    "matchday": 3,
+    "date": "2024-10-23",
+    "home": "Benfica",
+    "away": "Feyenoord",
+    "home_score": 1,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 55,
+    "matchday": 4,
+    "date": "2024-11-05",
+    "home": "PSV Eindhoven",
+    "away": "Girona",
+    "home_score": 4,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 56,
+    "matchday": 4,
+    "date": "2024-11-05",
+    "home": "Slovan Bratislava",
+    "away": "Dinamo Zagreb",
+    "home_score": 1,
+    "away_score": 4,
+    "result": "A"
+  },
+  {
+    "match_id": 57,
+    "matchday": 4,
+    "date": "2024-11-05",
+    "home": "Bologna",
+    "away": "Monaco",
+    "home_score": 0,
+    "away_score": 1,
+    "result": "A"
+  },
+  {
+    "match_id": 58,
+    "matchday": 4,
+    "date": "2024-11-05",
+    "home": "Borussia Dortmund",
+    "away": "Sturm Graz",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 59,
+    "matchday": 4,
+    "date": "2024-11-05",
+    "home": "Celtic",
+    "away": "RB Leipzig",
+    "home_score": 3,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 60,
+    "matchday": 4,
+    "date": "2024-11-05",
+    "home": "Liverpool",
+    "away": "Bayer Leverkusen",
+    "home_score": 4,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 61,
+    "matchday": 4,
+    "date": "2024-11-05",
+    "home": "Lille",
+    "away": "Juventus",
+    "home_score": 1,
+    "away_score": 1,
+    "result": "D"
+  },
+  {
+    "match_id": 62,
+    "matchday": 4,
+    "date": "2024-11-05",
+    "home": "Real Madrid",
+    "away": "Milan",
+    "home_score": 1,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 63,
+    "matchday": 4,
+    "date": "2024-11-05",
+    "home": "Sporting CP",
+    "away": "Manchester City",
+    "home_score": 4,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 64,
+    "matchday": 4,
+    "date": "2024-11-06",
+    "home": "Club Brugge",
+    "away": "Aston Villa",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 65,
+    "matchday": 4,
+    "date": "2024-11-06",
+    "home": "Shakhtar Donetsk",
+    "away": "Young Boys",
+    "home_score": 2,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 66,
+    "matchday": 4,
+    "date": "2024-11-06",
+    "home": "Sparta Prague",
+    "away": "Brest",
+    "home_score": 1,
+    "away_score": 2,
+    "result": "A"
+  },
+  {
+    "match_id": 67,
+    "matchday": 4,
+    "date": "2024-11-06",
+    "home": "Inter",
+    "away": "Arsenal",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 68,
+    "matchday": 4,
+    "date": "2024-11-06",
+    "home": "Feyenoord",
+    "away": "Red Bull Salzburg",
+    "home_score": 1,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 69,
+    "matchday": 4,
+    "date": "2024-11-06",
+    "home": "Red Star Belgrade",
+    "away": "Barcelona",
+    "home_score": 2,
+    "away_score": 5,
+    "result": "A"
+  },
+  {
+    "match_id": 70,
+    "matchday": 4,
+    "date": "2024-11-06",
+    "home": "Paris Saint-Germain",
+    "away": "Atletico Madrid",
+    "home_score": 1,
+    "away_score": 2,
+    "result": "A"
+  },
+  {
+    "match_id": 71,
+    "matchday": 4,
+    "date": "2024-11-06",
+    "home": "VfB Stuttgart",
+    "away": "Atalanta",
+    "home_score": 0,
+    "away_score": 2,
+    "result": "A"
+  },
+  {
+    "match_id": 72,
+    "matchday": 4,
+    "date": "2024-11-06",
+    "home": "Bayern Munich",
+    "away": "Benfica",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 73,
+    "matchday": 5,
+    "date": "2024-11-26",
+    "home": "Sparta Prague",
+    "away": "Atletico Madrid",
+    "home_score": 0,
+    "away_score": 6,
+    "result": "A"
+  },
+  {
+    "match_id": 74,
+    "matchday": 5,
+    "date": "2024-11-26",
+    "home": "Slovan Bratislava",
+    "away": "Milan",
+    "home_score": 2,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 75,
+    "matchday": 5,
+    "date": "2024-11-26",
+    "home": "Bayer Leverkusen",
+    "away": "Red Bull Salzburg",
+    "home_score": 5,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 76,
+    "matchday": 5,
+    "date": "2024-11-26",
+    "home": "Young Boys",
+    "away": "Atalanta",
+    "home_score": 1,
+    "away_score": 6,
+    "result": "A"
+  },
+  {
+    "match_id": 77,
+    "matchday": 5,
+    "date": "2024-11-26",
+    "home": "Barcelona",
+    "away": "Brest",
+    "home_score": 3,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 78,
+    "matchday": 5,
+    "date": "2024-11-26",
+    "home": "Bayern Munich",
+    "away": "Paris Saint-Germain",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 79,
+    "matchday": 5,
+    "date": "2024-11-26",
+    "home": "Inter",
+    "away": "RB Leipzig",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 80,
+    "matchday": 5,
+    "date": "2024-11-26",
+    "home": "Manchester City",
+    "away": "Feyenoord",
+    "home_score": 3,
+    "away_score": 3,
+    "result": "D"
+  },
+  {
+    "match_id": 81,
+    "matchday": 5,
+    "date": "2024-11-26",
+    "home": "Sporting CP",
+    "away": "Arsenal",
+    "home_score": 1,
+    "away_score": 5,
+    "result": "A"
+  },
+  {
+    "match_id": 82,
+    "matchday": 5,
+    "date": "2024-11-27",
+    "home": "Red Star Belgrade",
+    "away": "VfB Stuttgart",
+    "home_score": 5,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 83,
+    "matchday": 5,
+    "date": "2024-11-27",
+    "home": "Sturm Graz",
+    "away": "Girona",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 84,
+    "matchday": 5,
+    "date": "2024-11-27",
+    "home": "Monaco",
+    "away": "Benfica",
+    "home_score": 2,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 85,
+    "matchday": 5,
+    "date": "2024-11-27",
+    "home": "Aston Villa",
+    "away": "Juventus",
+    "home_score": 0,
+    "away_score": 0,
+    "result": "D"
+  },
+  {
+    "match_id": 86,
+    "matchday": 5,
+    "date": "2024-11-27",
+    "home": "Bologna",
+    "away": "Lille",
+    "home_score": 1,
+    "away_score": 2,
+    "result": "A"
+  },
+  {
+    "match_id": 87,
+    "matchday": 5,
+    "date": "2024-11-27",
+    "home": "Celtic",
+    "away": "Club Brugge",
+    "home_score": 1,
+    "away_score": 1,
+    "result": "D"
+  },
+  {
+    "match_id": 88,
+    "matchday": 5,
+    "date": "2024-11-27",
+    "home": "Dinamo Zagreb",
+    "away": "Borussia Dortmund",
+    "home_score": 0,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 89,
+    "matchday": 5,
+    "date": "2024-11-27",
+    "home": "Liverpool",
+    "away": "Real Madrid",
+    "home_score": 2,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 90,
+    "matchday": 5,
+    "date": "2024-11-27",
+    "home": "PSV Eindhoven",
+    "away": "Shakhtar Donetsk",
+    "home_score": 3,
+    "away_score": 2,
+    "result": "H"
+  },
+  {
+    "match_id": 91,
+    "matchday": 6,
+    "date": "2024-12-10",
+    "home": "Girona",
+    "away": "Liverpool",
+    "home_score": 0,
+    "away_score": 1,
+    "result": "A"
+  },
+  {
+    "match_id": 92,
+    "matchday": 6,
+    "date": "2024-12-10",
+    "home": "Dinamo Zagreb",
+    "away": "Celtic",
+    "home_score": 0,
+    "away_score": 0,
+    "result": "D"
+  },
+  {
+    "match_id": 93,
+    "matchday": 6,
+    "date": "2024-12-10",
+    "home": "Atalanta",
+    "away": "Real Madrid",
+    "home_score": 2,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 94,
+    "matchday": 6,
+    "date": "2024-12-10",
+    "home": "Bayer Leverkusen",
+    "away": "Inter",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 95,
+    "matchday": 6,
+    "date": "2024-12-10",
+    "home": "Club Brugge",
+    "away": "Sporting CP",
+    "home_score": 2,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 96,
+    "matchday": 6,
+    "date": "2024-12-10",
+    "home": "Red Bull Salzburg",
+    "away": "Paris Saint-Germain",
+    "home_score": 0,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 97,
+    "matchday": 6,
+    "date": "2024-12-10",
+    "home": "Shakhtar Donetsk",
+    "away": "Bayern Munich",
+    "home_score": 1,
+    "away_score": 5,
+    "result": "A"
+  },
+  {
+    "match_id": 98,
+    "matchday": 6,
+    "date": "2024-12-10",
+    "home": "RB Leipzig",
+    "away": "Aston Villa",
+    "home_score": 2,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 99,
+    "matchday": 6,
+    "date": "2024-12-10",
+    "home": "Brest",
+    "away": "PSV Eindhoven",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 100,
+    "matchday": 6,
+    "date": "2024-12-11",
+    "home": "Atletico Madrid",
+    "away": "Slovan Bratislava",
+    "home_score": 3,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 101,
+    "matchday": 6,
+    "date": "2024-12-11",
+    "home": "Lille",
+    "away": "Sturm Graz",
+    "home_score": 3,
+    "away_score": 2,
+    "result": "H"
+  },
+  {
+    "match_id": 102,
+    "matchday": 6,
+    "date": "2024-12-11",
+    "home": "Milan",
+    "away": "Red Star Belgrade",
+    "home_score": 2,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 103,
+    "matchday": 6,
+    "date": "2024-12-11",
+    "home": "Arsenal",
+    "away": "Monaco",
+    "home_score": 3,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 104,
+    "matchday": 6,
+    "date": "2024-12-11",
+    "home": "Borussia Dortmund",
+    "away": "Barcelona",
+    "home_score": 2,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 105,
+    "matchday": 6,
+    "date": "2024-12-11",
+    "home": "Feyenoord",
+    "away": "Sparta Prague",
+    "home_score": 4,
+    "away_score": 2,
+    "result": "H"
+  },
+  {
+    "match_id": 106,
+    "matchday": 6,
+    "date": "2024-12-11",
+    "home": "Juventus",
+    "away": "Manchester City",
+    "home_score": 2,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 107,
+    "matchday": 6,
+    "date": "2024-12-11",
+    "home": "Benfica",
+    "away": "Bologna",
+    "home_score": 0,
+    "away_score": 0,
+    "result": "D"
+  },
+  {
+    "match_id": 108,
+    "matchday": 6,
+    "date": "2024-12-11",
+    "home": "VfB Stuttgart",
+    "away": "Young Boys",
+    "home_score": 5,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 109,
+    "matchday": 7,
+    "date": "2025-01-21",
+    "home": "Monaco",
+    "away": "Aston Villa",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 110,
+    "matchday": 7,
+    "date": "2025-01-21",
+    "home": "Atalanta",
+    "away": "Sturm Graz",
+    "home_score": 5,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 111,
+    "matchday": 7,
+    "date": "2025-01-21",
+    "home": "Atletico Madrid",
+    "away": "Bayer Leverkusen",
+    "home_score": 2,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 112,
+    "matchday": 7,
+    "date": "2025-01-21",
+    "home": "Bologna",
+    "away": "Borussia Dortmund",
+    "home_score": 2,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 113,
+    "matchday": 7,
+    "date": "2025-01-21",
+    "home": "Club Brugge",
+    "away": "Juventus",
+    "home_score": 0,
+    "away_score": 0,
+    "result": "D"
+  },
+  {
+    "match_id": 114,
+    "matchday": 7,
+    "date": "2025-01-21",
+    "home": "Red Star Belgrade",
+    "away": "PSV Eindhoven",
+    "home_score": 2,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 115,
+    "matchday": 7,
+    "date": "2025-01-21",
+    "home": "Liverpool",
+    "away": "Lille",
+    "home_score": 2,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 116,
+    "matchday": 7,
+    "date": "2025-01-21",
+    "home": "Slovan Bratislava",
+    "away": "VfB Stuttgart",
+    "home_score": 1,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 117,
+    "matchday": 7,
+    "date": "2025-01-21",
+    "home": "Benfica",
+    "away": "Barcelona",
+    "home_score": 4,
+    "away_score": 5,
+    "result": "A"
+  },
+  {
+    "match_id": 118,
+    "matchday": 7,
+    "date": "2025-01-22",
+    "home": "Shakhtar Donetsk",
+    "away": "Brest",
+    "home_score": 2,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 119,
+    "matchday": 7,
+    "date": "2025-01-22",
+    "home": "RB Leipzig",
+    "away": "Sporting CP",
+    "home_score": 2,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 120,
+    "matchday": 7,
+    "date": "2025-01-22",
+    "home": "Milan",
+    "away": "Girona",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 121,
+    "matchday": 7,
+    "date": "2025-01-22",
+    "home": "Sparta Prague",
+    "away": "Inter",
+    "home_score": 0,
+    "away_score": 1,
+    "result": "A"
+  },
+  {
+    "match_id": 122,
+    "matchday": 7,
+    "date": "2025-01-22",
+    "home": "Arsenal",
+    "away": "Dinamo Zagreb",
+    "home_score": 3,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 123,
+    "matchday": 7,
+    "date": "2025-01-22",
+    "home": "Celtic",
+    "away": "Young Boys",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 124,
+    "matchday": 7,
+    "date": "2025-01-22",
+    "home": "Feyenoord",
+    "away": "Bayern Munich",
+    "home_score": 3,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 125,
+    "matchday": 7,
+    "date": "2025-01-22",
+    "home": "Paris Saint-Germain",
+    "away": "Manchester City",
+    "home_score": 4,
+    "away_score": 2,
+    "result": "H"
+  },
+  {
+    "match_id": 126,
+    "matchday": 7,
+    "date": "2025-01-22",
+    "home": "Real Madrid",
+    "away": "Red Bull Salzburg",
+    "home_score": 5,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 127,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Aston Villa",
+    "away": "Celtic",
+    "home_score": 4,
+    "away_score": 2,
+    "result": "H"
+  },
+  {
+    "match_id": 128,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Bayer Leverkusen",
+    "away": "Sparta Prague",
+    "home_score": 2,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 129,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Borussia Dortmund",
+    "away": "Shakhtar Donetsk",
+    "home_score": 3,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 130,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Young Boys",
+    "away": "Red Star Belgrade",
+    "home_score": 0,
+    "away_score": 1,
+    "result": "A"
+  },
+  {
+    "match_id": 131,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Barcelona",
+    "away": "Atalanta",
+    "home_score": 2,
+    "away_score": 2,
+    "result": "D"
+  },
+  {
+    "match_id": 132,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Bayern Munich",
+    "away": "Slovan Bratislava",
+    "home_score": 3,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 133,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Inter",
+    "away": "Monaco",
+    "home_score": 3,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 134,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Red Bull Salzburg",
+    "away": "Atletico Madrid",
+    "home_score": 1,
+    "away_score": 4,
+    "result": "A"
+  },
+  {
+    "match_id": 135,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Girona",
+    "away": "Arsenal",
+    "home_score": 1,
+    "away_score": 2,
+    "result": "A"
+  },
+  {
+    "match_id": 136,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Dinamo Zagreb",
+    "away": "Milan",
+    "home_score": 2,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 137,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Juventus",
+    "away": "Benfica",
+    "home_score": 0,
+    "away_score": 2,
+    "result": "A"
+  },
+  {
+    "match_id": 138,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Lille",
+    "away": "Feyenoord",
+    "home_score": 6,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 139,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Manchester City",
+    "away": "Club Brugge",
+    "home_score": 3,
+    "away_score": 1,
+    "result": "H"
+  },
+  {
+    "match_id": 140,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "PSV Eindhoven",
+    "away": "Liverpool",
+    "home_score": 3,
+    "away_score": 2,
+    "result": "H"
+  },
+  {
+    "match_id": 141,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Sturm Graz",
+    "away": "RB Leipzig",
+    "home_score": 1,
+    "away_score": 0,
+    "result": "H"
+  },
+  {
+    "match_id": 142,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Sporting CP",
+    "away": "Bologna",
+    "home_score": 1,
+    "away_score": 1,
+    "result": "D"
+  },
+  {
+    "match_id": 143,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "Brest",
+    "away": "Real Madrid",
+    "home_score": 0,
+    "away_score": 3,
+    "result": "A"
+  },
+  {
+    "match_id": 144,
+    "matchday": 8,
+    "date": "2025-01-29",
+    "home": "VfB Stuttgart",
+    "away": "Paris Saint-Germain",
+    "home_score": 1,
+    "away_score": 4,
+    "result": "A"
+  }
+]

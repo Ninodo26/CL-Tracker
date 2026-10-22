@@ -23,55 +23,6 @@ class ModelTests(unittest.TestCase):
         self.assertEqual(model.normalize_team_name("FC Bayern M\u00fcnchen"), "Bayern Munich")
         self.assertEqual(model.normalize_team_name("SSC Napoli"), "Napoli")
 
-    def test_api_football_disabled_makes_zero_requests_without_a_key(self):
-        original_env = model.os.environ.copy()
-        original_key = model.API_FOOTBALL_KEY
-        original_get = model.requests.get
-        original_fd_get = model.fd_get
-        class Response:
-            status_code = 200
-            def raise_for_status(self): pass
-            def json(self): return {"standings": []}
-        calls = []
-        try:
-            model.os.environ.pop("ENABLE_API_FOOTBALL", None)
-            model.API_FOOTBALL_KEY = None
-            model.fd_get = lambda *args, **kwargs: Response()
-            model.requests.get = lambda *args, **kwargs: calls.append(args) or Response()
-            model.fetch_domestic_form(model.SEASON)
-            self.assertEqual(calls, [])
-            model.os.environ["ENABLE_API_FOOTBALL"] = "false"
-            model.fetch_supplemental_form(model.SEASON)
-            self.assertEqual(calls, [])
-        finally:
-            model.os.environ.clear()
-            model.os.environ.update(original_env)
-            model.API_FOOTBALL_KEY = original_key
-            model.requests.get = original_get
-            model.fd_get = original_fd_get
-
-    def test_api_football_explicit_enable_requires_key_before_request(self):
-        original_env = model.os.environ.copy()
-        original_key = model.API_FOOTBALL_KEY
-        original_fd_get = model.fd_get
-        fd_calls = []
-        class Response:
-            status_code = 200
-            def raise_for_status(self): pass
-            def json(self): return {"standings": []}
-        try:
-            model.os.environ["ENABLE_API_FOOTBALL"] = "true"
-            model.API_FOOTBALL_KEY = None
-            model.fd_get = lambda *args, **kwargs: fd_calls.append(args) or Response()
-            with self.assertRaisesRegex(RuntimeError, "API_FOOTBALL_KEY is not configured"):
-                model.fetch_domestic_form(model.SEASON)
-            self.assertEqual(fd_calls, [])
-        finally:
-            model.os.environ.clear()
-            model.os.environ.update(original_env)
-            model.API_FOOTBALL_KEY = original_key
-            model.fd_get = original_fd_get
-
     def test_form_normalization_reaches_coefficient_seed(self):
         baseline = model.seed_elo("Borussia Dortmund", {})
         adjusted = model.seed_elo("BORUSSIA DORTMUND", {"borussia dortmund": 50})
@@ -125,19 +76,7 @@ class ModelTests(unittest.TestCase):
                     model.STARTING_COEFFICIENTS | model.QUALIFYING_COEFFICIENTS,
                 )
                 coefficient = model.coefficient_for_team(api_name)
-                mv_adj = model.market_value_adjustment(api_name)
-                self.assertEqual(model.seed_elo(api_name, {}), model.ELO_BASE + coefficient * model.ELO_COEF_SCALE + mv_adj)
-
-    def test_market_value_adjustments_are_bounded_and_monotonic(self):
-        real_madrid_adj = model.market_value_adjustment("Real Madrid")
-        dortmund_adj = model.market_value_adjustment("Borussia Dortmund")
-        slovan_adj = model.market_value_adjustment("Slovan Bratislava")
-        self.assertGreater(real_madrid_adj, dortmund_adj)
-        self.assertGreater(dortmund_adj, slovan_adj)
-        self.assertGreater(real_madrid_adj, 0)
-        self.assertLess(slovan_adj, 0)
-        self.assertLessEqual(real_madrid_adj, model.MARKET_VALUE_CAP)
-        self.assertGreaterEqual(slovan_adj, -model.MARKET_VALUE_CAP)
+                self.assertEqual(model.seed_elo(api_name, {}), model.ELO_BASE + coefficient * model.ELO_COEF_SCALE)
 
     def test_missing_coefficient_is_an_error_unless_explicit_fallback_is_requested(self):
         with self.assertRaisesRegex(model.MissingCoefficientError, "No UEFA coefficient configured"):
@@ -297,6 +236,32 @@ class ModelTests(unittest.TestCase):
         self.assertTrue(all(0 <= t["prob_top24"] <= 1 for t in teams.values()))
         self.assertAlmostEqual(sum(t["prob_top8"] for t in teams.values()), 8.0)
         self.assertAlmostEqual(sum(t["prob_top24"] for t in teams.values()), 24.0)
+        self.assertAlmostEqual(sum(t["prob_final"] for t in teams.values()), 2.0, delta=0.01)
+        self.assertAlmostEqual(sum(t["prob_champion"] for t in teams.values()), 1.0, delta=0.01)
+
+    def test_calibrated_elo_seeding_reflects_squad_value_and_tier(self):
+        # Uncalibrated baseline
+        base_arsenal = model.seed_elo("Arsenal", {}, calibrated=False)
+        # Calibrated incorporates €1.2B valuation and Premier League tier (1.0)
+        cal_arsenal = model.seed_elo("Arsenal", {}, calibrated=True)
+        self.assertGreater(cal_arsenal, base_arsenal)
+
+    def test_goal_margin_scaling_in_table_builder(self):
+        fixture_blowout = {
+            "fixture": {"status": {"short": "FT"}, "date": "2026-09-08T12:00:00Z"},
+            "league": {"round": "League Stage - 1"},
+            "teams": {
+                "home": {"id": 1, "name": "Borussia Dortmund"},
+                "away": {"id": 2, "name": "FC Barcelona"},
+            },
+            "goals": {"home": 5, "away": 0},
+        }
+        teams_std = model.build_table([fixture_blowout], {}, goal_margin=False)
+        teams_gm = model.build_table([fixture_blowout], {}, goal_margin=True)
+        # Margin of 5 yields higher delta than fixed K
+        delta_std = teams_std[1]["elo"] - model.seed_elo("Borussia Dortmund", {}, calibrated=False)
+        delta_gm = teams_gm[1]["elo"] - model.seed_elo("Borussia Dortmund", {}, calibrated=False)
+        self.assertGreater(delta_gm, delta_std)
 
 
 if __name__ == "__main__":

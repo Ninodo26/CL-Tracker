@@ -1,0 +1,167 @@
+{
+  "playoffs": [
+    {
+      "seed_high": "Real Madrid",
+      "seed_low": "Manchester City",
+      "leg1": "2-3",
+      "leg2": "3-1",
+      "agg": "6-3",
+      "winner": "Real Madrid"
+    },
+    {
+      "seed_high": "Paris Saint-Germain",
+      "seed_low": "Brest",
+      "leg1": "3-0",
+      "leg2": "7-0",
+      "agg": "10-0",
+      "winner": "Paris Saint-Germain"
+    },
+    {
+      "seed_high": "Bayern Munich",
+      "seed_low": "Celtic",
+      "leg1": "1-1",
+      "leg2": "2-1",
+      "agg": "3-2",
+      "winner": "Bayern Munich"
+    },
+    {
+      "seed_high": "Borussia Dortmund",
+      "seed_low": "Sporting CP",
+      "leg1": "1-0",
+      "leg2": "2-0",
+      "agg": "3-0",
+      "winner": "Borussia Dortmund"
+    },
+    {
+      "seed_high": "PSV Eindhoven",
+      "seed_low": "Juventus",
+      "leg1": "2-2",
+      "leg2": "2-1",
+      "agg": "4-3",
+      "winner": "PSV Eindhoven"
+    },
+    {
+      "seed_high": "Feyenoord",
+      "seed_low": "Atalanta",
+      "leg1": "2-2",
+      "leg2": "3-2",
+      "agg": "5-4",
+      "winner": "Feyenoord"
+    },
+    {
+      "seed_high": "Benfica",
+      "seed_low": "Monaco",
+      "leg1": "2-2",
+      "leg2": "2-1",
+      "agg": "4-3",
+      "winner": "Benfica"
+    },
+    {
+      "seed_high": "Club Brugge",
+      "seed_low": "Milan",
+      "leg1": "1-1",
+      "leg2": "1-0",
+      "agg": "2-1",
+      "winner": "Club Brugge"
+    }
+  ],
+  "round_of_16": [
+    {
+      "team_a": "Paris Saint-Germain",
+      "team_b": "Liverpool",
+      "agg": "1-1 (pens 4-1)",
+      "winner": "Paris Saint-Germain"
+    },
+    {
+      "team_a": "Barcelona",
+      "team_b": "Benfica",
+      "agg": "5-0",
+      "winner": "Barcelona"
+    },
+    {
+      "team_a": "Arsenal",
+      "team_b": "PSV Eindhoven",
+      "agg": "9-3",
+      "winner": "Arsenal"
+    },
+    {
+      "team_a": "Inter",
+      "team_b": "Feyenoord",
+      "agg": "4-1",
+      "winner": "Inter"
+    },
+    {
+      "team_a": "Real Madrid",
+      "team_b": "Atletico Madrid",
+      "agg": "2-2 (pens 4-2)",
+      "winner": "Real Madrid"
+    },
+    {
+      "team_a": "Bayern Munich",
+      "team_b": "Bayer Leverkusen",
+      "agg": "5-0",
+      "winner": "Bayern Munich"
+    },
+    {
+      "team_a": "Borussia Dortmund",
+      "team_b": "Lille",
+      "agg": "3-2",
+      "winner": "Borussia Dortmund"
+    },
+    {
+      "team_a": "Aston Villa",
+      "team_b": "Club Brugge",
+      "agg": "6-1",
+      "winner": "Aston Villa"
+    }
+  ],
+  "quarter_finals": [
+    {
+      "team_a": "Arsenal",
+      "team_b": "Real Madrid",
+      "agg": "5-1",
+      "winner": "Arsenal"
+    },
+    {
+      "team_a": "Paris Saint-Germain",
+      "team_b": "Aston Villa",
+      "agg": "5-4",
+      "winner": "Paris Saint-Germain"
+    },
+    {
+      "team_a": "Barcelona",
+      "team_b": "Borussia Dortmund",
+      "agg": "5-3",
+      "winner": "Barcelona"
+    },
+    {
+      "team_a": "Inter",
+      "team_b": "Bayern Munich",
+      "agg": "4-3",
+      "winner": "Inter"
+    }
+  ],
+  "semi_finals": [
+    {
+      "team_a": "Paris Saint-Germain",
+      "team_b": "Arsenal",
+      "agg": "3-1",
+      "winner": "Paris Saint-Germain"
+    },
+    {
+      "team_a": "Inter",
+      "team_b": "Barcelona",
+      "agg": "7-6",
+      "winner": "Inter"
+    }
+  ],
+  "final": {
+    "venue": "Allianz Arena, Munich",
+    "date": "2025-05-31",
+    "team_a": "Paris Saint-Germain",
+    "team_b": "Inter",
+    "score": "5-0",
+    "champion": "Paris Saint-Germain",
+    "runner_up": "Inter"
+  }
+}

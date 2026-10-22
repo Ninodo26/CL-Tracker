@@ -1,0 +1,187 @@
+{
+  "source": "Opta Supercomputer (The Analyst)",
+  "published_at": "2024-09-16T12:00:00Z",
+  "description": "Pre-tournament simulation run (10,000 simulations) before Matchday 1 kickoff",
+  "predictions": {
+    "Manchester City": {
+      "top8": 0.849,
+      "top24": 0.988,
+      "champion": 0.253
+    },
+    "Real Madrid": {
+      "top8": 0.798,
+      "top24": 0.982,
+      "champion": 0.182
+    },
+    "Inter": {
+      "top8": 0.696,
+      "top24": 0.965,
+      "champion": 0.109
+    },
+    "Arsenal": {
+      "top8": 0.658,
+      "top24": 0.958,
+      "champion": 0.063
+    },
+    "Bayern Munich": {
+      "top8": 0.642,
+      "top24": 0.952,
+      "champion": 0.041
+    },
+    "Barcelona": {
+      "top8": 0.612,
+      "top24": 0.941,
+      "champion": 0.052
+    },
+    "Bayer Leverkusen": {
+      "top8": 0.551,
+      "top24": 0.925,
+      "champion": 0.054
+    },
+    "Liverpool": {
+      "top8": 0.518,
+      "top24": 0.912,
+      "champion": 0.042
+    },
+    "Paris Saint-Germain": {
+      "top8": 0.504,
+      "top24": 0.905,
+      "champion": 0.041
+    },
+    "Borussia Dortmund": {
+      "top8": 0.448,
+      "top24": 0.885,
+      "champion": 0.024
+    },
+    "RB Leipzig": {
+      "top8": 0.412,
+      "top24": 0.865,
+      "champion": 0.018
+    },
+    "Atletico Madrid": {
+      "top8": 0.395,
+      "top24": 0.854,
+      "champion": 0.022
+    },
+    "Sporting CP": {
+      "top8": 0.342,
+      "top24": 0.812,
+      "champion": 0.012
+    },
+    "Atalanta": {
+      "top8": 0.315,
+      "top24": 0.795,
+      "champion": 0.009
+    },
+    "Juventus": {
+      "top8": 0.298,
+      "top24": 0.781,
+      "champion": 0.008
+    },
+    "Milan": {
+      "top8": 0.285,
+      "top24": 0.772,
+      "champion": 0.007
+    },
+    "Benfica": {
+      "top8": 0.264,
+      "top24": 0.755,
+      "champion": 0.006
+    },
+    "PSV Eindhoven": {
+      "top8": 0.245,
+      "top24": 0.738,
+      "champion": 0.005
+    },
+    "Monaco": {
+      "top8": 0.218,
+      "top24": 0.71,
+      "champion": 0.004
+    },
+    "Aston Villa": {
+      "top8": 0.198,
+      "top24": 0.685,
+      "champion": 0.003
+    },
+    "Feyenoord": {
+      "top8": 0.185,
+      "top24": 0.668,
+      "champion": 0.002
+    },
+    "VfB Stuttgart": {
+      "top8": 0.165,
+      "top24": 0.642,
+      "champion": 0.002
+    },
+    "Lille": {
+      "top8": 0.152,
+      "top24": 0.621,
+      "champion": 0.002
+    },
+    "Girona": {
+      "top8": 0.141,
+      "top24": 0.605,
+      "champion": 0.001
+    },
+    "Bologna": {
+      "top8": 0.122,
+      "top24": 0.574,
+      "champion": 0.001
+    },
+    "Club Brugge": {
+      "top8": 0.108,
+      "top24": 0.548,
+      "champion": 0.001
+    },
+    "Celtic": {
+      "top8": 0.095,
+      "top24": 0.518,
+      "champion": 0.001
+    },
+    "Brest": {
+      "top8": 0.082,
+      "top24": 0.485,
+      "champion": 0.0
+    },
+    "Shakhtar Donetsk": {
+      "top8": 0.075,
+      "top24": 0.465,
+      "champion": 0.0
+    },
+    "Red Bull Salzburg": {
+      "top8": 0.068,
+      "top24": 0.442,
+      "champion": 0.0
+    },
+    "Dinamo Zagreb": {
+      "top8": 0.048,
+      "top24": 0.385,
+      "champion": 0.0
+    },
+    "Sparta Prague": {
+      "top8": 0.035,
+      "top24": 0.332,
+      "champion": 0.0
+    },
+    "Sturm Graz": {
+      "top8": 0.022,
+      "top24": 0.265,
+      "champion": 0.0
+    },
+    "Young Boys": {
+      "top8": 0.018,
+      "top24": 0.235,
+      "champion": 0.0
+    },
+    "Red Star Belgrade": {
+      "top8": 0.012,
+      "top24": 0.192,
+      "champion": 0.0
+    },
+    "Slovan Bratislava": {
+      "top8": 0.003,
+      "top24": 0.098,
+      "champion": 0.0
+    }
+  }
+}
