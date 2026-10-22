@@ -77,15 +77,34 @@ always — if you want fresher same-night updates, tighten the cron on
 those days specifically, e.g. hourly 18:00–23:00 CET on Tue/Wed with a
 second, sparser cron for the rest of the week.
 
-## Site structure
+## Site Structure & Capabilities
 
-Four principal sections:
-1. **Standings** — Live league-phase table, clinch and elimination scenario tracking, and one-click single season Monte Carlo simulation with full knockout championship rollout. Clicking any club opens their detailed tactical dossier, key players, fan survival outlook, and upcoming match win probabilities.
-2. **Matches** — Complete 144-match league-phase fixtures with the current active round displayed at the top, past matchdays accessible by scrolling up, and quick-jump navigation pills across all 8 matchdays.
-3. **Power Rankings** — Multi-tier power rankings properly balancing title odds, automatic Round of 16 qualification, playoff survival, and underlying Elo strength (with realistic non-100% probabilistic bounds).
-4. **Model Accuracy & Backtest** — Empirical validation scorecard comparing CL Tracker against the Opta Supercomputer and ground truth from the completed 2024/25 season.
+Six comprehensive sections designed to compete with world-class sports analytics platforms (FotMob, SofaScore, Opta Analyst):
 
-The favourite-team selector lets users track their club's table position, next fixture, and qualification scenario front and center. Click any team across Standings or Power Rankings to open their full LLM tactical dossier.
+1. **Standings** — Live 36-club league-phase table, clinch and elimination scenario tracking, one-click single season Monte Carlo simulation rollout, and instant **TikTok / Social Story Card Export**. Clicking any club opens their tactical dossier.
+2. **Matches** — Complete 144-match league-phase fixtures with the current active round displayed at the top, past matchdays accessible by scrolling up, quick-nav jump pills, and **2D Tactical Pitch Lineup Views** with Starting XIs, formations, managers, and injury watches.
+3. **Power Rankings** — Multi-tier power rankings balancing title odds, automatic Round of 16 qualification, playoff survival, and underlying Elo strength (with non-100% probabilistic bounds).
+4. **Stats & Leaders** — Comprehensive tournament leaderboards:
+   - **Golden Boot**: Top scorers, assists, minutes, xG (Expected Goals), and Goals/90
+   - **Playmaking Masters**: Top assists, big chances created, and key passes
+   - **Golden Glove**: Clean sheets, saves made, save %, and goals conceded
+   - **Power Movers**: Biggest Elo rating swings and momentum shifts
+5. **5th Spot Race (EPS)** — Tracking the UEFA European Performance Spots battle (England, Italy, Spain, Germany, France) for the two additional automatic Champions League berths in 2027/28.
+6. **Model Accuracy & Backtest** — Empirical validation scorecard comparing CL Tracker against the Opta Supercomputer and ground truth from the completed 2024/25 season.
+
+### 📱 TikTok & Social Media Card Generator
+- Client-side high-resolution HTML5 Canvas rendering engine.
+- Formats: **9:16 Vertical (1080×1920)** for TikTok / Instagram Stories / Reels and **1:1 Square (1080×1080)** for Twitter/X / Instagram feed posts.
+- Features: Real-time visual preview, one-click high-res PNG download, and direct system clipboard copy (`navigator.clipboard.write`) for instant viral posting.
+- Export cards available for:
+  - Any Match (Odds, Predicted Result, Key Player Showdown, Stakes)
+  - Standings (Top 8 Qualifiers, Cutoff Thresholds, Bubble Teams)
+  - Any Club (Tactical DNA, Key Players, Advancement Outlook)
+
+### 📋 2D Tactical Pitch & Lineup Engine
+- Authentic formations (4-3-3, 4-2-3-1, 3-5-2, 3-4-2-1, 4-4-2) for all 36 participating clubs.
+- Interactive grass pitch rendering with touchlines, penalty boxes, center circle, and player jersey nodes with squad numbers and surnames.
+- Manager profiles, tactical directives, substitute benches, and injury updates.
 
 ## The probability model (Power Rankings & Knockout Engine)
 
@@ -132,13 +151,4 @@ To run the unit test suite:
 python -m unittest discover tests
 ```
 
-## Qualifying tab — manual for v1
-
-The third qualifying round and play-off round bracket
-(`QUALIFYING_PATHS` in `index.html`) is hardcoded from the actual 20
-July draw, not pulled from the API. Update it by hand after each round
-resolves. Automating this against football-data.org's qualifying-round data
-is a reasonable v2 — it wasn't done here to keep the first working
-version shippable rather than stalled on edge cases in how the API
-represents pre-league-phase rounds.
 

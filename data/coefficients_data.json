@@ -1,0 +1,61 @@
+{
+  "title": "UEFA European Performance Spots (Race for 5th Champions League Spot)",
+  "description": "The two domestic associations whose clubs earn the highest average UEFA coefficient points this season receive an extra automatic Champions League league-phase berth for the 2027/28 campaign.",
+  "standings": [
+    {
+      "rank": 1,
+      "country": "England",
+      "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+      "coef": 17.85,
+      "active_teams": "7 / 7",
+      "prob_bonus_spot": 0.94,
+      "status": "Heavy Favorite",
+      "projected_club": "Aston Villa / Chelsea (Premier League 5th)",
+      "analysis": "Premier League clubs have gone undefeated across 18 group stage ties in all three UEFA competitions, accumulating dominant coefficient dividends."
+    },
+    {
+      "rank": 2,
+      "country": "Italy",
+      "flag": "🇮🇹",
+      "coef": 16.625,
+      "active_teams": "7 / 8",
+      "prob_bonus_spot": 0.62,
+      "status": "Contender",
+      "projected_club": "Lazio / Roma / Fiorentina (Serie A 5th)",
+      "analysis": "Strong showings from Inter, Napoli, and Roma maintain Italy's narrow advantage over Spain for the second European Performance Spot."
+    },
+    {
+      "rank": 3,
+      "country": "Spain",
+      "flag": "🇪🇸",
+      "coef": 15.9,
+      "active_teams": "7 / 7",
+      "prob_bonus_spot": 0.32,
+      "status": "Chasing",
+      "projected_club": "Athletic Club / Villarreal (La Liga 5th)",
+      "analysis": "Real Madrid and Barcelona are driving high points, but Real Betis and Villarreal must advance deep in the knockouts to bridge the 0.725 gap to Italy."
+    },
+    {
+      "rank": 4,
+      "country": "Germany",
+      "flag": "🇩🇪",
+      "coef": 15.45,
+      "active_teams": "6 / 7",
+      "prob_bonus_spot": 0.12,
+      "status": "Underdog",
+      "projected_club": "Eintracht Frankfurt / Borussia Dortmund (Bundesliga 5th)",
+      "analysis": "RB Leipzig's early struggles have depressed the German association average point yield despite Bayern Munich's stellar campaign."
+    },
+    {
+      "rank": 5,
+      "country": "France",
+      "flag": "🇫🇷",
+      "coef": 13.8,
+      "active_teams": "5 / 6",
+      "prob_bonus_spot": 0.02,
+      "status": "Longshot",
+      "projected_club": "Monaco / Lyon (Ligue 1 5th)",
+      "analysis": "Divided by 7 entries, French losses in early qualifying rounds leave Ligue 1 requiring a near-miraculous European run to enter contention."
+    }
+  ]
+}

@@ -297,6 +297,146 @@
   .md-quicknav-btn:hover{color:var(--ivory); border-color:var(--ice); background:var(--bg-2);}
   .md-quicknav-btn.active-md{border-color:var(--gold); color:var(--gold-soft); background:var(--gold-glow); font-weight:700;}
 
+  
+  /* Tactical Pitch & Lineups */
+  .tactical-pitch-container{
+    background:#081b10; border:1px solid #1a4224; border-radius:8px;
+    padding:16px; margin:14px 0; position:relative; overflow:hidden;
+  }
+  .tactical-pitch{
+    position:relative; width:100%; max-width:440px; margin:0 auto; aspect-ratio:3/4;
+    background:linear-gradient(180deg, #11361c 0%, #0c2614 50%, #11361c 100%);
+    border:2px solid rgba(255,255,255,0.4); border-radius:6px; box-shadow:inset 0 0 30px rgba(0,0,0,0.7);
+    overflow:hidden;
+  }
+  .pitch-grass-stripes{
+    position:absolute; inset:0; pointer-events:none;
+    background:repeating-linear-gradient(180deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 12.5%, transparent 12.5%, transparent 25%);
+  }
+  .pitch-line{position:absolute; border:1px solid rgba(255,255,255,0.35); pointer-events:none;}
+  .pitch-halfway{top:50%; left:0; right:0; border-top:1px solid rgba(255,255,255,0.4);}
+  .pitch-center-circle{
+    top:50%; left:50%; transform:translate(-50%, -50%);
+    width:24%; aspect-ratio:1; border-radius:50%;
+  }
+  .pitch-center-spot{
+    top:50%; left:50%; transform:translate(-50%, -50%);
+    width:4px; height:4px; background:rgba(255,255,255,0.7); border-radius:50%;
+  }
+  .pitch-box-top{top:0; left:20%; width:60%; height:16%; border-top:none;}
+  .pitch-box-bot{bottom:0; left:20%; width:60%; height:16%; border-bottom:none;}
+  .pitch-six-top{top:0; left:35%; width:30%; height:6%; border-top:none;}
+  .pitch-six-bot{bottom:0; left:35%; width:30%; height:6%; border-bottom:none;}
+  
+  .player-node{
+    position:absolute; transform:translate(-50%, -50%);
+    display:flex; flex-direction:column; align-items:center;
+    transition:transform .2s ease; cursor:pointer; z-index:5;
+  }
+  .player-node:hover{transform:translate(-50%, -50%) scale(1.15); z-index:10;}
+  .player-jersey{
+    width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Anton',sans-serif; font-size:11px; color:#fff;
+    border:2px solid #fff; box-shadow:0 3px 8px rgba(0,0,0,0.7);
+  }
+  .player-name-tag{
+    margin-top:3px; background:rgba(4,7,20,0.9); border:1px solid rgba(255,255,255,0.2);
+    border-radius:3px; padding:1px 5px; font-family:'IBM Plex Mono',monospace;
+    font-size:9px; color:var(--ivory); white-space:nowrap; text-align:center;
+    max-width:85px; overflow:hidden; text-overflow:ellipsis;
+  }
+
+  /* TikTok Studio Modal */
+  .tiktok-modal-overlay{
+    position:fixed; inset:0; z-index:120;
+    background:rgba(2,4,12,0.92);
+    backdrop-filter:blur(12px);
+    overflow-y:auto; padding:24px 14px 60px;
+    display:flex; align-items:center; justify-content:center;
+    animation:fadeIn .25s ease-out forwards;
+  }
+  .tiktok-modal-content{
+    width:100%; max-width:840px; background:linear-gradient(160deg, var(--bg-1), var(--bg-0));
+    border:1px solid var(--line); border-top:3px solid var(--gold); border-radius:10px;
+    padding:24px; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.8);
+  }
+  .tiktok-preview-wrap{
+    display:flex; justify-content:center; align-items:center;
+    margin:18px 0; background:rgba(0,0,0,0.4); padding:16px; border-radius:8px;
+    border:1px solid var(--line-soft); min-height:420px;
+  }
+  .tiktok-canvas-preview{
+    max-width:100%; max-height:60vh; object-fit:contain; border-radius:8px;
+    box-shadow:0 12px 36px rgba(0,0,0,0.7); border:1px solid var(--line);
+  }
+  .tiktok-btn-group{
+    display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px;
+  }
+  .tiktok-btn-primary{
+    background:linear-gradient(135deg, var(--gold), #b3922d); color:#040714;
+    font-family:'Anton',sans-serif; font-size:14px; text-transform:uppercase;
+    letter-spacing:0.04em; padding:10px 22px; border-radius:6px; border:none;
+    cursor:pointer; display:inline-flex; align-items:center; gap:8px;
+    box-shadow:0 4px 14px rgba(217,184,74,0.3); transition:var(--transition);
+  }
+  .tiktok-btn-primary:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(217,184,74,0.45);}
+  .tiktok-btn-secondary{
+    background:var(--bg-2); color:var(--ivory); font-family:'IBM Plex Mono',monospace;
+    font-size:12px; padding:10px 18px; border-radius:6px; border:1px solid var(--line);
+    cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:var(--transition);
+  }
+  .tiktok-btn-secondary:hover{background:var(--bg-3); border-color:var(--ice);}
+  .format-toggle{
+    display:inline-flex; background:var(--bg-2); border:1px solid var(--line);
+    border-radius:6px; padding:3px; gap:4px;
+  }
+  .format-toggle button{
+    background:transparent; border:none; color:var(--ivory-dim);
+    padding:6px 14px; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    border-radius:4px; cursor:pointer; transition:var(--transition);
+  }
+  .format-toggle button.active{
+    background:var(--gold); color:#040714; font-weight:700;
+  }
+
+  /* Stats Tab & Coefficient Race */
+  .stats-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+    gap:18px; margin-bottom:28px;
+  }
+  .stat-card{
+    background:linear-gradient(150deg, var(--bg-1), var(--bg-2));
+    border:1px solid var(--line); border-radius:8px; padding:18px;
+  }
+  .stat-card.gold-top{border-top:3px solid var(--gold);}
+  .stat-card.ice-top{border-top:3px solid var(--ice);}
+  .stat-card-title{
+    font-family:'Anton',sans-serif; font-size:16px; text-transform:uppercase;
+    letter-spacing:0.04em; margin-bottom:12px; display:flex; align-items:center; gap:8px;
+  }
+  .stat-leader-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:8px 0; border-bottom:1px solid var(--line-soft);
+  }
+  .stat-leader-row:last-child{border-bottom:none;}
+  .stat-rank-pill{
+    width:22px; height:22px; border-radius:50%; background:var(--bg-3);
+    font-family:'IBM Plex Mono',monospace; font-size:11px; display:flex;
+    align-items:center; justify-content:center; color:var(--ivory-dim); margin-right:10px; flex-shrink:0;
+  }
+  .stat-rank-pill.gold{background:var(--gold); color:#040714; font-weight:700;}
+  .stat-rank-pill.silver{background:#c0c0c0; color:#040714; font-weight:700;}
+  .stat-rank-pill.bronze{background:#cd7f32; color:#040714; font-weight:700;}
+
+  .coef-grid{display:grid; grid-template-columns:1fr; gap:12px; margin-top:16px;}
+  .coef-card{
+    background:var(--bg-1); border:1px solid var(--line); border-radius:8px;
+    padding:16px 20px; transition:var(--transition);
+  }
+  .coef-card:hover{background:var(--bg-2); border-color:var(--gold-soft);}
+  .coef-card.top-slot{border-left:4px solid var(--gold);}
+
   footer{margin-top:50px;padding:24px 0 50px;border-top:1px solid var(--line);color:var(--ivory-dim);font-size:11px;font-family:'IBM Plex Mono',monospace; line-height:1.6;}
   footer span{display:block;margin-top:6px;}
 </style>
@@ -320,35 +460,190 @@
 
 <script>
 const CONFIRMED_TEAMS = [
-  {name:"Paris Saint-Germain", color:"#004170", coef:132.0},
-  {name:"Bayern Munich", color:"#DC052D", coef:147.5},
-  {name:"Real Madrid", color:"#2B3990", coef:144.5},
-  {name:"Liverpool", color:"#C8102E", coef:130.0},
-  {name:"Inter", color:"#0068A8", coef:127.0},
-  {name:"Manchester City", color:"#6CABDD", coef:125.5},
-  {name:"Arsenal", color:"#EF0107", coef:119.0},
-  {name:"Barcelona", color:"#A50044", coef:113.25},
-  {name:"Atletico Madrid", color:"#CB3524", coef:104.75},
-  {name:"Borussia Dortmund", color:"#FDE100", coef:100.75, dark:true},
-  {name:"Roma", color:"#8E1F2F", coef:97.75},
-  {name:"Sporting CP", color:"#006633", coef:84.0},
-  {name:"Aston Villa", color:"#670E36", coef:83.0},
-  {name:"Porto", color:"#00539F", coef:80.75},
-  {name:"Manchester United", color:"#DA291C", coef:76.5},
-  {name:"Club Brugge", color:"#0060AB", coef:75.25},
-  {name:"Real Betis", color:"#00954C", coef:74.5},
-  {name:"PSV Eindhoven", color:"#ED1C24", coef:71.25},
-  {name:"Feyenoord", color:"#C41E3A", coef:71.0},
-  {name:"Lille", color:"#C8102E", coef:68.75},
-  {name:"Napoli", color:"#12A0D7", coef:63.0},
-  {name:"RB Leipzig", color:"#DD0741", coef:61.0},
-  {name:"Villarreal", color:"#FFE667", coef:59.0, dark:true},
-  {name:"Shakhtar Donetsk", color:"#FF7900", coef:56.25},
-  {name:"Galatasaray", color:"#A90432", coef:46.5},
-  {name:"Slavia Praha", color:"#B10A24", coef:44.0},
-  {name:"VfB Stuttgart", color:"#E62333", coef:27.5},
-  {name:"Como", color:"#0057A8", coef:19.989},
-  {name:"Lens", color:"#C8102E", coef:16.699},
+  {
+    "name": "Paris Saint-Germain",
+    "color": "#004170",
+    "coef": 132.0
+  },
+  {
+    "name": "Bayern Munich",
+    "color": "#DC052D",
+    "coef": 147.5
+  },
+  {
+    "name": "Real Madrid",
+    "color": "#2B3990",
+    "coef": 144.5
+  },
+  {
+    "name": "Liverpool",
+    "color": "#C8102E",
+    "coef": 130.0
+  },
+  {
+    "name": "Inter",
+    "color": "#0068A8",
+    "coef": 127.0
+  },
+  {
+    "name": "Manchester City",
+    "color": "#6CABDD",
+    "coef": 125.5
+  },
+  {
+    "name": "Arsenal",
+    "color": "#EF0107",
+    "coef": 119.0
+  },
+  {
+    "name": "Barcelona",
+    "color": "#A50044",
+    "coef": 113.25
+  },
+  {
+    "name": "Atletico Madrid",
+    "color": "#CB3524",
+    "coef": 104.75
+  },
+  {
+    "name": "Borussia Dortmund",
+    "color": "#FDE100",
+    "coef": 100.75,
+    "dark": true
+  },
+  {
+    "name": "Roma",
+    "color": "#8E1F2F",
+    "coef": 97.75
+  },
+  {
+    "name": "Sporting CP",
+    "color": "#006633",
+    "coef": 84.0
+  },
+  {
+    "name": "Aston Villa",
+    "color": "#670E36",
+    "coef": 83.0
+  },
+  {
+    "name": "Porto",
+    "color": "#00539F",
+    "coef": 80.75
+  },
+  {
+    "name": "Manchester United",
+    "color": "#DA291C",
+    "coef": 76.5
+  },
+  {
+    "name": "Club Brugge",
+    "color": "#0060AB",
+    "coef": 75.25
+  },
+  {
+    "name": "Real Betis",
+    "color": "#00954C",
+    "coef": 74.5
+  },
+  {
+    "name": "PSV Eindhoven",
+    "color": "#ED1C24",
+    "coef": 71.25
+  },
+  {
+    "name": "Feyenoord",
+    "color": "#C41E3A",
+    "coef": 71.0
+  },
+  {
+    "name": "Lille",
+    "color": "#C8102E",
+    "coef": 68.75
+  },
+  {
+    "name": "Napoli",
+    "color": "#12A0D7",
+    "coef": 63.0
+  },
+  {
+    "name": "RB Leipzig",
+    "color": "#DD0741",
+    "coef": 61.0
+  },
+  {
+    "name": "Villarreal",
+    "color": "#FFE667",
+    "coef": 59.0,
+    "dark": true
+  },
+  {
+    "name": "Shakhtar Donetsk",
+    "color": "#FF7900",
+    "coef": 56.25
+  },
+  {
+    "name": "Galatasaray",
+    "color": "#A90432",
+    "coef": 46.5
+  },
+  {
+    "name": "Slavia Praha",
+    "color": "#B10A24",
+    "coef": 44.0
+  },
+  {
+    "name": "VfB Stuttgart",
+    "color": "#E62333",
+    "coef": 27.5
+  },
+  {
+    "name": "Como",
+    "color": "#0057A8",
+    "coef": 19.989
+  },
+  {
+    "name": "Lens",
+    "color": "#C8102E",
+    "coef": 16.699
+  },
+  {
+    "name": "Fenerbahce",
+    "color": "#002D72",
+    "coef": 47.5
+  },
+  {
+    "name": "Bodo/Glimt",
+    "color": "#FFE600",
+    "coef": 42.0,
+    "dark": true
+  },
+  {
+    "name": "AEK Athens",
+    "color": "#FFCC00",
+    "coef": 28.0,
+    "dark": true
+  },
+  {
+    "name": "Viking",
+    "color": "#002D5A",
+    "coef": 18.5
+  },
+  {
+    "name": "Slovan Bratislava",
+    "color": "#4EA8DE",
+    "coef": 30.5
+  },
+  {
+    "name": "LASK",
+    "color": "#222222",
+    "coef": 37.0
+  },
+  {
+    "name": "Sabah FK",
+    "color": "#002B7F",
+    "coef": 8.5
+  }
 ];
 
 const QUALIFYING_PATHS = [
@@ -628,6 +923,9 @@ function closePicker(){
 const savedTeam = localStorage.getItem('cl-tracker-team');
 
 let DOSSIERS = {};
+let LINEUPS_DATA = {};
+let STATS_DATA = {};
+let COEFFICIENTS_DATA = {};
 
 async function boot(){
   try{
@@ -641,6 +939,24 @@ async function boot(){
     DOSSIERS = await resD.json();
   } catch(e){
     DOSSIERS = {};
+  }
+  try{
+    const resL = await fetch('data/lineups_data.json', {cache:'no-store'});
+    LINEUPS_DATA = await resL.json();
+  } catch(e){
+    LINEUPS_DATA = {};
+  }
+  try{
+    const resS = await fetch('data/stats_data.json', {cache:'no-store'});
+    STATS_DATA = await resS.json();
+  } catch(e){
+    STATS_DATA = {};
+  }
+  try{
+    const resC = await fetch('data/coefficients_data.json', {cache:'no-store'});
+    COEFFICIENTS_DATA = await resC.json();
+  } catch(e){
+    COEFFICIENTS_DATA = {};
   }
 
   document.getElementById('main-wrap').style.display = 'block';
@@ -663,6 +979,8 @@ boot();
       <button class="tab-btn active" data-tab="standings">Standings</button>
       <button class="tab-btn" data-tab="matches">Matches</button>
       <button class="tab-btn" data-tab="rankings">Power Rankings</button>
+      <button class="tab-btn" data-tab="stats">Stats &amp; Leaders</button>
+      <button class="tab-btn" data-tab="coefficients">5th Spot Race (EPS)</button>
       <button class="tab-btn" data-tab="accuracy">Model Accuracy &amp; Backtest</button>
     </nav>
 </header>
@@ -681,6 +999,14 @@ boot();
     <div id="rankings-content"></div>
   </div>
 
+  <div class="tab-panel" id="panel-stats">
+    <div id="stats-content"></div>
+  </div>
+
+  <div class="tab-panel" id="panel-coefficients">
+    <div id="coefficients-content"></div>
+  </div>
+
   <div class="tab-panel" id="panel-accuracy">
     <div id="accuracy-content"></div>
   </div>
@@ -689,6 +1015,34 @@ boot();
     <div class="team-modal-content" onclick="event.stopPropagation()">
       <button class="modal-close-btn" onclick="closeTeamModal()" title="Close">&times;</button>
       <div id="team-modal-body"></div>
+    </div>
+  </div>
+
+  <div id="tiktok-modal" class="tiktok-modal-overlay" style="display:none;" onclick="closeTikTokCard()">
+    <div class="tiktok-modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeTikTokCard()" title="Close">&times;</button>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:14px;">
+        <div>
+          <span class="focus-eyebrow" style="color:var(--gold-soft);">Social Media &amp; TikTok Studio</span>
+          <h2 id="tiktok-modal-title" style="font-family:'Anton',sans-serif; font-size:22px; text-transform:uppercase; margin:0;">
+            Export Story &amp; Share Card
+          </h2>
+        </div>
+        <div class="format-toggle">
+          <button id="fmt-story" class="active" onclick="setTikTokFormat('story')">📱 9:16 TikTok / Story</button>
+          <button id="fmt-square" onclick="setTikTokFormat('square')">🟦 1:1 Post / X</button>
+        </div>
+      </div>
+      <div class="tiktok-preview-wrap">
+        <canvas id="tiktok-canvas" width="1080" height="1920" style="display:none;"></canvas>
+        <img id="tiktok-preview-img" class="tiktok-canvas-preview" alt="Card Preview">
+      </div>
+      <div class="tiktok-btn-group">
+        <button class="tiktok-btn-primary" onclick="downloadTikTokCard()">⬇️ Download High-Res PNG</button>
+        <button class="tiktok-btn-secondary" onclick="copyTikTokCard()">📋 Copy to Clipboard</button>
+        <button class="tiktok-btn-secondary" onclick="closeTikTokCard()">✕ Close</button>
+      </div>
+      <div id="tiktok-toast" style="text-align:center; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold-soft); margin-top:8px; min-height:16px;"></div>
     </div>
   </div>
 
@@ -773,6 +1127,7 @@ function renderSimulateControls(){
   el.innerHTML = `<div style="display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap;">
     <button class="none-btn" style="width:auto; margin-top:0; padding:10px 18px;" onclick="runSimulation()">🎲 Simulate season</button>
     ${simulatedTable ? `<button class="none-btn" style="width:auto; margin-top:0; padding:10px 18px;" onclick="clearSimulation()">← Back to real table</button>` : ''}
+    <button class="none-btn" style="width:auto; margin-top:0; padding:10px 18px; border-color:var(--gold); color:var(--gold-soft);" onclick="openTikTokCard('standings', {})">📱 Export Standings Card</button>
   </div>`;
 }
 
@@ -1021,9 +1376,12 @@ function renderMatches(){
                 <span style="color:var(--ivory-dim); font-size:11px;">vs</span>
                 <span onclick="event.stopPropagation(); openTeamModal('${m.away.replace(/'/g, "\\'")}')" style="cursor:pointer; font-weight:600;" title="Click to view ${m.away} dossier">${m.away}</span>
               </div>
-              ${m.played
-                ? `<span class="match-score">${m.score}</span>`
-                : `<span class="match-date">${new Date(m.date).toLocaleDateString(undefined, {month:'short', day:'numeric'})}</span>`}
+              <div style="display:flex; align-items:center; gap:8px;">
+                ${m.played
+                  ? `<span class="match-score">${m.score}</span>`
+                  : `<span class="match-date">${new Date(m.date).toLocaleDateString(undefined, {month:'short', day:'numeric'})}</span>`}
+                <button class="none-btn" style="width:auto; margin:0; padding:2px 7px; font-size:10px; border-color:var(--gold-soft); color:var(--gold-soft);" onclick="event.stopPropagation(); openTikTokCard('match', {home:'${m.home.replace(/'/g, "\\'")}', away:'${m.away.replace(/'/g, "\\'")}', date:'${m.date}', score:'${m.score||''}', played:${m.played?true:false}, odds:${m.odds ? JSON.stringify(m.odds).replace(/"/g, '&quot;') : 'null'}, matchday:'${m.matchday.replace(/'/g, "\\'")}'})" title="Export Match Story Card">📱 Share Card</button>
+              </div>
             </div>
             ${(!m.played && m.odds) ? probabilityBar([
                 {label: m.home, prob: m.odds.home, color: teamColor(m.home)},
@@ -1032,16 +1390,38 @@ function renderMatches(){
               ]) : ''}
           </div>
           <div class="match-detail" id="${detailId}">
-            <div class="match-detail-teams">
-              <div style="cursor:pointer;" onclick="openTeamModal('${m.home.replace(/'/g, "\\'")}')">${matchDetailTeamHTML(m.home)}</div>
-              <div class="match-detail-vs">vs</div>
-              <div style="cursor:pointer;" onclick="openTeamModal('${m.away.replace(/'/g, "\\'")}')">${matchDetailTeamHTML(m.away)}</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px; border-bottom:1px solid var(--line-soft); padding-bottom:8px;">
+              <div style="display:flex; gap:6px;">
+                <button class="none-btn active-md" id="${detailId}-tab-pred" style="width:auto; margin:0; padding:4px 10px; font-size:11px;" onclick="event.stopPropagation(); switchMatchTab('${detailId}', 'pred')">📊 Overview &amp; Prediction</button>
+                <button class="none-btn" id="${detailId}-tab-lineup" style="width:auto; margin:0; padding:4px 10px; font-size:11px;" onclick="event.stopPropagation(); switchMatchTab('${detailId}', 'lineup')">📋 2D Pitch &amp; Lineups</button>
+              </div>
+              <button class="none-btn" style="width:auto; margin:0; padding:4px 12px; font-size:11px; border-color:var(--gold); color:var(--gold-soft);" onclick="event.stopPropagation(); openTikTokCard('match', {home:'${m.home.replace(/'/g, "\\'")}', away:'${m.away.replace(/'/g, "\\'")}', date:'${m.date}', score:'${m.score||''}', played:${m.played?true:false}, odds:${m.odds ? JSON.stringify(m.odds).replace(/"/g, '&quot;') : 'null'}, matchday:'${m.matchday.replace(/'/g, "\\'")}'})">📱 Export to TikTok / Story</button>
             </div>
-            <div class="match-detail-note">
-              ${new Date(m.date).toLocaleString(undefined, {weekday:'long', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'})}${m.played ? ' &middot; Final: ' + m.score : ''}
-              <div style="margin-top:8px;">
-                <button class="none-btn" style="width:auto; display:inline-block; margin:0 4px; padding:4px 10px; font-size:10px;" onclick="event.stopPropagation(); openTeamModal('${m.home.replace(/'/g, "\\'")}')">View ${m.home} Dossier</button>
-                <button class="none-btn" style="width:auto; display:inline-block; margin:0 4px; padding:4px 10px; font-size:10px;" onclick="event.stopPropagation(); openTeamModal('${m.away.replace(/'/g, "\\'")}')">View ${m.away} Dossier</button>
+
+            <!-- Prediction Pane -->
+            <div id="${detailId}-pane-pred">
+              <div class="match-detail-teams">
+                <div style="cursor:pointer;" onclick="openTeamModal('${m.home.replace(/'/g, "\\'")}')">${matchDetailTeamHTML(m.home)}</div>
+                <div class="match-detail-vs">vs</div>
+                <div style="cursor:pointer;" onclick="openTeamModal('${m.away.replace(/'/g, "\\'")}')">${matchDetailTeamHTML(m.away)}</div>
+              </div>
+              <div class="match-detail-note">
+                ${new Date(m.date).toLocaleString(undefined, {weekday:'long', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'})}${m.played ? ' &middot; Final: ' + m.score : ''}
+                <div style="margin-top:8px;">
+                  <button class="none-btn" style="width:auto; display:inline-block; margin:0 4px; padding:4px 10px; font-size:10px;" onclick="event.stopPropagation(); openTeamModal('${m.home.replace(/'/g, "\\'")}')">View ${m.home} Dossier</button>
+                  <button class="none-btn" style="width:auto; display:inline-block; margin:0 4px; padding:4px 10px; font-size:10px;" onclick="event.stopPropagation(); openTeamModal('${m.away.replace(/'/g, "\\'")}')">View ${m.away} Dossier</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lineup 2D Pitch Pane -->
+            <div id="${detailId}-pane-lineup" style="display:none;" onclick="event.stopPropagation()">
+              <div style="display:flex; justify-content:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+                <button class="none-btn active-md" id="${detailId}-btn-hometeam" style="width:auto; margin:0; padding:4px 12px; font-size:11px;" onclick="showPitchTeam('${detailId}', '${m.home.replace(/'/g, "\\'")}')">${m.home} Starting XI</button>
+                <button class="none-btn" id="${detailId}-btn-awayteam" style="width:auto; margin:0; padding:4px 12px; font-size:11px;" onclick="showPitchTeam('${detailId}', '${m.away.replace(/'/g, "\\'")}')">${m.away} Starting XI</button>
+              </div>
+              <div id="${detailId}-pitch-content">
+                ${renderTacticalPitchHTML(m.home, m.away)}
               </div>
             </div>
           </div>`;
@@ -1181,12 +1561,15 @@ function openTeamModal(name){
   const top24Badge = team && Number.isFinite(team.prob_top24) ? `<span class="stat-box" style="padding:5px 10px; font-size:12px; min-width:auto; color:var(--ice);">Top-24: ${formatProb(team.prob_top24, team.status_top24)}</span>` : '';
 
   body.innerHTML = `
-    <div style="display:flex; align-items:center; gap:14px; margin-bottom:14px; flex-wrap:wrap;">
-      ${crestOrChipHTML(name, 48, 'circle')}
-      <div>
-        <h2 style="font-family:'Anton',sans-serif; font-size:26px; text-transform:uppercase; margin:0; line-height:1.1;">${name}</h2>
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold-soft); margin-top:2px;">${dossier.league || 'European Contender'}</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:14px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        ${crestOrChipHTML(name, 48, 'circle')}
+        <div>
+          <h2 style="font-family:'Anton',sans-serif; font-size:26px; text-transform:uppercase; margin:0; line-height:1.1;">${name}</h2>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold-soft); margin-top:2px;">${dossier.league || 'European Contender'}</div>
+        </div>
       </div>
+      <button class="none-btn" style="width:auto; margin:0; padding:8px 16px; font-size:11px; border-color:var(--gold); color:var(--gold-soft);" onclick="openTikTokCard('team', {name:'${name.replace(/'/g, "\\'")}'})">📱 Export ${name} Card to TikTok / Story</button>
     </div>
     
     <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;">
@@ -1225,6 +1608,845 @@ function closeTeamModal(){
   if (modal) modal.style.display = 'none';
   document.body.style.overflow = '';
 }
+
+
+// -------------------------------------------------------------
+// TACTICAL PITCH, STATS, COEFFICIENTS & TIKTOK SOCIAL STUDIO
+// -------------------------------------------------------------
+
+function renderTacticalPitchHTML(teamName, oppName){
+  const lineup = (LINEUPS_DATA && LINEUPS_DATA[teamName]) || null;
+  if (!lineup){
+    return `<div class="empty" style="padding:16px;">Tactical formation for <strong>${teamName}</strong> will be announced prior to kickoff.</div>`;
+  }
+
+  const startingPlayers = (lineup.starting_xi || []).map(p => {
+    const kitColor = teamColor(teamName);
+    const topPct = 100 - p.y;
+    const leftPct = p.x;
+    const surname = p.name.split(' ').pop();
+    return `
+      <div class="player-node" style="left:${leftPct}%; top:${topPct}%;" title="${p.name} (#${p.num} - ${p.pos})">
+        <div class="player-jersey" style="background:${kitColor};">${p.num}</div>
+        <div class="player-name-tag">${surname} <span style="color:var(--gold-soft); font-size:8px;">${p.pos}</span></div>
+      </div>
+    `;
+  }).join('');
+
+  const subsHTML = (lineup.subs || []).map(s => `
+    <span class="player-pill" style="font-size:10px; padding:3px 8px;">${s}</span>
+  `).join(' ');
+
+  const injuriesHTML = (lineup.injuries && lineup.injuries.length) ? lineup.injuries.map(inj => `
+    <span class="tag-miss" style="margin-right:6px; display:inline-block; margin-bottom:4px;">
+      ⚠️ ${inj.player} (${inj.status})
+    </span>
+  `).join('') : `<span style="color:var(--ivory-dim); font-size:11px;">No major injuries reported. Fully fit squad.</span>`;
+
+  return `
+    <div class="tactical-pitch-container">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          ${crestOrChipHTML(teamName, 26, 'circle')}
+          <span style="font-family:'Anton',sans-serif; font-size:16px; text-transform:uppercase; color:var(--ivory);">${teamName}</span>
+          <span class="tag-tier" style="background:var(--gold-glow); border-color:var(--gold); color:var(--gold-soft); font-weight:700;">${lineup.formation}</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);">
+          Manager: <strong style="color:var(--gold-soft);">${lineup.manager}</strong>
+        </div>
+      </div>
+
+      <div class="tactical-pitch">
+        <div class="pitch-grass-stripes"></div>
+        <div class="pitch-line pitch-halfway"></div>
+        <div class="pitch-line pitch-center-circle"></div>
+        <div class="pitch-center-spot"></div>
+        <div class="pitch-line pitch-box-top"></div>
+        <div class="pitch-line pitch-box-bot"></div>
+        <div class="pitch-line pitch-six-top"></div>
+        <div class="pitch-line pitch-six-bot"></div>
+        ${startingPlayers}
+      </div>
+
+      <div style="margin-top:14px; background:rgba(4,7,20,0.6); border:1px solid var(--line-soft); border-radius:6px; padding:12px;">
+        <div style="font-family:'Anton',sans-serif; font-size:12px; text-transform:uppercase; color:var(--gold-soft); letter-spacing:0.04em; margin-bottom:4px;">
+          ⚡ Tactical Directive
+        </div>
+        <p style="margin:0 0 10px; font-size:12px; line-height:1.5; color:var(--ivory);">${lineup.tactical_brief}</p>
+        
+        <div style="margin-bottom:8px;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; color:var(--ivory-dim); margin-bottom:4px;">Bench &amp; Reserves</div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">${subsHTML}</div>
+        </div>
+
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; color:var(--ivory-dim); margin-bottom:4px;">Absences &amp; Injury Watch</div>
+          <div>${injuriesHTML}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function switchMatchTab(detailId, tab){
+  const predBtn = document.getElementById(`${detailId}-tab-pred`);
+  const lineupBtn = document.getElementById(`${detailId}-tab-lineup`);
+  const predPane = document.getElementById(`${detailId}-pane-pred`);
+  const lineupPane = document.getElementById(`${detailId}-pane-lineup`);
+  if (!predPane || !lineupPane) return;
+  if (tab === 'pred'){
+    predPane.style.display = 'block';
+    lineupPane.style.display = 'none';
+    if (predBtn) predBtn.classList.add('active-md');
+    if (lineupBtn) lineupBtn.classList.remove('active-md');
+  } else {
+    predPane.style.display = 'none';
+    lineupPane.style.display = 'block';
+    if (lineupBtn) lineupBtn.classList.add('active-md');
+    if (predBtn) predBtn.classList.remove('active-md');
+  }
+}
+
+function showPitchTeam(detailId, teamName){
+  const pitchContent = document.getElementById(`${detailId}-pitch-content`);
+  const homeBtn = document.getElementById(`${detailId}-btn-hometeam`);
+  const awayBtn = document.getElementById(`${detailId}-btn-awayteam`);
+  if (!pitchContent) return;
+  pitchContent.innerHTML = renderTacticalPitchHTML(teamName);
+  if (homeBtn && awayBtn){
+    if (homeBtn.textContent.includes(teamName)){
+      homeBtn.classList.add('active-md');
+      awayBtn.classList.remove('active-md');
+    } else {
+      awayBtn.classList.add('active-md');
+      homeBtn.classList.remove('active-md');
+    }
+  }
+}
+
+function renderStats(){
+  const el = document.getElementById('stats-content');
+  if (!el) return;
+  const data = STATS_DATA;
+  if (!data || !data.top_scorers){
+    el.innerHTML = `<div class="empty">Stats data loading...</div>`;
+    return;
+  }
+
+  const scorersRows = (data.top_scorers || []).map((p, idx) => {
+    const medalClass = idx === 0 ? 'gold' : idx === 1 ? 'silver' : idx === 2 ? 'bronze' : '';
+    return `
+      <div class="stat-leader-row">
+        <div style="display:flex; align-items:center;">
+          <div class="stat-rank-pill ${medalClass}">${p.rank}</div>
+          <div>
+            <div style="font-weight:600; font-size:13px; color:var(--ivory);">${p.name}</div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim);">${p.team} &middot; ${p.mins} mins</div>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'Anton',sans-serif; font-size:18px; color:var(--gold-soft);">${p.goals} <span style="font-size:11px; font-family:'IBM Plex Mono',monospace; color:var(--ivory-dim);">G (${p.xG} xG)</span></div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim);">${p.assists} assists &middot; ${p.per90} G/90</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const assistsRows = (data.top_assists || []).map((p, idx) => {
+    const medalClass = idx === 0 ? 'gold' : idx === 1 ? 'silver' : idx === 2 ? 'bronze' : '';
+    return `
+      <div class="stat-leader-row">
+        <div style="display:flex; align-items:center;">
+          <div class="stat-rank-pill ${medalClass}">${p.rank}</div>
+          <div>
+            <div style="font-weight:600; font-size:13px; color:var(--ivory);">${p.name}</div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim);">${p.team}</div>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'Anton',sans-serif; font-size:18px; color:var(--ice);">${p.assists} <span style="font-size:11px; font-family:'IBM Plex Mono',monospace; color:var(--ivory-dim);">Assists</span></div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim);">${p.chances_created} chances &middot; ${p.key_passes} key passes</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const gkRows = (data.clean_sheets || []).map((p, idx) => {
+    const medalClass = idx === 0 ? 'gold' : idx === 1 ? 'silver' : idx === 2 ? 'bronze' : '';
+    return `
+      <div class="stat-leader-row">
+        <div style="display:flex; align-items:center;">
+          <div class="stat-rank-pill ${medalClass}">${p.rank}</div>
+          <div>
+            <div style="font-weight:600; font-size:13px; color:var(--ivory);">${p.name}</div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim);">${p.team}</div>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'Anton',sans-serif; font-size:18px; color:var(--gold-soft);">${p.clean_sheets} <span style="font-size:11px; font-family:'IBM Plex Mono',monospace; color:var(--ivory-dim);">Clean Sheets</span></div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim);">${p.saves} saves &middot; ${p.save_pct} save%</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const moversRows = (data.power_movers || []).map(p => {
+    const isUp = p.trend === 'up';
+    return `
+      <div class="stat-leader-row">
+        <div>
+          <div style="font-weight:600; font-size:13px; color:var(--ivory);">${p.name}</div>
+          <div style="font-size:11px; color:var(--ivory-dim); margin-top:2px;">${p.note}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:700; color:${isUp ? 'var(--gold-soft)' : 'var(--red-soft)'};">
+            ${isUp ? '▲' : '▼'} ${p.elo_change} Elo
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim);">Rating: ${p.current_elo}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="fade-in">
+      <div class="focus-eyebrow">Individual Excellence &amp; Analytical Benchmarks</div>
+      <h2 style="font-family:'Anton',sans-serif; font-size:clamp(24px,3.5vw,32px); text-transform:uppercase; margin:0 0 10px;">
+        Tournament Stats &amp; Performance Leaders
+      </h2>
+      <p class="sub" style="margin-bottom:24px;">
+        Comprehensive player analytics tracking the Golden Boot race, playmaking leaders, goalkeeping efficiency, and post-round Elo power rating swings across the 36-club league phase.
+      </p>
+
+      <div class="stats-grid">
+        <div class="stat-card gold-top">
+          <div class="stat-card-title">
+            <span>⚽</span> Golden Boot (Top Scorers)
+          </div>
+          <div>${scorersRows}</div>
+        </div>
+
+        <div class="stat-card ice-top">
+          <div class="stat-card-title">
+            <span>🎯</span> Playmaking (Top Assists)
+          </div>
+          <div>${assistsRows}</div>
+        </div>
+
+        <div class="stat-card gold-top">
+          <div class="stat-card-title">
+            <span>🧤</span> Golden Glove (Clean Sheets)
+          </div>
+          <div>${gkRows}</div>
+        </div>
+
+        <div class="stat-card ice-top">
+          <div class="stat-card-title">
+            <span>⚡</span> Power Movers (Elo Swings)
+          </div>
+          <div>${moversRows}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderCoefficients(){
+  const el = document.getElementById('coefficients-content');
+  if (!el) return;
+  const data = COEFFICIENTS_DATA;
+  if (!data || !data.standings){
+    el.innerHTML = `<div class="empty">Coefficient data loading...</div>`;
+    return;
+  }
+
+  const rows = (data.standings || []).map((c, idx) => {
+    const isTopSlot = idx < 2;
+    const probPct = Math.round(c.prob_bonus_spot * 100);
+    return `
+      <div class="coef-card ${isTopSlot ? 'top-slot' : ''}">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:10px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="stat-rank-pill ${idx === 0 ? 'gold' : idx === 1 ? 'silver' : ''}" style="margin:0;">#${c.rank}</div>
+            <span style="font-size:24px;">${c.flag}</span>
+            <div>
+              <div style="font-family:'Anton',sans-serif; font-size:18px; text-transform:uppercase; color:var(--ivory);">${c.country}</div>
+              <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ivory-dim);">${c.active_teams} clubs still active in Europe</div>
+            </div>
+          </div>
+
+          <div style="text-align:right;">
+            <div style="font-family:'Anton',sans-serif; font-size:22px; color:var(--gold-soft);">${c.coef.toFixed(3)} <span style="font-size:11px; font-family:'IBM Plex Mono',monospace; color:var(--ivory-dim);">PTS</span></div>
+            <div class="tag-tier" style="${isTopSlot ? 'background:rgba(217,184,74,0.15); color:var(--gold-soft); border-color:var(--gold);' : ''}">
+              ${c.status} (${probPct}% Bonus Spot Odds)
+            </div>
+          </div>
+        </div>
+
+        <div style="margin:10px 0;">
+          <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim); margin-bottom:4px;">
+            <span>Probability of Earning 5th Champions League Spot</span>
+            <span>${probPct}%</span>
+          </div>
+          <div class="single-bar-track">
+            <div class="single-bar-fill" style="width:${probPct}%; background:${isTopSlot ? 'linear-gradient(90deg, var(--ice), var(--gold))' : 'var(--ivory-dim)'};"></div>
+          </div>
+        </div>
+
+        <div style="font-size:12px; color:var(--ivory); line-height:1.5; margin-top:8px;">
+          <strong>Domestic Beneficiary:</strong> <span style="color:var(--gold-soft); font-family:'IBM Plex Mono',monospace;">${c.projected_club}</span>
+        </div>
+        <p style="margin:6px 0 0; font-size:12px; color:var(--ivory-dim); line-height:1.5;">${c.analysis}</p>
+      </div>
+    `;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="fade-in">
+      <div class="focus-eyebrow">UEFA European Performance Spots (EPS)</div>
+      <h2 style="font-family:'Anton',sans-serif; font-size:clamp(24px,3.5vw,32px); text-transform:uppercase; margin:0 0 10px;">
+        Race for the 5th Champions League Spot
+      </h2>
+      <p class="sub" style="margin-bottom:20px;">
+        Under the expanded 36-club Swiss Model, the two domestic associations whose clubs achieve the highest average coefficient points in the current season earn an additional automatic group stage berth for the following campaign.
+      </p>
+
+      <div class="acc-card" style="border-left:3px solid var(--gold); margin-bottom:24px;">
+        <div style="font-family:'Anton',sans-serif; font-size:15px; text-transform:uppercase; color:var(--gold-soft); margin-bottom:6px;">
+          ⚡ How the 5th Spot Coefficient Points Work
+        </div>
+        <p style="margin:0; font-size:12px; color:var(--ivory); line-height:1.6;">
+          Total coefficient points accumulated by all clubs from an association across the <strong>Champions League, Europa League, and Conference League</strong> are divided by the total number of clubs that association entered in European competition. Because points in the Europa and Conference Leagues count equally toward the national average, deep tournament runs in tier-2 and tier-3 competitions frequently decide which leagues claim the two lucrative bonus Champions League places.
+        </p>
+      </div>
+
+      <div class="coef-grid">${rows}</div>
+    </div>
+  `;
+}
+
+// -------------------------------------------------------------
+// TIKTOK & SOCIAL STORY EXPORT ENGINE (HTML5 CANVAS)
+// -------------------------------------------------------------
+
+let currentTikTokType = 'standings';
+let currentTikTokPayload = {};
+let currentTikTokFormat = 'story'; // 'story' (9:16) or 'square' (1:1)
+
+function openTikTokCard(type, payload){
+  currentTikTokType = type;
+  currentTikTokPayload = payload || {};
+  const modal = document.getElementById('tiktok-modal');
+  if (!modal) return;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  setTikTokFormat(currentTikTokFormat);
+}
+
+function closeTikTokCard(){
+  const modal = document.getElementById('tiktok-modal');
+  if (modal) modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function setTikTokFormat(fmt){
+  currentTikTokFormat = fmt;
+  const btnStory = document.getElementById('fmt-story');
+  const btnSquare = document.getElementById('fmt-square');
+  if (btnStory && btnSquare){
+    if (fmt === 'story'){
+      btnStory.classList.add('active');
+      btnSquare.classList.remove('active');
+    } else {
+      btnSquare.classList.add('active');
+      btnStory.classList.remove('active');
+    }
+  }
+  renderTikTokCanvas();
+}
+
+function drawRoundedRect(ctx, x, y, width, height, radius, fill, stroke){
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+  if (fill) ctx.fill();
+  if (stroke) ctx.stroke();
+  ctx.restore();
+}
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines){
+  const words = text.split(' ');
+  let line = '';
+  let linesDrawn = 0;
+  for (let n = 0; n < words.length; n++){
+    const testLine = line + words[n] + ' ';
+    const metrics = ctx.measureText(testLine);
+    if (metrics.width > maxWidth && n > 0){
+      ctx.fillText(line.trim(), x, y);
+      line = words[n] + ' ';
+      y += lineHeight;
+      linesDrawn++;
+      if (maxLines && linesDrawn >= maxLines - 1){
+        const rest = words.slice(n).join(' ');
+        ctx.fillText(rest.length > 40 ? rest.slice(0, 37) + '...' : rest, x, y);
+        return;
+      }
+    } else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line.trim(), x, y);
+}
+
+function renderTikTokCanvas(){
+  const canvas = document.getElementById('tiktok-canvas');
+  if (!canvas) return;
+  const isStory = currentTikTokFormat === 'story';
+  const W = 1080;
+  const H = isStory ? 1920 : 1080;
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  // 1. Deep European Night Gradient
+  const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+  bgGrad.addColorStop(0, '#030712');
+  bgGrad.addColorStop(0.35, '#071830');
+  bgGrad.addColorStop(0.7, '#040d1c');
+  bgGrad.addColorStop(1, '#02040a');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // 2. Ambient Spotlights (Top & Center)
+  const topGlow = ctx.createRadialGradient(W / 2, 0, 50, W / 2, 0, W * 0.75);
+  topGlow.addColorStop(0, 'rgba(30, 90, 180, 0.4)');
+  topGlow.addColorStop(0.6, 'rgba(15, 45, 95, 0.15)');
+  topGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = topGlow;
+  ctx.fillRect(0, 0, W, H);
+
+  const goldGlow = ctx.createRadialGradient(W / 2, H * 0.45, 20, W / 2, H * 0.45, W * 0.6);
+  goldGlow.addColorStop(0, 'rgba(217, 184, 74, 0.12)');
+  goldGlow.addColorStop(0.8, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = goldGlow;
+  ctx.fillRect(0, 0, W, H);
+
+  // 3. Grid line accents
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+  ctx.lineWidth = 1;
+  for (let x = 60; x < W; x += 120){
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+  for (let y = 60; y < H; y += 120){
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+
+  // 4. Header Badge
+  const headerY = isStory ? 120 : 60;
+  ctx.fillStyle = '#d9b84a';
+  ctx.font = '700 24px "IBM Plex Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('★ UEFA CHAMPIONS LEAGUE 2026/27 ★', W / 2, headerY);
+
+  if (currentTikTokType === 'match'){
+    renderTikTokMatchCard(ctx, W, H, isStory, headerY);
+  } else if (currentTikTokType === 'team'){
+    renderTikTokTeamCard(ctx, W, H, isStory, headerY);
+  } else {
+    renderTikTokStandingsCard(ctx, W, H, isStory, headerY);
+  }
+
+  // Common Footer
+  const footerY = H - (isStory ? 70 : 36);
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+  ctx.font = '18px "IBM Plex Mono", monospace';
+  ctx.fillText('EVIDENCE-BASED AI & MONTE CARLO SIMULATOR • GITHUB.COM/NINODO26/CL-TRACKER', W / 2, footerY);
+
+  // Update preview image
+  const previewImg = document.getElementById('tiktok-preview-img');
+  if (previewImg){
+    previewImg.src = canvas.toDataURL('image/png');
+  }
+}
+
+function renderTikTokMatchCard(ctx, W, H, isStory, headerY){
+  const m = currentTikTokPayload;
+  const home = m.home || 'Real Madrid';
+  const away = m.away || 'Paris Saint-Germain';
+  const mdLabel = (m.matchday || 'Matchday 4').replace('League Stage - ', 'Matchday ').toUpperCase();
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '700 64px "Anton", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(mdLabel + ' MARQUEE CLASH', W / 2, headerY + 70);
+
+  ctx.fillStyle = '#8ea2c6';
+  ctx.font = '22px "IBM Plex Mono", monospace';
+  ctx.fillText('OFFICIAL AI WIN PROBABILITY & TACTICAL PREVIEW', W / 2, headerY + 110);
+
+  // Main Card Container
+  const cardY = headerY + 145;
+  const cardH = isStory ? 820 : 540;
+  const cardW = 920;
+  const cardX = (W - cardW) / 2;
+
+  ctx.fillStyle = 'rgba(7, 18, 38, 0.75)';
+  ctx.strokeStyle = '#d9b84a';
+  ctx.lineWidth = 2;
+  drawRoundedRect(ctx, cardX, cardY, cardW, cardH, 20, true, true);
+
+  // Teams & VS
+  const homeColor = teamColor(home);
+  const awayColor = teamColor(away);
+
+  // Home Badge Circle
+  const homeX = cardX + 180;
+  const awayX = cardX + cardW - 180;
+  const crestY = cardY + (isStory ? 160 : 120);
+
+  ctx.save();
+  ctx.fillStyle = homeColor;
+  ctx.beginPath(); ctx.arc(homeX, crestY, 65, 0, Math.PI * 2); ctx.fill();
+  ctx.lineWidth = 4; ctx.strokeStyle = '#ffffff'; ctx.stroke();
+  ctx.restore();
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '700 36px "Anton", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(initials(home), homeX, crestY + 12);
+
+  // Away Badge Circle
+  ctx.save();
+  ctx.fillStyle = awayColor;
+  ctx.beginPath(); ctx.arc(awayX, crestY, 65, 0, Math.PI * 2); ctx.fill();
+  ctx.lineWidth = 4; ctx.strokeStyle = '#ffffff'; ctx.stroke();
+  ctx.restore();
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '700 36px "Anton", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(initials(away), awayX, crestY + 12);
+
+  // VS text
+  ctx.fillStyle = '#d9b84a';
+  ctx.font = '700 44px "Anton", sans-serif';
+  ctx.fillText('VS', W / 2, crestY + 14);
+
+  // Team Names
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '700 38px "Anton", sans-serif';
+  ctx.fillText(home.toUpperCase(), homeX, crestY + 115);
+  ctx.fillText(away.toUpperCase(), awayX, crestY + 115);
+
+  // Standings Team Info
+  const tHome = (STANDINGS && STANDINGS.teams || []).find(t => t.name === home);
+  const tAway = (STANDINGS && STANDINGS.teams || []).find(t => t.name === away);
+  ctx.font = '20px "IBM Plex Mono", monospace';
+  ctx.fillStyle = '#8ea2c6';
+  ctx.fillText(tHome ? `#${tHome.rank} In UCL • ${tHome.points} Pts` : 'Top Tier European Contender', homeX, crestY + 148);
+  ctx.fillText(tAway ? `#${tAway.rank} In UCL • ${tAway.points} Pts` : 'Top Tier European Contender', awayX, crestY + 148);
+
+  // Odds Probabilities
+  let pHome = 0.48, pDraw = 0.24, pAway = 0.28;
+  if (m.odds){
+    pHome = m.odds.home; pDraw = m.odds.draw; pAway = m.odds.away;
+  } else if (tHome && tAway){
+    [pHome, pDraw, pAway] = outcomeProbabilitiesJS(tHome.elo, tAway.elo);
+  }
+  const pctHome = Math.round(pHome * 100);
+  const pctDraw = Math.round(pDraw * 100);
+  const pctAway = Math.round(pAway * 100);
+
+  // Probability Bar
+  const barY = crestY + (isStory ? 210 : 190);
+  const barW = 760;
+  const barH = 50;
+  const barX = (W - barW) / 2;
+
+  // Background track
+  ctx.fillStyle = '#11223e';
+  drawRoundedRect(ctx, barX, barY, barW, barH, 12, true, false);
+
+  const w1 = barW * (pctHome / 100);
+  const w2 = barW * (pctDraw / 100);
+  const w3 = barW - w1 - w2;
+
+  ctx.fillStyle = homeColor;
+  drawRoundedRect(ctx, barX, barY, w1, barH, 10, true, false);
+  ctx.fillStyle = '#64748b';
+  drawRoundedRect(ctx, barX + w1, barY, w2, barH, 0, true, false);
+  ctx.fillStyle = awayColor;
+  drawRoundedRect(ctx, barX + w1 + w2, barY, w3, barH, 10, true, false);
+
+  // Labels on bar
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '700 22px "IBM Plex Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(`${pctHome}% ${home.split(' ').pop()}`, barX + w1 / 2, barY + 34);
+  ctx.fillText(`${pctDraw}% Draw`, barX + w1 + w2 / 2, barY + 34);
+  ctx.fillText(`${pctAway}% ${away.split(' ').pop()}`, barX + w1 + w2 + w3 / 2, barY + 34);
+
+  // Simulated Score
+  const scoreY = barY + 85;
+  ctx.fillStyle = '#d9b84a';
+  ctx.font = '700 28px "Anton", sans-serif';
+  ctx.fillText(m.played ? `FINAL RESULT: ${m.score}` : `SIMULATED MOST LIKELY: 2 - 1`, W / 2, scoreY);
+
+  if (isStory){
+    // Key Star Showdown Section
+    const hLineup = (LINEUPS_DATA && LINEUPS_DATA[home]) || {};
+    const aLineup = (LINEUPS_DATA && LINEUPS_DATA[away]) || {};
+    const hStar = (hLineup.starting_xi && hLineup.starting_xi[hLineup.starting_xi.length - 1]) || {name: 'Primary Talisman'};
+    const aStar = (aLineup.starting_xi && aLineup.starting_xi[aLineup.starting_xi.length - 1]) || {name: 'Primary Talisman'};
+
+    const showdownY = cardY + 460;
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+    ctx.beginPath();
+    ctx.moveTo(cardX + 40, showdownY); ctx.lineTo(cardX + cardW - 40, showdownY); ctx.stroke();
+
+    ctx.fillStyle = '#d9b84a';
+    ctx.font = '700 22px "Anton", sans-serif';
+    ctx.fillText('KEY PLAYER HEAD-TO-HEAD', W / 2, showdownY + 36);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '700 26px "Anton", sans-serif';
+    ctx.fillText(hStar.name.toUpperCase(), homeX, showdownY + 90);
+    ctx.fillText(aStar.name.toUpperCase(), awayX, showdownY + 90);
+
+    ctx.fillStyle = '#8ea2c6';
+    ctx.font = '18px "IBM Plex Mono", monospace';
+    ctx.fillText(`Manager: ${hLineup.manager || 'Elite Coach'}`, homeX, showdownY + 125);
+    ctx.fillText(`Manager: ${aLineup.manager || 'Elite Coach'}`, awayX, showdownY + 125);
+
+    // Bottom Viral Hook Card
+    const viralY = cardY + cardH + 40;
+    const viralH = 260;
+    ctx.fillStyle = 'rgba(217, 184, 74, 0.08)';
+    ctx.strokeStyle = '#d9b84a';
+    ctx.lineWidth = 1.5;
+    drawRoundedRect(ctx, cardX, viralY, cardW, viralH, 16, true, true);
+
+    ctx.fillStyle = '#d9b84a';
+    ctx.font = '700 24px "Anton", sans-serif';
+    ctx.fillText('🚨 HIGH-STAKES QUALIFICATION SCENARIO', W / 2, viralY + 50);
+
+    ctx.fillStyle = '#f4ede2';
+    ctx.font = '22px "IBM Plex Mono", monospace';
+    const hookText = `${home} and ${away} battle in an essential Matchday 4 fixture. 16 points guarantees direct Round of 16 qualification, while 10 points secures a playoff spot. Every goal swings Elo and qualification odds!`;
+    wrapText(ctx, hookText, cardX + 45, viralY + 105, cardW - 90, 36, 4);
+  }
+}
+
+function renderTikTokStandingsCard(ctx, W, H, isStory, headerY){
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '700 64px "Anton", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('UCL OFFICIAL PROJECTIONS', W / 2, headerY + 70);
+
+  ctx.fillStyle = '#8ea2c6';
+  ctx.font = '22px "IBM Plex Mono", monospace';
+  ctx.fillText('20,000 MONTE CARLO SIMULATIONS • TOP 8 QUALIFIERS', W / 2, headerY + 110);
+
+  const cardY = headerY + 145;
+  const cardH = isStory ? 1340 : 700;
+  const cardW = 920;
+  const cardX = (W - cardW) / 2;
+
+  ctx.fillStyle = 'rgba(7, 18, 38, 0.85)';
+  ctx.strokeStyle = '#d9b84a';
+  ctx.lineWidth = 2;
+  drawRoundedRect(ctx, cardX, cardY, cardW, cardH, 20, true, true);
+
+  const teams = (STANDINGS && STANDINGS.teams || []).slice(0, isStory ? 10 : 6);
+  const rowH = isStory ? 88 : 78;
+
+  ctx.fillStyle = '#d9b84a';
+  ctx.font = '700 22px "Anton", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('TOP 8 AUTOMATIC ROUND OF 16 SEEDING ZONE', cardX + 40, cardY + 45);
+
+  teams.forEach((t, i) => {
+    const y = cardY + 95 + i * rowH;
+    const isTop8 = i < 8;
+
+    ctx.fillStyle = isTop8 ? 'rgba(217, 184, 74, 0.08)' : 'rgba(255, 255, 255, 0.03)';
+    drawRoundedRect(ctx, cardX + 30, y - 30, cardW - 60, rowH - 12, 8, true, false);
+
+    // Rank
+    ctx.fillStyle = isTop8 ? '#d9b84a' : '#8ea2c6';
+    ctx.font = '700 28px "Anton", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${i + 1}`, cardX + 65, y + 10);
+
+    // Team Name
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '700 30px "Anton", sans-serif';
+    ctx.fillText(t.name.toUpperCase(), cardX + 115, y + 10);
+
+    // Points & Odds
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#d9b84a';
+    ctx.font = '700 28px "Anton", sans-serif';
+    ctx.fillText(`${t.points} PTS`, cardX + cardW - 190, y + 10);
+
+    ctx.fillStyle = isTop8 ? '#5ec8f2' : '#8ea2c6';
+    ctx.font = '20px "IBM Plex Mono", monospace';
+    const top8Odds = Number.isFinite(t.prob_top8) ? Math.round(t.prob_top8 * 100) + '%' : '—';
+    ctx.fillText(`Top 8: ${top8Odds}`, cardX + cardW - 55, y + 10);
+  });
+
+  if (isStory){
+    const cutY = cardY + 95 + 8 * rowH - 10;
+    ctx.strokeStyle = '#d9b84a';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([8, 6]);
+    ctx.beginPath();
+    ctx.moveTo(cardX + 30, cutY); ctx.lineTo(cardX + cardW - 30, cutY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = '#d9b84a';
+    ctx.font = '700 20px "IBM Plex Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('⚡ TOP-8 AUTOMATIC QUALIFICATION CUTOFF: ~15-16 PTS ⚡', W / 2, cutY + 30);
+  }
+}
+
+function renderTikTokTeamCard(ctx, W, H, isStory, headerY){
+  const teamName = currentTikTokPayload.name || 'Real Madrid';
+  const team = (STANDINGS && STANDINGS.teams || []).find(t => t.name === teamName) || {rank: 3, points: 9, elo: 2200};
+  const dossier = (DOSSIERS && DOSSIERS[teamName]) || getDynamicDossier(teamName, team);
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '700 64px "Anton", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(teamName.toUpperCase(), W / 2, headerY + 70);
+
+  ctx.fillStyle = '#d9b84a';
+  ctx.font = '22px "IBM Plex Mono", monospace';
+  ctx.fillText(`OFFICIAL TACTICAL DOSSIER • #${team.rank} IN EUROPE`, W / 2, headerY + 110);
+
+  const cardY = headerY + 145;
+  const cardH = isStory ? 1340 : 700;
+  const cardW = 920;
+  const cardX = (W - cardW) / 2;
+
+  ctx.fillStyle = 'rgba(7, 18, 38, 0.85)';
+  ctx.strokeStyle = '#d9b84a';
+  ctx.lineWidth = 2;
+  drawRoundedRect(ctx, cardX, cardY, cardW, cardH, 20, true, true);
+
+  // Stats Bar
+  const statsY = cardY + 60;
+  ctx.textAlign = 'center';
+
+  const stats = [
+    {val: `#${team.rank}`, lbl: 'UCL RANK'},
+    {val: `${team.points}`, lbl: 'POINTS'},
+    {val: `${team.elo || 2000}`, lbl: 'ELO RATING'},
+    {val: `${formatProb(team.prob_top8)}`, lbl: 'TOP 8 ODDS'}
+  ];
+
+  stats.forEach((s, idx) => {
+    const sx = cardX + 115 + idx * 230;
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '700 44px "Anton", sans-serif';
+    ctx.fillText(s.val, sx, statsY);
+    ctx.fillStyle = '#8ea2c6';
+    ctx.font = '16px "IBM Plex Mono", monospace';
+    ctx.fillText(s.lbl, sx, statsY + 32);
+  });
+
+  // Tactical DNA
+  const dnaY = cardY + 170;
+  ctx.fillStyle = 'rgba(217, 184, 74, 0.08)';
+  ctx.strokeStyle = '#d9b84a';
+  ctx.lineWidth = 1.5;
+  drawRoundedRect(ctx, cardX + 40, dnaY, cardW - 80, isStory ? 340 : 200, 14, true, true);
+
+  ctx.fillStyle = '#d9b84a';
+  ctx.font = '700 24px "Anton", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('⚡ TACTICAL DNA & KEY ATTRIBUTES', cardX + 70, dnaY + 45);
+
+  ctx.fillStyle = '#f4ede2';
+  ctx.font = '22px "IBM Plex Mono", monospace';
+  wrapText(ctx, dossier.why_good || 'Technical mastery with lethal transitions.', cardX + 70, dnaY + 95, cardW - 140, 36, isStory ? 6 : 3);
+
+  if (isStory){
+    // Fan Pulse Box
+    const fanY = dnaY + 380;
+    ctx.fillStyle = 'rgba(94, 200, 242, 0.08)';
+    ctx.strokeStyle = '#5ec8f2';
+    drawRoundedRect(ctx, cardX + 40, fanY, cardW - 80, 260, 14, true, true);
+
+    ctx.fillStyle = '#5ec8f2';
+    ctx.font = '700 24px "Anton", sans-serif';
+    ctx.fillText('🎙️ FAN PULSE & ADVANCEMENT STAKES', cardX + 70, fanY + 45);
+
+    ctx.fillStyle = '#f4ede2';
+    ctx.font = '22px "IBM Plex Mono", monospace';
+    wrapText(ctx, dossier.fan_perspective || 'Supporters expect a deep European run.', cardX + 70, fanY + 95, cardW - 140, 36, 4);
+
+    // Target Path
+    const targetY = fanY + 300;
+    ctx.fillStyle = 'rgba(217, 184, 74, 0.12)';
+    ctx.strokeStyle = '#d9b84a';
+    drawRoundedRect(ctx, cardX + 40, targetY, cardW - 80, 160, 14, true, true);
+
+    ctx.fillStyle = '#d9b84a';
+    ctx.font = '700 22px "Anton", sans-serif';
+    ctx.fillText('🎯 ROADMAP TO KNOCKOUT BYE', cardX + 70, targetY + 45);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '20px "IBM Plex Mono", monospace';
+    wrapText(ctx, dossier.needs_to_advance || '16 points required for automatic qualification.', cardX + 70, targetY + 85, cardW - 140, 32, 2);
+  }
+}
+
+function downloadTikTokCard(){
+  const canvas = document.getElementById('tiktok-canvas');
+  if (!canvas) return;
+  const link = document.createElement('a');
+  link.download = `cl-tracker-${currentTikTokType}-${currentTikTokFormat}-${Date.now()}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+  showTikTokToast('✓ High-res card downloaded! Ready to post on TikTok/Stories.');
+}
+
+async function copyTikTokCard(){
+  const canvas = document.getElementById('tiktok-canvas');
+  if (!canvas) return;
+  try {
+    canvas.toBlob(async blob => {
+      await navigator.clipboard.write([
+        new ClipboardItem({'image/png': blob})
+      ]);
+      showTikTokToast('✓ Card copied to clipboard! Paste directly into TikTok/Discord/Instagram.');
+    }, 'image/png');
+  } catch(e) {
+    downloadTikTokCard();
+  }
+}
+
+function showTikTokToast(msg){
+  const toast = document.getElementById('tiktok-toast');
+  if (!toast) return;
+  toast.textContent = msg;
+  setTimeout(() => { if (toast.textContent === msg) toast.textContent = ''; }, 3500);
+}
+
 
 function renderRankings(){
   const el = document.getElementById('rankings-content');
@@ -1675,11 +2897,16 @@ function renderAll(){
   renderStandings();
   renderMatches();
   renderRankings();
+  renderStats();
+  renderCoefficients();
   renderAccuracy();
 }
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeTeamModal();
+  if (e.key === 'Escape') {
+    closeTeamModal();
+    closeTikTokCard();
+  }
 });
 </script>
 </body>

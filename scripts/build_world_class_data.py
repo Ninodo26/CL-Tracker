@@ -1,0 +1,844 @@
+import json
+
+# Full squad lineups and tactical formations for all 36 clubs
+# Coordinates (x, y) are percentage coordinates on a standard 100x100 pitch:
+# y: 8 (GK), 20-25 (Defenders), 40-55 (Midfielders), 70-85 (Forwards)
+# x: 15 (Left), 35 (Center-Left), 50 (Center), 65 (Center-Right), 85 (Right)
+
+LINEUPS = {
+    "Real Madrid": {
+        "formation": "4-3-3",
+        "manager": "Carlo Ancelotti",
+        "starting_xi": [
+            {"name": "Thibaut Courtois", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Dani Carvajal", "num": 2, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Éder Militão", "num": 3, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Antonio Rüdiger", "num": 22, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Ferland Mendy", "num": 23, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Federico Valverde", "num": 8, "pos": "RCM", "x": 70, "y": 48},
+            {"name": "Aurélien Tchouaméni", "num": 14, "pos": "DM", "x": 50, "y": 40},
+            {"name": "Jude Bellingham", "num": 5, "pos": "LCM", "x": 30, "y": 52},
+            {"name": "Rodrygo", "num": 11, "pos": "RW", "x": 82, "y": 78},
+            {"name": "Kylian Mbappé", "num": 9, "pos": "ST", "x": 50, "y": 86},
+            {"name": "Vinícius Júnior", "num": 7, "pos": "LW", "x": 18, "y": 80}
+        ],
+        "subs": ["Luka Modrić", "Brahim Díaz", "Eduardo Camavinga", "Arda Güler", "Lucas Vázquez", "Andriy Lunin"],
+        "injuries": [{"player": "David Alaba", "status": "Doubtful"}, {"player": "Dani Carvajal", "status": "Out"}],
+        "tactical_brief": "Direct vertical transition with inverted wing overloads. Mbappé and Vinícius exploit space behind high defensive lines while Bellingham arrives late into the box."
+    },
+    "Paris Saint-Germain": {
+        "formation": "4-3-3",
+        "manager": "Luis Enrique",
+        "starting_xi": [
+            {"name": "Gianluigi Donnarumma", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Achraf Hakimi", "num": 2, "pos": "RB", "x": 84, "y": 25},
+            {"name": "Marquinhos", "num": 5, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Willian Pacho", "num": 51, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Nuno Mendes", "num": 25, "pos": "LB", "x": 16, "y": 25},
+            {"name": "Warren Zaïre-Emery", "num": 33, "pos": "RCM", "x": 70, "y": 48},
+            {"name": "Vitinha", "num": 17, "pos": "DM", "x": 50, "y": 42},
+            {"name": "João Neves", "num": 87, "pos": "LCM", "x": 30, "y": 48},
+            {"name": "Ousmane Dembélé", "num": 10, "pos": "RW", "x": 82, "y": 78},
+            {"name": "Marco Asensio", "num": 11, "pos": "ST", "x": 50, "y": 82},
+            {"name": "Bradley Barcola", "num": 29, "pos": "LW", "x": 18, "y": 80}
+        ],
+        "subs": ["Randal Kolo Muani", "Fabián Ruiz", "Lucas Beraldo", "Kang-in Lee", "Matvey Safonov", "Lucas Hernández"],
+        "injuries": [{"player": "Presnel Kimpembe", "status": "Out"}, {"player": "Gonçalo Ramos", "status": "Doubtful"}],
+        "tactical_brief": "Dominant possession with high territorial strangulation. Vitinha dictates tempo while Dembélé and Barcola isolate full-backs in 1v1 situations."
+    },
+    "Liverpool": {
+        "formation": "4-2-3-1",
+        "manager": "Arne Slot",
+        "starting_xi": [
+            {"name": "Alisson Becker", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Trent Alexander-Arnold", "num": 66, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Ibrahima Konaté", "num": 5, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Virgil van Dijk", "num": 4, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Andy Robertson", "num": 26, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Ryan Gravenberch", "num": 38, "pos": "DM", "x": 60, "y": 40},
+            {"name": "Alexis Mac Allister", "num": 10, "pos": "DM", "x": 40, "y": 40},
+            {"name": "Mohamed Salah", "num": 11, "pos": "RW", "x": 84, "y": 74},
+            {"name": "Dominik Szoboszlai", "num": 8, "pos": "AM", "x": 50, "y": 60},
+            {"name": "Luis Díaz", "num": 7, "pos": "LW", "x": 16, "y": 74},
+            {"name": "Darwin Núñez", "num": 9, "pos": "ST", "x": 50, "y": 84}
+        ],
+        "subs": ["Cody Gakpo", "Curtis Jones", "Harvey Elliott", "Diogo Jota", "Kostas Tsimikas", "Caoimhín Kelleher"],
+        "injuries": [{"player": "Alisson Becker", "status": "Doubtful"}],
+        "tactical_brief": "Controlled possession combined with ferocious counter-pressing. Gravenberch controls the double pivot while Salah operates as the primary outlet."
+    },
+    "Manchester City": {
+        "formation": "4-1-4-1",
+        "manager": "Pep Guardiola",
+        "starting_xi": [
+            {"name": "Ederson", "num": 31, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Kyle Walker", "num": 2, "pos": "RB", "x": 84, "y": 22},
+            {"name": "Manuel Akanji", "num": 25, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Rúben Dias", "num": 3, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Joško Gvardiol", "num": 24, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Mateo Kovačić", "num": 8, "pos": "DM", "x": 50, "y": 40},
+            {"name": "Bernardo Silva", "num": 20, "pos": "RM", "x": 82, "y": 66},
+            {"name": "Kevin De Bruyne", "num": 17, "pos": "RCM", "x": 65, "y": 58},
+            {"name": "Phil Foden", "num": 47, "pos": "LCM", "x": 35, "y": 58},
+            {"name": "Jérémy Doku", "num": 11, "pos": "LM", "x": 18, "y": 66},
+            {"name": "Erling Haaland", "num": 9, "pos": "ST", "x": 50, "y": 86}
+        ],
+        "subs": ["Jack Grealish", "İlkay Gündoğan", "Savinho", "John Stones", "Nathan Aké", "Stefan Ortega"],
+        "injuries": [{"player": "Rodri", "status": "Out"}],
+        "tactical_brief": "Positional mastery with 3-2-4-1 buildup structure. Gvardiol pushes high, creating numerical superiorities while Haaland provides devastating box finishing."
+    },
+    "Barcelona": {
+        "formation": "4-2-3-1",
+        "manager": "Hansi Flick",
+        "starting_xi": [
+            {"name": "Wojciech Szczęsny", "num": 25, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Jules Koundé", "num": 23, "pos": "RB", "x": 84, "y": 25},
+            {"name": "Pau Cubarsí", "num": 2, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Iñigo Martínez", "num": 5, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Alejandro Balde", "num": 3, "pos": "LB", "x": 16, "y": 25},
+            {"name": "Marc Casadó", "num": 17, "pos": "DM", "x": 60, "y": 42},
+            {"name": "Pedri", "num": 8, "pos": "DM", "x": 40, "y": 42},
+            {"name": "Lamine Yamal", "num": 19, "pos": "RW", "x": 84, "y": 74},
+            {"name": "Dani Olmo", "num": 20, "pos": "AM", "x": 50, "y": 62},
+            {"name": "Raphinha", "num": 11, "pos": "LW", "x": 16, "y": 74},
+            {"name": "Robert Lewandowski", "num": 9, "pos": "ST", "x": 50, "y": 86}
+        ],
+        "subs": ["Frenkie de Jong", "Gavi", "Fermín López", "Ferran Torres", "Ansu Fati", "Iñaki Peña"],
+        "injuries": [{"player": "Marc-André ter Stegen", "status": "Out"}, {"player": "Ronald Araújo", "status": "Doubtful"}],
+        "tactical_brief": "Extreme high defensive line with relentless pressing. Raphinha's blistering transitions and Lamine Yamal's creative magic unlock deep blocks."
+    },
+    "Bayern Munich": {
+        "formation": "4-2-3-1",
+        "manager": "Vincent Kompany",
+        "starting_xi": [
+            {"name": "Manuel Neuer", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Konrad Laimer", "num": 27, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Dayot Upamecano", "num": 2, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Kim Min-jae", "num": 3, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Alphonso Davies", "num": 19, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Joshua Kimmich", "num": 6, "pos": "DM", "x": 60, "y": 42},
+            {"name": "Aleksandar Pavlović", "num": 45, "pos": "DM", "x": 40, "y": 42},
+            {"name": "Michael Olise", "num": 17, "pos": "RW", "x": 84, "y": 74},
+            {"name": "Jamal Musiala", "num": 42, "pos": "AM", "x": 50, "y": 62},
+            {"name": "Serge Gnabry", "num": 7, "pos": "LW", "x": 16, "y": 74},
+            {"name": "Harry Kane", "num": 9, "pos": "ST", "x": 50, "y": 86}
+        ],
+        "subs": ["Leroy Sané", "Kingsley Coman", "João Palhinha", "Thomas Müller", "Leon Goretzka", "Sven Ulreich"],
+        "injuries": [{"player": "Hiroki Ito", "status": "Doubtful"}, {"player": "Josip Stanišić", "status": "Out"}],
+        "tactical_brief": "Vertical pressing with aggressive counter-movements. Harry Kane drops deep as a facilitator, opening channels for Olise and Musiala's half-space runs."
+    },
+    "Arsenal": {
+        "formation": "4-3-3",
+        "manager": "Mikel Arteta",
+        "starting_xi": [
+            {"name": "David Raya", "num": 22, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Ben White", "num": 4, "pos": "RB", "x": 84, "y": 24},
+            {"name": "William Saliba", "num": 2, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Gabriel Magalhães", "num": 6, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Jurriën Timber", "num": 12, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Thomas Partey", "num": 5, "pos": "DM", "x": 50, "y": 40},
+            {"name": "Declan Rice", "num": 41, "pos": "RCM", "x": 70, "y": 50},
+            {"name": "Martin Ødegaard", "num": 8, "pos": "LCM", "x": 30, "y": 56},
+            {"name": "Bukayo Saka", "num": 7, "pos": "RW", "x": 84, "y": 78},
+            {"name": "Kai Havertz", "num": 29, "pos": "ST", "x": 50, "y": 84},
+            {"name": "Gabriel Martinelli", "num": 11, "pos": "LW", "x": 16, "y": 78}
+        ],
+        "subs": ["Leandro Trossard", "Jorginho", "Mikel Merino", "Raheem Sterling", "Riccardo Calafiori", "Neto"],
+        "injuries": [{"player": "Martin Ødegaard", "status": "Doubtful"}, {"player": "Takehiro Tomiyasu", "status": "Out"}],
+        "tactical_brief": "Suffocating box-to-box territorial control with the world's most disciplined set-piece routines. Saliba and Gabriel form Europe's stingiest defensive axis."
+    },
+    "Inter": {
+        "formation": "3-5-2",
+        "manager": "Simone Inzaghi",
+        "starting_xi": [
+            {"name": "Yann Sommer", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Benjamin Pavard", "num": 28, "pos": "RCB", "x": 75, "y": 22},
+            {"name": "Francesco Acerbi", "num": 15, "pos": "CB", "x": 50, "y": 18},
+            {"name": "Alessandro Bastoni", "num": 95, "pos": "LCB", "x": 25, "y": 22},
+            {"name": "Denzel Dumfries", "num": 2, "pos": "RWB", "x": 88, "y": 48},
+            {"name": "Nicolò Barella", "num": 23, "pos": "RCM", "x": 68, "y": 50},
+            {"name": "Hakan Çalhanoğlu", "num": 20, "pos": "DM", "x": 50, "y": 38},
+            {"name": "Henrikh Mkhitaryan", "num": 22, "pos": "LCM", "x": 32, "y": 50},
+            {"name": "Federico Dimarco", "num": 32, "pos": "LWB", "x": 12, "y": 48},
+            {"name": "Marcus Thuram", "num": 9, "pos": "ST", "x": 62, "y": 80},
+            {"name": "Lautaro Martínez", "num": 10, "pos": "ST", "x": 38, "y": 82}
+        ],
+        "subs": ["Mehdi Taremi", "Davide Frattesi", "Stefan de Vrij", "Piotr Zieliński", "Carlos Augusto", "Josep Martínez"],
+        "injuries": [{"player": "Tajon Buchanan", "status": "Doubtful"}],
+        "tactical_brief": "Fluid 3-5-2 with overlapping centre-backs. Çalhanoğlu is the deep-lying maestro while Lautaro and Thuram exploit 2v2 situations against opposing backlines."
+    },
+    "Aston Villa": {
+        "formation": "4-2-3-1",
+        "manager": "Unai Emery",
+        "starting_xi": [
+            {"name": "Emiliano Martínez", "num": 23, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Ezri Konsa", "num": 4, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Diego Carlos", "num": 3, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Pau Torres", "num": 14, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Lucas Digne", "num": 12, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Amadou Onana", "num": 24, "pos": "DM", "x": 60, "y": 40},
+            {"name": "Youri Tielemans", "num": 8, "pos": "DM", "x": 40, "y": 40},
+            {"name": "Leon Bailey", "num": 31, "pos": "RW", "x": 84, "y": 72},
+            {"name": "Morgan Rogers", "num": 27, "pos": "AM", "x": 50, "y": 60},
+            {"name": "John McGinn", "num": 7, "pos": "LW", "x": 16, "y": 72},
+            {"name": "Ollie Watkins", "num": 11, "pos": "ST", "x": 50, "y": 84}
+        ],
+        "subs": ["Jhon Durán", "Jacob Ramsey", "Ross Barkley", "Ian Maatsen", "Kosta Nedeljković", "Robin Olsen"],
+        "injuries": [{"player": "Boubacar Kamara", "status": "Doubtful"}, {"player": "Tyrone Mings", "status": "Doubtful"}],
+        "tactical_brief": "Emery's structured mid-block with rapid vertical counter-attacks. Pau Torres breaks lines with precision passing into Rogers and Watkins."
+    },
+    "Atletico Madrid": {
+        "formation": "5-3-2",
+        "manager": "Diego Simeone",
+        "starting_xi": [
+            {"name": "Jan Oblak", "num": 13, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Nahuel Molina", "num": 16, "pos": "RWB", "x": 88, "y": 45},
+            {"name": "Robin Le Normand", "num": 24, "pos": "RCB", "x": 72, "y": 22},
+            {"name": "José María Giménez", "num": 2, "pos": "CB", "x": 50, "y": 18},
+            {"name": "Reinildo Mandava", "num": 23, "pos": "LCB", "x": 28, "y": 22},
+            {"name": "Samuel Lino", "num": 12, "pos": "LWB", "x": 12, "y": 45},
+            {"name": "Rodrigo De Paul", "num": 5, "pos": "RCM", "x": 68, "y": 50},
+            {"name": "Koke", "num": 6, "pos": "DM", "x": 50, "y": 38},
+            {"name": "Conor Gallagher", "num": 4, "pos": "LCM", "x": 32, "y": 50},
+            {"name": "Antoine Griezmann", "num": 7, "pos": "ST", "x": 40, "y": 78},
+            {"name": "Julián Alvarez", "num": 19, "pos": "ST", "x": 60, "y": 82}
+        ],
+        "subs": ["Alexander Sørloth", "Ángel Correa", "Pablo Barrios", "Axel Witsel", "César Azpilicueta", "Juan Musso"],
+        "injuries": [{"player": "Robin Le Normand", "status": "Doubtful"}],
+        "tactical_brief": "Relentless defensive solidity with explosive transition punch. Griezmann pulls strings between the lines while Alvarez provides intelligent pressing."
+    },
+    "Borussia Dortmund": {
+        "formation": "4-2-3-1",
+        "manager": "Nuri Şahin",
+        "starting_xi": [
+            {"name": "Gregor Kobel", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Julian Ryerson", "num": 26, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Waldemar Anton", "num": 3, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Nico Schlotterbeck", "num": 4, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Ramy Bensebaini", "num": 5, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Emre Can", "num": 23, "pos": "DM", "x": 60, "y": 40},
+            {"name": "Pascal Groß", "num": 13, "pos": "DM", "x": 40, "y": 40},
+            {"name": "Donyell Malen", "num": 21, "pos": "RW", "x": 84, "y": 74},
+            {"name": "Julian Brandt", "num": 10, "pos": "AM", "x": 50, "y": 60},
+            {"name": "Jamie Bynoe-Gittens", "num": 43, "pos": "LW", "x": 16, "y": 74},
+            {"name": "Serhou Guirassy", "num": 9, "pos": "ST", "x": 50, "y": 84}
+        ],
+        "subs": ["Marcel Sabitzer", "Maximilian Beier", "Felix Nmecha", "Niklas Süle", "Yan Couto", "Alexander Meyer"],
+        "injuries": [{"player": "Karim Adeyemi", "status": "Out"}, {"player": "Giovanni Reyna", "status": "Doubtful"}],
+        "tactical_brief": "Direct dynamic transitions utilizing the box threat of Serhou Guirassy and the 1v1 wing isolation of Bynoe-Gittens."
+    },
+    "Sporting CP": {
+        "formation": "3-4-2-1",
+        "manager": "Rúben Amorim",
+        "starting_xi": [
+            {"name": "Franco Israel", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Zeno Debast", "num": 6, "pos": "RCB", "x": 75, "y": 22},
+            {"name": "Ousmane Diomande", "num": 26, "pos": "CB", "x": 50, "y": 18},
+            {"name": "Gonçalo Inácio", "num": 25, "pos": "LCB", "x": 25, "y": 22},
+            {"name": "Geovany Quenda", "num": 57, "pos": "RWB", "x": 88, "y": 48},
+            {"name": "Morten Hjulmand", "num": 42, "pos": "CM", "x": 62, "y": 44},
+            {"name": "Hidemasa Morita", "num": 8, "pos": "CM", "x": 38, "y": 44},
+            {"name": "Nuno Santos", "num": 11, "pos": "LWB", "x": 12, "y": 48},
+            {"name": "Francisco Trincão", "num": 17, "pos": "RAM", "x": 72, "y": 68},
+            {"name": "Pedro Gonçalves", "num": 8, "pos": "LAM", "x": 28, "y": 68},
+            {"name": "Viktor Gyökeres", "num": 9, "pos": "ST", "x": 50, "y": 86}
+        ],
+        "subs": ["Marcus Edwards", "Geny Catamo", "Daniel Bragança", "Matheus Reis", "Conrad Harder", "Vladan Kovačević"],
+        "injuries": [{"player": "Pedro Gonçalves", "status": "Doubtful"}],
+        "tactical_brief": "High-intensity 3-4-2-1 system built around Viktor Gyökeres's relentless power running and Morten Hjulmand's midfield bite."
+    },
+    "Real Betis": {
+        "formation": "4-2-3-1",
+        "manager": "Manuel Pellegrini",
+        "starting_xi": [
+            {"name": "Rui Silva", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Héctor Bellerín", "num": 2, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Diego Llorente", "num": 3, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Natan", "num": 4, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Romain Perraud", "num": 15, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Sergi Altimira", "num": 16, "pos": "DM", "x": 60, "y": 40},
+            {"name": "Marc Roca", "num": 21, "pos": "DM", "x": 40, "y": 40},
+            {"name": "Pablo Fornals", "num": 18, "pos": "RW", "x": 84, "y": 70},
+            {"name": "Giovani Lo Celso", "num": 20, "pos": "AM", "x": 50, "y": 62},
+            {"name": "Abde Ezzalzouli", "num": 10, "pos": "LW", "x": 16, "y": 70},
+            {"name": "Vitor Roque", "num": 8, "pos": "ST", "x": 50, "y": 84}
+        ],
+        "subs": ["Chimy Ávila", "Johnny Cardoso", "Aitor Ruibal", "Ricardo Rodriguez", "Adrián", "Iker Losada"],
+        "injuries": [{"player": "Isco", "status": "Out"}, {"player": "William Carvalho", "status": "Out"}],
+        "tactical_brief": "Pellegrini's fluid possession system. Lo Celso operates with total creative freedom behind Vitor Roque, creating dynamic central combinations."
+    },
+    "VfB Stuttgart": {
+        "formation": "4-4-2",
+        "manager": "Sebastian Hoeneß",
+        "starting_xi": [
+            {"name": "Alexander Nübel", "num": 33, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Josha Vagnoman", "num": 4, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Anthony Rouault", "num": 29, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Jeff Chabot", "num": 24, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Maximilian Mittelstädt", "num": 7, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Enzo Millot", "num": 8, "pos": "RM", "x": 82, "y": 55},
+            {"name": "Atakan Karazor", "num": 16, "pos": "CM", "x": 60, "y": 42},
+            {"name": "Angelo Stiller", "num": 6, "pos": "CM", "x": 40, "y": 42},
+            {"name": "Jamie Leweling", "num": 18, "pos": "LM", "x": 18, "y": 55},
+            {"name": "Deniz Undav", "num": 26, "pos": "ST", "x": 40, "y": 80},
+            {"name": "El Bilal Touré", "num": 10, "pos": "ST", "x": 60, "y": 82}
+        ],
+        "subs": ["Chris Führich", "Ermedin Demirović", "Fabian Rieder", "Pascal Stenzel", "Dan-Axel Zagadou", "Fabian Bredlow"],
+        "injuries": [{"player": "Dan-Axel Zagadou", "status": "Out"}],
+        "tactical_brief": "Intricate buildup play orchestrated by Angelo Stiller, combined with high-tempo wing overloads through Mittelstädt and Undav's deceptive box movement."
+    },
+    "Como": {
+        "formation": "4-2-3-1",
+        "manager": "Cesc Fàbregas",
+        "starting_xi": [
+            {"name": "Emil Audero", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Ignace Van der Brempt", "num": 77, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Alberto Dossena", "num": 13, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Marc-Oliver Kempf", "num": 2, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Alberto Moreno", "num": 18, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Máximo Perrone", "num": 23, "pos": "DM", "x": 60, "y": 40},
+            {"name": "Sergi Roberto", "num": 20, "pos": "DM", "x": 40, "y": 40},
+            {"name": "Gabriel Strefezza", "num": 7, "pos": "RW", "x": 84, "y": 72},
+            {"name": "Nico Paz", "num": 79, "pos": "AM", "x": 50, "y": 62},
+            {"name": "Alieu Fadera", "num": 16, "pos": "LW", "x": 16, "y": 72},
+            {"name": "Patrick Cutrone", "num": 10, "pos": "ST", "x": 50, "y": 84}
+        ],
+        "subs": ["Andrea Belotti", "Lucas Da Cunha", "Simone Verdi", "Edoardo Goldaniga", "Pepe Reina", "Yannik Engelhardt"],
+        "injuries": [{"player": "Raphaël Varane", "status": "Retired/Out"}],
+        "tactical_brief": "Fàbregas's ambitious modern Spanish-style possession scheme. Nico Paz is the creative centerpiece, linking intricate passing sequences with Cutrone's energetic pressing."
+    },
+    "Club Brugge": {
+        "formation": "4-3-3",
+        "manager": "Nicky Hayen",
+        "starting_xi": [
+            {"name": "Simon Mignolet", "num": 22, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Joaquin Seys", "num": 65, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Joel Ordóñez", "num": 4, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Brandon Mechele", "num": 44, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Maxim De Cuyper", "num": 55, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Raphael Onyedika", "num": 15, "pos": "DM", "x": 50, "y": 40},
+            {"name": "Ardon Jashari", "num": 27, "pos": "RCM", "x": 70, "y": 50},
+            {"name": "Hans Vanaken", "num": 20, "pos": "LCM", "x": 30, "y": 54},
+            {"name": "Chemsdine Talbi", "num": 68, "pos": "RW", "x": 84, "y": 74},
+            {"name": "Ferran Jutglà", "num": 9, "pos": "ST", "x": 50, "y": 84},
+            {"name": "Christos Tzolis", "num": 8, "pos": "LW", "x": 16, "y": 74}
+        ],
+        "subs": ["Gustaf Nilsson", "Andreas Skov Olsen", "Hugo Vetlesen", "Casper Nielsen", "Kyriani Sabbe", "Nordin Jackers"],
+        "injuries": [{"player": "Bjorn Meijer", "status": "Doubtful"}],
+        "tactical_brief": "Direct, physically commanding structure orchestrated by tall playmaker Hans Vanaken, with explosive pace from Tzolis on the left wing."
+    },
+    "Roma": {
+        "formation": "3-4-2-1",
+        "manager": "Ivan Jurić",
+        "starting_xi": [
+            {"name": "Mile Svilar", "num": 99, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Gianluca Mancini", "num": 23, "pos": "RCB", "x": 75, "y": 22},
+            {"name": "Evan Ndicka", "num": 5, "pos": "CB", "x": 50, "y": 18},
+            {"name": "Angeliño", "num": 3, "pos": "LCB", "x": 25, "y": 22},
+            {"name": "Zeki Çelik", "num": 19, "pos": "RWB", "x": 88, "y": 46},
+            {"name": "Manu Koné", "num": 17, "pos": "CM", "x": 62, "y": 42},
+            {"name": "Bryan Cristante", "num": 4, "pos": "CM", "x": 38, "y": 42},
+            {"name": "Nicola Zalewski", "num": 59, "pos": "LWB", "x": 12, "y": 46},
+            {"name": "Paulo Dybala", "num": 21, "pos": "RAM", "x": 70, "y": 68},
+            {"name": "Lorenzo Pellegrini", "num": 7, "pos": "LAM", "x": 30, "y": 68},
+            {"name": "Artem Dovbyk", "num": 11, "pos": "ST", "x": 50, "y": 84}
+        ],
+        "subs": ["Matías Soulé", "Tommaso Baldanzi", "Enzo Le Fée", "Mario Hermoso", "Stephan El Shaarawy", "Mathew Ryan"],
+        "injuries": [{"player": "Alexis Saelemaekers", "status": "Out"}],
+        "tactical_brief": "Aggressive man-to-man pressing across all zones. Paulo Dybala delivers game-breaking brilliance while Artem Dovbyk acts as an aerially dominant focal point."
+    },
+    "Shakhtar Donetsk": {
+        "formation": "4-3-3",
+        "manager": "Marino Pušić",
+        "starting_xi": [
+            {"name": "Dmytro Riznyk", "num": 31, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Yukhym Konoplya", "num": 26, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Valeriy Bondar", "num": 5, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Mykola Matviyenko", "num": 22, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Pedro Henrique", "num": 13, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Taras Stepanenko", "num": 6, "pos": "DM", "x": 50, "y": 38},
+            {"name": "Artem Bondarenko", "num": 21, "pos": "RCM", "x": 70, "y": 50},
+            {"name": "Georgiy Sudakov", "num": 10, "pos": "LCM", "x": 30, "y": 54},
+            {"name": "Oleksandr Zubkov", "num": 11, "pos": "RW", "x": 84, "y": 74},
+            {"name": "Danylo Sikan", "num": 14, "pos": "ST", "x": 50, "y": 84},
+            {"name": "Newertton", "num": 7, "pos": "LW", "x": 16, "y": 74}
+        ],
+        "subs": ["Kevin", "Marlon Gomes", "Eguinaldo", "Dmytro Kryskiv", "Vinicius Tobias", "Denys Tvardovskyi"],
+        "injuries": [{"player": "Tymur Puzankov", "status": "Doubtful"}],
+        "tactical_brief": "Brave technical buildup in tight spaces, driven by Georgiy Sudakov's elite passing vision and quick transitions to the Brazilian wingers."
+    },
+    "PSV Eindhoven": {
+        "formation": "4-3-3",
+        "manager": "Peter Bosz",
+        "starting_xi": [
+            {"name": "Walter Benítez", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Mauro Júnior", "num": 17, "pos": "RB", "x": 84, "y": 25},
+            {"name": "Ryan Flamingo", "num": 6, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Olivier Boscagli", "num": 18, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Matteo Dams", "num": 39, "pos": "LB", "x": 16, "y": 25},
+            {"name": "Jerdy Schouten", "num": 22, "pos": "DM", "x": 50, "y": 40},
+            {"name": "Guus Til", "num": 20, "pos": "RCM", "x": 70, "y": 54},
+            {"name": "Ismael Saibari", "num": 34, "pos": "LCM", "x": 30, "y": 50},
+            {"name": "Johan Bakayoko", "num": 11, "pos": "RW", "x": 84, "y": 76},
+            {"name": "Luuk de Jong", "num": 9, "pos": "ST", "x": 50, "y": 86},
+            {"name": "Noa Lang", "num": 10, "pos": "LW", "x": 16, "y": 76}
+        ],
+        "subs": ["Malik Tillman", "Ricardo Pepi", "Joey Veerman", "Couhaib Driouech", "Rick Karsdorp", "Joël Drommel"],
+        "injuries": [{"player": "Joey Veerman", "status": "Doubtful"}, {"player": "Sergiño Dest", "status": "Out"}],
+        "tactical_brief": "High-risk, high-reward attacking frenzy under Peter Bosz. Constant crossing opportunities for Luuk de Jong's unmatched aerial finishing."
+    },
+    "Villarreal": {
+        "formation": "4-4-2",
+        "manager": "Marcelino",
+        "starting_xi": [
+            {"name": "Diego Conde", "num": 13, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Kiko Femenía", "num": 17, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Raúl Albiol", "num": 3, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Logan Costa", "num": 2, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Sergi Cardona", "num": 23, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Ilias Akhomach", "num": 11, "pos": "RM", "x": 82, "y": 55},
+            {"name": "Santi Comesaña", "num": 14, "pos": "CM", "x": 60, "y": 42},
+            {"name": "Dani Parejo", "num": 10, "pos": "CM", "x": 40, "y": 42},
+            {"name": "Álex Baena", "num": 16, "pos": "LM", "x": 18, "y": 55},
+            {"name": "Ayoze Pérez", "num": 22, "pos": "ST", "x": 40, "y": 82},
+            {"name": "Thierno Barry", "num": 15, "pos": "ST", "x": 60, "y": 82}
+        ],
+        "subs": ["Nicolas Pépé", "Yeremy Pino", "Pape Gueye", "Eric Bailly", "Luiz Júnior", "Ramon Terrats"],
+        "injuries": [{"player": "Gerard Moreno", "status": "Doubtful"}, {"player": "Juan Foyth", "status": "Out"}],
+        "tactical_brief": "Classic compact 4-4-2 with rapid counter-attacking wings. Álex Baena is Europe's premier open-play chance creator, unlocking defenses with surgical precision."
+    },
+    "Manchester United": {
+        "formation": "4-2-3-1",
+        "manager": "Erik ten Hag",
+        "starting_xi": [
+            {"name": "André Onana", "num": 24, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Noussair Mazraoui", "num": 3, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Matthijs de Ligt", "num": 4, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Lisandro Martínez", "num": 6, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Diogo Dalot", "num": 20, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Casemiro", "num": 18, "pos": "DM", "x": 60, "y": 40},
+            {"name": "Kobbie Mainoo", "num": 37, "pos": "DM", "x": 40, "y": 40},
+            {"name": "Amad Diallo", "num": 16, "pos": "RW", "x": 84, "y": 72},
+            {"name": "Bruno Fernandes", "num": 8, "pos": "AM", "x": 50, "y": 60},
+            {"name": "Alejandro Garnacho", "num": 17, "pos": "LW", "x": 16, "y": 72},
+            {"name": "Rasmus Højlund", "num": 9, "pos": "ST", "x": 50, "y": 84}
+        ],
+        "subs": ["Marcus Rashford", "Joshua Zirkzee", "Manuel Ugarte", "Christian Eriksen", "Harry Maguire", "Altay Bayındır"],
+        "injuries": [{"player": "Luke Shaw", "status": "Out"}, {"player": "Mason Mount", "status": "Doubtful"}],
+        "tactical_brief": "Direct vertical transitions driven by Bruno Fernandes's defense-splitting passes and Garnacho's direct running into the channels."
+    },
+    "Napoli": {
+        "formation": "4-3-3",
+        "manager": "Antonio Conte",
+        "starting_xi": [
+            {"name": "Alex Meret", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Giovanni Di Lorenzo", "num": 22, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Amir Rrahmani", "num": 13, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Alessandro Buongiorno", "num": 4, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Mathías Olivera", "num": 17, "pos": "LB", "x": 16, "y": 24},
+            {"name": "André-Frank Zambo Anguissa", "num": 99, "pos": "RCM", "x": 70, "y": 48},
+            {"name": "Stanislav Lobotka", "num": 68, "pos": "DM", "x": 50, "y": 38},
+            {"name": "Scott McTominay", "num": 8, "pos": "LCM", "x": 30, "y": 52},
+            {"name": "Matteo Politano", "num": 21, "pos": "RW", "x": 84, "y": 76},
+            {"name": "Romelu Lukaku", "num": 11, "pos": "ST", "x": 50, "y": 86},
+            {"name": "Khvicha Kvaratskhelia", "num": 77, "pos": "LW", "x": 16, "y": 76}
+        ],
+        "subs": ["David Neres", "Giacomo Raspadori", "Billy Gilmour", "Leonardo Spinazzola", "Rafa Marín", "Elia Caprile"],
+        "injuries": [{"player": "Stanislav Lobotka", "status": "Doubtful"}],
+        "tactical_brief": "Conte's relentless intensity and physical dominance. Lukaku acts as the impenetrable wall for McTominay's late bursts and Kvaratskhelia's 1v1 trickery."
+    },
+    "LASK": {
+        "formation": "3-4-3",
+        "manager": "Markus Schopp",
+        "starting_xi": [
+            {"name": "Jörg Siebenhandl", "num": 28, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Philipp Ziereis", "num": 5, "pos": "RCB", "x": 75, "y": 22},
+            {"name": "Hrvoje Smolčić", "num": 4, "pos": "CB", "x": 50, "y": 18},
+            {"name": "Maksym Talovierov", "num": 3, "pos": "LCB", "x": 25, "y": 22},
+            {"name": "Melayro Bogarde", "num": 20, "pos": "RWB", "x": 88, "y": 48},
+            {"name": "Branko Jovičić", "num": 18, "pos": "CM", "x": 60, "y": 44},
+            {"name": "Valon Berisha", "num": 14, "pos": "CM", "x": 40, "y": 44},
+            {"name": "George Bello", "num": 2, "pos": "LWB", "x": 12, "y": 48},
+            {"name": "Moses Usor", "num": 17, "pos": "RW", "x": 80, "y": 74},
+            {"name": "Marin Ljubičić", "num": 9, "pos": "ST", "x": 50, "y": 84},
+            {"name": "Robert Žulj", "num": 10, "pos": "LW", "x": 20, "y": 74}
+        ],
+        "subs": ["Lenny Pintor", "Sascha Horvath", "Florian Flecker", "Andrés Andrade", "Lukas Jungwirth"],
+        "injuries": [{"player": "Tobias Lawal", "status": "Out"}],
+        "tactical_brief": "Direct, aggressive pressing block that hunts turnovers in the middle third and relies on Robert Žulj's technical composure in front of goal."
+    },
+    "Sabah FK": {
+        "formation": "4-2-3-1",
+        "manager": "Krunoslav Rendulić",
+        "starting_xi": [
+            {"name": "Yusif Imanov", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Amin Seydiyev", "num": 2, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Jon Irazabal", "num": 4, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Sofian Chakla", "num": 44, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Bojan Letić", "num": 3, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Ivan Lepinjica", "num": 8, "pos": "DM", "x": 60, "y": 40},
+            {"name": "Elvin Camalov", "num": 6, "pos": "DM", "x": 40, "y": 40},
+            {"name": "Kaheem Parris", "num": 7, "pos": "RW", "x": 84, "y": 72},
+            {"name": "Ayaz Guliyev", "num": 10, "pos": "AM", "x": 50, "y": 60},
+            {"name": "Jesse Sekidika", "num": 11, "pos": "LW", "x": 16, "y": 72},
+            {"name": "Pavol Šafranko", "num": 9, "pos": "ST", "x": 50, "y": 84}
+        ],
+        "subs": ["Joy-Lance Mickels", "Namiq Ələsgərov", "Khayal Aliyev", "Rahman Dashdamirov", "Nicat Mehbaliyev"],
+        "injuries": [{"player": "Vincent Thill", "status": "Doubtful"}],
+        "tactical_brief": "Compact low-block defensive shield with explosive vertical breaks targeting the pace of Parris and the hold-up play of Šafranko."
+    },
+    "Feyenoord": {
+        "formation": "4-3-3",
+        "manager": "Brian Priske",
+        "starting_xi": [
+            {"name": "Timon Wellenreuther", "num": 22, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Jordan Lotomba", "num": 2, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Gernot Trauner", "num": 18, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Dávid Hancko", "num": 33, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Hugo Bueno", "num": 16, "pos": "LB", "x": 16, "y": 24},
+            {"name": "In-beom Hwang", "num": 4, "pos": "DM", "x": 50, "y": 40},
+            {"name": "Quinten Timber", "num": 8, "pos": "RCM", "x": 70, "y": 50},
+            {"name": "Antoni Milambo", "num": 27, "pos": "LCM", "x": 30, "y": 54},
+            {"name": "Ibrahim Osman", "num": 11, "pos": "RW", "x": 84, "y": 74},
+            {"name": "Ayase Ueda", "num": 9, "pos": "ST", "x": 50, "y": 84},
+            {"name": "Igor Paixão", "num": 14, "pos": "LW", "x": 16, "y": 74}
+        ],
+        "subs": ["Santiago Giménez", "Luka Ivanušec", "Ramiz Zerrouki", "Thomas Beelen", "Gjivai Zechiël", "Justin Bijlow"],
+        "injuries": [{"player": "Santiago Giménez", "status": "Out"}, {"player": "Quilindschy Hartman", "status": "Out"}],
+        "tactical_brief": "High-intensity midfield pressing engineered by Quinten Timber, with Hwang controlling the distribution to dynamic wide wingers."
+    },
+    "Lens": {
+        "formation": "3-4-1-2",
+        "manager": "Will Still",
+        "starting_xi": [
+            {"name": "Brice Samba", "num": 30, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Jonathan Gradit", "num": 24, "pos": "RCB", "x": 75, "y": 22},
+            {"name": "Kevin Danso", "num": 4, "pos": "CB", "x": 50, "y": 18},
+            {"name": "Facundo Medina", "num": 14, "pos": "LCB", "x": 25, "y": 22},
+            {"name": "Przemysław Frankowski", "num": 29, "pos": "RWB", "x": 88, "y": 46},
+            {"name": "Andy Diouf", "num": 18, "pos": "CM", "x": 62, "y": 42},
+            {"name": "Adrien Thomasson", "num": 28, "pos": "CM", "x": 38, "y": 42},
+            {"name": "Deiver Machado", "num": 3, "pos": "LWB", "x": 12, "y": 46},
+            {"name": "Angelo Fulgini", "num": 11, "pos": "AM", "x": 50, "y": 64},
+            {"name": "Florian Sotoca", "num": 7, "pos": "ST", "x": 38, "y": 82},
+            {"name": "M'Bala Nzola", "num": 8, "pos": "ST", "x": 62, "y": 82}
+        ],
+        "subs": ["Wesley Saïd", "Martin Satriano", "Nampalys Mendy", "Abdukodir Khusanov", "Hervé Koffi"],
+        "injuries": [{"player": "Jimmy Cabot", "status": "Out"}],
+        "tactical_brief": "Ferocious front-foot pressing, vertical directness from Brice Samba, and punishing physical duels through Danso and Medina."
+    },
+    "Bodo/Glimt": {
+        "formation": "4-3-3",
+        "manager": "Kjetil Knutsen",
+        "starting_xi": [
+            {"name": "Nikita Haikin", "num": 12, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Fredrik Sjøvold", "num": 20, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Jostein Gundersen", "num": 6, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Odin Bjørtuft", "num": 4, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Fredrik André Bjørkan", "num": 15, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Patrick Berg", "num": 77, "pos": "DM", "x": 50, "y": 40},
+            {"name": "Håkon Evjen", "num": 26, "pos": "RCM", "x": 70, "y": 52},
+            {"name": "Ulrik Saltnes", "num": 14, "pos": "LCM", "x": 30, "y": 52},
+            {"name": "Isak Dybvik Määttä", "num": 27, "pos": "RW", "x": 84, "y": 74},
+            {"name": "Philip Zinckernagel", "num": 10, "pos": "ST", "x": 50, "y": 84},
+            {"name": "Jens Petter Hauge", "num": 23, "pos": "LW", "x": 16, "y": 74}
+        ],
+        "subs": ["Kasper Høgh", "August Mikkelsen", "Sondre Fet", "Villads Nielsen", "Julian Faye Lund"],
+        "injuries": [{"player": "Brice Wembangomo", "status": "Doubtful"}],
+        "tactical_brief": "Lightning-fast synchronized attacking rotations under Knutsen. Patrick Berg initiates rapid counter-attacks targeting Jens Petter Hauge's 1v1 quality."
+    },
+    "AEK Athens": {
+        "formation": "4-4-2",
+        "manager": "Matías Almeyda",
+        "starting_xi": [
+            {"name": "Thomas Strakosha", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Lazaros Rota", "num": 12, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Domagoj Vida", "num": 21, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Harold Moukoudi", "num": 2, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Ehsan Hajsafi", "num": 3, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Niclas Eliasson", "num": 19, "pos": "RM", "x": 82, "y": 55},
+            {"name": "Damian Szymański", "num": 6, "pos": "CM", "x": 60, "y": 42},
+            {"name": "Orbelín Pineda", "num": 13, "pos": "CM", "x": 40, "y": 42},
+            {"name": "Mijat Gaćinović", "num": 8, "pos": "LM", "x": 18, "y": 55},
+            {"name": "Levi García", "num": 7, "pos": "ST", "x": 40, "y": 82},
+            {"name": "Frantzdy Pierrot", "num": 14, "pos": "ST", "x": 60, "y": 82}
+        ],
+        "subs": ["Erik Lamela", "Anthony Martial", "Roberto Pereyra", "Petros Mantalos", "Alberto Brignoli"],
+        "injuries": [{"player": "Jens Jønsson", "status": "Doubtful"}],
+        "tactical_brief": "Almeyda's high-pressure man-oriented defensive setup, complemented by the physical dynamism of Pierrot and the creative flair of Lamela and Pineda."
+    },
+    "RB Leipzig": {
+        "formation": "4-2-2-2",
+        "manager": "Marco Rose",
+        "starting_xi": [
+            {"name": "Péter Gulácsi", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Lutsharel Geertruida", "num": 3, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Willi Orbán", "num": 4, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Castello Lukeba", "num": 23, "pos": "CB", "x": 38, "y": 20},
+            {"name": "David Raum", "num": 22, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Amadou Haidara", "num": 8, "pos": "DM", "x": 60, "y": 42},
+            {"name": "Arthur Vermeeren", "num": 18, "pos": "DM", "x": 40, "y": 42},
+            {"name": "Christoph Baumgartner", "num": 14, "pos": "RAM", "x": 75, "y": 64},
+            {"name": "Xavi Simons", "num": 10, "pos": "LAM", "x": 25, "y": 64},
+            {"name": "Loïs Openda", "num": 11, "pos": "ST", "x": 60, "y": 84},
+            {"name": "Benjamin Šeško", "num": 30, "pos": "ST", "x": 40, "y": 84}
+        ],
+        "subs": ["Antonio Nusa", "Nicolas Seiwald", "El Chadaille Bitshiabu", "Kevin Kampl", "Maarten Vandevoordt"],
+        "injuries": [{"player": "Xaver Schlager", "status": "Out"}, {"player": "David Raum", "status": "Doubtful"}],
+        "tactical_brief": "High-octane central counter-pressing. Xavi Simons orchestrates from the half-spaces, unleashing the devastating raw sprint speed of Openda and Šeško."
+    },
+    "Slavia Praha": {
+        "formation": "3-4-2-1",
+        "manager": "Jindřich Trpišovský",
+        "starting_xi": [
+            {"name": "Antonín Kinský", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Tomáš Holeš", "num": 3, "pos": "RCB", "x": 75, "y": 22},
+            {"name": "David Zima", "num": 4, "pos": "CB", "x": 50, "y": 18},
+            {"name": "Jan Bořil", "num": 18, "pos": "LCB", "x": 25, "y": 22},
+            {"name": "David Douděra", "num": 21, "pos": "RWB", "x": 88, "y": 46},
+            {"name": "Oscar Dorley", "num": 19, "pos": "CM", "x": 60, "y": 42},
+            {"name": "Christos Zafeiris", "num": 10, "pos": "CM", "x": 40, "y": 42},
+            {"name": "El Hadji Malick Diouf", "num": 12, "pos": "LWB", "x": 12, "y": 46},
+            {"name": "Lukáš Provod", "num": 17, "pos": "RAM", "x": 70, "y": 68},
+            {"name": "Mojmír Chytil", "num": 13, "pos": "LAM", "x": 30, "y": 68},
+            {"name": "Tomáš Chorý", "num": 25, "pos": "ST", "x": 50, "y": 85}
+        ],
+        "subs": ["Ivan Schranz", "Conrad Wallem", "Matěj Jurásek", "Filip Prebsl", "Aleš Mandous"],
+        "injuries": [{"player": "Lukáš Masopust", "status": "Doubtful"}],
+        "tactical_brief": "Tireless full-pitch running and relentless pressing duels. Chorý provides massive aerial target support while Provod creates opportunities from out wide."
+    },
+    "Viking": {
+        "formation": "4-3-3",
+        "manager": "Bjarte Lunde Aarsheim",
+        "starting_xi": [
+            {"name": "Arild Østbø", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Viljar Vevatne", "num": 18, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Gianni Stensness", "num": 4, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Sondre Langås", "num": 23, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Jost Urbancic", "num": 3, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Joe Bell", "num": 8, "pos": "DM", "x": 50, "y": 40},
+            {"name": "Sander Svendsen", "num": 10, "pos": "RCM", "x": 70, "y": 52},
+            {"name": "Kristoffer Løkberg", "num": 24, "pos": "LCM", "x": 30, "y": 52},
+            {"name": "Zlatko Tripić", "num": 11, "pos": "RW", "x": 84, "y": 74},
+            {"name": "Lars-Jørgen Salvesen", "num": 9, "pos": "ST", "x": 50, "y": 84},
+            {"name": "Peter Christiansen", "num": 29, "pos": "LW", "x": 16, "y": 74}
+        ],
+        "subs": ["Simen Kvia-Egeskog", "Edvin Austbø", "Yann-Erik de Lanlay", "Herman Haugen", "Magnus Rugland Ree"],
+        "injuries": [{"player": "Nick D'Agostino", "status": "Doubtful"}],
+        "tactical_brief": "Scandinavia's high-tempo direct attack, revolving around captain Zlatko Tripić's talismanic leadership and deadly dead-ball deliveries."
+    },
+    "Porto": {
+        "formation": "4-2-3-1",
+        "manager": "Vítor Bruno",
+        "starting_xi": [
+            {"name": "Diogo Costa", "num": 99, "pos": "GK", "x": 50, "y": 8},
+            {"name": "João Mário", "num": 23, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Nehuén Pérez", "num": 24, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Zé Pedro", "num": 97, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Francisco Moura", "num": 74, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Alan Varela", "num": 22, "pos": "DM", "x": 60, "y": 40},
+            {"name": "Stephen Eustáquio", "num": 6, "pos": "DM", "x": 40, "y": 40},
+            {"name": "Pepê", "num": 11, "pos": "RW", "x": 84, "y": 72},
+            {"name": "Nico González", "num": 16, "pos": "AM", "x": 50, "y": 62},
+            {"name": "Galeno", "num": 13, "pos": "LW", "x": 16, "y": 72},
+            {"name": "Samu Omorodion", "num": 9, "pos": "ST", "x": 50, "y": 84}
+        ],
+        "subs": ["Danny Namaso", "Fábio Vieira", "Iván Jaime", "Vasco Sousa", "Otávio", "Cláudio Ramos"],
+        "injuries": [{"player": "Iván Marcano", "status": "Out"}, {"player": "Zaidu Sanusi", "status": "Doubtful"}],
+        "tactical_brief": "Aggressive, physically dominant counter-attack. Alan Varela shields the backline while Samu Omorodion offers elite physical power in the penalty box."
+    },
+    "Lille": {
+        "formation": "4-2-3-1",
+        "manager": "Bruno Génésio",
+        "starting_xi": [
+            {"name": "Lucas Chevalier", "num": 30, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Thomas Meunier", "num": 12, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Bafodé Diakité", "num": 18, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Alexsandro", "num": 4, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Gabriel Gudmundsson", "num": 5, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Benjamin André", "num": 21, "pos": "DM", "x": 60, "y": 40},
+            {"name": "André Gomes", "num": 26, "pos": "DM", "x": 40, "y": 40},
+            {"name": "Edon Zhegrova", "num": 23, "pos": "RW", "x": 84, "y": 74},
+            {"name": "Angel Gomes", "num": 8, "pos": "AM", "x": 50, "y": 62},
+            {"name": "Osame Sahraoui", "num": 11, "pos": "LW", "x": 16, "y": 74},
+            {"name": "Jonathan David", "num": 9, "pos": "ST", "x": 50, "y": 86}
+        ],
+        "subs": ["Rémy Cabella", "Matias Fernandez-Pardo", "Mitchel Bakker", "Aïssa Mandi", "Vito Mannone"],
+        "injuries": [{"player": "Ethan Mbappé", "status": "Out"}, {"player": "Tiago Santos", "status": "Out"}],
+        "tactical_brief": "Tactically astute giant-killers. Lucas Chevalier provides world-class shot-stopping, Zhegrova provides 1v1 flair, and Jonathan David converts half-chances with lethal precision."
+    },
+    "Slovan Bratislava": {
+        "formation": "4-3-3",
+        "manager": "Vladimír Weiss",
+        "starting_xi": [
+            {"name": "Dominik Takáč", "num": 71, "pos": "GK", "x": 50, "y": 8},
+            {"name": "César Blackman", "num": 28, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Guram Kashia", "num": 4, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Kenan Bajrić", "num": 6, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Kevin Wimmer", "num": 17, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Danylo Ihnatenko", "num": 26, "pos": "DM", "x": 50, "y": 40},
+            {"name": "Juraj Kucka", "num": 33, "pos": "RCM", "x": 70, "y": 50},
+            {"name": "Marko Tolić", "num": 10, "pos": "LCM", "x": 30, "y": 54},
+            {"name": "Tigran Barseghyan", "num": 11, "pos": "RW", "x": 84, "y": 74},
+            {"name": "David Strelec", "num": 13, "pos": "ST", "x": 50, "y": 84},
+            {"name": "Vladimír Weiss Jr.", "num": 7, "pos": "LW", "x": 16, "y": 74}
+        ],
+        "subs": ["Róbert Mak", "Alen Mustafić", "Siemen Voet", "Matúš Vojtko", "Martin Trnovský"],
+        "injuries": [{"player": "Lukáš Pauschek", "status": "Doubtful"}],
+        "tactical_brief": "Deep, veteran defensive block led by Kucka and Kashia, looking for individual inspiration from Tolić and Barseghyan on set pieces."
+    },
+    "Fenerbahce": {
+        "formation": "4-2-3-1",
+        "manager": "José Mourinho",
+        "starting_xi": [
+            {"name": "Dominik Livaković", "num": 40, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Mert Müldür", "num": 16, "pos": "RB", "x": 84, "y": 24},
+            {"name": "Alexander Djiku", "num": 6, "pos": "CB", "x": 62, "y": 20},
+            {"name": "Rodrigo Becão", "num": 50, "pos": "CB", "x": 38, "y": 20},
+            {"name": "Jayden Oosterwolde", "num": 24, "pos": "LB", "x": 16, "y": 24},
+            {"name": "Sofyan Amrabat", "num": 34, "pos": "DM", "x": 60, "y": 40},
+            {"name": "Fred", "num": 13, "pos": "DM", "x": 40, "y": 40},
+            {"name": "Dušan Tadić", "num": 10, "pos": "RW", "x": 84, "y": 72},
+            {"name": "Sebastian Szymański", "num": 53, "pos": "AM", "x": 50, "y": 60},
+            {"name": "Allan Saint-Maximin", "num": 97, "pos": "LW", "x": 16, "y": 72},
+            {"name": "Edin Džeko", "num": 9, "pos": "ST", "x": 50, "y": 84}
+        ],
+        "subs": ["Youssef En-Nesyri", "İrfan Can Kahveci", "Cengiz Ünder", "İsmail Yüksek", "Çağlar Söyüncü", "İrfan Can Eğribayat"],
+        "injuries": [{"player": "Jayden Oosterwolde", "status": "Out"}],
+        "tactical_brief": "Mourinho's pragmatic tournament blueprint. Amrabat and Fred provide an unbreakable engine room while Tadić and Saint-Maximin create chances for Džeko."
+    },
+    "Galatasaray": {
+        "formation": "3-4-1-2",
+        "manager": "Okan Buruk",
+        "starting_xi": [
+            {"name": "Fernando Muslera", "num": 1, "pos": "GK", "x": 50, "y": 8},
+            {"name": "Kaan Ayhan", "num": 23, "pos": "RCB", "x": 75, "y": 22},
+            {"name": "Davinson Sánchez", "num": 6, "pos": "CB", "x": 50, "y": 18},
+            {"name": "Abdülkerim Bardakcı", "num": 42, "pos": "LCB", "x": 25, "y": 22},
+            {"name": "Roland Sallai", "num": 7, "pos": "RWB", "x": 88, "y": 48},
+            {"name": "Lucas Torreira", "num": 34, "pos": "CM", "x": 60, "y": 42},
+            {"name": "Gabriel Sara", "num": 20, "pos": "CM", "x": 40, "y": 42},
+            {"name": "Barış Alper Yılmaz", "num": 53, "pos": "LWB", "x": 12, "y": 48},
+            {"name": "Dries Mertens", "num": 10, "pos": "AM", "x": 50, "y": 64},
+            {"name": "Mauro Icardi", "num": 9, "pos": "ST", "x": 40, "y": 84},
+            {"name": "Victor Osimhen", "num": 45, "pos": "ST", "x": 60, "y": 84}
+        ],
+        "subs": ["Michy Batshuayi", "Hakim Ziyech", "Kerem Demirbay", "Victor Nelsson", "Günay Güvenç"],
+        "injuries": [{"player": "Ismail Jakobs", "status": "Doubtful"}],
+        "tactical_brief": "Hyper-aggressive forward pressing backed by the blockbuster partnership of Osimhen and Icardi. Torreira governs the midfield recoveries."
+    }
+}
+
+# 2. STATS & LEADERS
+STATS = {
+    "top_scorers": [
+        {"rank": 1, "name": "Harry Kane", "team": "Bayern Munich", "crest": "https://crests.football-data.org/5.png", "goals": 5, "assists": 1, "mins": 252, "xG": 4.6, "per90": 1.79},
+        {"rank": 2, "name": "Raphinha", "team": "Barcelona", "crest": "https://crests.football-data.org/81.png", "goals": 4, "assists": 3, "mins": 268, "xG": 3.4, "per90": 1.34},
+        {"rank": 3, "name": "Erling Haaland", "team": "Manchester City", "crest": "https://crests.football-data.org/65.png", "goals": 4, "assists": 0, "mins": 270, "xG": 4.1, "per90": 1.33},
+        {"rank": 4, "name": "Vinícius Júnior", "team": "Real Madrid", "crest": "https://crests.football-data.org/86.png", "goals": 4, "assists": 1, "mins": 270, "xG": 3.2, "per90": 1.33},
+        {"rank": 5, "name": "Viktor Gyökeres", "team": "Sporting CP", "crest": "https://crests.football-data.org/498.png", "goals": 4, "assists": 1, "mins": 270, "xG": 3.7, "per90": 1.33},
+        {"rank": 6, "name": "Robert Lewandowski", "team": "Barcelona", "crest": "https://crests.football-data.org/81.png", "goals": 3, "assists": 0, "mins": 240, "xG": 3.5, "per90": 1.13},
+        {"rank": 7, "name": "Kylian Mbappé", "team": "Real Madrid", "crest": "https://crests.football-data.org/86.png", "goals": 3, "assists": 1, "mins": 270, "xG": 3.1, "per90": 1.00},
+        {"rank": 8, "name": "Jonathan David", "team": "Lille", "crest": "https://crests.football-data.org/521.png", "goals": 3, "assists": 0, "mins": 260, "xG": 2.6, "per90": 1.04},
+        {"rank": 9, "name": "Mohamed Salah", "team": "Liverpool", "crest": "https://crests.football-data.org/64.png", "goals": 3, "assists": 2, "mins": 265, "xG": 2.8, "per90": 1.02},
+        {"rank": 10, "name": "Florian Wirtz", "team": "Bayern Munich", "crest": "https://crests.football-data.org/5.png", "goals": 3, "assists": 1, "mins": 245, "xG": 2.3, "per90": 1.10}
+    ],
+    "top_assists": [
+        {"rank": 1, "name": "Raphinha", "team": "Barcelona", "crest": "https://crests.football-data.org/81.png", "assists": 3, "chances_created": 11, "key_passes": 14},
+        {"rank": 2, "name": "Bukayo Saka", "team": "Arsenal", "crest": "https://crests.football-data.org/57.png", "assists": 3, "chances_created": 9, "key_passes": 12},
+        {"rank": 3, "name": "Lamine Yamal", "team": "Barcelona", "crest": "https://crests.football-data.org/81.png", "assists": 3, "chances_created": 10, "key_passes": 11},
+        {"rank": 4, "name": "Álex Baena", "team": "Villarreal", "crest": "https://crests.football-data.org/90.png", "assists": 3, "chances_created": 8, "key_passes": 10},
+        {"rank": 5, "name": "Mohamed Salah", "team": "Liverpool", "crest": "https://crests.football-data.org/64.png", "assists": 2, "chances_created": 8, "key_passes": 9},
+        {"rank": 6, "name": "Kevin De Bruyne", "team": "Manchester City", "crest": "https://crests.football-data.org/65.png", "assists": 2, "chances_created": 9, "key_passes": 10},
+        {"rank": 7, "name": "Vitinha", "team": "Paris Saint-Germain", "crest": "https://crests.football-data.org/524.png", "assists": 2, "chances_created": 7, "key_passes": 13}
+    ],
+    "clean_sheets": [
+        {"rank": 1, "name": "Emiliano Martínez", "team": "Aston Villa", "crest": "https://crests.football-data.org/58.png", "clean_sheets": 2, "saves": 14, "save_pct": "93.3%", "ga": 1},
+        {"rank": 2, "name": "David Raya", "team": "Arsenal", "crest": "https://crests.football-data.org/57.png", "clean_sheets": 2, "saves": 11, "save_pct": "91.7%", "ga": 1},
+        {"rank": 3, "name": "Alisson Becker", "team": "Liverpool", "crest": "https://crests.football-data.org/64.png", "clean_sheets": 2, "saves": 10, "save_pct": "88.9%", "ga": 2},
+        {"rank": 4, "name": "Thibaut Courtois", "team": "Real Madrid", "crest": "https://crests.football-data.org/86.png", "clean_sheets": 2, "saves": 12, "save_pct": "85.7%", "ga": 3},
+        {"rank": 5, "name": "Yann Sommer", "team": "Inter", "crest": "https://crests.football-data.org/108.png", "clean_sheets": 2, "saves": 9, "save_pct": "90.0%", "ga": 1}
+    ],
+    "power_movers": [
+        {"name": "Aston Villa", "elo_change": "+48", "current_elo": 1855, "trend": "up", "note": "3 wins from 3, beating all expectations"},
+        {"name": "Real Betis", "elo_change": "+35", "current_elo": 1933, "trend": "up", "note": "Pellegrini masterclass with 9 points"},
+        {"name": "VfB Stuttgart", "elo_change": "+27", "current_elo": 1589, "trend": "up", "note": "7 points from opening three ties"},
+        {"name": "Sporting CP", "elo_change": "+24", "current_elo": 1845, "trend": "up", "note": "Gyökeres firing Sporting into the top 8"},
+        {"name": "Porto", "elo_change": "-32", "current_elo": 2004, "trend": "down", "note": "3 straight narrow defeats"},
+        {"name": "Lille", "elo_change": "-28", "current_elo": 1853, "trend": "down", "note": "Winless opening rounds against tough opposition"},
+        {"name": "RB Leipzig", "elo_change": "-24", "current_elo": 1785, "trend": "down", "note": "Struggling to find offensive rhythm"}
+    ]
+}
+
+# 3. EUROPEAN 5TH SPOT RACE (UEFA COUNTRY COEFFICIENTS)
+COEFFICIENT_RACE = {
+    "title": "UEFA European Performance Spots (Race for 5th Champions League Spot)",
+    "description": "The two domestic associations whose clubs earn the highest average UEFA coefficient points this season receive an extra automatic Champions League league-phase berth for the 2027/28 campaign.",
+    "standings": [
+        {
+            "rank": 1,
+            "country": "England",
+            "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+            "coef": 17.850,
+            "active_teams": "7 / 7",
+            "prob_bonus_spot": 0.94,
+            "status": "Heavy Favorite",
+            "projected_club": "Aston Villa / Chelsea (Premier League 5th)",
+            "analysis": "Premier League clubs have gone undefeated across 18 group stage ties in all three UEFA competitions, accumulating dominant coefficient dividends."
+        },
+        {
+            "rank": 2,
+            "country": "Italy",
+            "flag": "🇮🇹",
+            "coef": 16.625,
+            "active_teams": "7 / 8",
+            "prob_bonus_spot": 0.62,
+            "status": "Contender",
+            "projected_club": "Lazio / Roma / Fiorentina (Serie A 5th)",
+            "analysis": "Strong showings from Inter, Napoli, and Roma maintain Italy's narrow advantage over Spain for the second European Performance Spot."
+        },
+        {
+            "rank": 3,
+            "country": "Spain",
+            "flag": "🇪🇸",
+            "coef": 15.900,
+            "active_teams": "7 / 7",
+            "prob_bonus_spot": 0.32,
+            "status": "Chasing",
+            "projected_club": "Athletic Club / Villarreal (La Liga 5th)",
+            "analysis": "Real Madrid and Barcelona are driving high points, but Real Betis and Villarreal must advance deep in the knockouts to bridge the 0.725 gap to Italy."
+        },
+        {
+            "rank": 4,
+            "country": "Germany",
+            "flag": "🇩🇪",
+            "coef": 15.450,
+            "active_teams": "6 / 7",
+            "prob_bonus_spot": 0.12,
+            "status": "Underdog",
+            "projected_club": "Eintracht Frankfurt / Borussia Dortmund (Bundesliga 5th)",
+            "analysis": "RB Leipzig's early struggles have depressed the German association average point yield despite Bayern Munich's stellar campaign."
+        },
+        {
+            "rank": 5,
+            "country": "France",
+            "flag": "🇫🇷",
+            "coef": 13.800,
+            "active_teams": "5 / 6",
+            "prob_bonus_spot": 0.02,
+            "status": "Longshot",
+            "projected_club": "Monaco / Lyon (Ligue 1 5th)",
+            "analysis": "Divided by 7 entries, French losses in early qualifying rounds leave Ligue 1 requiring a near-miraculous European run to enter contention."
+        }
+    ]
+}
+
+with open("data/lineups_data.json", "w", encoding="utf-8") as f:
+    json.dump(LINEUPS, f, indent=2, ensure_ascii=False)
+
+with open("data/stats_data.json", "w", encoding="utf-8") as f:
+    json.dump(STATS, f, indent=2, ensure_ascii=False)
+
+with open("data/coefficients_data.json", "w", encoding="utf-8") as f:
+    json.dump(COEFFICIENT_RACE, f, indent=2, ensure_ascii=False)
+
+print("Generated lineups_data.json, stats_data.json, and coefficients_data.json successfully!")

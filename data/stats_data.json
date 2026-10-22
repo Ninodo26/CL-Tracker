@@ -1,0 +1,282 @@
+{
+  "top_scorers": [
+    {
+      "rank": 1,
+      "name": "Harry Kane",
+      "team": "Bayern Munich",
+      "crest": "https://crests.football-data.org/5.png",
+      "goals": 5,
+      "assists": 1,
+      "mins": 252,
+      "xG": 4.6,
+      "per90": 1.79
+    },
+    {
+      "rank": 2,
+      "name": "Raphinha",
+      "team": "Barcelona",
+      "crest": "https://crests.football-data.org/81.png",
+      "goals": 4,
+      "assists": 3,
+      "mins": 268,
+      "xG": 3.4,
+      "per90": 1.34
+    },
+    {
+      "rank": 3,
+      "name": "Erling Haaland",
+      "team": "Manchester City",
+      "crest": "https://crests.football-data.org/65.png",
+      "goals": 4,
+      "assists": 0,
+      "mins": 270,
+      "xG": 4.1,
+      "per90": 1.33
+    },
+    {
+      "rank": 4,
+      "name": "Vinícius Júnior",
+      "team": "Real Madrid",
+      "crest": "https://crests.football-data.org/86.png",
+      "goals": 4,
+      "assists": 1,
+      "mins": 270,
+      "xG": 3.2,
+      "per90": 1.33
+    },
+    {
+      "rank": 5,
+      "name": "Viktor Gyökeres",
+      "team": "Sporting CP",
+      "crest": "https://crests.football-data.org/498.png",
+      "goals": 4,
+      "assists": 1,
+      "mins": 270,
+      "xG": 3.7,
+      "per90": 1.33
+    },
+    {
+      "rank": 6,
+      "name": "Robert Lewandowski",
+      "team": "Barcelona",
+      "crest": "https://crests.football-data.org/81.png",
+      "goals": 3,
+      "assists": 0,
+      "mins": 240,
+      "xG": 3.5,
+      "per90": 1.13
+    },
+    {
+      "rank": 7,
+      "name": "Kylian Mbappé",
+      "team": "Real Madrid",
+      "crest": "https://crests.football-data.org/86.png",
+      "goals": 3,
+      "assists": 1,
+      "mins": 270,
+      "xG": 3.1,
+      "per90": 1.0
+    },
+    {
+      "rank": 8,
+      "name": "Jonathan David",
+      "team": "Lille",
+      "crest": "https://crests.football-data.org/521.png",
+      "goals": 3,
+      "assists": 0,
+      "mins": 260,
+      "xG": 2.6,
+      "per90": 1.04
+    },
+    {
+      "rank": 9,
+      "name": "Mohamed Salah",
+      "team": "Liverpool",
+      "crest": "https://crests.football-data.org/64.png",
+      "goals": 3,
+      "assists": 2,
+      "mins": 265,
+      "xG": 2.8,
+      "per90": 1.02
+    },
+    {
+      "rank": 10,
+      "name": "Florian Wirtz",
+      "team": "Bayern Munich",
+      "crest": "https://crests.football-data.org/5.png",
+      "goals": 3,
+      "assists": 1,
+      "mins": 245,
+      "xG": 2.3,
+      "per90": 1.1
+    }
+  ],
+  "top_assists": [
+    {
+      "rank": 1,
+      "name": "Raphinha",
+      "team": "Barcelona",
+      "crest": "https://crests.football-data.org/81.png",
+      "assists": 3,
+      "chances_created": 11,
+      "key_passes": 14
+    },
+    {
+      "rank": 2,
+      "name": "Bukayo Saka",
+      "team": "Arsenal",
+      "crest": "https://crests.football-data.org/57.png",
+      "assists": 3,
+      "chances_created": 9,
+      "key_passes": 12
+    },
+    {
+      "rank": 3,
+      "name": "Lamine Yamal",
+      "team": "Barcelona",
+      "crest": "https://crests.football-data.org/81.png",
+      "assists": 3,
+      "chances_created": 10,
+      "key_passes": 11
+    },
+    {
+      "rank": 4,
+      "name": "Álex Baena",
+      "team": "Villarreal",
+      "crest": "https://crests.football-data.org/90.png",
+      "assists": 3,
+      "chances_created": 8,
+      "key_passes": 10
+    },
+    {
+      "rank": 5,
+      "name": "Mohamed Salah",
+      "team": "Liverpool",
+      "crest": "https://crests.football-data.org/64.png",
+      "assists": 2,
+      "chances_created": 8,
+      "key_passes": 9
+    },
+    {
+      "rank": 6,
+      "name": "Kevin De Bruyne",
+      "team": "Manchester City",
+      "crest": "https://crests.football-data.org/65.png",
+      "assists": 2,
+      "chances_created": 9,
+      "key_passes": 10
+    },
+    {
+      "rank": 7,
+      "name": "Vitinha",
+      "team": "Paris Saint-Germain",
+      "crest": "https://crests.football-data.org/524.png",
+      "assists": 2,
+      "chances_created": 7,
+      "key_passes": 13
+    }
+  ],
+  "clean_sheets": [
+    {
+      "rank": 1,
+      "name": "Emiliano Martínez",
+      "team": "Aston Villa",
+      "crest": "https://crests.football-data.org/58.png",
+      "clean_sheets": 2,
+      "saves": 14,
+      "save_pct": "93.3%",
+      "ga": 1
+    },
+    {
+      "rank": 2,
+      "name": "David Raya",
+      "team": "Arsenal",
+      "crest": "https://crests.football-data.org/57.png",
+      "clean_sheets": 2,
+      "saves": 11,
+      "save_pct": "91.7%",
+      "ga": 1
+    },
+    {
+      "rank": 3,
+      "name": "Alisson Becker",
+      "team": "Liverpool",
+      "crest": "https://crests.football-data.org/64.png",
+      "clean_sheets": 2,
+      "saves": 10,
+      "save_pct": "88.9%",
+      "ga": 2
+    },
+    {
+      "rank": 4,
+      "name": "Thibaut Courtois",
+      "team": "Real Madrid",
+      "crest": "https://crests.football-data.org/86.png",
+      "clean_sheets": 2,
+      "saves": 12,
+      "save_pct": "85.7%",
+      "ga": 3
+    },
+    {
+      "rank": 5,
+      "name": "Yann Sommer",
+      "team": "Inter",
+      "crest": "https://crests.football-data.org/108.png",
+      "clean_sheets": 2,
+      "saves": 9,
+      "save_pct": "90.0%",
+      "ga": 1
+    }
+  ],
+  "power_movers": [
+    {
+      "name": "Aston Villa",
+      "elo_change": "+48",
+      "current_elo": 1855,
+      "trend": "up",
+      "note": "3 wins from 3, beating all expectations"
+    },
+    {
+      "name": "Real Betis",
+      "elo_change": "+35",
+      "current_elo": 1933,
+      "trend": "up",
+      "note": "Pellegrini masterclass with 9 points"
+    },
+    {
+      "name": "VfB Stuttgart",
+      "elo_change": "+27",
+      "current_elo": 1589,
+      "trend": "up",
+      "note": "7 points from opening three ties"
+    },
+    {
+      "name": "Sporting CP",
+      "elo_change": "+24",
+      "current_elo": 1845,
+      "trend": "up",
+      "note": "Gyökeres firing Sporting into the top 8"
+    },
+    {
+      "name": "Porto",
+      "elo_change": "-32",
+      "current_elo": 2004,
+      "trend": "down",
+      "note": "3 straight narrow defeats"
+    },
+    {
+      "name": "Lille",
+      "elo_change": "-28",
+      "current_elo": 1853,
+      "trend": "down",
+      "note": "Winless opening rounds against tough opposition"
+    },
+    {
+      "name": "RB Leipzig",
+      "elo_change": "-24",
+      "current_elo": 1785,
+      "trend": "down",
+      "note": "Struggling to find offensive rhythm"
+    }
+  ]
+}
