@@ -1,0 +1,14 @@
+{
+  "name": "cl-league-tracker",
+  "version": "1.0.0",
+  "description": "UEFA Champions League League-Phase Simulator & Autonomous TikTok Video Pipeline",
+  "scripts": {
+    "test": "node tests/test_snapshot_validation.js",
+    "video:match": "python scripts/build_tiktok_video.py --type match",
+    "video:standings": "python scripts/build_tiktok_video.py --type standings",
+    "video:post": "python scripts/tiktok_publisher.py"
+  },
+  "dependencies": {
+    "puppeteer-core": "^25.16.0"
+  }
+}

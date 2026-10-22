@@ -106,14 +106,33 @@ Six comprehensive sections designed to compete with world-class sports analytics
   - **Fan Pulse & Ultra Culture**: Real supporter sentiment, stadium atmosphere, European expectations, and historical weight.
   - **Knockout Advancement Roadmap**: Exact points calculations and fixture analysis required for automatic top-8 byes or playoff survival.
 
-### 📱 TikTok & Social Media Card Generator
-- Client-side high-resolution HTML5 Canvas rendering engine.
-- Formats: **9:16 Vertical (1080×1920)** for TikTok / Instagram Stories / Reels and **1:1 Square (1080×1080)** for Twitter/X / Instagram feed posts.
-- Features: Real-time visual preview, one-click high-res PNG download, and direct system clipboard copy (`navigator.clipboard.write`) for instant viral posting.
-- Export cards available for:
-  - Any Match (Odds, Predicted Result, Key Player Showdown, Stakes)
-  - Standings (Top 8 Qualifiers, Cutoff Thresholds, Bubble Teams)
-  - Any Club (Tactical DNA, Key Players, Advancement Outlook)
+### 📱 TikTok Video Generator & Social Media Studio
+- **Client-Side Video & Card Studio**:
+  - **Animated 9:16 MP4 / WebM Export**: Click *"🎬 Export Animated Video (MP4)"* on any match, team, or standings card to record smooth 30 FPS animated videos in-browser with spotlight pulses, dynamic probability meters, and tactical insights at €0 server cost.
+  - **High-Resolution Static Cards**: One-click PNG download and direct clipboard copy (`navigator.clipboard.write`) in **9:16 Vertical (1080×1920)** and **1:1 Square (1080×1080)** for TikTok, Instagram Stories, and X/Twitter.
+  - **Cards Available For**:
+    - Any Match (Odds, Predicted Result, Key Player Showdown, Stakes)
+    - Standings (Top 8 Qualifiers, Cutoff Thresholds, Bubble Teams)
+    - Any Club (Tactical DNA, Key Players, Advancement Outlook)
+
+### 🤖 Autonomous Headless TikTok Video & Auto-Posting Pipeline
+Complete end-to-end autonomous video generation and publishing stack:
+1. **AI Script & Multi-Scene Storyboard** (`scripts/generate_tiktok_script.py`):
+   - Automatically detects the most prominent marquee clash or critical table cutoffs.
+   - Generates high-retention 4-scene narrative scripts with hooks, odds breakdowns, context, and viral calls-to-action.
+2. **Headless Visual Card Rendering** (`scripts/render_card_headless.mjs`):
+   - Renders pixel-perfect 1080×1920 visual cards via headless Chrome/Edge and Puppeteer.
+3. **Neural Broadcast Voiceover** (`edge-tts`):
+   - Natural, studio-grade narration (e.g. `en-GB-RyanNeural`, `en-US-ChristopherNeural`).
+4. **Cinematic Video Assembly** (`scripts/build_tiktok_video.py`):
+   - Assembles full vertical video with smooth Ken Burns zoom motion and high-contrast TikTok pill subtitle overlays using FFmpeg.
+   - Emits finalized MP4 + posting metadata (`output/cl_tiktok_video.mp4` and `output/tiktok_post.json`).
+5. **Hands-Free Automated Distribution & Posting**:
+   - **GitHub Actions Cloud Automation** (`.github/workflows/daily_tiktok.yml`): Runs daily at 16:00 UTC (18:00 CEST preview) and 21:00 UTC (23:00 CEST post-match reaction), builds video, notifies webhooks, and stores artifacts.
+   - **Direct TikTok Studio Upload** (`scripts/tiktok_upload.mjs`): Hands-free browser automation logging into TikTok Studio and publishing queued videos.
+   - **TikTok Content Posting API v2** (`scripts/post_to_tiktok.py`): Live API publishing via repository secret `TIKTOK_ACCESS_TOKEN`.
+   - **Instant Phone / Discord Delivery** (`scripts/tiktok_publisher.py`): Delivers the finished video and caption straight to Telegram or Discord.
+   - **Windows Task Scheduler Automation** (`scripts/schedule_windows_daily.ps1` + `scripts/run_daily_tiktok.bat`): Set-and-forget local daily background execution.
 
 ### 📋 2D Tactical Pitch & Lineup Engine
 - Authentic formations (4-3-3, 4-2-3-1, 3-5-2, 3-4-2-1, 4-4-2) for all 36 participating clubs.

@@ -1,0 +1,87 @@
+name: Daily TikTok Video Generator
+
+on:
+  schedule:
+    # 1. Pre-Match Preview: 18:00 CEST (16:00 UTC)
+    - cron: "0 16 * * *"
+    # 2. Post-Match Reaction: 23:00 CEST (21:00 UTC)
+    - cron: "0 21 * * *"
+  workflow_dispatch:
+    inputs:
+      video_type:
+        description: "Type of video to generate (match or standings)"
+        required: true
+        default: "auto"
+        type: choice
+        options:
+          - auto
+          - match
+          - standings
+
+concurrency:
+  group: daily-tiktok
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Google Chrome (for headless card rendering)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget fonts-liberation libasound2t64 libatk-bridge2.0-0 libatk1.0-0 libcups2 libdrm2 libgbm1 libnspr4 libnss3 libxcomposite1 libxdamage1 libxrandr2 xdg-utils
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -fy install
+
+      - name: Install Python & Node dependencies
+        run: |
+          pip install edge-tts imageio-ffmpeg requests
+          npm install puppeteer-core
+
+      - name: Generate TikTok Video
+        run: |
+          INPUT_TYPE="${{ github.event.inputs.video_type || 'auto' }}"
+          CURRENT_HOUR=$(date -u +%H)
+          if [ "$INPUT_TYPE" != "auto" ]; then
+            VIDEO_TYPE="$INPUT_TYPE"
+          elif [ "$CURRENT_HOUR" -ge 20 ]; then
+            VIDEO_TYPE="standings"
+          else
+            VIDEO_TYPE="match"
+          fi
+          echo "Selected video type: $VIDEO_TYPE"
+          python scripts/build_tiktok_video.py --type "$VIDEO_TYPE"
+
+      - name: Distribute Video (Discord / Telegram)
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python scripts/tiktok_publisher.py
+
+      - name: Upload Video as Workflow Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-cl-tiktok-video
+          path: |
+            output/*.mp4
+            output/tiktok_post.json
+            output/storyboard.json
+          retention-days: 7

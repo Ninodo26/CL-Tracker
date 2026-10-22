@@ -4,4 +4,10 @@ __pycache__/
 .pytest_cache/
 .coverage
 node_modules/
+output/
+*.mp4
+*.mp3
+test_*.png
+test_*.mp4
+test_*.mp3
 .DS_Store
