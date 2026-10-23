@@ -35,7 +35,10 @@
       "prob_champion": 0.097,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 1
+      "rank": 1,
+      "seed_elo": 2137,
+      "elo_change": 27,
+      "clean_sheets": 0
     },
     {
       "name": "Aston Villa",
@@ -66,7 +69,10 @@
       "prob_champion": 0.001,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 2
+      "rank": 2,
+      "seed_elo": 1801,
+      "elo_change": 22,
+      "clean_sheets": 1
     },
     {
       "name": "Liverpool",
@@ -97,7 +103,10 @@
       "prob_champion": 0.037,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 3
+      "rank": 3,
+      "seed_elo": 2071,
+      "elo_change": 12,
+      "clean_sheets": 0
     },
     {
       "name": "Real Madrid",
@@ -128,7 +137,10 @@
       "prob_champion": 0.186,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 4
+      "rank": 4,
+      "seed_elo": 2215,
+      "elo_change": 15,
+      "clean_sheets": 0
     },
     {
       "name": "Real Betis",
@@ -159,7 +171,10 @@
       "prob_champion": 0.004,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 5
+      "rank": 5,
+      "seed_elo": 1904,
+      "elo_change": 34,
+      "clean_sheets": 1
     },
     {
       "name": "VfB Stuttgart",
@@ -190,7 +205,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 6
+      "rank": 6,
+      "seed_elo": 1550,
+      "elo_change": 33,
+      "clean_sheets": 1
     },
     {
       "name": "Arsenal",
@@ -221,7 +239,10 @@
       "prob_champion": 0.09,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 7
+      "rank": 7,
+      "seed_elo": 2149,
+      "elo_change": 10,
+      "clean_sheets": 2
     },
     {
       "name": "Barcelona",
@@ -252,7 +273,10 @@
       "prob_champion": 0.109,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 8
+      "rank": 8,
+      "seed_elo": 2184,
+      "elo_change": -5,
+      "clean_sheets": 0
     },
     {
       "name": "Como",
@@ -283,7 +307,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 9
+      "rank": 9,
+      "seed_elo": 1654,
+      "elo_change": 21,
+      "clean_sheets": 0
     },
     {
       "name": "Manchester City",
@@ -314,7 +341,10 @@
       "prob_champion": 0.181,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 10
+      "rank": 10,
+      "seed_elo": 2236,
+      "elo_change": -9,
+      "clean_sheets": 1
     },
     {
       "name": "Club Brugge",
@@ -345,7 +375,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 11
+      "rank": 11,
+      "seed_elo": 1801,
+      "elo_change": 11,
+      "clean_sheets": 1
     },
     {
       "name": "Sporting CP",
@@ -376,7 +409,10 @@
       "prob_champion": 0.002,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 12
+      "rank": 12,
+      "seed_elo": 1943,
+      "elo_change": -14,
+      "clean_sheets": 1
     },
     {
       "name": "Borussia Dortmund",
@@ -407,7 +443,10 @@
       "prob_champion": 0.017,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 13
+      "rank": 13,
+      "seed_elo": 2044,
+      "elo_change": -14,
+      "clean_sheets": 0
     },
     {
       "name": "Bayern Munich",
@@ -438,7 +477,10 @@
       "prob_champion": 0.161,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 14
+      "rank": 14,
+      "seed_elo": 2231,
+      "elo_change": -14,
+      "clean_sheets": 1
     },
     {
       "name": "Roma",
@@ -469,7 +511,10 @@
       "prob_champion": 0.012,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 15
+      "rank": 15,
+      "seed_elo": 2018,
+      "elo_change": -11,
+      "clean_sheets": 1
     },
     {
       "name": "Atletico Madrid",
@@ -500,7 +545,10 @@
       "prob_champion": 0.023,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 16
+      "rank": 16,
+      "seed_elo": 2072,
+      "elo_change": -16,
+      "clean_sheets": 1
     },
     {
       "name": "Shakhtar Donetsk",
@@ -531,7 +579,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 17
+      "rank": 17,
+      "seed_elo": 1725,
+      "elo_change": 11,
+      "clean_sheets": 0
     },
     {
       "name": "PSV Eindhoven",
@@ -562,7 +613,10 @@
       "prob_champion": 0.002,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 18
+      "rank": 18,
+      "seed_elo": 1898,
+      "elo_change": -3,
+      "clean_sheets": 1
     },
     {
       "name": "Villarreal",
@@ -593,7 +647,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 19
+      "rank": 19,
+      "seed_elo": 1686,
+      "elo_change": 8,
+      "clean_sheets": 0
     },
     {
       "name": "Inter",
@@ -624,7 +681,10 @@
       "prob_champion": 0.07,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 20
+      "rank": 20,
+      "seed_elo": 2171,
+      "elo_change": -27,
+      "clean_sheets": 1
     },
     {
       "name": "Manchester United",
@@ -655,7 +715,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 21
+      "rank": 21,
+      "seed_elo": 1755,
+      "elo_change": -11,
+      "clean_sheets": 1
     },
     {
       "name": "Napoli",
@@ -686,7 +749,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 22
+      "rank": 22,
+      "seed_elo": 1754,
+      "elo_change": -4,
+      "clean_sheets": 0
     },
     {
       "name": "LASK",
@@ -717,7 +783,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 23
+      "rank": 23,
+      "seed_elo": 1584,
+      "elo_change": 10,
+      "clean_sheets": 0
     },
     {
       "name": "Galatasaray",
@@ -748,7 +817,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 24
+      "rank": 24,
+      "seed_elo": 1686,
+      "elo_change": 13,
+      "clean_sheets": 0
     },
     {
       "name": "Sabah FK",
@@ -779,7 +851,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 25
+      "rank": 25,
+      "seed_elo": 1524,
+      "elo_change": 8,
+      "clean_sheets": 1
     },
     {
       "name": "Feyenoord",
@@ -810,7 +885,10 @@
       "prob_champion": 0.003,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 26
+      "rank": 26,
+      "seed_elo": 1963,
+      "elo_change": -11,
+      "clean_sheets": 0
     },
     {
       "name": "Lens",
@@ -841,7 +919,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 27
+      "rank": 27,
+      "seed_elo": 1575,
+      "elo_change": 9,
+      "clean_sheets": 0
     },
     {
       "name": "Bodo/Glimt",
@@ -872,7 +953,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 28
+      "rank": 28,
+      "seed_elo": 1756,
+      "elo_change": 6,
+      "clean_sheets": 1
     },
     {
       "name": "AEK Athens",
@@ -903,7 +987,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 29
+      "rank": 29,
+      "seed_elo": 1596,
+      "elo_change": 3,
+      "clean_sheets": 1
     },
     {
       "name": "RB Leipzig",
@@ -934,7 +1021,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 30
+      "rank": 30,
+      "seed_elo": 1759,
+      "elo_change": 0,
+      "clean_sheets": 1
     },
     {
       "name": "Fenerbahce",
@@ -965,7 +1055,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 31
+      "rank": 31,
+      "seed_elo": 1731,
+      "elo_change": -5,
+      "clean_sheets": 0
     },
     {
       "name": "Slavia Praha",
@@ -996,7 +1089,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 32
+      "rank": 32,
+      "seed_elo": 1676,
+      "elo_change": -25,
+      "clean_sheets": 0
     },
     {
       "name": "Viking",
@@ -1027,7 +1123,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 33
+      "rank": 33,
+      "seed_elo": 1533,
+      "elo_change": 0,
+      "clean_sheets": 0
     },
     {
       "name": "Porto",
@@ -1058,7 +1157,10 @@
       "prob_champion": 0.005,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 34
+      "rank": 34,
+      "seed_elo": 2022,
+      "elo_change": -35,
+      "clean_sheets": 0
     },
     {
       "name": "Lille",
@@ -1089,7 +1191,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 35
+      "rank": 35,
+      "seed_elo": 1884,
+      "elo_change": -33,
+      "clean_sheets": 0
     },
     {
       "name": "Slovan Bratislava",
@@ -1120,7 +1225,10 @@
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 36
+      "rank": 36,
+      "seed_elo": 1644,
+      "elo_change": -18,
+      "clean_sheets": 0
     }
   ],
   "matches": [

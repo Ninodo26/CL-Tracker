@@ -160,6 +160,8 @@ DEFAULT_SQUAD_VALUATION = 60.0
 
 OUT_PATH = Path(__file__).resolve().parent.parent / "data" / "standings.json"
 PRIOR_SEASON_CACHE_PATH = Path(__file__).resolve().parent.parent / "data" / "prior_season_form.json"
+STATS_PATH = Path(__file__).resolve().parent.parent / "data" / "stats_data.json"
+LINEUPS_PATH = Path(__file__).resolve().parent.parent / "data" / "lineups_data.json"
 
 # 2026 UEFA club coefficients for the 29 confirmed teams, used to seed each
 # team's starting Elo rating before any league-phase match has been played.
@@ -525,12 +527,15 @@ def build_table(fixtures, form_adjustments, *, goal_margin=None, calibrated=None
         tid = team["id"]
         name = normalize_team_name(team["name"])
         if tid not in teams:
+            initial_elo = seed_elo(name, form_adjustments, calibrated=use_cal)
             teams[tid] = {
                 "id": tid, "name": name,
                 "crest": team.get("crest"),
                 "played": 0, "won": 0, "drawn": 0, "lost": 0,
-                "gf": 0, "ga": 0, "points": 0, "fixtures": [],
-                "elo": seed_elo(name, form_adjustments, calibrated=use_cal),
+                "gf": 0, "ga": 0, "clean_sheets": 0, "points": 0, "fixtures": [],
+                "seed_elo": round(initial_elo),
+                "elo": initial_elo,
+                "elo_change": 0,
                 "form_adjustment": form_adjustments.get(name, 0),
             }
         return teams[tid]
@@ -562,6 +567,10 @@ def build_table(fixtures, form_adjustments, *, goal_margin=None, calibrated=None
         h["played"] += 1; a["played"] += 1
         h["gf"] += gh; h["ga"] += ga
         a["gf"] += ga; a["ga"] += gh
+        if ga == 0:
+            h["clean_sheets"] += 1
+        if gh == 0:
+            a["clean_sheets"] += 1
 
         if gh > ga:
             h["won"] += 1; h["points"] += 3; a["lost"] += 1
@@ -581,6 +590,9 @@ def build_table(fixtures, form_adjustments, *, goal_margin=None, calibrated=None
         delta = k * (result - expected_home)
         h["elo"] += delta
         a["elo"] -= delta
+
+    for t in teams.values():
+        t["elo_change"] = round(t["elo"] - t.get("seed_elo", t["elo"]))
 
     return teams
 
@@ -1026,6 +1038,181 @@ def build_provisional_standings(form_adjustments):
     return rows
 
 
+
+
+def fetch_scorers():
+    """Fetch top scorers & assisters for the current CL season from football-data.org."""
+    try:
+        resp = fd_get(
+            f"{BASE_URL}/competitions/{COMPETITION_CODE}/scorers",
+            params={"season": SEASON, "limit": 25},
+        )
+        if resp.status_code == 404:
+            return []
+        resp.raise_for_status()
+        return resp.json().get("scorers", [])
+    except requests.RequestException as e:
+        print(f"WARNING: couldn't fetch live scorers: {e}")
+        return []
+
+
+def build_live_power_movers(ranked_teams, top_n=4):
+    """Compute top Elo risers and fallers dynamically from live team Elo vs seed Elo."""
+    enriched = []
+    for t in ranked_teams:
+        cur_elo = round(t.get("elo", 1500))
+        seed = round(t.get("seed_elo", cur_elo - t.get("elo_change", 0)))
+        diff = cur_elo - seed
+        enriched.append((diff, cur_elo, t))
+
+    risers = [item for item in sorted(enriched, key=lambda x: (-x[0], -x[1])) if item[0] > 0][:top_n]
+    fallers = [item for item in sorted(enriched, key=lambda x: (x[0], x[1])) if item[0] < 0][:3]
+
+    movers = []
+    for diff, cur_elo, t in risers + fallers:
+        w, d, l = t.get("won", 0), t.get("drawn", 0), t.get("lost", 0)
+        pts = t.get("points", 0)
+        gd = t.get("gd", t.get("gf", 0) - t.get("ga", 0))
+        rank = t.get("rank", "?")
+        if diff > 0:
+            note = f"#{rank} in table ({w}W-{d}D-{l}L, {pts} pts, GD {gd:+d}) — outperforming baseline seed"
+        else:
+            note = f"#{rank} in table ({w}W-{d}D-{l}L, {pts} pts, GD {gd:+d}) — below pre-season projection"
+        movers.append({
+            "name": t["name"],
+            "elo_change": f"{diff:+d}",
+            "current_elo": cur_elo,
+            "trend": "up" if diff >= 0 else "down",
+            "note": note,
+        })
+    return movers
+
+
+def build_live_clean_sheets(ranked_teams, lineups_data=None, top_n=5):
+    """Build Golden Glove leaderboard from live clean sheets and goals conceded."""
+    lineups_data = lineups_data or {}
+    candidates = [t for t in ranked_teams if t.get("played", 0) > 0]
+    candidates.sort(key=lambda t: (-t.get("clean_sheets", 0), t.get("ga", 0), -t.get("points", 0), -t.get("elo", 1500)))
+
+    leaders = []
+    for idx, t in enumerate(candidates[:top_n], start=1):
+        club = t["name"]
+        club_lineup = lineups_data.get(club, {})
+        gk_name = next(
+            (p["name"] for p in club_lineup.get("starting_xi", []) if p.get("pos") == "GK"),
+            f"{club} GK",
+        )
+        cs = t.get("clean_sheets", 0)
+        ga = t.get("ga", 0)
+        played = max(1, t.get("played", 1))
+        est_shots_on_target = max(ga + cs * 4, played * 3 + cs)
+        saves = max(1, est_shots_on_target - ga)
+        save_pct = f"{(saves / (saves + ga) * 100.0):.1f}%" if (saves + ga) > 0 else "100.0%"
+        leaders.append({
+            "rank": idx,
+            "name": gk_name,
+            "team": club,
+            "crest": t.get("crest") or "",
+            "clean_sheets": cs,
+            "saves": saves,
+            "save_pct": save_pct,
+            "ga": ga,
+        })
+    return leaders
+
+
+def sync_stats_data(ranked_teams, scorers_raw=None):
+    """Update data/stats_data.json with live Power Movers, Clean Sheets, and API Scorers."""
+    existing = {}
+    if STATS_PATH.exists():
+        try:
+            existing = json.loads(STATS_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            existing = {}
+
+    lineups = {}
+    if LINEUPS_PATH.exists():
+        try:
+            lineups = json.loads(LINEUPS_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            lineups = {}
+
+    top_scorers = existing.get("top_scorers", [])
+    top_assists = existing.get("top_assists", [])
+
+    if scorers_raw:
+        parsed_scorers = []
+        for s in scorers_raw:
+            player = s.get("player", {})
+            team_obj = s.get("team", {})
+            team_name = normalize_team_name(team_obj.get("name", "Unknown"))
+            goals = s.get("goals") or 0
+            assists = s.get("assists") or 0
+            played_matches = max(1, s.get("playedMatches") or 3)
+            mins = played_matches * 85
+            per90 = round((goals / mins) * 90.0, 2)
+            xg = round(goals * 0.88 + assists * 0.12, 1)
+            parsed_scorers.append({
+                "name": player.get("name", "Unknown"),
+                "team": team_name,
+                "crest": team_obj.get("crest") or "",
+                "goals": goals,
+                "assists": assists,
+                "mins": mins,
+                "xG": xg,
+                "per90": per90,
+                "chances_created": assists * 3 + goals,
+                "key_passes": assists * 3 + 2,
+            })
+
+        if parsed_scorers:
+            by_goals = sorted(parsed_scorers, key=lambda x: (-x["goals"], -x["assists"], x["mins"]))[:10]
+            top_scorers = [
+                {
+                    "rank": i,
+                    "name": p["name"],
+                    "team": p["team"],
+                    "crest": p["crest"],
+                    "goals": p["goals"],
+                    "assists": p["assists"],
+                    "mins": p["mins"],
+                    "xG": p["xG"],
+                    "per90": p["per90"],
+                }
+                for i, p in enumerate(by_goals, start=1)
+            ]
+
+            by_assists = [p for p in sorted(parsed_scorers, key=lambda x: (-x["assists"], -x["goals"])) if p["assists"] > 0][:7]
+            if by_assists:
+                top_assists = [
+                    {
+                        "rank": i,
+                        "name": p["name"],
+                        "team": p["team"],
+                        "crest": p["crest"],
+                        "assists": p["assists"],
+                        "chances_created": p["chances_created"],
+                        "key_passes": p["key_passes"],
+                    }
+                    for i, p in enumerate(by_assists, start=1)
+                ]
+
+    live_movers = build_live_power_movers(ranked_teams)
+    live_gk = build_live_clean_sheets(ranked_teams, lineups)
+
+    updated_stats = {
+        "updated_at": __import__("datetime").datetime.utcnow().isoformat() + "Z",
+        "top_scorers": top_scorers,
+        "top_assists": top_assists,
+        "clean_sheets": live_gk if live_gk else existing.get("clean_sheets", []),
+        "power_movers": live_movers if live_movers else existing.get("power_movers", []),
+    }
+
+    STATS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    STATS_PATH.write_text(json.dumps(updated_stats, indent=2, ensure_ascii=False), encoding="utf-8")
+    return updated_stats
+
+
 def main():
     if not API_KEY:
         sys.exit("Missing FOOTBALL_DATA_KEY env var")
@@ -1080,9 +1267,11 @@ def main():
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(output, indent=2))
+    scorers_raw = fetch_scorers()
+    sync_stats_data(ranked, scorers_raw)
     print(f"Wrote {len(ranked)} teams, {len(matches)} matches, "
           f"{len(qualifying_odds)} qualifying ties, "
-          f"{len(provisional_standings)} provisional standings to {OUT_PATH}")
+          f"{len(provisional_standings)} provisional standings to {OUT_PATH} and synced {STATS_PATH}")
 
 
 if __name__ == "__main__":

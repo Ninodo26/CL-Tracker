@@ -263,6 +263,35 @@ class ModelTests(unittest.TestCase):
         delta_gm = teams_gm[1]["elo"] - model.seed_elo("Borussia Dortmund", {}, calibrated=False)
         self.assertGreater(delta_gm, delta_std)
 
+    def test_live_power_movers_and_clean_sheets_tracking(self):
+        fixture = {
+            "fixture": {"status": {"short": "FT"}, "date": "2026-09-08T12:00:00Z"},
+            "league": {"round": "League Stage - 1"},
+            "teams": {
+                "home": {"id": 1, "name": "Borussia Dortmund"},
+                "away": {"id": 2, "name": "FC Barcelona"},
+            },
+            "goals": {"home": 2, "away": 0},
+        }
+        teams = model.build_table([fixture], {}, goal_margin=False, calibrated=False)
+        self.assertEqual(teams[1]["clean_sheets"], 1)
+        self.assertEqual(teams[2]["clean_sheets"], 0)
+        self.assertGreater(teams[1]["elo_change"], 0)
+        self.assertLess(teams[2]["elo_change"], 0)
+
+        model.add_projections(teams)
+        ranked = model.compute_scenarios(teams)
+        movers = model.build_live_power_movers(ranked)
+        self.assertEqual(len(movers), 2)
+        self.assertEqual(movers[0]["name"], "Borussia Dortmund")
+        self.assertEqual(movers[0]["trend"], "up")
+        self.assertEqual(movers[1]["name"], "Barcelona")
+        self.assertEqual(movers[1]["trend"], "down")
+
+        clean_sheets = model.build_live_clean_sheets(ranked, {"Borussia Dortmund": {"starting_xi": [{"pos": "GK", "name": "Gregor Kobel"}]}})
+        self.assertEqual(clean_sheets[0]["name"], "Gregor Kobel")
+        self.assertEqual(clean_sheets[0]["clean_sheets"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()

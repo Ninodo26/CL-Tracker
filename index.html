@@ -347,6 +347,52 @@
     max-width:85px; overflow:hidden; text-overflow:ellipsis;
   }
 
+  /* What-If Match Predictor & Floating Bar */
+  .whatif-pick-bar{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    gap:8px; margin-top:4px; padding-top:6px; border-top:1px dashed rgba(35,48,92,0.55);
+  }
+  .whatif-btn-group{display:flex; gap:5px; align-items:center; flex-wrap:wrap;}
+  .whatif-btn{
+    background:rgba(10,17,40,0.85); border:1px solid var(--line); color:var(--ivory-dim);
+    font-family:'IBM Plex Mono',monospace; font-size:10px; padding:3px 9px; border-radius:4px;
+    cursor:pointer; transition:var(--transition);
+  }
+  .whatif-btn:hover{border-color:var(--gold-soft); color:var(--ivory);}
+  .whatif-btn.active-pick-home, .whatif-btn.active-pick-away{
+    background:var(--gold-glow); border-color:var(--gold); color:var(--gold-soft); font-weight:600;
+  }
+  .whatif-btn.active-pick-draw{
+    background:var(--ice-soft); border-color:var(--ice); color:var(--ice); font-weight:600;
+  }
+  .whatif-score-stepper{
+    display:inline-flex; align-items:center; gap:4px; background:var(--bg-0);
+    border:1px solid var(--gold); border-radius:4px; padding:2px 6px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold-soft);
+  }
+  .whatif-step-btn{
+    background:var(--bg-2); border:1px solid var(--line); color:var(--ivory);
+    width:18px; height:18px; line-height:14px; text-align:center; border-radius:3px;
+    cursor:pointer; font-size:11px; padding:0;
+  }
+  .whatif-step-btn:hover{border-color:var(--gold); color:var(--gold-soft);}
+  .rank-delta-pill{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600;
+    padding:1px 5px; border-radius:3px; margin-left:4px; display:inline-block;
+  }
+  .rank-delta-up{background:rgba(94,200,242,0.14); color:var(--ice); border:1px solid rgba(94,200,242,0.4);}
+  .rank-delta-down{background:var(--red-soft); color:var(--red); border:1px solid rgba(224,84,107,0.4);}
+  .whatif-floating-bar{
+    position:fixed; bottom:16px; left:50%; transform:translateX(-50%);
+    z-index:95; width:calc(100% - 32px); max-width:960px;
+    background:linear-gradient(135deg, rgba(10,17,40,0.97), rgba(18,28,64,0.97));
+    border:1px solid var(--gold); border-left:4px solid var(--gold);
+    border-radius:8px; padding:12px 18px;
+    box-shadow:0 16px 40px rgba(0,0,0,0.85), 0 0 20px rgba(217,184,74,0.2);
+    display:none; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    backdrop-filter:blur(10px);
+  }
+
   /* TikTok Studio Modal */
   .tiktok-modal-overlay{
     position:fixed; inset:0; z-index:120;
@@ -721,7 +767,8 @@ function randomMargin(){
  * real remaining fixture list — same model as the backend's 20,000-run
  * Monte Carlo, just showing a single draw instead of the aggregate odds. */
 function simulateOneSeason(){
-  const teams = STANDINGS.teams || [];
+  const teams = getActiveStandingsTeams();
+  const isWhatIf = getWhatIfPickCount() > 0;
   const matches = STANDINGS.matches || [];
   if (!STANDINGS.schedule_complete || !teams.length || !matches.length) return null;
 
@@ -1056,6 +1103,8 @@ boot();
     </div>
   </div>
 
+  <div id="whatif-floating-bar" class="whatif-floating-bar"></div>
+
   <div id="tiktok-modal" class="tiktok-modal-overlay" style="display:none;" onclick="closeTikTokCard()">
     <div class="tiktok-modal-content" onclick="event.stopPropagation()">
       <button class="modal-close-btn" onclick="closeTikTokCard()" title="Close">&times;</button>
@@ -1149,6 +1198,260 @@ function renderFocusPanel(selectedName){
       <button class="none-btn" style="width:auto; margin-top:0; padding:8px 16px; font-size:11px;" onclick="openTeamModal('${team.name.replace(/'/g, "\\'")}')">🔍 View ${team.name} Tactical Dossier &amp; Upcoming Match Odds &rarr;</button>
     </div>
   </div>`;
+}
+
+// -------------------------------------------------------------
+// INTERACTIVE "WHAT-IF" MATCH PREDICTOR ENGINE
+// -------------------------------------------------------------
+let userWhatIfPicks = {};
+let cachedWhatIfStandings = null;
+
+function getMatchPickKey(m){
+  return `${m.home}|${m.away}|${m.matchday}`;
+}
+
+function getWhatIfPickCount(){
+  return Object.keys(userWhatIfPicks).length;
+}
+
+function setWhatIfPick(home, away, matchday, outcome){
+  const key = `${home}|${away}|${matchday}`;
+  const current = userWhatIfPicks[key];
+  if (current && current.outcome === outcome){
+    delete userWhatIfPicks[key];
+  } else {
+    const scores = outcome === 'H' ? {homeGoals: 2, awayGoals: 1}
+                 : outcome === 'D' ? {homeGoals: 1, awayGoals: 1}
+                 : {homeGoals: 1, awayGoals: 2};
+    userWhatIfPicks[key] = { ...scores, outcome, home, away, matchday };
+  }
+  simulatedTable = null;
+  cachedWhatIfStandings = null;
+  renderAll();
+  renderWhatIfFloatingBar();
+}
+
+function adjustWhatIfScore(home, away, matchday, side, delta){
+  const key = `${home}|${away}|${matchday}`;
+  const pick = userWhatIfPicks[key] || { homeGoals: 1, awayGoals: 1, outcome: 'D', home, away, matchday };
+  if (side === 'home') pick.homeGoals = Math.max(0, Math.min(9, pick.homeGoals + delta));
+  if (side === 'away') pick.awayGoals = Math.max(0, Math.min(9, pick.awayGoals + delta));
+  pick.outcome = pick.homeGoals > pick.awayGoals ? 'H' : pick.homeGoals < pick.awayGoals ? 'A' : 'D';
+  userWhatIfPicks[key] = pick;
+  simulatedTable = null;
+  cachedWhatIfStandings = null;
+  renderAll();
+  renderWhatIfFloatingBar();
+}
+
+function clearSingleWhatIfPick(home, away, matchday){
+  const key = `${home}|${away}|${matchday}`;
+  delete userWhatIfPicks[key];
+  cachedWhatIfStandings = null;
+  renderAll();
+  renderWhatIfFloatingBar();
+}
+
+function autoFillCurrentRoundFavorites(){
+  const matches = STANDINGS.matches || [];
+  const groups = {};
+  matches.forEach(m => { (groups[m.matchday] = groups[m.matchday] || []).push(m); });
+  const allMds = Object.keys(groups);
+  const currentMd = allMds.find(md => groups[md].some(m => !m.played));
+  if (!currentMd) return;
+  groups[currentMd].filter(m => !m.played).forEach(m => {
+    const key = getMatchPickKey(m);
+    const pH = m.odds ? m.odds.home : 0.45;
+    const pA = m.odds ? m.odds.away : 0.30;
+    if (pH >= pA + 0.08) {
+      userWhatIfPicks[key] = { homeGoals: 2, awayGoals: 1, outcome: 'H', home: m.home, away: m.away, matchday: m.matchday };
+    } else if (pA >= pH + 0.08) {
+      userWhatIfPicks[key] = { homeGoals: 1, awayGoals: 2, outcome: 'A', home: m.home, away: m.away, matchday: m.matchday };
+    } else {
+      userWhatIfPicks[key] = { homeGoals: 1, awayGoals: 1, outcome: 'D', home: m.home, away: m.away, matchday: m.matchday };
+    }
+  });
+  simulatedTable = null;
+  cachedWhatIfStandings = null;
+  renderAll();
+  renderWhatIfFloatingBar();
+}
+
+function clearAllWhatIfPicks(){
+  userWhatIfPicks = {};
+  cachedWhatIfStandings = null;
+  renderAll();
+  renderWhatIfFloatingBar();
+}
+
+function jumpToWhatIfStandings(){
+  const wrap = document.getElementById('main-wrap');
+  if (!wrap) return;
+  const btn = wrap.querySelector('.tab-btn[data-tab="standings"]');
+  if (btn) btn.click();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function computeWhatIfStandings(){
+  if (cachedWhatIfStandings) return cachedWhatIfStandings;
+  const baseTeams = STANDINGS.teams || [];
+  const matches = STANDINGS.matches || [];
+  if (!baseTeams.length || ! getWhatIfPickCount()) return baseTeams;
+
+  const stateByName = {};
+  baseTeams.forEach(t => {
+    stateByName[t.name] = {
+      ...t,
+      orig_rank: t.rank,
+      orig_points: t.points,
+      orig_prob_top8: t.prob_top8,
+      orig_prob_top24: t.prob_top24,
+    };
+  });
+
+  const remainingUnpicked = [];
+  matches.filter(m => !m.played).forEach(m => {
+    const key = getMatchPickKey(m);
+    const pick = userWhatIfPicks[key];
+    const h = stateByName[m.home];
+    const a = stateByName[m.away];
+    if (!h || !a) return;
+
+    if (pick){
+      const gh = pick.homeGoals;
+      const ga = pick.awayGoals;
+      h.played += 1; a.played += 1;
+      h.gf += gh; h.ga += ga; h.gd = h.gf - h.ga;
+      a.gf += ga; a.ga += gh; a.gd = a.gf - a.ga;
+      let res = 0.5;
+      if (gh > ga){
+        h.won += 1; h.points += 3; a.lost += 1; res = 1.0;
+      } else if (gh < ga){
+        a.won += 1; a.points += 3; h.lost += 1; res = 0.0;
+      } else {
+        h.drawn += 1; a.drawn += 1; h.points += 1; a.points += 1; res = 0.5;
+      }
+      const expH = eloExpected(h.elo, a.elo, HOME_ADVANTAGE);
+      const delta = 22 * (res - expH);
+      h.elo = Math.round(h.elo + delta);
+      a.elo = Math.round(a.elo - delta);
+    } else {
+      remainingUnpicked.push(m);
+    }
+  });
+
+  const all = Object.values(stateByName);
+  const totalMds = STANDINGS.league_phase_matchdays || 8;
+  all.forEach(t => {
+    const rem = Math.max(0, totalMds - t.played);
+    t.remaining = rem;
+    t.min_points = t.points;
+    t.max_points = t.points + 3 * rem;
+  });
+
+  // Floor vs ceiling status
+  const cut8 = STANDINGS.top_auto_r16 || 8;
+  const cut24 = STANDINGS.top_playoff_cutoff || 24;
+  all.forEach(t => {
+    const others = all.filter(o => o.name !== t.name);
+    const checkCut = (cut) => {
+      if (others.filter(o => o.min_points > t.max_points).length >= cut) return 'eliminated';
+      if (others.filter(o => o.max_points > t.min_points).length < cut) return 'clinched';
+      return 'alive';
+    };
+    t.status_top8 = checkCut(cut8);
+    t.status_top24 = checkCut(cut24);
+  });
+
+  // Fast 600-iteration Monte Carlo over remaining unpicked fixtures
+  const sims = 600;
+  const top8Counts = {};
+  const top24Counts = {};
+  all.forEach(t => { top8Counts[t.name] = 0; top24Counts[t.name] = 0; });
+
+  const matchProbs = remainingUnpicked.map(m => {
+    const h = stateByName[m.home], a = stateByName[m.away];
+    const [pH, pD, pA] = outcomeProbabilitiesJS(h.elo, a.elo);
+    return { home: m.home, away: m.away, pH, pHD: pH + pD };
+  });
+
+  for (let s = 0; s < sims; s++){
+    const pts = {}, gd = {}, gf = {};
+    for (let i = 0; i < all.length; i++){
+      const nm = all[i].name;
+      pts[nm] = all[i].points;
+      gd[nm] = all[i].gd;
+      gf[nm] = all[i].gf;
+    }
+    for (let j = 0; j < matchProbs.length; j++){
+      const mp = matchProbs[j];
+      const r = Math.random();
+      if (r < mp.pH){
+        pts[mp.home] += 3; gd[mp.home] += 1; gd[mp.away] -= 1; gf[mp.home] += 2;
+      } else if (r < mp.pHD){
+        pts[mp.home] += 1; pts[mp.away] += 1; gf[mp.home] += 1; gf[mp.away] += 1;
+      } else {
+        pts[mp.away] += 3; gd[mp.away] += 1; gd[mp.home] -= 1; gf[mp.away] += 2;
+      }
+    }
+    const order = all.map(x => x.name).sort((a, b) => pts[b] - pts[a] || gd[b] - gd[a] || gf[b] - gf[a]);
+    for (let k = 0; k < 24 && k < order.length; k++){
+      if (k < 8) top8Counts[order[k]] += 1;
+      top24Counts[order[k]] += 1;
+    }
+  }
+
+  all.forEach(t => {
+    t.prob_top8 = top8Counts[t.name] / sims;
+    t.prob_top24 = top24Counts[t.name] / sims;
+    t.prob_top8_delta = (t.orig_prob_top8 !== null && t.orig_prob_top8 !== undefined) ? (t.prob_top8 - t.orig_prob_top8) : 0;
+  });
+
+  all.sort((a, b) => b.points - a.points || b.gd - a.gd || b.gf - a.gf);
+  all.forEach((t, idx) => {
+    t.rank = idx + 1;
+    t.rank_delta = t.orig_rank - t.rank;
+  });
+
+  cachedWhatIfStandings = all;
+  return all;
+}
+
+function getActiveStandingsTeams(){
+  if (getWhatIfPickCount() > 0) return computeWhatIfStandings();
+  return STANDINGS.teams || [];
+}
+
+function renderWhatIfFloatingBar(){
+  const bar = document.getElementById('whatif-floating-bar');
+  if (!bar) return;
+  const count = getWhatIfPickCount();
+  if (count === 0){
+    bar.style.display = 'none';
+    return;
+  }
+  const updated = computeWhatIfStandings();
+  const biggestJumper = [...updated].sort((a, b) => (b.rank_delta || 0) - (a.rank_delta || 0))[0];
+  const jumpNote = (biggestJumper && biggestJumper.rank_delta > 0)
+    ? ` &middot; Biggest climber: <strong style="color:var(--ice);">${biggestJumper.name} (&uarr;${biggestJumper.rank_delta} to #${biggestJumper.rank})</strong>`
+    : '';
+
+  bar.style.display = 'flex';
+  bar.innerHTML = `
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; color:var(--gold-soft); font-weight:600;">
+        🔮 What-If Predictor Active &middot; ${count} Custom Match ${count === 1 ? 'Pick' : 'Picks'} Applied
+      </div>
+      <div style="font-size:12px; color:var(--ivory-dim); margin-top:2px;">
+        Live 36-club table &amp; Monte Carlo qualification odds dynamically recalculated${jumpNote}
+      </div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+      <button class="none-btn" style="width:auto; margin:0; padding:7px 14px; font-size:11px; background:var(--gold-glow); border-color:var(--gold); color:var(--gold-soft); font-weight:600;" onclick="jumpToWhatIfStandings()">📊 View Updated Table</button>
+      <button class="none-btn" style="width:auto; margin:0; padding:7px 14px; font-size:11px; border-color:var(--ice); color:var(--ice);" onclick="openTikTokCard('standings', {})">📱 Export What-If Card</button>
+      <button class="none-btn" style="width:auto; margin:0; padding:7px 12px; font-size:11px;" onclick="clearAllWhatIfPicks()">↺ Reset</button>
+    </div>
+  `;
 }
 
 function renderSimulateControls(){
@@ -1291,7 +1594,11 @@ function renderStandings(){
       <div class="standings-row-top">
         <span class="rank">${t.rank}</span>
         ${crestOrChipHTML(t.name, 20, 'circle')}
-        <span class="team-name">${t.name}${isYours ? ' <span style="color:var(--gold-soft);">&bull;</span>' : ''}</span>
+        <span class="team-name">${t.name}${isYours ? ' <span style="color:var(--gold-soft);">&bull;</span>' : ''}${
+          isWhatIf && t.rank_delta
+            ? `<span class="rank-delta-pill ${t.rank_delta > 0 ? 'rank-delta-up' : 'rank-delta-down'}">${t.rank_delta > 0 ? '&uarr;' + t.rank_delta : '&darr;' + Math.abs(t.rank_delta)}</span>`
+            : ''
+        }</span>
         <span class="pts">${t.points} pts</span>
         <div style="width:44px; height:8px; border-radius:4px; overflow:hidden; box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08); flex-shrink:0;">
           <div style="width:${(t.points/maxPoints*100).toFixed(1)}%; height:100%; background:${teamColor(t.name)};"></div>
@@ -1311,8 +1618,13 @@ function renderStandings(){
       </div>
     </div>`;
   });
-  el.innerHTML = `<div class="provisional-note" style="margin-bottom:14px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
-    <span>💡 <strong>Interactive:</strong> Click any club row to view tactical dossier, key players, fan survival outlook, and upcoming match win probabilities.</span>
+  const whatIfBanner = isWhatIf ? `
+    <div class="provisional-note" style="margin-bottom:12px; background:linear-gradient(135deg, rgba(217,184,74,0.16), rgba(18,28,64,0.9)); border-color:var(--gold); color:var(--gold-soft); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <span>🔮 <strong>What-If Predictor Mode (${getWhatIfPickCount()} custom ${getWhatIfPickCount() === 1 ? 'pick' : 'picks'}):</strong> Standings, rank movements (&uarr;/&darr;), and clinch scenarios reflect your predicted scores.</span>
+      <button class="none-btn" style="width:auto; margin:0; padding:4px 12px; font-size:11px;" onclick="clearAllWhatIfPicks()">↺ Back to Official Live Standings</button>
+    </div>` : '';
+  el.innerHTML = `${whatIfBanner}<div class="provisional-note" style="margin-bottom:14px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+    <span>💡 <strong>Interactive:</strong> Click any club row for tactical dossiers, or go to <strong>Matches</strong> to pick custom What-If results.</span>
   </div><div class="fade-in">${rows}</div>`;
 }
 
@@ -1427,6 +1739,35 @@ function renderMatches(){
                 {label: 'Draw', prob: m.odds.draw, color: 'var(--ivory-dim)'},
                 {label: m.away, prob: m.odds.away, color: teamColor(m.away)},
               ]) : ''}
+            ${!m.played ? (() => {
+              const pKey = getMatchPickKey(m);
+              const pick = userWhatIfPicks[pKey];
+              const hEsc = m.home.replace(/'/g, "\'");
+              const aEsc = m.away.replace(/'/g, "\'");
+              const mdEsc = m.matchday.replace(/'/g, "\'");
+              return `
+              <div class="whatif-pick-bar" onclick="event.stopPropagation()">
+                <div class="whatif-btn-group">
+                  <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ivory-dim);">🔮 What-If:</span>
+                  <button class="whatif-btn ${pick && pick.outcome === 'H' ? 'active-pick-home' : ''}" onclick="setWhatIfPick('${hEsc}', '${aEsc}', '${mdEsc}', 'H')">1 &middot; ${m.home} Win</button>
+                  <button class="whatif-btn ${pick && pick.outcome === 'D' ? 'active-pick-draw' : ''}" onclick="setWhatIfPick('${hEsc}', '${aEsc}', '${mdEsc}', 'D')">X &middot; Draw</button>
+                  <button class="whatif-btn ${pick && pick.outcome === 'A' ? 'active-pick-away' : ''}" onclick="setWhatIfPick('${hEsc}', '${aEsc}', '${mdEsc}', 'A')">2 &middot; ${m.away} Win</button>
+                </div>
+                ${pick ? `
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <div class="whatif-score-stepper">
+                    <button class="whatif-step-btn" onclick="adjustWhatIfScore('${hEsc}', '${aEsc}', '${mdEsc}', 'home', -1)">-</button>
+                    <span>${pick.homeGoals}</span>
+                    <button class="whatif-step-btn" onclick="adjustWhatIfScore('${hEsc}', '${aEsc}', '${mdEsc}', 'home', 1)">+</button>
+                    <span style="color:var(--ivory-dim);">:</span>
+                    <button class="whatif-step-btn" onclick="adjustWhatIfScore('${hEsc}', '${aEsc}', '${mdEsc}', 'away', -1)">-</button>
+                    <span>${pick.awayGoals}</span>
+                    <button class="whatif-step-btn" onclick="adjustWhatIfScore('${hEsc}', '${aEsc}', '${mdEsc}', 'away', 1)">+</button>
+                  </div>
+                  <button class="whatif-btn" style="padding:2px 6px;" onclick="clearSingleWhatIfPick('${hEsc}', '${aEsc}', '${mdEsc}')" title="Clear pick">&times;</button>
+                </div>` : ''}
+              </div>`;
+            })() : ''}
           </div>
           <div class="match-detail" id="${detailId}">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px; border-bottom:1px solid var(--line-soft); padding-bottom:8px;">
@@ -1488,7 +1829,11 @@ function renderMatches(){
           Upcoming European fixtures &middot; Scroll up (&uarr;) for past rounds, scroll down (&darr;) for future matchdays
         </div>
       </div>
-      ${pastMds.length ? `<button class="none-btn" style="width:auto; margin:0; padding:6px 14px; font-size:10px;" onclick="scrollToTopPastMatches()">&uarr; Past Matchdays (1&ndash;${pastMds.length})</button>` : ''}
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="none-btn" style="width:auto; margin:0; padding:6px 12px; font-size:10px; border-color:var(--gold); color:var(--gold-soft);" onclick="autoFillCurrentRoundFavorites()">🔮 Auto-Pick Round Favorites</button>
+        ${getWhatIfPickCount() > 0 ? `<button class="none-btn" style="width:auto; margin:0; padding:6px 12px; font-size:10px;" onclick="clearAllWhatIfPicks()">↺ Clear Picks (${getWhatIfPickCount()})</button>` : ''}
+        ${pastMds.length ? `<button class="none-btn" style="width:auto; margin:0; padding:6px 14px; font-size:10px;" onclick="scrollToTopPastMatches()">&uarr; Past Matchdays (1&ndash;${pastMds.length})</button>` : ''}
+      </div>
     </div>
   `;
 
@@ -1859,7 +2204,22 @@ function renderStats(){
     `;
   }).join('');
 
-  const moversRows = (data.power_movers || []).map(p => {
+  let liveMovers = data.power_movers || [];
+  if (STANDINGS && STANDINGS.teams && STANDINGS.teams.length > 0 && STANDINGS.teams[0].elo_change !== undefined){
+    const sorted = [...STANDINGS.teams];
+    const risers = sorted.filter(t => (t.elo_change || 0) > 0).sort((a, b) => b.elo_change - a.elo_change || b.elo - a.elo).slice(0, 4);
+    const fallers = sorted.filter(t => (t.elo_change || 0) < 0).sort((a, b) => a.elo_change - b.elo_change || a.elo - b.elo).slice(0, 3);
+    if (risers.length + fallers.length > 0){
+      liveMovers = [...risers, ...fallers].map(t => ({
+        name: t.name,
+        elo_change: (t.elo_change >= 0 ? '+' : '') + t.elo_change,
+        current_elo: t.elo,
+        trend: t.elo_change >= 0 ? 'up' : 'down',
+        note: `#${t.rank} in table (${t.won}W-${t.drawn}D-${t.lost}L, ${t.points} pts, GD ${t.gd >= 0 ? '+' : ''}${t.gd})`
+      }));
+    }
+  }
+  const moversRows = liveMovers.map(p => {
     const isUp = p.trend === 'up';
     return `
       <div class="stat-leader-row">
@@ -2336,7 +2696,7 @@ function renderTikTokStandingsCard(ctx, W, H, isStory, headerY){
   ctx.lineWidth = 2;
   drawRoundedRect(ctx, cardX, cardY, cardW, cardH, 20, true, true);
 
-  const teams = (STANDINGS && STANDINGS.teams || []).slice(0, isStory ? 10 : 6);
+  const teams = getActiveStandingsTeams().slice(0, isStory ? 10 : 6);
   const rowH = isStory ? 88 : 78;
 
   ctx.fillStyle = '#d9b84a';
