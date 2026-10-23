@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-23T16:33:16.462556Z",
+  "updated_at": "2026-10-23T21:03:33.370185Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -200,7 +200,7 @@
     },
     {
       "rank": 3,
-      "name": "Walter Benítez",
+      "name": "Matej Kovář",
       "team": "PSV Eindhoven",
       "crest": "https://crests.football-data.org/674.png",
       "clean_sheets": 1,
@@ -231,6 +231,13 @@
   ],
   "power_movers": [
     {
+      "name": "VfB Stuttgart",
+      "elo_change": "+35",
+      "current_elo": 1554,
+      "trend": "up",
+      "note": "#6 in table (2W-1D-0L, 7 pts, GD +5) — outperforming baseline seed"
+    },
+    {
       "name": "Real Betis",
       "elo_change": "+34",
       "current_elo": 1938,
@@ -238,16 +245,9 @@
       "note": "#5 in table (3W-0D-0L, 9 pts, GD +3) — outperforming baseline seed"
     },
     {
-      "name": "VfB Stuttgart",
-      "elo_change": "+33",
-      "current_elo": 1583,
-      "trend": "up",
-      "note": "#6 in table (2W-1D-0L, 7 pts, GD +5) — outperforming baseline seed"
-    },
-    {
       "name": "Paris Saint-Germain",
       "elo_change": "+27",
-      "current_elo": 2164,
+      "current_elo": 2163,
       "trend": "up",
       "note": "#1 in table (3W-0D-0L, 9 pts, GD +9) — outperforming baseline seed"
     },
@@ -268,14 +268,14 @@
     {
       "name": "Lille",
       "elo_change": "-33",
-      "current_elo": 1851,
+      "current_elo": 1850,
       "trend": "down",
       "note": "#35 in table (0W-0D-3L, 0 pts, GD -6) — below pre-season projection"
     },
     {
       "name": "Inter",
-      "elo_change": "-27",
-      "current_elo": 2144,
+      "elo_change": "-26",
+      "current_elo": 2143,
       "trend": "down",
       "note": "#20 in table (1W-0D-2L, 3 pts, GD -1) — below pre-season projection"
     }
