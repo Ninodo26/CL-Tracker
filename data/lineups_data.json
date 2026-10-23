@@ -1005,7 +1005,7 @@
     "tactical_brief": "Relentless defensive solidity with explosive transition punch. Griezmann pulls strings between the lines while Alvarez provides intelligent pressing."
   },
   "Borussia Dortmund": {
-    "formation": "4-2-3-1",
+    "formation": "3-4-2-1",
     "manager": "Niko Kovač",
     "starting_xi": [
       {
@@ -1016,86 +1016,93 @@
         "y": 8
       },
       {
-        "name": "Yan Couto",
-        "num": 2,
-        "pos": "RB",
-        "x": 84,
-        "y": 24
-      },
-      {
         "name": "Waldemar Anton",
         "num": 3,
-        "pos": "CB",
-        "x": 62,
-        "y": 20
+        "pos": "RCB",
+        "x": 70,
+        "y": 22
       },
       {
         "name": "Nico Schlotterbeck",
         "num": 4,
         "pos": "CB",
-        "x": 38,
+        "x": 50,
         "y": 20
       },
       {
         "name": "Ramy Bensebaini",
         "num": 5,
-        "pos": "LB",
-        "x": 16,
-        "y": 24
+        "pos": "LCB",
+        "x": 30,
+        "y": 22
       },
       {
-        "name": "Felix Nmecha",
-        "num": 8,
-        "pos": "DM",
-        "x": 60,
-        "y": 40
+        "name": "Julian Ryerson",
+        "num": 26,
+        "pos": "RWB",
+        "x": 86,
+        "y": 48
       },
       {
         "name": "Jobe Bellingham",
         "num": 7,
-        "pos": "DM",
+        "pos": "CM",
+        "x": 60,
+        "y": 44
+      },
+      {
+        "name": "Felix Nmecha",
+        "num": 8,
+        "pos": "CM",
         "x": 40,
-        "y": 40
+        "y": 44
+      },
+      {
+        "name": "Daniel Svensson",
+        "num": 24,
+        "pos": "LWB",
+        "x": 14,
+        "y": 48
+      },
+      {
+        "name": "Konstantinos Karetsas",
+        "num": 19,
+        "pos": "RAM",
+        "x": 70,
+        "y": 68
       },
       {
         "name": "Maximilian Beier",
         "num": 14,
-        "pos": "RW",
-        "x": 84,
-        "y": 74
-      },
-      {
-        "name": "Carney Chukwuemeka",
-        "num": 17,
-        "pos": "AM",
-        "x": 50,
-        "y": 60
-      },
-      {
-        "name": "Joey Veerman",
-        "num": 20,
-        "pos": "LW",
-        "x": 16,
-        "y": 74
+        "pos": "LAM",
+        "x": 30,
+        "y": 68
       },
       {
         "name": "Serhou Guirassy",
         "num": 9,
         "pos": "ST",
         "x": 50,
-        "y": 84
+        "y": 86
       }
     ],
     "subs": [
       "Alexander Meyer",
       "Joane Gadou",
-      "Julian Ryerson",
-      "Pascal Groß",
+      "Yan Couto",
+      "Marcel Sabitzer",
+      "Joey Veerman",
       "Ethan Nwaneri",
-      "Fábio Silva"
+      "Fábio Silva",
+      "Carney Chukwuemeka"
     ],
-    "injuries": [],
-    "tactical_brief": "Kovač's disciplined, high-octane 4-2-3-1 system. Guirassy acts as the dominant aerial anchor while Beier and Chukwuemeka burst into space behind opposing full-backs."
+    "injuries": [
+      {
+        "player": "Giannis Konstantelias",
+        "status": "Out (Cruciate Ligament Injury)"
+      }
+    ],
+    "tactical_brief": "Kovač's aggressive 3-4-2-1 structure. Guirassy pins center-backs to create isolation channels for €35m wonderkid Karetsas and Beier, while Svensson and Ryerson provide relentless width."
   },
   "Sporting CP": {
     "formation": "3-4-2-1",

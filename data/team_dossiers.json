@@ -392,41 +392,41 @@
   "Borussia Dortmund": {
     "league": "Bundesliga",
     "manager": "Niko Kovač",
-    "formation": "4-2-3-1 High-Intensity Press",
-    "why_good": "Under Niko Kovač, Borussia Dortmund play with relentless physical intensity, tactical discipline, and ruthless transition speed. Having rebuilt the squad for the 2026/27 campaign, BVB combine an imposing central spine with explosive young attacking talent.\n\nSerhou Guirassy remains the focal point in attack, dominating penalty boxes with his physical hold-up play and aerial prowess. Around him, Maximilian Beier and Carney Chukwuemeka provide lethal direct vertical runs and press resistance in the half-spaces.\n\nIn midfield, Felix Nmecha and Jobe Bellingham provide athletic power and ball-winning range, while Gregor Kobel continues to anchor the team in goal as one of Europe's most dependable shot-stoppers.",
+    "formation": "3-4-2-1 High-Intensity Press",
+    "why_good": "Under Niko Kovač, Borussia Dortmund play with relentless physical intensity, synchronized pressing, and direct vertical transition punch. After a major squad evolution for the 2026/27 campaign, BVB combine defensive solidity with sensational young attacking flair.\n\nAt the creative hub of the attack is Greek wonderkid Konstantinos Karetsas—signed from KRC Genk for €35m—whose supernatural balance, close-control dribbling, and incisive through-balls have electrified Signal Iduna Park. Leading the line is Serhou Guirassy, an elite physical focal point whose box hold-up play and aerial finishing pin backlines.\n\nIn midfield, Jobe Bellingham and Felix Nmecha dominate central duels alongside wing-backs Julian Ryerson and Daniel Svensson. While creative maestro Giannis Konstantelias (signed from PAOK) is currently sidelined with a major knee injury, Dortmund have found dynamic output through Maximilian Beier and Ethan Nwaneri.",
     "key_strengths": [
-      "Serhou Guirassy's elite box hold-up play and clinical finishing",
-      "Maximilian Beier's explosive off-the-ball runs into attacking channels",
-      "Gregor Kobel's world-class reflex shot-stopping and defensive command"
+      "Konstantinos Karetsas's generational 1v1 dribbling and final-third incision",
+      "Serhou Guirassy's elite box hold-up play and aerial finishing threat",
+      "Gregor Kobel's world-class reflex shot-stopping and backline leadership"
     ],
     "known_vulnerabilities": [
-      "Adjusting to new midfield partnerships in possession-heavy spells",
-      "Vulnerability to quick switches behind attacking full-backs"
+      "Creative burden heavily on Karetsas while Konstantelias recovers from injury",
+      "High-energy wing-backs can leave space behind against rapid counter-attacks"
     ],
     "key_players": [
       {
         "name": "Serhou Guirassy",
-        "role": "Target Center-Forward and Clinical Finisher",
-        "impact": "Top focal point who pins center-backs and scores in high-leverage moments."
+        "role": "Target Center-Forward & Top Goalscorer (#9)",
+        "impact": "The attacking anchor who dominates physical battles and provides clinical finishing."
       },
       {
-        "name": "Maximilian Beier",
-        "role": "Dynamic Forward and Channel Runner",
-        "impact": "Stretches backlines with high-speed sprints and sharp box finishing."
-      },
-      {
-        "name": "Carney Chukwuemeka",
-        "role": "Creative Attacking Midfielder",
-        "impact": "Brings press-resistant ball carries and decisive through-balls in transition."
+        "name": "Konstantinos Karetsas",
+        "role": "Generational Attacking Playmaker & Winger (#19)",
+        "impact": "€35m wonderkid from Genk with breathtaking 1v1 dribbling and visionary passing."
       },
       {
         "name": "Gregor Kobel",
-        "role": "Elite Goalkeeper and Vice-Captain",
-        "impact": "Delivers match-winning reflex saves and commands the penalty area."
+        "role": "World-Class Goalkeeper & Leader (#1)",
+        "impact": "Europe-leading reflex shot-stopper capable of winning matches single-handedly."
+      },
+      {
+        "name": "Nico Schlotterbeck",
+        "role": "Defensive Pillar & Diagonal Distributor (#4)",
+        "impact": "Commanding backline general with elite aerial dominance and 60-yard switches."
       }
     ],
-    "fan_perspective": "The Yellow Wall at Signal Iduna Park expects high-tempo aggression and uncompromising fight under Niko Kovač. Supporters have rallied around the revitalized 2026/27 squad as Dortmund mount a fresh assault on Europe.",
-    "needs_to_advance": "Dortmund are targeting at least 15 points to contend for an automatic top-8 seed and avoid the knockout play-off round."
+    "fan_perspective": "The Yellow Wall is buzzing over the arrival of Konstantinos Karetsas, viewing him as Dortmund's next world-class superstar. Fans back Niko Kovač's intense, high-energy football, eagerly awaiting Konstantelias's return from injury to complete a devastating Greek creative duo.",
+    "needs_to_advance": "With crucial league-phase points already secured, Dortmund are targeting 15 points to seal an automatic top-8 bye into the Round of 16."
   },
   "Sporting CP": {
     "league": "Primeira Liga",
