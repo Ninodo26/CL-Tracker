@@ -482,6 +482,7 @@
       }
     ],
     "subs": [
+      "Karim Adeyemi",
       "Frenkie de Jong",
       "Gavi",
       "Fermín López",
@@ -1005,7 +1006,7 @@
   },
   "Borussia Dortmund": {
     "formation": "4-2-3-1",
-    "manager": "Nuri Şahin",
+    "manager": "Niko Kovač",
     "starting_xi": [
       {
         "name": "Gregor Kobel",
@@ -1015,8 +1016,8 @@
         "y": 8
       },
       {
-        "name": "Julian Ryerson",
-        "num": 26,
+        "name": "Yan Couto",
+        "num": 2,
         "pos": "RB",
         "x": 84,
         "y": 24
@@ -1043,36 +1044,36 @@
         "y": 24
       },
       {
-        "name": "Emre Can",
-        "num": 23,
+        "name": "Felix Nmecha",
+        "num": 8,
         "pos": "DM",
         "x": 60,
         "y": 40
       },
       {
-        "name": "Pascal Groß",
-        "num": 13,
+        "name": "Jobe Bellingham",
+        "num": 7,
         "pos": "DM",
         "x": 40,
         "y": 40
       },
       {
-        "name": "Donyell Malen",
-        "num": 21,
+        "name": "Maximilian Beier",
+        "num": 14,
         "pos": "RW",
         "x": 84,
         "y": 74
       },
       {
-        "name": "Julian Brandt",
-        "num": 10,
+        "name": "Carney Chukwuemeka",
+        "num": 17,
         "pos": "AM",
         "x": 50,
         "y": 60
       },
       {
-        "name": "Jamie Gittens",
-        "num": 43,
+        "name": "Joey Veerman",
+        "num": 20,
         "pos": "LW",
         "x": 16,
         "y": 74
@@ -1086,24 +1087,15 @@
       }
     ],
     "subs": [
-      "Marcel Sabitzer",
-      "Maximilian Beier",
-      "Felix Nmecha",
-      "Niklas Süle",
-      "Yan Couto",
-      "Alexander Meyer"
+      "Alexander Meyer",
+      "Joane Gadou",
+      "Julian Ryerson",
+      "Pascal Groß",
+      "Ethan Nwaneri",
+      "Fábio Silva"
     ],
-    "injuries": [
-      {
-        "player": "Karim Adeyemi",
-        "status": "Out"
-      },
-      {
-        "player": "Giovanni Reyna",
-        "status": "Doubtful"
-      }
-    ],
-    "tactical_brief": "Direct dynamic transitions utilizing the box threat of Serhou Guirassy and the 1v1 wing isolation of Bynoe-Gittens."
+    "injuries": [],
+    "tactical_brief": "Kovač's disciplined, high-octane 4-2-3-1 system. Guirassy acts as the dominant aerial anchor while Beier and Chukwuemeka burst into space behind opposing full-backs."
   },
   "Sporting CP": {
     "formation": "3-4-2-1",

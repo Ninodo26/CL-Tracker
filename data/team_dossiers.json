@@ -172,23 +172,23 @@
     "key_players": [
       {
         "name": "Lamine Yamal",
-        "role": "Generational Right-Wing Creator",
-        "impact": "Completed 14 key dribbles and averages 3.1 chances created per 90, drawing triple-coverage."
-      },
-      {
-        "name": "Raphinha",
-        "role": "Pressing Monster & Left-Wing Finisher",
-        "impact": "Directly involved in 7 European goals already, combining blistering speed with work-rate."
+        "role": "World-Class Right Winger & Talisman",
+        "impact": "Europe's most valuable forward, generating unmatched 1v1 threat and key passes."
       },
       {
         "name": "Pedri",
-        "role": "Press-Resistant Midfield Maestro",
-        "impact": "Controls game tempo with 91% pass accuracy and exceptional disguised line-breaking passes."
+        "role": "Master Midfield Controller",
+        "impact": "Dictates the game's tempo and orchestrates attacking phases with immaculate composure."
       },
       {
-        "name": "Robert Lewandowski",
-        "role": "Master Striker & Box Predator",
-        "impact": "Veteran scoring acumen ensures half-chances are ruthlessly dispatched inside the 6-yard box."
+        "name": "Karim Adeyemi",
+        "role": "Rapid Direct Winger & Forward (#14)",
+        "impact": "Joined from Dortmund, providing electric 1v1 sprint speed and direct transition goals."
+      },
+      {
+        "name": "Raphinha",
+        "role": "Relentless High-Pressing Winger & Finisher",
+        "impact": "Combines aggressive counter-pressing work rate with decisive final-third delivery."
       }
     ],
     "fan_perspective": "Culés are walking on air. The Montjuïc stadium is buzzing with the feeling that the golden era of La Masia has returned with an added dose of physical intensity. Watching Lamine Yamal dismantle European powerhouses alongside Raphinha has restored Barcelona's pride on the continental stage.\n\nFans know that Flick's daring high line brings heart-stopping moments against pacey strikers, but the attacking joy has made Barcelona the most thrilling watch in Europe.",
@@ -391,42 +391,42 @@
   },
   "Borussia Dortmund": {
     "league": "Bundesliga",
-    "manager": "Nuri Şahin",
-    "formation": "4-2-3-1 Dynamic Transition",
-    "why_good": "Borussia Dortmund possess one of the most explosive transition attacks on the continent. Under Nuri Şahin, BVB look to bait opponents forward before hitting them with blistering wide pace through Jamie Gittens and Donyell Malen.\n\nAt the focal point of the attack is Serhou Guirassy—a physical monster in the penalty box whose hold-up play and aerial prowess bring Dortmund's attacking midfielders into scoring positions. Julian Brandt pulls the creative strings as the number 10, delivering threaded through-balls into the half-spaces.\n\nIn goal, Gregor Kobel is arguably Europe's most athletic shot-stopper, capable of single-handedly keeping Dortmund in matches against high-xG European powerhouses.",
+    "manager": "Niko Kovač",
+    "formation": "4-2-3-1 High-Intensity Press",
+    "why_good": "Under Niko Kovač, Borussia Dortmund play with relentless physical intensity, tactical discipline, and ruthless transition speed. Having rebuilt the squad for the 2026/27 campaign, BVB combine an imposing central spine with explosive young attacking talent.\n\nSerhou Guirassy remains the focal point in attack, dominating penalty boxes with his physical hold-up play and aerial prowess. Around him, Maximilian Beier and Carney Chukwuemeka provide lethal direct vertical runs and press resistance in the half-spaces.\n\nIn midfield, Felix Nmecha and Jobe Bellingham provide athletic power and ball-winning range, while Gregor Kobel continues to anchor the team in goal as one of Europe's most dependable shot-stoppers.",
     "key_strengths": [
-      "Jamie Gittens's lethal 1v1 dribbling and explosive wing acceleration",
-      "Serhou Guirassy's elite box hold-up play and aerial goal threat",
-      "Gregor Kobel's heroic shot-stopping ability in high-leverage knockout ties"
+      "Serhou Guirassy's elite box hold-up play and clinical finishing",
+      "Maximilian Beier's explosive off-the-ball runs into attacking channels",
+      "Gregor Kobel's world-class reflex shot-stopping and defensive command"
     ],
     "known_vulnerabilities": [
-      "Defensive transitions can be disjointed when the double pivot is bypassed",
-      "Inconsistency in maintaining defensive focus across full 90-minute stretches"
+      "Adjusting to new midfield partnerships in possession-heavy spells",
+      "Vulnerability to quick switches behind attacking full-backs"
     ],
     "key_players": [
       {
         "name": "Serhou Guirassy",
-        "role": "Target Striker & Clinical Box Finisher",
-        "impact": "Averages 0.85 goals per 90 and anchors forward attacks with physical strength."
+        "role": "Target Center-Forward and Clinical Finisher",
+        "impact": "Top focal point who pins center-backs and scores in high-leverage moments."
       },
       {
-        "name": "Jamie Gittens",
-        "role": "Dynamic Left-Wing Dribbler",
-        "impact": "Completed 18 progressive carries, scoring spectacular goals cutting inside onto his right foot."
+        "name": "Maximilian Beier",
+        "role": "Dynamic Forward and Channel Runner",
+        "impact": "Stretches backlines with high-speed sprints and sharp box finishing."
       },
       {
-        "name": "Julian Brandt",
-        "role": "Creative Number 10 & Playmaker",
-        "impact": "Leads Dortmund in key passes and switches play with pinpoint vision."
+        "name": "Carney Chukwuemeka",
+        "role": "Creative Attacking Midfielder",
+        "impact": "Brings press-resistant ball carries and decisive through-balls in transition."
       },
       {
         "name": "Gregor Kobel",
-        "role": "Elite Goalkeeper & Leader",
-        "impact": "Averaging 4.2 saves per match with outstanding reflex stops on close-range attempts."
+        "role": "Elite Goalkeeper and Vice-Captain",
+        "impact": "Delivers match-winning reflex saves and commands the penalty area."
       }
     ],
-    "fan_perspective": "The Yellow Wall at the Westfalenstadion is football's most iconic cathedral. Dortmund supporters carry the pride of last season's run to the Wembley final, and the 80,000-strong crowd expects nothing less than another deep European crusade.\n\nWhile fans scrutinize away consistency, the belief at home is that Dortmund can overwhelm any opponent on earth with the roar of the Südtribüne at their backs.",
-    "needs_to_advance": "With 6 points on the board, Dortmund need approximately 9 more points from their remaining fixtures to secure an automatic top-8 bye."
+    "fan_perspective": "The Yellow Wall at Signal Iduna Park expects high-tempo aggression and uncompromising fight under Niko Kovač. Supporters have rallied around the revitalized 2026/27 squad as Dortmund mount a fresh assault on Europe.",
+    "needs_to_advance": "Dortmund are targeting at least 15 points to contend for an automatic top-8 seed and avoid the knockout play-off round."
   },
   "Sporting CP": {
     "league": "Primeira Liga",
