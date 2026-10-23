@@ -45,7 +45,7 @@
     "why_good": "Under Luis Enrique, PSG have transitioned into a hyper-dynamic, unified collective. The blockbuster arrival of Georgian sensation Khvicha Kvaratskhelia alongside Lucas Chevalier in goal and Spanish forward Ferran Torres gives Paris extraordinary attacking versatility.\n\nVitinha and João Neves dictate the midfield tempo with press-resistant elegance, while Achraf Hakimi and Nuno Mendes bomb forward to create wide overloads. On the wings, Ousmane Dembélé and Kvaratskhelia provide Europe's most electric 1v1 dribbling pair.",
     "key_strengths": [
       "Territorial strangulation and relentless 5-second counter-pressing traps",
-      "Elite wide 1v1 dribbling with Ousmane Dembélé and Bradley Barcola",
+      "Elite wide 1v1 dribbling with Ousmane Dembélé and Khvicha Kvaratskhelia",
       "Fluid midfield tempo control through Vitinha and João Neves"
     ],
     "known_vulnerabilities": [
@@ -434,8 +434,8 @@
     "formation": "3-4-2-1 High-Intensity Press",
     "why_good": "Under Rui Borges, Sporting CP maintain their fluid, aggressive 3-4-2-1 tactical identity. Rebuilding the frontline following Gyökeres's departure to Arsenal, Sporting brought in Greek international Fotis Ioannidis alongside veteran Luis Suárez and goalkeeper Rui Silva.\n\nFrancisco Trincão and Pedro Gonçalves provide sublime technical wizardry in the half-spaces, while Gonçalo Inácio and Zeno Debast anchor an athletic backline with outstanding progressive passing range.",
     "key_strengths": [
-      "Viktor Gyökeres's unstoppable physical power, pace, and clinical scoring (4 UCL goals)",
-      "Morten Hjulmand's midfield bite, leadership, and pressing coordination",
+      "Fotis Ioannidis's physical box hold-up play and aerial goal threat",
+      "Daniel Bragança and Hidemasa Morita's fluid midfield control and pressing coordination",
       "Defensive athleticism and recovery speed of Gonçalo Inácio and Ousmane Diomande"
     ],
     "known_vulnerabilities": [
@@ -464,7 +464,7 @@
         "impact": "Elite left-footed distributor launching attacks from deep."
       }
     ],
-    "fan_perspective": "The Estádio José Alvalade is euphoric. Sporting fans feel they are witnessing a generational team that can challenge the traditional European aristocracy. The love for Gyökeres is bordering on religious devotion across Lisbon.\n\nSupporters believe that with their tactical discipline and Gyökeres firing on all cylinders, no team in the draw wants to face Sporting over two legs.",
+    "fan_perspective": "The Estádio José Alvalade is roaring with passion. Sporting supporters carry supreme pride in their champion squad, backing Rui Borges's high-intensity attacking football. Fans believe that with Francisco Trincão and Pedro Gonçalves orchestrating between the lines, no European opponent will find an easy night in Lisbon.",
     "needs_to_advance": "Sitting on 7 points with a strong +4 goal differential, Sporting need roughly 8 points from their remaining 5 fixtures to lock in a historic automatic top-8 seed."
   },
   "Real Betis": {
@@ -747,7 +747,7 @@
     "why_good": "Under Marco Rose, RB Leipzig execute a ferocious, vertical transition game. The addition of Dutch winger Johan Bakayoko alongside Christopher Nkunku (on loan) and prodigy Assan Ouédraogo has injected blistering creativity around Loïs Openda and Xavi Simons.\n\nCastello Lukeba and Willi Orbán anchor a resilient back four, while Arthur Vermeeren and Ouédraogo drive transitions through the center. Up front, Bakayoko and Nusa provide electrifying 1v1 pace on the perimeter.",
     "key_strengths": [
       "Xavi Simons's world-class 1v1 dribbling and half-space playmaking brilliance",
-      "Loïs Openda and Benjamin Šeško's devastating combination of pace and power",
+      "Loïs Openda and Johan Bakayoko's devastating combination of pace, width, and clinical finishing",
       "Fierce central counter-pressing that forces high-turnover scoring opportunities"
     ],
     "known_vulnerabilities": [
@@ -825,7 +825,7 @@
     "why_good": "Under Peter Bosz, PSV Eindhoven play an unapologetically aggressive, high-line pressing game. The marquee additions of Croatian legend Ivan Perišić and defender Lutsharel Geertruida alongside Filip Kostić give PSV vast European experience to complement their relentless pressing.\n\nJerdy Schouten commands the base of midfield with flawless positional sense, while Sergiño Dest provides dynamic attacking width. At the focal point, veteran captain Luuk de Jong remains Europe's most dominant aerial target in the box.",
     "key_strengths": [
       "Luuk de Jong's unmatched aerial dominance and header conversion",
-      "Johan Bakayoko and Noa Lang's electric 1v1 wide dribbling threat",
+      "Ivan Perišić and Sergiño Dest's dynamic wide creativity and pinpoint crossing",
       "Peter Bosz's high-octane attacking philosophy and chance-creation volume"
     ],
     "known_vulnerabilities": [
@@ -863,13 +863,13 @@
     "formation": "4-4-2 Rapid Transition",
     "why_good": "Under Marcelino, Villarreal execute an uncompromising 4-4-2 low-to-mid block with blistering vertical counter-attacks. The arrivals of creative virtuoso Alberto Moleiro, Georgian striker Georges Mikautadze, and winger Nicolas Pépé give the Yellow Submarine devastating pace in open space.\n\nPape Gueye and Santi Comesaña control the central midfield battle with physical authority, while veteran icon Gerard Moreno and Ayoze Pérez weave clinical finishing patterns in the final third.",
     "key_strengths": [
-      "Álex Baena's world-class vision, assists, and open-play chance creation",
+      "Alberto Moleiro and Nicolas Pépé's creative flair and open-play chance creation",
       "Marcelino's compact, disciplined 4-4-2 defensive block that frustrates possession sides",
-      "Lethal transition efficiency through Ayoze Pérez and Thierno Barry"
+      "Lethal transition efficiency through Ayoze Pérez and Georges Mikautadze"
     ],
     "known_vulnerabilities": [
       "Can lack top-end sprint pace in central defense when pushed deep into their box",
-      "Relies heavily on Álex Baena for creative inspiration against deep blocks"
+      "Relies heavily on Alberto Moleiro for creative inspiration against deep blocks"
     ],
     "key_players": [
       {
@@ -941,9 +941,9 @@
     "formation": "4-3-3 Pragmatic Masterclass",
     "why_good": "Under Massimiliano Allegri, Napoli are a masterclass in tactical discipline and ruthless match management. The arrival of Belgian legend Kevin De Bruyne provides visionary creativity between the lines, feeding dynamic Danish striker Rasmus Højlund.\n\nAlessandro Buongiorno and Giovanni Di Lorenzo anchor a resolute, physically intimidating backline, while Stanislav Lobotka controls tempo in the central pivot. On the flanks, Matteo Politano and Noa Lang stretch defenses with direct running.",
     "key_strengths": [
-      "Khvicha Kvaratskhelia's unplayable 1v1 dribbling and solo goal threat",
-      "Romelu Lukaku's immense physical hold-up play and penalty-box gravity",
-      "Scott McTominay's box-to-box power, late runs, and aerial goalscoring"
+      "Kevin De Bruyne's world-class vision, tempo control, and pinpoint final-third delivery",
+      "Rasmus Højlund's explosive transition acceleration and clinical box finishing",
+      "Scott McTominay and André-Frank Zambo Anguissa's box-to-box midfield power and aerial authority"
     ],
     "known_vulnerabilities": [
       "Midfield can lack lateral speed against rapid counter-attacking wing overloads",
@@ -980,9 +980,9 @@
     "formation": "4-2-3-1 High-Tempo Direct Counter",
     "why_good": "Under Bruno Génésio, LOSC Lille are a disciplined, razor-sharp tournament side capable of defeating Europe's best. With Berke Özer taking over in goal and Tanguy Nianzou bolstering the central defense, Lille rely on rapid transition punch.\n\nEdon Zhegrova remains one of the continent's most electrifying 1v1 wingers, cutting inside with explosive flair, while Benjamin André and Angel Gomes control the midfield with relentless tenacity and vision.",
     "key_strengths": [
-      "Jonathan David's world-class penalty-box finishing and intelligent movement",
-      "Edon Zhegrova's electrifying 1v1 dribbling and unpredictability on the wing",
-      "Lucas Chevalier's heroic shot-stopping and calm command of his penalty box"
+      "Edon Zhegrova's electrifying 1v1 dribbling and curling left-foot strikes",
+      "Dilane Bakwa's explosive pace and direct transition threat",
+      "Berke Özer's commanding penalty-box presence and reflex shot-stopping"
     ],
     "known_vulnerabilities": [
       "Can struggle to break down low blocks when forced to dominate 65%+ possession",

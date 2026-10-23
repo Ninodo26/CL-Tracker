@@ -185,7 +185,6 @@
       "Lucas Beraldo",
       "Fabián Ruiz",
       "Senny Mayulu",
-      "Kang-in Lee",
       "Gonçalo Ramos"
     ],
     "injuries": [
@@ -198,7 +197,7 @@
         "status": "Doubtful"
       }
     ],
-    "tactical_brief": "Dominant possession with high territorial strangulation. Vitinha dictates tempo while Dembélé and Barcola isolate full-backs in 1v1 situations."
+    "tactical_brief": "Dominant possession with high territorial strangulation. Vitinha dictates tempo while Dembélé and Kvaratskhelia isolate full-backs in 1v1 situations."
   },
   "Liverpool": {
     "formation": "4-2-3-1",
@@ -382,7 +381,6 @@
     ],
     "subs": [
       "Marcus Bettinelli",
-      "John Stones",
       "Rico Lewis",
       "İlkay Gündoğan",
       "Jack Grealish",
@@ -483,7 +481,6 @@
       "Frenkie de Jong",
       "Gavi",
       "Fermín López",
-      "Ferran Torres",
       "Ansu Fati",
       "Iñaki Peña"
     ],
@@ -1203,7 +1200,7 @@
         "status": "Doubtful"
       }
     ],
-    "tactical_brief": "Rui Borges's high-tempo pressing structure, maintaining the lethal 3-4-2-1 shape around Viktor Gyökeres's unmatched physical running and Hjulmand's ball recoveries."
+    "tactical_brief": "Rui Borges's high-tempo pressing structure, maintaining the lethal 3-4-2-1 shape around Fotis Ioannidis's physical box presence, Trincão's creative wizardry, and Morita's midfield recoveries."
   },
   "Real Betis": {
     "formation": "4-2-3-1",
@@ -1288,7 +1285,6 @@
       }
     ],
     "subs": [
-      "Diego Conde",
       "Valentín Gómez",
       "Junior Firpo",
       "Pablo Fornals",
@@ -1884,7 +1880,6 @@
       "Kiliann Sildillia",
       "Yarek Gąsiorowski",
       "Mauro Júnior",
-      "Joey Veerman",
       "Ricardo Pepi"
     ],
     "injuries": [
@@ -1999,7 +1994,7 @@
         "status": "Out"
       }
     ],
-    "tactical_brief": "Classic compact 4-4-2 with rapid counter-attacking wings. Álex Baena is Europe's premier open-play chance creator, unlocking defenses with surgical precision."
+    "tactical_brief": "Classic compact 4-4-2 with rapid counter-attacking wings. Alberto Moleiro and Nicolas Pépé unlock defenses with surgical precision and dynamic 1v1 pace."
   },
   "Manchester United": {
     "formation": "4-2-3-1",
@@ -2201,7 +2196,7 @@
         "status": "Doubtful"
       }
     ],
-    "tactical_brief": "Conte's relentless intensity and physical dominance. Lukaku acts as the impenetrable wall for McTominay's late bursts and Kvaratskhelia's 1v1 trickery."
+    "tactical_brief": "Allegri's pragmatic structure with ruthless transition punch. Rasmus Højlund spearheads the attack while Kevin De Bruyne and Matteo Politano unlock opposing defenses."
   },
   "LASK": {
     "formation": "3-4-3",
@@ -2803,8 +2798,8 @@
         "y": 8
       },
       {
-        "name": "Lutsharel Geertruida",
-        "num": 3,
+        "name": "Benjamin Henrichs",
+        "num": 39,
         "pos": "RB",
         "x": 84,
         "y": 24
@@ -3290,7 +3285,7 @@
         "status": "Out"
       }
     ],
-    "tactical_brief": "Tactically astute giant-killers. Lucas Chevalier provides world-class shot-stopping, Zhegrova provides 1v1 flair, and Jonathan David converts half-chances with lethal precision."
+    "tactical_brief": "Tactically astute giant-killers. Berke Özer provides agile shot-stopping, while Edon Zhegrova and Dilane Bakwa shred backlines with explosive wing pace."
   },
   "Slovan Bratislava": {
     "formation": "4-3-3",
