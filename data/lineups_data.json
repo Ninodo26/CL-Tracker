@@ -1,7 +1,7 @@
 {
   "Real Madrid": {
     "formation": "4-3-3",
-    "manager": "Carlo Ancelotti",
+    "manager": "José Mourinho",
     "starting_xi": [
       {
         "name": "Thibaut Courtois",
@@ -11,8 +11,8 @@
         "y": 8
       },
       {
-        "name": "Dani Carvajal",
-        "num": 2,
+        "name": "Trent Alexander-Arnold",
+        "num": 12,
         "pos": "RB",
         "x": 84,
         "y": 24
@@ -25,8 +25,8 @@
         "y": 20
       },
       {
-        "name": "Antonio Rüdiger",
-        "num": 22,
+        "name": "Dean Huijsen",
+        "num": 4,
         "pos": "CB",
         "x": 38,
         "y": 20
@@ -68,7 +68,7 @@
       },
       {
         "name": "Kylian Mbappé",
-        "num": 9,
+        "num": 10,
         "pos": "ST",
         "x": 50,
         "y": 86
@@ -82,21 +82,18 @@
       }
     ],
     "subs": [
-      "Luka Modrić",
-      "Brahim Díaz",
+      "Andriy Lunin",
+      "Ibrahima Konaté",
+      "Marc Cucurella",
       "Eduardo Camavinga",
       "Arda Güler",
-      "Lucas Vázquez",
-      "Andriy Lunin"
+      "Endrick",
+      "Brahim Díaz"
     ],
     "injuries": [
       {
-        "player": "David Alaba",
-        "status": "Doubtful"
-      },
-      {
         "player": "Dani Carvajal",
-        "status": "Out"
+        "status": "Out (ACL Recovery)"
       }
     ],
     "tactical_brief": "Ancelotti's Madrid blueprint: fluid attacking freedom combined with lethal transition punch. Mbappé and Vinícius exploit vertical channels while Valverde and Bellingham dominate midfield duels."
@@ -106,7 +103,7 @@
     "manager": "Luis Enrique",
     "starting_xi": [
       {
-        "name": "Gianluigi Donnarumma",
+        "name": "Lucas Chevalier",
         "num": 1,
         "pos": "GK",
         "x": 50,
@@ -165,31 +162,31 @@
         "name": "Ousmane Dembélé",
         "num": 10,
         "pos": "RW",
-        "x": 82,
+        "x": 84,
         "y": 78
       },
       {
-        "name": "Marco Asensio",
+        "name": "Ferran Torres",
         "num": 11,
         "pos": "ST",
         "x": 50,
         "y": 82
       },
       {
-        "name": "Bradley Barcola",
-        "num": 29,
+        "name": "Khvicha Kvaratskhelia",
+        "num": 7,
         "pos": "LW",
-        "x": 18,
-        "y": 80
+        "x": 16,
+        "y": 78
       }
     ],
     "subs": [
-      "Randal Kolo Muani",
-      "Fabián Ruiz",
-      "Lucas Beraldo",
-      "Kang-in Lee",
       "Matvey Safonov",
-      "Lucas Hernández"
+      "Lucas Beraldo",
+      "Fabián Ruiz",
+      "Senny Mayulu",
+      "Kang-in Lee",
+      "Gonçalo Ramos"
     ],
     "injuries": [
       {
@@ -205,7 +202,7 @@
   },
   "Liverpool": {
     "formation": "4-2-3-1",
-    "manager": "Arne Slot",
+    "manager": "Andoni Iraola",
     "starting_xi": [
       {
         "name": "Alisson Becker",
@@ -215,15 +212,15 @@
         "y": 8
       },
       {
-        "name": "Trent Alexander-Arnold",
-        "num": 66,
+        "name": "Conor Bradley",
+        "num": 84,
         "pos": "RB",
         "x": 84,
         "y": 24
       },
       {
-        "name": "Ibrahima Konaté",
-        "num": 5,
+        "name": "Ronald Araújo",
+        "num": 2,
         "pos": "CB",
         "x": 62,
         "y": 20
@@ -236,8 +233,8 @@
         "y": 20
       },
       {
-        "name": "Andy Robertson",
-        "num": 26,
+        "name": "Kostas Tsimikas",
+        "num": 21,
         "pos": "LB",
         "x": 16,
         "y": 24
@@ -257,22 +254,22 @@
         "y": 40
       },
       {
-        "name": "Mohamed Salah",
-        "num": 11,
+        "name": "Dominik Szoboszlai",
+        "num": 8,
         "pos": "RW",
         "x": 84,
         "y": 74
       },
       {
-        "name": "Dominik Szoboszlai",
-        "num": 8,
-        "pos": "AM",
-        "x": 50,
-        "y": 60
-      },
-      {
         "name": "Luis Díaz",
         "num": 7,
+        "pos": "AM",
+        "x": 50,
+        "y": 62
+      },
+      {
+        "name": "Bradley Barcola",
+        "num": 29,
         "pos": "LW",
         "x": 16,
         "y": 74
@@ -286,12 +283,12 @@
       }
     ],
     "subs": [
+      "Giorgi Mamardashvili",
+      "Jérémy Jacquet",
+      "Joe Gomez",
+      "Wataru Endo",
       "Cody Gakpo",
-      "Curtis Jones",
-      "Harvey Elliott",
-      "Diogo Jota",
-      "Kostas Tsimikas",
-      "Caoimhín Kelleher"
+      "Federico Chiesa"
     ],
     "injuries": [
       {
@@ -303,11 +300,11 @@
   },
   "Manchester City": {
     "formation": "4-1-4-1",
-    "manager": "Pep Guardiola",
+    "manager": "Enzo Maresca",
     "starting_xi": [
       {
-        "name": "Ederson",
-        "num": 31,
+        "name": "Gianluigi Donnarumma",
+        "num": 1,
         "pos": "GK",
         "x": 50,
         "y": 8
@@ -320,8 +317,8 @@
         "y": 22
       },
       {
-        "name": "Manuel Akanji",
-        "num": 25,
+        "name": "Marc Guéhi",
+        "num": 6,
         "pos": "CB",
         "x": 62,
         "y": 20
@@ -344,36 +341,36 @@
         "name": "Mateo Kovačić",
         "num": 8,
         "pos": "DM",
-        "x": 50,
+        "x": 60,
         "y": 40
       },
       {
         "name": "Bernardo Silva",
         "num": 20,
-        "pos": "RM",
-        "x": 82,
-        "y": 66
-      },
-      {
-        "name": "Kevin De Bruyne",
-        "num": 17,
-        "pos": "RCM",
-        "x": 65,
-        "y": 58
+        "pos": "DM",
+        "x": 40,
+        "y": 40
       },
       {
         "name": "Phil Foden",
         "num": 47,
-        "pos": "LCM",
-        "x": 35,
-        "y": 58
+        "pos": "RW",
+        "x": 84,
+        "y": 74
+      },
+      {
+        "name": "Rayan Cherki",
+        "num": 10,
+        "pos": "AM",
+        "x": 50,
+        "y": 62
       },
       {
         "name": "Jérémy Doku",
         "num": 11,
-        "pos": "LM",
-        "x": 18,
-        "y": 66
+        "pos": "LW",
+        "x": 16,
+        "y": 74
       },
       {
         "name": "Erling Haaland",
@@ -384,12 +381,12 @@
       }
     ],
     "subs": [
-      "Jack Grealish",
-      "İlkay Gündoğan",
-      "Savinho",
+      "Marcus Bettinelli",
       "John Stones",
-      "Nathan Aké",
-      "Stefan Ortega"
+      "Rico Lewis",
+      "İlkay Gündoğan",
+      "Jack Grealish",
+      "Savinho"
     ],
     "injuries": [
       {
@@ -514,22 +511,22 @@
         "y": 8
       },
       {
-        "name": "Konrad Laimer",
-        "num": 27,
+        "name": "Josip Stanišić",
+        "num": 44,
         "pos": "RB",
         "x": 84,
         "y": 24
       },
       {
-        "name": "Dayot Upamecano",
-        "num": 2,
+        "name": "Jonathan Tah",
+        "num": 4,
         "pos": "CB",
         "x": 62,
         "y": 20
       },
       {
-        "name": "Kim Min-jae",
-        "num": 3,
+        "name": "Dayot Upamecano",
+        "num": 2,
         "pos": "CB",
         "x": 38,
         "y": 20
@@ -564,7 +561,7 @@
       },
       {
         "name": "Jamal Musiala",
-        "num": 42,
+        "num": 10,
         "pos": "AM",
         "x": 50,
         "y": 62
@@ -581,16 +578,17 @@
         "num": 9,
         "pos": "ST",
         "x": 50,
-        "y": 86
+        "y": 84
       }
     ],
     "subs": [
-      "Leroy Sané",
+      "Jonas Urbig",
+      "Kim Min-jae",
+      "Hiroki Ito",
+      "Tom Bischof",
+      "Konrad Laimer",
       "Kingsley Coman",
-      "João Palhinha",
-      "Thomas Müller",
-      "Leon Goretzka",
-      "Sven Ulreich"
+      "Leroy Sané"
     ],
     "injuries": [
       {
@@ -616,8 +614,8 @@
         "y": 8
       },
       {
-        "name": "Ben White",
-        "num": 4,
+        "name": "Jurriën Timber",
+        "num": 12,
         "pos": "RB",
         "x": 84,
         "y": 24
@@ -637,62 +635,63 @@
         "y": 20
       },
       {
-        "name": "Jurriën Timber",
-        "num": 12,
+        "name": "Piero Hincapié",
+        "num": 3,
         "pos": "LB",
         "x": 16,
         "y": 24
       },
       {
-        "name": "Thomas Partey",
-        "num": 5,
-        "pos": "DM",
-        "x": 50,
-        "y": 40
+        "name": "Bruno Guimarães",
+        "num": 8,
+        "pos": "RCM",
+        "x": 70,
+        "y": 48
       },
       {
         "name": "Declan Rice",
         "num": 41,
-        "pos": "RCM",
-        "x": 70,
-        "y": 50
+        "pos": "DM",
+        "x": 50,
+        "y": 40
       },
       {
         "name": "Martin Ødegaard",
         "num": 8,
         "pos": "LCM",
         "x": 30,
-        "y": 56
+        "y": 52
       },
       {
         "name": "Bukayo Saka",
         "num": 7,
         "pos": "RW",
         "x": 84,
-        "y": 78
+        "y": 76
+      },
+      {
+        "name": "Viktor Gyökeres",
+        "num": 9,
+        "pos": "ST",
+        "x": 50,
+        "y": 86
       },
       {
         "name": "Kai Havertz",
         "num": 29,
-        "pos": "ST",
-        "x": 50,
-        "y": 84
-      },
-      {
-        "name": "Gabriel Martinelli",
-        "num": 11,
         "pos": "LW",
         "x": 16,
-        "y": 78
+        "y": 76
       }
     ],
     "subs": [
-      "Leandro Trossard",
-      "Jorginho",
+      "Illan Meslier",
+      "Ezri Konsa",
+      "Ben White",
       "Mikel Merino",
-      "Raheem Sterling",
-      "Riccardo Calafiori",
-      "Neto"
+      "Gabriel Martinelli",
+      "Noni Madueke",
+      "Leandro Trossard"
     ],
     "injuries": [
       {
@@ -711,8 +710,8 @@
     "manager": "Simone Inzaghi",
     "starting_xi": [
       {
-        "name": "Yann Sommer",
-        "num": 1,
+        "name": "Josep Martínez",
+        "num": 13,
         "pos": "GK",
         "x": 50,
         "y": 8
@@ -721,36 +720,36 @@
         "name": "Benjamin Pavard",
         "num": 28,
         "pos": "RCB",
-        "x": 75,
+        "x": 70,
         "y": 22
       },
       {
-        "name": "Francesco Acerbi",
-        "num": 15,
+        "name": "Manuel Akanji",
+        "num": 25,
         "pos": "CB",
         "x": 50,
-        "y": 18
+        "y": 20
       },
       {
         "name": "Alessandro Bastoni",
         "num": 95,
         "pos": "LCB",
-        "x": 25,
+        "x": 30,
         "y": 22
       },
       {
         "name": "Denzel Dumfries",
         "num": 2,
         "pos": "RWB",
-        "x": 88,
+        "x": 86,
         "y": 48
       },
       {
         "name": "Nicolò Barella",
         "num": 23,
         "pos": "RCM",
-        "x": 68,
-        "y": 50
+        "x": 65,
+        "y": 46
       },
       {
         "name": "Hakan Çalhanoğlu",
@@ -760,41 +759,42 @@
         "y": 38
       },
       {
-        "name": "Henrikh Mkhitaryan",
-        "num": 22,
+        "name": "Petar Sučić",
+        "num": 24,
         "pos": "LCM",
-        "x": 32,
-        "y": 50
+        "x": 35,
+        "y": 46
       },
       {
         "name": "Federico Dimarco",
         "num": 32,
         "pos": "LWB",
-        "x": 12,
+        "x": 14,
         "y": 48
       },
       {
         "name": "Marcus Thuram",
         "num": 9,
         "pos": "ST",
-        "x": 62,
+        "x": 40,
         "y": 80
       },
       {
         "name": "Lautaro Martínez",
         "num": 10,
         "pos": "ST",
-        "x": 38,
+        "x": 60,
         "y": 82
       }
     ],
     "subs": [
-      "Mehdi Taremi",
-      "Davide Frattesi",
-      "Stefan de Vrij",
-      "Piotr Zieliński",
+      "Ivan Provedel",
+      "John Stones",
+      "Yann Bisseck",
       "Carlos Augusto",
-      "Josep Martínez"
+      "Curtis Jones",
+      "Henrikh Mkhitaryan",
+      "Ange-Yoan Bonny"
     ],
     "injuries": [
       {
@@ -816,22 +816,22 @@
         "y": 8
       },
       {
-        "name": "Ezri Konsa",
-        "num": 4,
+        "name": "Aaron Wan-Bissaka",
+        "num": 29,
         "pos": "RB",
         "x": 84,
         "y": 24
       },
       {
-        "name": "Diego Carlos",
-        "num": 3,
+        "name": "Pau Torres",
+        "num": 14,
         "pos": "CB",
         "x": 62,
         "y": 20
       },
       {
-        "name": "Pau Torres",
-        "num": 14,
+        "name": "Taylor Harwood-Bellis",
+        "num": 6,
         "pos": "CB",
         "x": 38,
         "y": 20
@@ -848,35 +848,35 @@
         "num": 24,
         "pos": "DM",
         "x": 60,
-        "y": 40
+        "y": 42
       },
       {
-        "name": "Youri Tielemans",
+        "name": "Leon Goretzka",
         "num": 8,
         "pos": "DM",
         "x": 40,
-        "y": 40
-      },
-      {
-        "name": "Leon Bailey",
-        "num": 31,
-        "pos": "RW",
-        "x": 84,
-        "y": 72
+        "y": 42
       },
       {
         "name": "Morgan Rogers",
         "num": 27,
-        "pos": "AM",
-        "x": 50,
-        "y": 60
+        "pos": "RW",
+        "x": 84,
+        "y": 74
       },
       {
         "name": "John McGinn",
         "num": 7,
+        "pos": "AM",
+        "x": 50,
+        "y": 62
+      },
+      {
+        "name": "Nicolas Jackson",
+        "num": 15,
         "pos": "LW",
         "x": 16,
-        "y": 72
+        "y": 74
       },
       {
         "name": "Ollie Watkins",
@@ -887,12 +887,13 @@
       }
     ],
     "subs": [
-      "Jhon Durán",
-      "Jacob Ramsey",
+      "Zion Suzuki",
+      "Tyrone Mings",
+      "Boubacar Kamara",
+      "João Gomes",
       "Ross Barkley",
-      "Ian Maatsen",
-      "Kosta Nedeljković",
-      "Robin Olsen"
+      "Emiliano Buendía",
+      "Leon Bailey"
     ],
     "injuries": [
       {
@@ -918,46 +919,39 @@
         "y": 8
       },
       {
-        "name": "Nahuel Molina",
-        "num": 16,
-        "pos": "RWB",
-        "x": 88,
-        "y": 45
-      },
-      {
         "name": "Robin Le Normand",
         "num": 24,
         "pos": "RCB",
-        "x": 72,
+        "x": 70,
         "y": 22
       },
       {
-        "name": "José María Giménez",
-        "num": 2,
+        "name": "Cristian Romero",
+        "num": 17,
         "pos": "CB",
         "x": 50,
-        "y": 18
+        "y": 20
       },
       {
-        "name": "Reinildo Mandava",
-        "num": 23,
+        "name": "Dávid Hancko",
+        "num": 3,
         "pos": "LCB",
-        "x": 28,
+        "x": 30,
         "y": 22
       },
       {
-        "name": "Samuel Lino",
-        "num": 12,
-        "pos": "LWB",
-        "x": 12,
-        "y": 45
+        "name": "Marcos Llorente",
+        "num": 14,
+        "pos": "RWB",
+        "x": 86,
+        "y": 48
       },
       {
-        "name": "Rodrigo De Paul",
-        "num": 5,
-        "pos": "RCM",
-        "x": 68,
-        "y": 50
+        "name": "Morten Hjulmand",
+        "num": 42,
+        "pos": "CM",
+        "x": 65,
+        "y": 44
       },
       {
         "name": "Koke",
@@ -967,11 +961,18 @@
         "y": 38
       },
       {
-        "name": "Conor Gallagher",
-        "num": 4,
-        "pos": "LCM",
-        "x": 32,
-        "y": 50
+        "name": "Álex Baena",
+        "num": 16,
+        "pos": "CM",
+        "x": 35,
+        "y": 44
+      },
+      {
+        "name": "Alejandro Grimaldo",
+        "num": 20,
+        "pos": "LWB",
+        "x": 14,
+        "y": 48
       },
       {
         "name": "Antoine Griezmann",
@@ -989,12 +990,14 @@
       }
     ],
     "subs": [
-      "Alexander Sørloth",
-      "Ángel Correa",
+      "Juan Musso",
+      "José María Giménez",
+      "Johnny Cardoso",
       "Pablo Barrios",
-      "Axel Witsel",
-      "César Azpilicueta",
-      "Juan Musso"
+      "Kang-in Lee",
+      "Ademola Lookman",
+      "Alexander Sørloth",
+      "Jonathan David"
     ],
     "injuries": [
       {
@@ -1106,10 +1109,10 @@
   },
   "Sporting CP": {
     "formation": "3-4-2-1",
-    "manager": "João Pereira",
+    "manager": "Rui Borges",
     "starting_xi": [
       {
-        "name": "Franco Israel",
+        "name": "Rui Silva",
         "num": 1,
         "pos": "GK",
         "x": 50,
@@ -1119,7 +1122,7 @@
         "name": "Zeno Debast",
         "num": 6,
         "pos": "RCB",
-        "x": 75,
+        "x": 70,
         "y": 22
       },
       {
@@ -1127,59 +1130,59 @@
         "num": 26,
         "pos": "CB",
         "x": 50,
-        "y": 18
+        "y": 20
       },
       {
         "name": "Gonçalo Inácio",
         "num": 25,
         "pos": "LCB",
-        "x": 25,
+        "x": 30,
         "y": 22
       },
       {
         "name": "Geovany Quenda",
         "num": 57,
         "pos": "RWB",
-        "x": 88,
+        "x": 86,
         "y": 48
       },
       {
-        "name": "Morten Hjulmand",
-        "num": 42,
+        "name": "Daniel Bragança",
+        "num": 23,
         "pos": "CM",
-        "x": 62,
+        "x": 65,
         "y": 44
       },
       {
         "name": "Hidemasa Morita",
-        "num": 8,
+        "num": 5,
         "pos": "CM",
-        "x": 38,
+        "x": 35,
         "y": 44
       },
       {
-        "name": "Nuno Santos",
-        "num": 11,
+        "name": "Maxi Araújo",
+        "num": 20,
         "pos": "LWB",
-        "x": 12,
+        "x": 14,
         "y": 48
       },
       {
         "name": "Francisco Trincão",
         "num": 17,
         "pos": "RAM",
-        "x": 72,
+        "x": 70,
         "y": 68
       },
       {
         "name": "Pedro Gonçalves",
         "num": 8,
         "pos": "LAM",
-        "x": 28,
+        "x": 30,
         "y": 68
       },
       {
-        "name": "Viktor Gyökeres",
+        "name": "Fotis Ioannidis",
         "num": 9,
         "pos": "ST",
         "x": 50,
@@ -1187,12 +1190,12 @@
       }
     ],
     "subs": [
-      "Marcus Edwards",
+      "Diego Callai",
+      "Eduardo Quaresma",
       "Geny Catamo",
-      "Daniel Bragança",
-      "Matheus Reis",
-      "Conrad Harder",
-      "Vladan Kovačević"
+      "Luís Guilherme",
+      "Luis Suárez",
+      "Conrad Harder"
     ],
     "injuries": [
       {
@@ -1207,8 +1210,8 @@
     "manager": "Manuel Pellegrini",
     "starting_xi": [
       {
-        "name": "Rui Silva",
-        "num": 1,
+        "name": "Álvaro Valles",
+        "num": 13,
         "pos": "GK",
         "x": 50,
         "y": 8
@@ -1235,36 +1238,36 @@
         "y": 20
       },
       {
-        "name": "Romain Perraud",
-        "num": 15,
+        "name": "Fran García",
+        "num": 20,
         "pos": "LB",
         "x": 16,
         "y": 24
       },
       {
-        "name": "Sergi Altimira",
-        "num": 16,
+        "name": "Dani Ceballos",
+        "num": 6,
         "pos": "DM",
         "x": 60,
-        "y": 40
+        "y": 42
       },
       {
         "name": "Marc Roca",
         "num": 21,
         "pos": "DM",
         "x": 40,
-        "y": 40
+        "y": 42
       },
       {
-        "name": "Pablo Fornals",
-        "num": 18,
+        "name": "Antony",
+        "num": 11,
         "pos": "RW",
         "x": 84,
-        "y": 70
+        "y": 74
       },
       {
-        "name": "Giovani Lo Celso",
-        "num": 20,
+        "name": "Isco",
+        "num": 22,
         "pos": "AM",
         "x": 50,
         "y": 62
@@ -1274,23 +1277,23 @@
         "num": 10,
         "pos": "LW",
         "x": 16,
-        "y": 70
+        "y": 74
       },
       {
-        "name": "Vitor Roque",
-        "num": 8,
+        "name": "Troy Parrott",
+        "num": 9,
         "pos": "ST",
         "x": 50,
         "y": 84
       }
     ],
     "subs": [
-      "Chimy Ávila",
-      "Johnny Cardoso",
-      "Aitor Ruibal",
-      "Ricardo Rodriguez",
-      "Adrián",
-      "Iker Losada"
+      "Diego Conde",
+      "Valentín Gómez",
+      "Junior Firpo",
+      "Pablo Fornals",
+      "Rodrigo Riquelme",
+      "Cucho Hernández"
     ],
     "injuries": [
       {
@@ -1310,7 +1313,7 @@
     "starting_xi": [
       {
         "name": "Alexander Nübel",
-        "num": 33,
+        "num": 1,
         "pos": "GK",
         "x": 50,
         "y": 8
@@ -1323,8 +1326,8 @@
         "y": 24
       },
       {
-        "name": "Anthony Rouault",
-        "num": 29,
+        "name": "Finn Jeltsch",
+        "num": 5,
         "pos": "CB",
         "x": 62,
         "y": 20
@@ -1344,55 +1347,55 @@
         "y": 24
       },
       {
-        "name": "Enzo Millot",
-        "num": 8,
-        "pos": "RM",
-        "x": 82,
-        "y": 55
-      },
-      {
         "name": "Atakan Karazor",
         "num": 16,
-        "pos": "CM",
+        "pos": "DM",
         "x": 60,
         "y": 42
       },
       {
         "name": "Angelo Stiller",
         "num": 6,
-        "pos": "CM",
+        "pos": "DM",
         "x": 40,
         "y": 42
       },
       {
         "name": "Jamie Leweling",
         "num": 18,
-        "pos": "LM",
-        "x": 18,
-        "y": 55
+        "pos": "RAM",
+        "x": 75,
+        "y": 66
+      },
+      {
+        "name": "Bilal El Khannouss",
+        "num": 10,
+        "pos": "LAM",
+        "x": 25,
+        "y": 66
       },
       {
         "name": "Deniz Undav",
         "num": 26,
         "pos": "ST",
         "x": 40,
-        "y": 80
+        "y": 84
       },
       {
-        "name": "El Bilal Touré",
-        "num": 10,
+        "name": "Ermedin Demirović",
+        "num": 9,
         "pos": "ST",
         "x": 60,
-        "y": 82
+        "y": 84
       }
     ],
     "subs": [
+      "Dennis Seimen",
+      "Ramon Hendriks",
+      "Luca Jaquez",
+      "Lorenz Assignon",
       "Chris Führich",
-      "Ermedin Demirović",
-      "Fabian Rieder",
-      "Pascal Stenzel",
-      "Dan-Axel Zagadou",
-      "Fabian Bredlow"
+      "Tiago Tomás"
     ],
     "injuries": [
       {
@@ -1415,7 +1418,7 @@
       },
       {
         "name": "Ignace Van der Brempt",
-        "num": 77,
+        "num": 2,
         "pos": "RB",
         "x": 84,
         "y": 24
@@ -1429,7 +1432,7 @@
       },
       {
         "name": "Marc-Oliver Kempf",
-        "num": 2,
+        "num": 5,
         "pos": "CB",
         "x": 38,
         "y": 20
@@ -1446,21 +1449,21 @@
         "num": 23,
         "pos": "DM",
         "x": 60,
-        "y": 40
+        "y": 42
       },
       {
         "name": "Sergi Roberto",
         "num": 20,
         "pos": "DM",
         "x": 40,
-        "y": 40
+        "y": 42
       },
       {
         "name": "Gabriel Strefezza",
         "num": 7,
         "pos": "RW",
         "x": 84,
-        "y": 72
+        "y": 74
       },
       {
         "name": "Nico Paz",
@@ -1474,7 +1477,7 @@
         "num": 16,
         "pos": "LW",
         "x": 16,
-        "y": 72
+        "y": 74
       },
       {
         "name": "Patrick Cutrone",
@@ -1485,12 +1488,12 @@
       }
     ],
     "subs": [
-      "Andrea Belotti",
+      "Pepe Reina",
+      "Edoardo Goldaniga",
+      "Yannik Engelhardt",
       "Lucas Da Cunha",
       "Simone Verdi",
-      "Edoardo Goldaniga",
-      "Pepe Reina",
-      "Yannik Engelhardt"
+      "Andrea Belotti"
     ],
     "injuries": [
       {
@@ -1548,47 +1551,47 @@
       },
       {
         "name": "Ardon Jashari",
-        "num": 27,
+        "num": 30,
         "pos": "RCM",
         "x": 70,
-        "y": 50
+        "y": 52
       },
       {
         "name": "Hans Vanaken",
         "num": 20,
         "pos": "LCM",
         "x": 30,
-        "y": 54
+        "y": 52
       },
       {
-        "name": "Chemsdine Talbi",
-        "num": 68,
+        "name": "Carlos Forbs",
+        "num": 11,
         "pos": "RW",
         "x": 84,
-        "y": 74
+        "y": 76
       },
       {
-        "name": "Ferran Jutglà",
+        "name": "Nicolò Tresoldi",
         "num": 9,
         "pos": "ST",
         "x": 50,
-        "y": 84
+        "y": 86
       },
       {
         "name": "Christos Tzolis",
         "num": 8,
         "pos": "LW",
         "x": 16,
-        "y": 74
+        "y": 76
       }
     ],
     "subs": [
-      "Gustaf Nilsson",
-      "Andreas Skov Olsen",
-      "Hugo Vetlesen",
-      "Casper Nielsen",
+      "Nordin Jackers",
       "Kyriani Sabbe",
-      "Nordin Jackers"
+      "Hugo Vetlesen",
+      "Félix Lemaréchal",
+      "Ferran Jutglà",
+      "Romeo Vermant"
     ],
     "injuries": [
       {
@@ -1600,7 +1603,7 @@
   },
   "Roma": {
     "formation": "3-4-2-1",
-    "manager": "Claudio Ranieri",
+    "manager": "Gian Piero Gasperini",
     "starting_xi": [
       {
         "name": "Mile Svilar",
@@ -1613,7 +1616,7 @@
         "name": "Gianluca Mancini",
         "num": 23,
         "pos": "RCB",
-        "x": 75,
+        "x": 70,
         "y": 22
       },
       {
@@ -1621,55 +1624,55 @@
         "num": 5,
         "pos": "CB",
         "x": 50,
-        "y": 18
+        "y": 20
       },
       {
-        "name": "Angeliño",
-        "num": 3,
+        "name": "Mario Hermoso",
+        "num": 22,
         "pos": "LCB",
-        "x": 25,
+        "x": 30,
         "y": 22
       },
       {
         "name": "Zeki Çelik",
         "num": 19,
         "pos": "RWB",
-        "x": 88,
-        "y": 46
+        "x": 86,
+        "y": 48
       },
       {
         "name": "Manu Koné",
         "num": 17,
         "pos": "CM",
-        "x": 62,
-        "y": 42
+        "x": 60,
+        "y": 44
       },
       {
         "name": "Bryan Cristante",
         "num": 4,
         "pos": "CM",
-        "x": 38,
-        "y": 42
+        "x": 40,
+        "y": 44
       },
       {
-        "name": "Nicola Zalewski",
-        "num": 59,
+        "name": "Angeliño",
+        "num": 3,
         "pos": "LWB",
-        "x": 12,
-        "y": 46
+        "x": 14,
+        "y": 48
       },
       {
         "name": "Paulo Dybala",
         "num": 21,
         "pos": "RAM",
-        "x": 70,
+        "x": 65,
         "y": 68
       },
       {
-        "name": "Lorenzo Pellegrini",
-        "num": 7,
+        "name": "Matías Soulé",
+        "num": 18,
         "pos": "LAM",
-        "x": 30,
+        "x": 35,
         "y": 68
       },
       {
@@ -1677,16 +1680,16 @@
         "num": 11,
         "pos": "ST",
         "x": 50,
-        "y": 84
+        "y": 86
       }
     ],
     "subs": [
-      "Matías Soulé",
-      "Tommaso Baldanzi",
+      "Mathew Ryan",
+      "Devyne Rensch",
       "Enzo Le Fée",
-      "Mario Hermoso",
+      "Tommaso Baldanzi",
       "Stephan El Shaarawy",
-      "Mathew Ryan"
+      "Lorenzo Pellegrini"
     ],
     "injuries": [
       {
@@ -1729,7 +1732,7 @@
         "y": 20
       },
       {
-        "name": "Pedro Henrique",
+        "name": "Alan Matturro",
         "num": 13,
         "pos": "LB",
         "x": 16,
@@ -1740,51 +1743,51 @@
         "num": 6,
         "pos": "DM",
         "x": 50,
-        "y": 38
+        "y": 40
+      },
+      {
+        "name": "Marlon Gomes",
+        "num": 30,
+        "pos": "RCM",
+        "x": 70,
+        "y": 52
       },
       {
         "name": "Artem Bondarenko",
         "num": 21,
-        "pos": "RCM",
-        "x": 70,
-        "y": 50
-      },
-      {
-        "name": "Georgiy Sudakov",
-        "num": 10,
         "pos": "LCM",
         "x": 30,
-        "y": 54
+        "y": 52
       },
       {
         "name": "Oleksandr Zubkov",
         "num": 11,
         "pos": "RW",
         "x": 84,
-        "y": 74
+        "y": 76
       },
       {
-        "name": "Danylo Sikan",
-        "num": 14,
+        "name": "Kauã Elias",
+        "num": 9,
         "pos": "ST",
         "x": 50,
-        "y": 84
+        "y": 86
       },
       {
-        "name": "Newertton",
+        "name": "Newerton",
         "num": 7,
         "pos": "LW",
         "x": 16,
-        "y": 74
+        "y": 76
       }
     ],
     "subs": [
-      "Kevin",
-      "Marlon Gomes",
-      "Eguinaldo",
+      "Kiril Fesyun",
+      "Pedro Henrique",
       "Dmytro Kryskiv",
-      "Vinicius Tobias",
-      "Denys Tvardovskyi"
+      "Gabriel Carvalho",
+      "Isaque",
+      "Eguinaldo"
     ],
     "injuries": [
       {
@@ -1799,18 +1802,18 @@
     "manager": "Peter Bosz",
     "starting_xi": [
       {
-        "name": "Walter Benítez",
+        "name": "Matej Kovář",
         "num": 1,
         "pos": "GK",
         "x": 50,
         "y": 8
       },
       {
-        "name": "Mauro Júnior",
-        "num": 17,
+        "name": "Sergiño Dest",
+        "num": 8,
         "pos": "RB",
         "x": 84,
-        "y": 25
+        "y": 24
       },
       {
         "name": "Ryan Flamingo",
@@ -1820,18 +1823,18 @@
         "y": 20
       },
       {
-        "name": "Olivier Boscagli",
-        "num": 18,
+        "name": "Lutsharel Geertruida",
+        "num": 4,
         "pos": "CB",
         "x": 38,
         "y": 20
       },
       {
-        "name": "Matteo Dams",
-        "num": 39,
+        "name": "Filip Kostić",
+        "num": 17,
         "pos": "LB",
         "x": 16,
-        "y": 25
+        "y": 24
       },
       {
         "name": "Jerdy Schouten",
@@ -1845,18 +1848,18 @@
         "num": 20,
         "pos": "RCM",
         "x": 70,
-        "y": 54
+        "y": 52
       },
       {
         "name": "Ismael Saibari",
-        "num": 34,
+        "num": 28,
         "pos": "LCM",
         "x": 30,
-        "y": 50
+        "y": 52
       },
       {
-        "name": "Johan Bakayoko",
-        "num": 11,
+        "name": "Ivan Perišić",
+        "num": 5,
         "pos": "RW",
         "x": 84,
         "y": 76
@@ -1869,20 +1872,20 @@
         "y": 86
       },
       {
-        "name": "Noa Lang",
-        "num": 10,
+        "name": "Alassane Pléa",
+        "num": 11,
         "pos": "LW",
         "x": 16,
         "y": 76
       }
     ],
     "subs": [
-      "Malik Tillman",
-      "Ricardo Pepi",
+      "Nick Olij",
+      "Kiliann Sildillia",
+      "Yarek Gąsiorowski",
+      "Mauro Júnior",
       "Joey Veerman",
-      "Couhaib Driouech",
-      "Rick Karsdorp",
-      "Joël Drommel"
+      "Ricardo Pepi"
     ],
     "injuries": [
       {
@@ -1908,8 +1911,8 @@
         "y": 8
       },
       {
-        "name": "Kiko Femenía",
-        "num": 17,
+        "name": "Juan Foyth",
+        "num": 8,
         "pos": "RB",
         "x": 84,
         "y": 24
@@ -1922,8 +1925,8 @@
         "y": 20
       },
       {
-        "name": "Logan Costa",
-        "num": 2,
+        "name": "Willy Kambwala",
+        "num": 4,
         "pos": "CB",
         "x": 38,
         "y": 20
@@ -1936,55 +1939,55 @@
         "y": 24
       },
       {
-        "name": "Ilias Akhomach",
-        "num": 11,
+        "name": "Nicolas Pépé",
+        "num": 19,
         "pos": "RM",
-        "x": 82,
-        "y": 55
+        "x": 84,
+        "y": 64
       },
       {
         "name": "Santi Comesaña",
         "num": 14,
         "pos": "CM",
         "x": 60,
-        "y": 42
+        "y": 44
       },
       {
-        "name": "Dani Parejo",
-        "num": 10,
+        "name": "Pape Gueye",
+        "num": 18,
         "pos": "CM",
         "x": 40,
-        "y": 42
+        "y": 44
       },
       {
-        "name": "Álex Baena",
-        "num": 16,
+        "name": "Alberto Moleiro",
+        "num": 10,
         "pos": "LM",
-        "x": 18,
-        "y": 55
+        "x": 16,
+        "y": 64
       },
       {
         "name": "Ayoze Pérez",
         "num": 22,
         "pos": "ST",
         "x": 40,
-        "y": 82
+        "y": 84
       },
       {
-        "name": "Thierno Barry",
-        "num": 15,
+        "name": "Georges Mikautadze",
+        "num": 9,
         "pos": "ST",
         "x": 60,
-        "y": 82
+        "y": 84
       }
     ],
     "subs": [
-      "Nicolas Pépé",
-      "Yeremy Pino",
-      "Pape Gueye",
-      "Eric Bailly",
       "Luiz Júnior",
-      "Ramon Terrats"
+      "Santiago Mouriño",
+      "Dani Parejo",
+      "Ilias Akhomach",
+      "Tajon Buchanan",
+      "Gerard Moreno"
     ],
     "injuries": [
       {
@@ -2000,7 +2003,7 @@
   },
   "Manchester United": {
     "formation": "4-2-3-1",
-    "manager": "Ruben Amorim",
+    "manager": "Michael Carrick",
     "starting_xi": [
       {
         "name": "André Onana",
@@ -2010,8 +2013,8 @@
         "y": 8
       },
       {
-        "name": "Noussair Mazraoui",
-        "num": 3,
+        "name": "Diogo Dalot",
+        "num": 20,
         "pos": "RB",
         "x": 84,
         "y": 24
@@ -2031,15 +2034,15 @@
         "y": 20
       },
       {
-        "name": "Diogo Dalot",
-        "num": 20,
+        "name": "Patrick Dorgu",
+        "num": 13,
         "pos": "LB",
         "x": 16,
         "y": 24
       },
       {
-        "name": "Casemiro",
-        "num": 18,
+        "name": "Manuel Ugarte",
+        "num": 25,
         "pos": "DM",
         "x": 60,
         "y": 40
@@ -2052,28 +2055,28 @@
         "y": 40
       },
       {
-        "name": "Amad Diallo",
-        "num": 16,
+        "name": "Bryan Mbeumo",
+        "num": 19,
         "pos": "RW",
         "x": 84,
-        "y": 72
+        "y": 74
       },
       {
         "name": "Bruno Fernandes",
         "num": 8,
         "pos": "AM",
         "x": 50,
-        "y": 60
+        "y": 62
       },
       {
         "name": "Alejandro Garnacho",
         "num": 17,
         "pos": "LW",
         "x": 16,
-        "y": 72
+        "y": 74
       },
       {
-        "name": "Rasmus Højlund",
+        "name": "Benjamin Šeško",
         "num": 9,
         "pos": "ST",
         "x": 50,
@@ -2081,12 +2084,14 @@
       }
     ],
     "subs": [
-      "Marcus Rashford",
-      "Joshua Zirkzee",
-      "Manuel Ugarte",
-      "Christian Eriksen",
+      "Altay Bayındır",
       "Harry Maguire",
-      "Altay Bayındır"
+      "Noussair Mazraoui",
+      "Carlos Baleba",
+      "Mason Mount",
+      "Amad Diallo",
+      "Joshua Zirkzee",
+      "Matheus Cunha"
     ],
     "injuries": [
       {
@@ -2102,7 +2107,7 @@
   },
   "Napoli": {
     "formation": "4-3-3",
-    "manager": "Antonio Conte",
+    "manager": "Massimiliano Allegri",
     "starting_xi": [
       {
         "name": "Alex Meret",
@@ -2119,8 +2124,8 @@
         "y": 24
       },
       {
-        "name": "Amir Rrahmani",
-        "num": 13,
+        "name": "Sam Beukema",
+        "num": 31,
         "pos": "CB",
         "x": 62,
         "y": 20
@@ -2151,11 +2156,11 @@
         "num": 68,
         "pos": "DM",
         "x": 50,
-        "y": 38
+        "y": 40
       },
       {
-        "name": "Scott McTominay",
-        "num": 8,
+        "name": "Kevin De Bruyne",
+        "num": 10,
         "pos": "LCM",
         "x": 30,
         "y": 52
@@ -2168,27 +2173,27 @@
         "y": 76
       },
       {
-        "name": "Romelu Lukaku",
-        "num": 11,
+        "name": "Rasmus Højlund",
+        "num": 9,
         "pos": "ST",
         "x": 50,
         "y": 86
       },
       {
-        "name": "Khvicha Kvaratskhelia",
-        "num": 77,
+        "name": "Noa Lang",
+        "num": 7,
         "pos": "LW",
         "x": 16,
         "y": 76
       }
     ],
     "subs": [
-      "David Neres",
-      "Giacomo Raspadori",
-      "Billy Gilmour",
-      "Leonardo Spinazzola",
+      "Vanja Milinković-Savić",
       "Rafa Marín",
-      "Elia Caprile"
+      "Benoît Badiashile",
+      "David Neres",
+      "Lorenzo Lucca",
+      "Giacomo Raspadori"
     ],
     "injuries": [
       {
@@ -2204,7 +2209,7 @@
     "starting_xi": [
       {
         "name": "Jörg Siebenhandl",
-        "num": 28,
+        "num": 1,
         "pos": "GK",
         "x": 50,
         "y": 8
@@ -2213,7 +2218,7 @@
         "name": "Philipp Ziereis",
         "num": 5,
         "pos": "RCB",
-        "x": 75,
+        "x": 70,
         "y": 22
       },
       {
@@ -2221,20 +2226,20 @@
         "num": 4,
         "pos": "CB",
         "x": 50,
-        "y": 18
+        "y": 20
       },
       {
         "name": "Maksym Talovierov",
-        "num": 3,
+        "num": 6,
         "pos": "LCB",
-        "x": 25,
+        "x": 30,
         "y": 22
       },
       {
         "name": "Melayro Bogarde",
-        "num": 20,
+        "num": 2,
         "pos": "RWB",
-        "x": 88,
+        "x": 86,
         "y": 48
       },
       {
@@ -2253,39 +2258,39 @@
       },
       {
         "name": "George Bello",
-        "num": 2,
+        "num": 22,
         "pos": "LWB",
-        "x": 12,
+        "x": 14,
         "y": 48
       },
       {
         "name": "Moses Usor",
         "num": 17,
-        "pos": "RW",
-        "x": 80,
-        "y": 74
+        "pos": "RAM",
+        "x": 65,
+        "y": 68
+      },
+      {
+        "name": "Robert Žulj",
+        "num": 10,
+        "pos": "LAM",
+        "x": 35,
+        "y": 68
       },
       {
         "name": "Marin Ljubičić",
         "num": 9,
         "pos": "ST",
         "x": 50,
-        "y": 84
-      },
-      {
-        "name": "Robert Žulj",
-        "num": 10,
-        "pos": "LW",
-        "x": 20,
-        "y": 74
+        "y": 86
       }
     ],
     "subs": [
-      "Lenny Pintor",
-      "Sascha Horvath",
-      "Florian Flecker",
+      "Lukas Jungwirth",
       "Andrés Andrade",
-      "Lukas Jungwirth"
+      "Florian Flecker",
+      "Sascha Horvath",
+      "Lenny Pintor"
     ],
     "injuries": [
       {
@@ -2322,7 +2327,7 @@
       },
       {
         "name": "Sofian Chakla",
-        "num": 44,
+        "num": 5,
         "pos": "CB",
         "x": 38,
         "y": 20
@@ -2336,38 +2341,38 @@
       },
       {
         "name": "Ivan Lepinjica",
-        "num": 8,
+        "num": 6,
         "pos": "DM",
         "x": 60,
-        "y": 40
+        "y": 42
       },
       {
         "name": "Elvin Camalov",
-        "num": 6,
+        "num": 8,
         "pos": "DM",
         "x": 40,
-        "y": 40
+        "y": 42
       },
       {
         "name": "Kaheem Parris",
         "num": 7,
         "pos": "RW",
         "x": 84,
-        "y": 72
+        "y": 74
       },
       {
         "name": "Ayaz Guliyev",
         "num": 10,
         "pos": "AM",
         "x": 50,
-        "y": 60
+        "y": 62
       },
       {
         "name": "Jesse Sekidika",
         "num": 11,
         "pos": "LW",
         "x": 16,
-        "y": 72
+        "y": 74
       },
       {
         "name": "Pavol Šafranko",
@@ -2378,11 +2383,11 @@
       }
     ],
     "subs": [
-      "Joy-Lance Mickels",
-      "Namiq Ələsgərov",
-      "Khayal Aliyev",
+      "Nicat Mehbaliyev",
       "Rahman Dashdamirov",
-      "Nicat Mehbaliyev"
+      "Khayal Aliyev",
+      "Namiq Ələsgərov",
+      "Joy-Lance Mickels"
     ],
     "injuries": [
       {
@@ -2397,8 +2402,8 @@
     "manager": "Brian Priske",
     "starting_xi": [
       {
-        "name": "Timon Wellenreuther",
-        "num": 22,
+        "name": "Tjark Ernst",
+        "num": 1,
         "pos": "GK",
         "x": 50,
         "y": 8
@@ -2411,22 +2416,22 @@
         "y": 24
       },
       {
-        "name": "Gernot Trauner",
-        "num": 18,
+        "name": "Tsuyoshi Watanabe",
+        "num": 4,
         "pos": "CB",
         "x": 62,
         "y": 20
       },
       {
-        "name": "Dávid Hancko",
-        "num": 33,
+        "name": "Mika Mármol",
+        "num": 3,
         "pos": "CB",
         "x": 38,
         "y": 20
       },
       {
-        "name": "Hugo Bueno",
-        "num": 16,
+        "name": "Gijs Smal",
+        "num": 5,
         "pos": "LB",
         "x": 16,
         "y": 24
@@ -2439,48 +2444,48 @@
         "y": 40
       },
       {
-        "name": "Quinten Timber",
+        "name": "Oussama Targhalline",
         "num": 8,
         "pos": "RCM",
         "x": 70,
-        "y": 50
+        "y": 52
       },
       {
         "name": "Antoni Milambo",
-        "num": 27,
+        "num": 24,
         "pos": "LCM",
         "x": 30,
-        "y": 54
+        "y": 52
       },
       {
-        "name": "Ibrahim Osman",
-        "num": 11,
+        "name": "Anis Hadj Moussa",
+        "num": 23,
         "pos": "RW",
         "x": 84,
-        "y": 74
+        "y": 76
       },
       {
         "name": "Ayase Ueda",
         "num": 9,
         "pos": "ST",
         "x": 50,
-        "y": 84
+        "y": 86
       },
       {
         "name": "Igor Paixão",
         "num": 14,
         "pos": "LW",
         "x": 16,
-        "y": 74
+        "y": 76
       }
     ],
     "subs": [
-      "Santiago Giménez",
-      "Luka Ivanušec",
-      "Ramiz Zerrouki",
+      "Timon Wellenreuther",
       "Thomas Beelen",
-      "Gjivai Zechiël",
-      "Justin Bijlow"
+      "Givairo Read",
+      "Ramiz Zerrouki",
+      "Gonçalo Borges",
+      "Shaqueel van Persie"
     ],
     "injuries": [
       {
@@ -2499,8 +2504,8 @@
     "manager": "Will Still",
     "starting_xi": [
       {
-        "name": "Brice Samba",
-        "num": 30,
+        "name": "Robin Risser",
+        "num": 1,
         "pos": "GK",
         "x": 50,
         "y": 8
@@ -2509,79 +2514,80 @@
         "name": "Jonathan Gradit",
         "num": 24,
         "pos": "RCB",
-        "x": 75,
+        "x": 70,
         "y": 22
       },
       {
-        "name": "Kevin Danso",
+        "name": "Jean-Clair Todibo",
         "num": 4,
         "pos": "CB",
         "x": 50,
-        "y": 18
+        "y": 20
       },
       {
-        "name": "Facundo Medina",
-        "num": 14,
+        "name": "Samson Baidoo",
+        "num": 5,
         "pos": "LCB",
-        "x": 25,
+        "x": 30,
         "y": 22
       },
       {
-        "name": "Przemysław Frankowski",
-        "num": 29,
+        "name": "Ruben Aguilar",
+        "num": 2,
         "pos": "RWB",
-        "x": 88,
-        "y": 46
+        "x": 86,
+        "y": 48
+      },
+      {
+        "name": "Amadou Haidara",
+        "num": 8,
+        "pos": "CM",
+        "x": 60,
+        "y": 44
       },
       {
         "name": "Andy Diouf",
         "num": 18,
         "pos": "CM",
-        "x": 62,
-        "y": 42
+        "x": 40,
+        "y": 44
       },
       {
-        "name": "Adrien Thomasson",
-        "num": 28,
-        "pos": "CM",
-        "x": 38,
-        "y": 42
-      },
-      {
-        "name": "Deiver Machado",
-        "num": 3,
+        "name": "Jhoanner Chávez",
+        "num": 13,
         "pos": "LWB",
-        "x": 12,
-        "y": 46
+        "x": 14,
+        "y": 48
       },
       {
-        "name": "Angelo Fulgini",
+        "name": "Florian Thauvin",
+        "num": 10,
+        "pos": "RAM",
+        "x": 65,
+        "y": 68
+      },
+      {
+        "name": "Thorgan Hazard",
         "num": 11,
-        "pos": "AM",
+        "pos": "LAM",
+        "x": 35,
+        "y": 68
+      },
+      {
+        "name": "Odsonne Édouard",
+        "num": 9,
+        "pos": "ST",
         "x": 50,
-        "y": 64
-      },
-      {
-        "name": "Florian Sotoca",
-        "num": 7,
-        "pos": "ST",
-        "x": 38,
-        "y": 82
-      },
-      {
-        "name": "M'Bala Nzola",
-        "num": 8,
-        "pos": "ST",
-        "x": 62,
-        "y": 82
+        "y": 86
       }
     ],
     "subs": [
-      "Wesley Saïd",
-      "Martin Satriano",
-      "Nampalys Mendy",
-      "Abdukodir Khusanov",
-      "Hervé Koffi"
+      "Hervé Koffi",
+      "Saud Abdulhamid",
+      "Matthieu Udol",
+      "Michaël Cuisance",
+      "Abdallah Sima",
+      "Florian Sotoca"
     ],
     "injuries": [
       {
@@ -2632,14 +2638,14 @@
       },
       {
         "name": "Patrick Berg",
-        "num": 77,
+        "num": 7,
         "pos": "DM",
         "x": 50,
         "y": 40
       },
       {
         "name": "Håkon Evjen",
-        "num": 26,
+        "num": 19,
         "pos": "RCM",
         "x": 70,
         "y": 52
@@ -2653,32 +2659,32 @@
       },
       {
         "name": "Isak Dybvik Määttä",
-        "num": 27,
+        "num": 21,
         "pos": "RW",
         "x": 84,
-        "y": 74
+        "y": 76
       },
       {
         "name": "Philip Zinckernagel",
         "num": 10,
         "pos": "ST",
         "x": 50,
-        "y": 84
+        "y": 86
       },
       {
         "name": "Jens Petter Hauge",
         "num": 23,
         "pos": "LW",
         "x": 16,
-        "y": 74
+        "y": 76
       }
     ],
     "subs": [
-      "Kasper Høgh",
-      "August Mikkelsen",
-      "Sondre Fet",
+      "Julian Faye Lund",
       "Villads Nielsen",
-      "Julian Faye Lund"
+      "Sondre Fet",
+      "August Mikkelsen",
+      "Kasper Høgh"
     ],
     "injuries": [
       {
@@ -2701,7 +2707,7 @@
       },
       {
         "name": "Lazaros Rota",
-        "num": 12,
+        "num": 2,
         "pos": "RB",
         "x": 84,
         "y": 24
@@ -2715,7 +2721,7 @@
       },
       {
         "name": "Harold Moukoudi",
-        "num": 2,
+        "num": 28,
         "pos": "CB",
         "x": 38,
         "y": 20
@@ -2728,54 +2734,54 @@
         "y": 24
       },
       {
+        "name": "Damian Szymański",
+        "num": 6,
+        "pos": "DM",
+        "x": 50,
+        "y": 38
+      },
+      {
         "name": "Niclas Eliasson",
         "num": 19,
         "pos": "RM",
-        "x": 82,
-        "y": 55
-      },
-      {
-        "name": "Damian Szymański",
-        "num": 6,
-        "pos": "CM",
-        "x": 60,
-        "y": 42
+        "x": 84,
+        "y": 62
       },
       {
         "name": "Orbelín Pineda",
         "num": 13,
         "pos": "CM",
-        "x": 40,
-        "y": 42
+        "x": 50,
+        "y": 52
       },
       {
-        "name": "Mijat Gaćinović",
-        "num": 8,
+        "name": "Roberto Pereyra",
+        "num": 37,
         "pos": "LM",
-        "x": 18,
-        "y": 55
+        "x": 16,
+        "y": 62
       },
       {
         "name": "Levi García",
-        "num": 7,
+        "num": 11,
         "pos": "ST",
         "x": 40,
-        "y": 82
+        "y": 84
       },
       {
         "name": "Frantzdy Pierrot",
         "num": 14,
         "pos": "ST",
         "x": 60,
-        "y": 82
+        "y": 84
       }
     ],
     "subs": [
+      "Alberto Brignoli",
+      "Mijat Gaćinović",
       "Erik Lamela",
       "Anthony Martial",
-      "Roberto Pereyra",
-      "Petros Mantalos",
-      "Alberto Brignoli"
+      "Petros Mantalos"
     ],
     "injuries": [
       {
@@ -2790,8 +2796,8 @@
     "manager": "Marco Rose",
     "starting_xi": [
       {
-        "name": "Péter Gulácsi",
-        "num": 1,
+        "name": "Maarten Vandevoordt",
+        "num": 26,
         "pos": "GK",
         "x": 50,
         "y": 8
@@ -2825,8 +2831,8 @@
         "y": 24
       },
       {
-        "name": "Amadou Haidara",
-        "num": 8,
+        "name": "Assan Ouédraogo",
+        "num": 17,
         "pos": "DM",
         "x": 60,
         "y": 42
@@ -2839,18 +2845,25 @@
         "y": 42
       },
       {
-        "name": "Christoph Baumgartner",
-        "num": 14,
+        "name": "Johan Bakayoko",
+        "num": 7,
         "pos": "RAM",
         "x": 75,
-        "y": 64
+        "y": 66
       },
       {
         "name": "Xavi Simons",
-        "num": 10,
+        "num": 20,
         "pos": "LAM",
         "x": 25,
-        "y": 64
+        "y": 66
+      },
+      {
+        "name": "Antonio Nusa",
+        "num": 14,
+        "pos": "ST",
+        "x": 40,
+        "y": 84
       },
       {
         "name": "Loïs Openda",
@@ -2858,21 +2871,16 @@
         "pos": "ST",
         "x": 60,
         "y": 84
-      },
-      {
-        "name": "Benjamin Šeško",
-        "num": 30,
-        "pos": "ST",
-        "x": 40,
-        "y": 84
       }
     ],
     "subs": [
-      "Antonio Nusa",
-      "Nicolas Seiwald",
-      "El Chadaille Bitshiabu",
-      "Kevin Kampl",
-      "Maarten Vandevoordt"
+      "Péter Gulácsi",
+      "Maxime Estève",
+      "Christoph Baumgartner",
+      "Brajan Gruda",
+      "Rocco Reitz",
+      "Christopher Nkunku",
+      "Marc Guiu"
     ],
     "injuries": [
       {
@@ -2892,7 +2900,7 @@
     "starting_xi": [
       {
         "name": "Antonín Kinský",
-        "num": 1,
+        "num": 31,
         "pos": "GK",
         "x": 50,
         "y": 8
@@ -2901,7 +2909,7 @@
         "name": "Tomáš Holeš",
         "num": 3,
         "pos": "RCB",
-        "x": 75,
+        "x": 70,
         "y": 22
       },
       {
@@ -2909,71 +2917,71 @@
         "num": 4,
         "pos": "CB",
         "x": 50,
-        "y": 18
+        "y": 20
       },
       {
         "name": "Jan Bořil",
         "num": 18,
         "pos": "LCB",
-        "x": 25,
+        "x": 30,
         "y": 22
       },
       {
         "name": "David Douděra",
         "num": 21,
         "pos": "RWB",
-        "x": 88,
-        "y": 46
+        "x": 86,
+        "y": 48
       },
       {
         "name": "Oscar Dorley",
         "num": 19,
         "pos": "CM",
         "x": 60,
-        "y": 42
+        "y": 44
       },
       {
         "name": "Christos Zafeiris",
         "num": 10,
         "pos": "CM",
         "x": 40,
-        "y": 42
+        "y": 44
       },
       {
         "name": "El Hadji Malick Diouf",
         "num": 12,
         "pos": "LWB",
-        "x": 12,
-        "y": 46
+        "x": 14,
+        "y": 48
       },
       {
         "name": "Lukáš Provod",
         "num": 17,
         "pos": "RAM",
-        "x": 70,
+        "x": 65,
         "y": 68
       },
       {
         "name": "Mojmír Chytil",
         "num": 13,
         "pos": "LAM",
-        "x": 30,
+        "x": 35,
         "y": 68
       },
       {
         "name": "Tomáš Chorý",
-        "num": 25,
+        "num": 18,
         "pos": "ST",
         "x": 50,
-        "y": 85
+        "y": 86
       }
     ],
     "subs": [
-      "Ivan Schranz",
+      "Aleš Mandous",
+      "Filip Prebsl",
       "Conrad Wallem",
       "Matěj Jurásek",
-      "Filip Prebsl",
-      "Aleš Mandous"
+      "Ivan Schranz"
     ],
     "injuries": [
       {
@@ -2996,7 +3004,7 @@
       },
       {
         "name": "Viljar Vevatne",
-        "num": 18,
+        "num": 3,
         "pos": "RB",
         "x": 84,
         "y": 24
@@ -3010,14 +3018,14 @@
       },
       {
         "name": "Sondre Langås",
-        "num": 23,
+        "num": 5,
         "pos": "CB",
         "x": 38,
         "y": 20
       },
       {
         "name": "Jost Urbancic",
-        "num": 3,
+        "num": 23,
         "pos": "LB",
         "x": 16,
         "y": 24
@@ -3031,46 +3039,46 @@
       },
       {
         "name": "Sander Svendsen",
-        "num": 10,
+        "num": 11,
         "pos": "RCM",
         "x": 70,
         "y": 52
       },
       {
         "name": "Kristoffer Løkberg",
-        "num": 24,
+        "num": 16,
         "pos": "LCM",
         "x": 30,
         "y": 52
       },
       {
-        "name": "Zlatko Tripić",
-        "num": 11,
+        "name": "Peter Christiansen",
+        "num": 17,
         "pos": "RW",
         "x": 84,
-        "y": 74
+        "y": 76
       },
       {
         "name": "Lars-Jørgen Salvesen",
         "num": 9,
         "pos": "ST",
         "x": 50,
-        "y": 84
+        "y": 86
       },
       {
-        "name": "Peter Christiansen",
-        "num": 29,
+        "name": "Zlatko Tripić",
+        "num": 10,
         "pos": "LW",
         "x": 16,
-        "y": 74
+        "y": 76
       }
     ],
     "subs": [
+      "Magnus Rugland Ree",
+      "Herman Haugen",
       "Simen Kvia-Egeskog",
       "Edvin Austbø",
-      "Yann-Erik de Lanlay",
-      "Herman Haugen",
-      "Magnus Rugland Ree"
+      "Yann-Erik de Lanlay"
     ],
     "injuries": [
       {
@@ -3092,8 +3100,8 @@
         "y": 8
       },
       {
-        "name": "João Mário",
-        "num": 23,
+        "name": "Martim Fernandes",
+        "num": 52,
         "pos": "RB",
         "x": 84,
         "y": 24
@@ -3106,8 +3114,8 @@
         "y": 20
       },
       {
-        "name": "Zé Pedro",
-        "num": 97,
+        "name": "Jakub Kiwior",
+        "num": 15,
         "pos": "CB",
         "x": 38,
         "y": 20
@@ -3124,21 +3132,21 @@
         "num": 22,
         "pos": "DM",
         "x": 60,
-        "y": 40
+        "y": 42
       },
       {
-        "name": "Stephen Eustáquio",
-        "num": 6,
+        "name": "Pablo Rosario",
+        "num": 8,
         "pos": "DM",
         "x": 40,
-        "y": 40
+        "y": 42
       },
       {
         "name": "Pepê",
         "num": 11,
         "pos": "RW",
         "x": 84,
-        "y": 72
+        "y": 74
       },
       {
         "name": "Nico González",
@@ -3148,11 +3156,11 @@
         "y": 62
       },
       {
-        "name": "Galeno",
-        "num": 13,
+        "name": "Borja Sainz",
+        "num": 17,
         "pos": "LW",
         "x": 16,
-        "y": 72
+        "y": 74
       },
       {
         "name": "Samu Omorodion",
@@ -3163,12 +3171,12 @@
       }
     ],
     "subs": [
-      "Danny Namaso",
+      "Cláudio Ramos",
+      "Jan Bednarek",
+      "João Mário",
+      "Stephen Eustáquio",
       "Fábio Vieira",
-      "Iván Jaime",
-      "Vasco Sousa",
-      "Otávio",
-      "Cláudio Ramos"
+      "Gabriel Mec"
     ],
     "injuries": [
       {
@@ -3187,36 +3195,36 @@
     "manager": "Bruno Génésio",
     "starting_xi": [
       {
-        "name": "Lucas Chevalier",
-        "num": 30,
+        "name": "Berke Özer",
+        "num": 1,
         "pos": "GK",
         "x": 50,
         "y": 8
       },
       {
-        "name": "Thomas Meunier",
-        "num": 12,
+        "name": "Tiago Santos",
+        "num": 22,
         "pos": "RB",
         "x": 84,
         "y": 24
       },
       {
-        "name": "Bafodé Diakité",
-        "num": 18,
+        "name": "Alexsandro",
+        "num": 4,
         "pos": "CB",
         "x": 62,
         "y": 20
       },
       {
-        "name": "Alexsandro",
-        "num": 4,
+        "name": "Tanguy Nianzou",
+        "num": 14,
         "pos": "CB",
         "x": 38,
         "y": 20
       },
       {
-        "name": "Gabriel Gudmundsson",
-        "num": 5,
+        "name": "Romain Perraud",
+        "num": 15,
         "pos": "LB",
         "x": 16,
         "y": 24
@@ -3226,14 +3234,14 @@
         "num": 21,
         "pos": "DM",
         "x": 60,
-        "y": 40
+        "y": 42
       },
       {
         "name": "André Gomes",
         "num": 26,
         "pos": "DM",
         "x": 40,
-        "y": 40
+        "y": 42
       },
       {
         "name": "Edon Zhegrova",
@@ -3250,26 +3258,27 @@
         "y": 62
       },
       {
-        "name": "Osame Sahraoui",
-        "num": 11,
+        "name": "Dilane Bakwa",
+        "num": 7,
         "pos": "LW",
         "x": 16,
         "y": 74
       },
       {
-        "name": "Jonathan David",
-        "num": 9,
+        "name": "Ethan Mbappé",
+        "num": 29,
         "pos": "ST",
         "x": 50,
-        "y": 86
+        "y": 84
       }
     ],
     "subs": [
+      "Orlando Gill",
+      "Thomas Meunier",
+      "Nathan Ngoy",
       "Rémy Cabella",
-      "Matias Fernandez-Pardo",
-      "Mitchel Bakker",
-      "Aïssa Mandi",
-      "Vito Mannone"
+      "Osame Sahraoui",
+      "Matias Fernandez-Pardo"
     ],
     "injuries": [
       {
@@ -3324,7 +3333,7 @@
       },
       {
         "name": "Danylo Ihnatenko",
-        "num": 26,
+        "num": 25,
         "pos": "DM",
         "x": 50,
         "y": 40
@@ -3334,43 +3343,43 @@
         "num": 33,
         "pos": "RCM",
         "x": 70,
-        "y": 50
+        "y": 52
       },
       {
         "name": "Marko Tolić",
         "num": 10,
         "pos": "LCM",
         "x": 30,
-        "y": 54
+        "y": 52
       },
       {
         "name": "Tigran Barseghyan",
         "num": 11,
         "pos": "RW",
         "x": 84,
-        "y": 74
+        "y": 76
       },
       {
         "name": "David Strelec",
         "num": 13,
         "pos": "ST",
         "x": 50,
-        "y": 84
+        "y": 86
       },
       {
         "name": "Vladimír Weiss Jr.",
         "num": 7,
         "pos": "LW",
         "x": 16,
-        "y": 74
+        "y": 76
       }
     ],
     "subs": [
-      "Róbert Mak",
-      "Alen Mustafić",
+      "Martin Trnovský",
       "Siemen Voet",
       "Matúš Vojtko",
-      "Martin Trnovský"
+      "Alen Mustafić",
+      "Róbert Mak"
     ],
     "injuries": [
       {
@@ -3382,32 +3391,32 @@
   },
   "Fenerbahce": {
     "formation": "4-2-3-1",
-    "manager": "Carlo Ancelotti",
+    "manager": "İsmail Kartal",
     "starting_xi": [
       {
-        "name": "Dominik Livaković",
-        "num": 40,
+        "name": "Ederson",
+        "num": 31,
         "pos": "GK",
         "x": 50,
         "y": 8
       },
       {
         "name": "Mert Müldür",
-        "num": 16,
+        "num": 27,
         "pos": "RB",
         "x": 84,
         "y": 24
       },
       {
-        "name": "Alexander Djiku",
-        "num": 6,
+        "name": "Milan Škriniar",
+        "num": 37,
         "pos": "CB",
         "x": 62,
         "y": 20
       },
       {
-        "name": "Rodrigo Becão",
-        "num": 50,
+        "name": "Nathan Aké",
+        "num": 6,
         "pos": "CB",
         "x": 38,
         "y": 20
@@ -3420,42 +3429,42 @@
         "y": 24
       },
       {
-        "name": "Sofyan Amrabat",
-        "num": 34,
-        "pos": "DM",
-        "x": 60,
-        "y": 40
-      },
-      {
         "name": "Fred",
         "num": 13,
         "pos": "DM",
-        "x": 40,
-        "y": 40
+        "x": 60,
+        "y": 42
       },
       {
-        "name": "Dušan Tadić",
+        "name": "İrfan Can Kahveci",
+        "num": 17,
+        "pos": "DM",
+        "x": 40,
+        "y": 42
+      },
+      {
+        "name": "Mason Greenwood",
         "num": 10,
         "pos": "RW",
         "x": 84,
-        "y": 72
+        "y": 74
       },
       {
-        "name": "Sebastian Szymański",
-        "num": 53,
+        "name": "Marco Asensio",
+        "num": 11,
         "pos": "AM",
         "x": 50,
-        "y": 60
+        "y": 62
       },
       {
-        "name": "Allan Saint-Maximin",
-        "num": 97,
+        "name": "Kerem Aktürkoğlu",
+        "num": 7,
         "pos": "LW",
         "x": 16,
-        "y": 72
+        "y": 74
       },
       {
-        "name": "Edin Džeko",
+        "name": "Romelu Lukaku",
         "num": 9,
         "pos": "ST",
         "x": 50,
@@ -3463,12 +3472,13 @@
       }
     ],
     "subs": [
-      "Youssef En-Nesyri",
-      "İrfan Can Kahveci",
-      "Cengiz Ünder",
+      "Mert Günok",
+      "Kojo Oppong",
+      "Rodrigo Becão",
       "İsmail Yüksek",
-      "Çağlar Söyüncü",
-      "İrfan Can Eğribayat"
+      "Sebastian Szymański",
+      "Oğuz Aydın",
+      "Vedat Muriqi"
     ],
     "injuries": [
       {
@@ -3490,82 +3500,84 @@
         "y": 8
       },
       {
-        "name": "Kaan Ayhan",
+        "name": "Wilfried Singo",
         "num": 23,
-        "pos": "RCB",
-        "x": 75,
-        "y": 22
+        "pos": "RB",
+        "x": 84,
+        "y": 24
       },
       {
         "name": "Davinson Sánchez",
         "num": 6,
         "pos": "CB",
-        "x": 50,
-        "y": 18
+        "x": 62,
+        "y": 20
       },
       {
         "name": "Abdülkerim Bardakcı",
         "num": 42,
-        "pos": "LCB",
-        "x": 25,
-        "y": 22
+        "pos": "CB",
+        "x": 38,
+        "y": 20
       },
       {
-        "name": "Roland Sallai",
-        "num": 7,
-        "pos": "RWB",
-        "x": 88,
-        "y": 48
+        "name": "Barış Alper Yılmaz",
+        "num": 53,
+        "pos": "LB",
+        "x": 16,
+        "y": 24
       },
       {
         "name": "Lucas Torreira",
         "num": 34,
-        "pos": "CM",
+        "pos": "DM",
         "x": 60,
         "y": 42
       },
       {
         "name": "Gabriel Sara",
         "num": 20,
-        "pos": "CM",
+        "pos": "DM",
         "x": 40,
         "y": 42
       },
       {
-        "name": "Barış Alper Yılmaz",
-        "num": 53,
-        "pos": "LWB",
-        "x": 12,
-        "y": 48
+        "name": "Roland Sallai",
+        "num": 7,
+        "pos": "RW",
+        "x": 84,
+        "y": 74
       },
       {
-        "name": "Dries Mertens",
+        "name": "Aleksey Batrakov",
         "num": 10,
         "pos": "AM",
         "x": 50,
-        "y": 64
+        "y": 62
       },
       {
-        "name": "Mauro Icardi",
-        "num": 9,
-        "pos": "ST",
-        "x": 40,
-        "y": 84
+        "name": "Rafael Leão",
+        "num": 11,
+        "pos": "LW",
+        "x": 16,
+        "y": 74
       },
       {
         "name": "Victor Osimhen",
         "num": 45,
         "pos": "ST",
-        "x": 60,
+        "x": 50,
         "y": 84
       }
     ],
     "subs": [
-      "Michy Batshuayi",
-      "Hakim Ziyech",
+      "Günay Güvenç",
+      "Kaan Ayhan",
+      "El Chadaille Bitshiabu",
+      "Lesley Ugochukwu",
       "Kerem Demirbay",
-      "Victor Nelsson",
-      "Günay Güvenç"
+      "Dries Mertens",
+      "Deniz Gül"
     ],
     "injuries": [
       {
