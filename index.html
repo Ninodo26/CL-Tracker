@@ -767,8 +767,7 @@ function randomMargin(){
  * real remaining fixture list — same model as the backend's 20,000-run
  * Monte Carlo, just showing a single draw instead of the aggregate odds. */
 function simulateOneSeason(){
-  const teams = getActiveStandingsTeams();
-  const isWhatIf = getWhatIfPickCount() > 0;
+  const teams = STANDINGS.teams || [];
   const matches = STANDINGS.matches || [];
   if (!STANDINGS.schedule_complete || !teams.length || !matches.length) return null;
 
@@ -1488,7 +1487,8 @@ function clearSimulation(){
 function renderStandings(){
   const el = document.getElementById('standings-content');
   if (!el) return;
-  const teams = STANDINGS.teams || [];
+  const teams = getActiveStandingsTeams();
+  const isWhatIf = getWhatIfPickCount() > 0;
   if (STANDINGS.generated_at){
     const generatedAt = new Date(STANDINGS.generated_at);
     const ageHours = (Date.now() - generatedAt.getTime()) / 3600000;
