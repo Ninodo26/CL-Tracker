@@ -1,7 +1,7 @@
 {
   "Real Madrid": {
     "formation": "4-3-3",
-    "manager": "José Mourinho",
+    "manager": "Carlo Ancelotti",
     "starting_xi": [
       {
         "name": "Thibaut Courtois",
@@ -99,7 +99,7 @@
         "status": "Out"
       }
     ],
-    "tactical_brief": "Mourinho's second-stint Madrid blueprint: pragmatic defensive compactness combined with lethal transition punch. Mbappé and Vinícius exploit vertical channels while Valverde and Bellingham dominate midfield duels."
+    "tactical_brief": "Ancelotti's Madrid blueprint: fluid attacking freedom combined with lethal transition punch. Mbappé and Vinícius exploit vertical channels while Valverde and Bellingham dominate midfield duels."
   },
   "Paris Saint-Germain": {
     "formation": "4-3-3",
@@ -205,7 +205,7 @@
   },
   "Liverpool": {
     "formation": "4-2-3-1",
-    "manager": "Andoni Iraola",
+    "manager": "Arne Slot",
     "starting_xi": [
       {
         "name": "Alisson Becker",
@@ -299,11 +299,11 @@
         "status": "Doubtful"
       }
     ],
-    "tactical_brief": "Iraola's trademark ultra-high pressing intensity and ferocious front-foot transitions. Salah and Díaz attack space directly while Gravenberch and Mac Allister suffocate opposition buildup."
+    "tactical_brief": "Slot's refined high-tempo control and aggressive transition pressing and ferocious front-foot transitions. Salah and Díaz attack space directly while Gravenberch and Mac Allister suffocate opposition buildup."
   },
   "Manchester City": {
     "formation": "4-1-4-1",
-    "manager": "Enzo Maresca",
+    "manager": "Pep Guardiola",
     "starting_xi": [
       {
         "name": "Ederson",
@@ -397,7 +397,7 @@
         "status": "Out"
       }
     ],
-    "tactical_brief": "Maresca's structured inverted wing-back system with rapid vertical acceleration into the final third. Gvardiol and Lewis invert into midfield while Haaland spearheads devastating box runs."
+    "tactical_brief": "Guardiola's positional mastery and relentless territorial pressure with rapid vertical acceleration into the final third. Gvardiol and Lewis invert into midfield while Haaland spearheads devastating box runs."
   },
   "Barcelona": {
     "formation": "4-2-3-1",
@@ -1071,7 +1071,7 @@
         "y": 60
       },
       {
-        "name": "Jamie Bynoe-Gittens",
+        "name": "Jamie Gittens",
         "num": 43,
         "pos": "LW",
         "x": 16,
@@ -1107,7 +1107,7 @@
   },
   "Sporting CP": {
     "formation": "3-4-2-1",
-    "manager": "Rui Borges",
+    "manager": "João Pereira",
     "starting_xi": [
       {
         "name": "Franco Israel",
@@ -1601,7 +1601,7 @@
   },
   "Roma": {
     "formation": "3-4-2-1",
-    "manager": "Gian Piero Gasperini",
+    "manager": "Claudio Ranieri",
     "starting_xi": [
       {
         "name": "Mile Svilar",
@@ -2001,7 +2001,7 @@
   },
   "Manchester United": {
     "formation": "4-2-3-1",
-    "manager": "Michael Carrick",
+    "manager": "Ruben Amorim",
     "starting_xi": [
       {
         "name": "André Onana",
@@ -3383,7 +3383,7 @@
   },
   "Fenerbahce": {
     "formation": "4-2-3-1",
-    "manager": "İsmail Kartal",
+    "manager": "Carlo Ancelotti",
     "starting_xi": [
       {
         "name": "Dominik Livaković",

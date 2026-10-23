@@ -8,7 +8,7 @@ import json
 LINEUPS = {
     "Real Madrid": {
         "formation": "4-3-3",
-        "manager": "José Mourinho",
+        "manager": "Carlo Ancelotti",
         "starting_xi": [
             {"name": "Thibaut Courtois", "num": 1, "pos": "GK", "x": 50, "y": 8},
             {"name": "Dani Carvajal", "num": 2, "pos": "RB", "x": 84, "y": 24},
@@ -24,7 +24,7 @@ LINEUPS = {
         ],
         "subs": ["Luka Modrić", "Brahim Díaz", "Eduardo Camavinga", "Arda Güler", "Lucas Vázquez", "Andriy Lunin"],
         "injuries": [{"player": "David Alaba", "status": "Doubtful"}, {"player": "Dani Carvajal", "status": "Out"}],
-        "tactical_brief": "Mourinho's second-stint Madrid blueprint: pragmatic defensive compactness combined with lethal transition punch. Mbappé and Vinícius exploit vertical channels while Valverde and Bellingham dominate midfield duels."
+        "tactical_brief": "Ancelotti's Madrid blueprint: fluid attacking freedom combined with lethal transition punch. Mbappé and Vinícius exploit vertical channels while Valverde and Bellingham dominate midfield duels."
     },
     "Paris Saint-Germain": {
         "formation": "4-3-3",
@@ -48,7 +48,7 @@ LINEUPS = {
     },
     "Liverpool": {
         "formation": "4-2-3-1",
-        "manager": "Andoni Iraola",
+        "manager": "Arne Slot",
         "starting_xi": [
             {"name": "Alisson Becker", "num": 1, "pos": "GK", "x": 50, "y": 8},
             {"name": "Trent Alexander-Arnold", "num": 66, "pos": "RB", "x": 84, "y": 24},
@@ -64,11 +64,11 @@ LINEUPS = {
         ],
         "subs": ["Cody Gakpo", "Curtis Jones", "Harvey Elliott", "Diogo Jota", "Kostas Tsimikas", "Caoimhín Kelleher"],
         "injuries": [{"player": "Alisson Becker", "status": "Doubtful"}],
-        "tactical_brief": "Iraola's trademark ultra-high pressing intensity and ferocious front-foot transitions. Salah and Díaz attack space directly while Gravenberch and Mac Allister suffocate opposition buildup."
+        "tactical_brief": "Slot's refined high-tempo control and aggressive transition pressing and ferocious front-foot transitions. Salah and Díaz attack space directly while Gravenberch and Mac Allister suffocate opposition buildup."
     },
     "Manchester City": {
         "formation": "4-1-4-1",
-        "manager": "Enzo Maresca",
+        "manager": "Pep Guardiola",
         "starting_xi": [
             {"name": "Ederson", "num": 31, "pos": "GK", "x": 50, "y": 8},
             {"name": "Kyle Walker", "num": 2, "pos": "RB", "x": 84, "y": 22},
@@ -84,7 +84,7 @@ LINEUPS = {
         ],
         "subs": ["Jack Grealish", "İlkay Gündoğan", "Savinho", "John Stones", "Nathan Aké", "Stefan Ortega"],
         "injuries": [{"player": "Rodri", "status": "Out"}],
-        "tactical_brief": "Maresca's structured inverted wing-back system with rapid vertical acceleration into the final third. Gvardiol and Lewis invert into midfield while Haaland spearheads devastating box runs."
+        "tactical_brief": "Guardiola's positional mastery and relentless territorial pressure with rapid vertical acceleration into the final third. Gvardiol and Lewis invert into midfield while Haaland spearheads devastating box runs."
     },
     "Barcelona": {
         "formation": "4-2-3-1",
@@ -219,7 +219,7 @@ LINEUPS = {
             {"name": "Pascal Groß", "num": 13, "pos": "DM", "x": 40, "y": 40},
             {"name": "Donyell Malen", "num": 21, "pos": "RW", "x": 84, "y": 74},
             {"name": "Julian Brandt", "num": 10, "pos": "AM", "x": 50, "y": 60},
-            {"name": "Jamie Bynoe-Gittens", "num": 43, "pos": "LW", "x": 16, "y": 74},
+            {"name": "Jamie Gittens", "num": 43, "pos": "LW", "x": 16, "y": 74},
             {"name": "Serhou Guirassy", "num": 9, "pos": "ST", "x": 50, "y": 84}
         ],
         "subs": ["Marcel Sabitzer", "Maximilian Beier", "Felix Nmecha", "Niklas Süle", "Yan Couto", "Alexander Meyer"],
@@ -228,7 +228,7 @@ LINEUPS = {
     },
     "Sporting CP": {
         "formation": "3-4-2-1",
-        "manager": "Rui Borges",
+        "manager": "João Pereira",
         "starting_xi": [
             {"name": "Franco Israel", "num": 1, "pos": "GK", "x": 50, "y": 8},
             {"name": "Zeno Debast", "num": 6, "pos": "RCB", "x": 75, "y": 22},
@@ -328,7 +328,7 @@ LINEUPS = {
     },
     "Roma": {
         "formation": "3-4-2-1",
-        "manager": "Gian Piero Gasperini",
+        "manager": "Claudio Ranieri",
         "starting_xi": [
             {"name": "Mile Svilar", "num": 99, "pos": "GK", "x": 50, "y": 8},
             {"name": "Gianluca Mancini", "num": 23, "pos": "RCB", "x": 75, "y": 22},
@@ -408,7 +408,7 @@ LINEUPS = {
     },
     "Manchester United": {
         "formation": "4-2-3-1",
-        "manager": "Michael Carrick",
+        "manager": "Ruben Amorim",
         "starting_xi": [
             {"name": "André Onana", "num": 24, "pos": "GK", "x": 50, "y": 8},
             {"name": "Noussair Mazraoui", "num": 3, "pos": "RB", "x": 84, "y": 24},
@@ -688,7 +688,7 @@ LINEUPS = {
     },
     "Fenerbahce": {
         "formation": "4-2-3-1",
-        "manager": "İsmail Kartal",
+        "manager": "Carlo Ancelotti",
         "starting_xi": [
             {"name": "Dominik Livaković", "num": 40, "pos": "GK", "x": 50, "y": 8},
             {"name": "Mert Müldür", "num": 16, "pos": "RB", "x": 84, "y": 24},

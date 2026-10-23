@@ -1,9 +1,9 @@
 {
   "Real Madrid": {
     "league": "La Liga",
-    "manager": "José Mourinho",
+    "manager": "Carlo Ancelotti",
     "formation": "4-3-3 Pragmatic Transition",
-    "why_good": "Real Madrid combine the world's most devastating transition trident with ruthless tournament maturity. Under José Mourinho, Los Blancos have structured a bulletproof mid-block that lures opponents into committing bodies forward before unleashing Vinícius Júnior and Kylian Mbappé into yawning acres of space behind high defensive lines.\n\nIn possession, the midfield balances tactical discipline with elite technical composure. Federico Valverde and Aurélien Tchouaméni form a physically suffocating defensive screen, while Jude Bellingham operates as a dynamic hybrid box-to-box facilitator, timing his late box arrivals to devastating effect. Full-backs tuck into a rigid three-man rest defense to eliminate opponent counter-attacks before they start.\n\nWhat sets Madrid apart on European nights is their unprecedented psychological composure. Regardless of scoreboard deficits or territorial pressure, Madrid's players exhibit an unflappable belief in high-leverage moments, consistently finding game-breaking individual magic when ties tighten into the final 20 minutes.",
+    "why_good": "Real Madrid combine the world's most devastating transition trident with ruthless tournament maturity. Under Carlo Ancelotti, Los Blancos have structured a bulletproof mid-block that lures opponents into committing bodies forward before unleashing Vinícius Júnior and Kylian Mbappé into yawning acres of space behind high defensive lines.\n\nIn possession, the midfield balances tactical discipline with elite technical composure. Federico Valverde and Aurélien Tchouaméni form a physically suffocating defensive screen, while Jude Bellingham operates as a dynamic hybrid box-to-box facilitator, timing his late box arrivals to devastating effect. Full-backs tuck into a rigid three-man rest defense to eliminate opponent counter-attacks before they start.\n\nWhat sets Madrid apart on European nights is their unprecedented psychological composure. Regardless of scoreboard deficits or territorial pressure, Madrid's players exhibit an unflappable belief in high-leverage moments, consistently finding game-breaking individual magic when ties tighten into the final 20 minutes.",
     "key_strengths": [
       "Devastating vertical transition speed with Vinícius Jr and Kylian Mbappé",
       "Suffocating athletic midfield dominance and late box arriving runs from Jude Bellingham",
@@ -79,9 +79,9 @@
   },
   "Liverpool": {
     "league": "Premier League",
-    "manager": "Andoni Iraola",
+    "manager": "Arne Slot",
     "formation": "4-2-3-1 Heavy-Metal Press",
-    "why_good": "Liverpool play with a ferocity and directness that overwhelms opposing buildup structures. Under Andoni Iraola, the Reds have elevated their trademark pressing intensity into a hyper-synchronized trap, forcing turnovers inside the opposition half at Europe's highest rate.\n\nRyan Gravenberch and Alexis Mac Allister form an exceptionally balanced double pivot—Gravenberch provides line-breaking ball carries and tackling range, while Mac Allister distributes surgically under pressure. Behind them, Virgil van Dijk commands the backline with peerless aerial supremacy and 60-yard diagonal switches that instantly unlock wide spaces.\n\nIn the final third, Mohamed Salah remains Europe's most consistent offensive dynamo, cutting inside onto his favored left foot while Luis Díaz stretches defenses with explosive direct running. The combination of rapid transitional pace and Anfield's suffocating energy makes Liverpool a nightmare opponent.",
+    "why_good": "Liverpool play with a ferocity and directness that overwhelms opposing buildup structures. Under Arne Slot, the Reds have elevated their trademark pressing intensity into a hyper-synchronized trap, forcing turnovers inside the opposition half at Europe's highest rate.\n\nRyan Gravenberch and Alexis Mac Allister form an exceptionally balanced double pivot—Gravenberch provides line-breaking ball carries and tackling range, while Mac Allister distributes surgically under pressure. Behind them, Virgil van Dijk commands the backline with peerless aerial supremacy and 60-yard diagonal switches that instantly unlock wide spaces.\n\nIn the final third, Mohamed Salah remains Europe's most consistent offensive dynamo, cutting inside onto his favored left foot while Luis Díaz stretches defenses with explosive direct running. The combination of rapid transitional pace and Anfield's suffocating energy makes Liverpool a nightmare opponent.",
     "key_strengths": [
       "Europe's most aggressive attacking-third turnover generator",
       "Virgil van Dijk's aerial dominance and long-range diagonal distribution",
@@ -118,9 +118,9 @@
   },
   "Manchester City": {
     "league": "Premier League",
-    "manager": "Enzo Maresca",
+    "manager": "Pep Guardiola",
     "formation": "3-2-4-1 Positional Mastery",
-    "why_good": "Manchester City operate like an algorithmic machine, wearing opponents down through calculated positional dominance. Under Enzo Maresca, City have retained their signature rest-defense and 3-2-4-1 buildup structure while infusing quicker vertical releases into the penalty box for Erling Haaland.\n\nJoško Gvardiol inverts from left-back to join Mateo Kovačić in the central double pivot, creating an overload that forces opposing midfields into narrow blocks. This opens up vast channels for Kevin De Bruyne and Phil Foden to operate between the lines, sliding defense-splitting through-balls into the channels.\n\nAt the focal point is Erling Haaland—the sport's most lethal penalty-box predator. Haaland's physical presence pins both opposing center-backs, opening space for Bernardo Silva and Jérémy Doku to manipulate 1v1 match-ups on the perimeter.",
+    "why_good": "Manchester City operate like an algorithmic machine, wearing opponents down through calculated positional dominance. Under Pep Guardiola, City have retained their signature rest-defense and 3-2-4-1 buildup structure while infusing quicker vertical releases into the penalty box for Erling Haaland.\n\nJoško Gvardiol inverts from left-back to join Mateo Kovačić in the central double pivot, creating an overload that forces opposing midfields into narrow blocks. This opens up vast channels for Kevin De Bruyne and Phil Foden to operate between the lines, sliding defense-splitting through-balls into the channels.\n\nAt the focal point is Erling Haaland—the sport's most lethal penalty-box predator. Haaland's physical presence pins both opposing center-backs, opening space for Bernardo Silva and Jérémy Doku to manipulate 1v1 match-ups on the perimeter.",
     "key_strengths": [
       "Unrivaled territorial control and numerical overloads in the half-spaces",
       "Erling Haaland's generational box finishing and physical gravity",
@@ -393,9 +393,9 @@
     "league": "Bundesliga",
     "manager": "Nuri Şahin",
     "formation": "4-2-3-1 Dynamic Transition",
-    "why_good": "Borussia Dortmund possess one of the most explosive transition attacks on the continent. Under Nuri Şahin, BVB look to bait opponents forward before hitting them with blistering wide pace through Jamie Bynoe-Gittens and Donyell Malen.\n\nAt the focal point of the attack is Serhou Guirassy—a physical monster in the penalty box whose hold-up play and aerial prowess bring Dortmund's attacking midfielders into scoring positions. Julian Brandt pulls the creative strings as the number 10, delivering threaded through-balls into the half-spaces.\n\nIn goal, Gregor Kobel is arguably Europe's most athletic shot-stopper, capable of single-handedly keeping Dortmund in matches against high-xG European powerhouses.",
+    "why_good": "Borussia Dortmund possess one of the most explosive transition attacks on the continent. Under Nuri Şahin, BVB look to bait opponents forward before hitting them with blistering wide pace through Jamie Gittens and Donyell Malen.\n\nAt the focal point of the attack is Serhou Guirassy—a physical monster in the penalty box whose hold-up play and aerial prowess bring Dortmund's attacking midfielders into scoring positions. Julian Brandt pulls the creative strings as the number 10, delivering threaded through-balls into the half-spaces.\n\nIn goal, Gregor Kobel is arguably Europe's most athletic shot-stopper, capable of single-handedly keeping Dortmund in matches against high-xG European powerhouses.",
     "key_strengths": [
-      "Jamie Bynoe-Gittens's lethal 1v1 dribbling and explosive wing acceleration",
+      "Jamie Gittens's lethal 1v1 dribbling and explosive wing acceleration",
       "Serhou Guirassy's elite box hold-up play and aerial goal threat",
       "Gregor Kobel's heroic shot-stopping ability in high-leverage knockout ties"
     ],
@@ -410,7 +410,7 @@
         "impact": "Averages 0.85 goals per 90 and anchors forward attacks with physical strength."
       },
       {
-        "name": "Jamie Bynoe-Gittens",
+        "name": "Jamie Gittens",
         "role": "Dynamic Left-Wing Dribbler",
         "impact": "Completed 18 progressive carries, scoring spectacular goals cutting inside onto his right foot."
       },
@@ -430,7 +430,7 @@
   },
   "Sporting CP": {
     "league": "Primeira Liga",
-    "manager": "Rui Borges",
+    "manager": "João Pereira",
     "formation": "3-4-2-1 High-Intensity Press",
     "why_good": "Sporting CP are Portugal's dominant force and a genuine European dark horse. Built around a fluid, aggressive 3-4-2-1 structure, Sporting overwhelm opponents with high-tempo pressing, synchronized wing-back rotations, and the most devastating striker in Portuguese football history.\n\nViktor Gyökeres is an absolute force of nature—a 6'2\" physical powerhouse who combines the sprint speed of a winger with the finishing ruthlessness of a classic number 9. Gyökeres bullies entire defensive lines on his own, forcing opponents to commit double-coverage and opening space for Trincão and Pedro Gonçalves.\n\nMorten Hjulmand is the tactical general in midfield, winning second balls and orchestrating distribution alongside Hidemasa Morita, while Inácio and Diomande provide athletic recovery pace in defense.",
     "key_strengths": [
@@ -625,9 +625,9 @@
   },
   "Roma": {
     "league": "Serie A",
-    "manager": "Gian Piero Gasperini",
+    "manager": "Claudio Ranieri",
     "formation": "3-4-2-1 Relentless Man-to-Man Press",
-    "why_good": "Under Gian Piero Gasperini, AS Roma have adopted one of the most suffocating tactical approaches in world football. Gasperini's signature full-pitch man-to-man pressing forces opponents into hurried long clearances, allowing Roma's back three to dominate aerial duels and instantly reset attacking waves.\n\nPaulo Dybala is the genius who brings magic to this demanding physical system. Dybala operates with total creative freedom in the attacking half-space, delivering world-class set-pieces, visionary reverse passes, and curling strikes from distance.\n\nUp front, Ukrainian powerhouse Artem Dovbyk acts as the ultimate focal point—pinning center-backs, winning physical battles, and converting crosses delivered by aggressive wing-backs Angeliño and Zeki Çelik. Manu Koné provides immense engine room power in midfield, shutting down opponent breaks with ease.",
+    "why_good": "Under Claudio Ranieri, AS Roma have adopted one of the most suffocating tactical approaches in world football. Ranieri's disciplined defensive organization forces opponents into hurried long clearances, allowing Roma's back three to dominate aerial duels and instantly reset attacking waves.\n\nPaulo Dybala is the genius who brings magic to this demanding physical system. Dybala operates with total creative freedom in the attacking half-space, delivering world-class set-pieces, visionary reverse passes, and curling strikes from distance.\n\nUp front, Ukrainian powerhouse Artem Dovbyk acts as the ultimate focal point—pinning center-backs, winning physical battles, and converting crosses delivered by aggressive wing-backs Angeliño and Zeki Çelik. Manu Koné provides immense engine room power in midfield, shutting down opponent breaks with ease.",
     "key_strengths": [
       "Paulo Dybala's world-class individual brilliance, set-pieces, and final-third vision",
       "Artem Dovbyk's physical penalty-box dominance and aerial hold-up play",
@@ -664,9 +664,9 @@
   },
   "Fenerbahce": {
     "league": "Süper Lig",
-    "manager": "İsmail Kartal",
+    "manager": "Carlo Ancelotti",
     "formation": "4-2-3-1 High-Energy Wide Overload",
-    "why_good": "Fenerbahçe play with an intensity and passion that mirrors the roaring atmosphere of Istanbul. Under İsmail Kartal, the Yellow Canaries deploy an aggressive 4-2-3-1 system that utilizes the physical midfield dominance of Sofyan Amrabat and Fred to control the center of the pitch.\n\nIn the attacking third, veteran maestro Dušan Tadić directs play with supreme intelligence, cutting inside from the right to pick out the explosive 1v1 runs of Allan Saint-Maximin. Saint-Maximin is a terrifying prospect for opposing full-backs, leading the competition in successful take-on percentage.\n\nInside the box, veteran striker Edin Džeko continues to deliver masterclasses in center-forward play—using his 6'4\" frame to bring midfielders into play before arriving at the back post to convert crosses with lethal precision.",
+    "why_good": "Fenerbahçe play with an intensity and passion that mirrors the roaring atmosphere of Istanbul. Under José Mourinho, the Yellow Canaries deploy an aggressive 4-2-3-1 system that utilizes the physical midfield dominance of Sofyan Amrabat and Fred to control the center of the pitch.\n\nIn the attacking third, veteran maestro Dušan Tadić directs play with supreme intelligence, cutting inside from the right to pick out the explosive 1v1 runs of Allan Saint-Maximin. Saint-Maximin is a terrifying prospect for opposing full-backs, leading the competition in successful take-on percentage.\n\nInside the box, veteran striker Edin Džeko continues to deliver masterclasses in center-forward play—using his 6'4\" frame to bring midfielders into play before arriving at the back post to convert crosses with lethal precision.",
     "key_strengths": [
       "Dušan Tadić's supreme footballing IQ and pinpoint chance delivery",
       "Allan Saint-Maximin's unplayable 1v1 dribbling and explosive acceleration",
@@ -898,9 +898,9 @@
   },
   "Manchester United": {
     "league": "Premier League",
-    "manager": "Michael Carrick",
+    "manager": "Ruben Amorim",
     "formation": "4-2-3-1 Pragmatic Direct Attack",
-    "why_good": "Manchester United possess extraordinary individual match-winners capable of blowing ties open in seconds. Under Michael Carrick, the Red Devils have prioritized defensive compactness and rapid vertical transitions to unleash the pace of Alejandro Garnacho and the playmaking brilliance of Bruno Fernandes.\n\nBruno Fernandes is the team's undisputed creative engine, leading Europe in progressive passes and dangerous crosses into the box. Flanking him, Garnacho and Amad Diallo provide dynamic 1v1 threat on the wings, stretching defenses and creating space for Rasmus Højlund in the box.\n\nIn midfield, Kobbie Mainoo and Casemiro provide a balanced double pivot—Mainoo brings press-resistant composure and ball retention, while Casemiro offers physical aerial authority and defensive protection.",
+    "why_good": "Manchester United possess extraordinary individual match-winners capable of blowing ties open in seconds. Under Ruben Amorim, the Red Devils have prioritized defensive compactness and rapid vertical transitions to unleash the pace of Alejandro Garnacho and the playmaking brilliance of Bruno Fernandes.\n\nBruno Fernandes is the team's undisputed creative engine, leading Europe in progressive passes and dangerous crosses into the box. Flanking him, Garnacho and Amad Diallo provide dynamic 1v1 threat on the wings, stretching defenses and creating space for Rasmus Højlund in the box.\n\nIn midfield, Kobbie Mainoo and Casemiro provide a balanced double pivot—Mainoo brings press-resistant composure and ball retention, while Casemiro offers physical aerial authority and defensive protection.",
     "key_strengths": [
       "Bruno Fernandes's world-class defense-splitting passing and talismanic leadership",
       "Alejandro Garnacho's electric transitional speed and direct running at full-backs",
