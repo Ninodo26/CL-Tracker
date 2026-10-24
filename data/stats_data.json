@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-23T21:03:33.370185Z",
+  "updated_at": "2026-10-24T03:29:09.029335Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -261,7 +261,7 @@
     {
       "name": "Porto",
       "elo_change": "-35",
-      "current_elo": 1987,
+      "current_elo": 1988,
       "trend": "down",
       "note": "#34 in table (0W-0D-3L, 0 pts, GD -4) — below pre-season projection"
     },
