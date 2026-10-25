@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T10:50:16.647254Z",
+  "updated_at": "2026-10-25T15:38:15.940334Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -240,7 +240,7 @@
     {
       "name": "Real Betis",
       "elo_change": "+34",
-      "current_elo": 1937,
+      "current_elo": 1936,
       "trend": "up",
       "note": "#5 in table (3W-0D-0L, 9 pts, GD +3) — outperforming baseline seed"
     },
@@ -254,7 +254,7 @@
     {
       "name": "Como",
       "elo_change": "+21",
-      "current_elo": 1692,
+      "current_elo": 1691,
       "trend": "up",
       "note": "#9 in table (2W-0D-1L, 6 pts, GD +5) — outperforming baseline seed"
     },
@@ -275,7 +275,7 @@
     {
       "name": "Inter",
       "elo_change": "-27",
-      "current_elo": 2146,
+      "current_elo": 2149,
       "trend": "down",
       "note": "#20 in table (1W-0D-2L, 3 pts, GD -1) — below pre-season projection"
     }
