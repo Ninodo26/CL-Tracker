@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T22:55:53.242209Z",
+  "updated_at": "2026-10-25T03:25:03.171511Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -240,42 +240,42 @@
     {
       "name": "Real Betis",
       "elo_change": "+34",
-      "current_elo": 1937,
+      "current_elo": 1938,
       "trend": "up",
       "note": "#5 in table (3W-0D-0L, 9 pts, GD +3) — outperforming baseline seed"
     },
     {
       "name": "Paris Saint-Germain",
-      "elo_change": "+26",
-      "current_elo": 2162,
+      "elo_change": "+27",
+      "current_elo": 2166,
       "trend": "up",
       "note": "#1 in table (3W-0D-0L, 9 pts, GD +9) — outperforming baseline seed"
     },
     {
       "name": "Aston Villa",
-      "elo_change": "+20",
-      "current_elo": 1855,
+      "elo_change": "+22",
+      "current_elo": 1823,
       "trend": "up",
       "note": "#2 in table (3W-0D-0L, 9 pts, GD +9) — outperforming baseline seed"
     },
     {
       "name": "Porto",
-      "elo_change": "-36",
-      "current_elo": 1987,
+      "elo_change": "-35",
+      "current_elo": 1988,
       "trend": "down",
       "note": "#34 in table (0W-0D-3L, 0 pts, GD -4) — below pre-season projection"
     },
     {
       "name": "Lille",
       "elo_change": "-33",
-      "current_elo": 1850,
+      "current_elo": 1853,
       "trend": "down",
       "note": "#35 in table (0W-0D-3L, 0 pts, GD -6) — below pre-season projection"
     },
     {
       "name": "Inter",
-      "elo_change": "-27",
-      "current_elo": 2146,
+      "elo_change": "-26",
+      "current_elo": 2143,
       "trend": "down",
       "note": "#20 in table (1W-0D-2L, 3 pts, GD -1) — below pre-season projection"
     }
