@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T03:25:03.171511Z",
+  "updated_at": "2026-10-25T10:50:16.647254Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -233,35 +233,35 @@
     {
       "name": "VfB Stuttgart",
       "elo_change": "+35",
-      "current_elo": 1554,
+      "current_elo": 1555,
       "trend": "up",
       "note": "#6 in table (2W-1D-0L, 7 pts, GD +5) — outperforming baseline seed"
     },
     {
       "name": "Real Betis",
       "elo_change": "+34",
-      "current_elo": 1938,
+      "current_elo": 1937,
       "trend": "up",
       "note": "#5 in table (3W-0D-0L, 9 pts, GD +3) — outperforming baseline seed"
     },
     {
       "name": "Paris Saint-Germain",
-      "elo_change": "+27",
-      "current_elo": 2166,
+      "elo_change": "+26",
+      "current_elo": 2165,
       "trend": "up",
       "note": "#1 in table (3W-0D-0L, 9 pts, GD +9) — outperforming baseline seed"
     },
     {
-      "name": "Aston Villa",
-      "elo_change": "+22",
-      "current_elo": 1823,
+      "name": "Como",
+      "elo_change": "+21",
+      "current_elo": 1692,
       "trend": "up",
-      "note": "#2 in table (3W-0D-0L, 9 pts, GD +9) — outperforming baseline seed"
+      "note": "#9 in table (2W-0D-1L, 6 pts, GD +5) — outperforming baseline seed"
     },
     {
       "name": "Porto",
-      "elo_change": "-35",
-      "current_elo": 1988,
+      "elo_change": "-37",
+      "current_elo": 1990,
       "trend": "down",
       "note": "#34 in table (0W-0D-3L, 0 pts, GD -4) — below pre-season projection"
     },
@@ -274,8 +274,8 @@
     },
     {
       "name": "Inter",
-      "elo_change": "-26",
-      "current_elo": 2143,
+      "elo_change": "-27",
+      "current_elo": 2146,
       "trend": "down",
       "note": "#20 in table (1W-0D-2L, 3 pts, GD -1) — below pre-season projection"
     }
