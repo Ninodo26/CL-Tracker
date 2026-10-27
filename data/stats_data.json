@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-27T15:09:54.745427Z",
+  "updated_at": "2026-10-27T21:52:13.146915Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -275,7 +275,7 @@
     {
       "name": "Inter",
       "elo_change": "-26",
-      "current_elo": 2149,
+      "current_elo": 2147,
       "trend": "down",
       "note": "#20 in table (1W-0D-2L, 3 pts, GD -1) — below pre-season projection"
     }
