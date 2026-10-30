@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-30T17:45:56.900527Z",
+  "updated_at": "2026-10-30T21:58:42.755527Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -247,7 +247,7 @@
     {
       "name": "Paris Saint-Germain",
       "elo_change": "+23",
-      "current_elo": 2189,
+      "current_elo": 2205,
       "trend": "up",
       "note": "#1 in table (3W-0D-0L, 9 pts, GD +9) — outperforming baseline seed"
     },
@@ -267,8 +267,8 @@
     },
     {
       "name": "Lille",
-      "elo_change": "-32",
-      "current_elo": 1835,
+      "elo_change": "-33",
+      "current_elo": 1856,
       "trend": "down",
       "note": "#35 in table (0W-0D-3L, 0 pts, GD -6) — below pre-season projection"
     },
