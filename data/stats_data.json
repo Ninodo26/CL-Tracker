@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-04T10:31:38.045006Z",
+  "updated_at": "2026-11-04T19:25:56.468524Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -25,6 +25,17 @@
     },
     {
       "rank": 3,
+      "name": "Kylian Mbappé",
+      "team": "Real Madrid",
+      "crest": "https://crests.football-data.org/86.png",
+      "goals": 4,
+      "assists": 1,
+      "mins": 340,
+      "xG": 3.6,
+      "per90": 1.06
+    },
+    {
+      "rank": 4,
       "name": "Fabián Ruiz",
       "team": "Paris Saint-Germain",
       "crest": "https://crests.football-data.org/524.png",
@@ -35,40 +46,7 @@
       "per90": 1.06
     },
     {
-      "rank": 4,
-      "name": "Nicolo Tresoldi",
-      "team": "Club Brugge",
-      "crest": "https://crests.football-data.org/851.png",
-      "goals": 4,
-      "assists": 0,
-      "mins": 255,
-      "xG": 3.5,
-      "per90": 1.41
-    },
-    {
       "rank": 5,
-      "name": "Erling Haaland",
-      "team": "Manchester City",
-      "crest": "https://crests.football-data.org/65.png",
-      "goals": 4,
-      "assists": 0,
-      "mins": 255,
-      "xG": 3.5,
-      "per90": 1.41
-    },
-    {
-      "rank": 6,
-      "name": "Sehrou Guirassy",
-      "team": "Borussia Dortmund",
-      "crest": "https://crests.football-data.org/4.png",
-      "goals": 4,
-      "assists": 0,
-      "mins": 255,
-      "xG": 3.5,
-      "per90": 1.41
-    },
-    {
-      "rank": 7,
       "name": "Raphinha",
       "team": "Barcelona",
       "crest": "https://crests.football-data.org/81.png",
@@ -79,7 +57,40 @@
       "per90": 1.41
     },
     {
+      "rank": 6,
+      "name": "Nicolo Tresoldi",
+      "team": "Club Brugge",
+      "crest": "https://crests.football-data.org/851.png",
+      "goals": 4,
+      "assists": 0,
+      "mins": 340,
+      "xG": 3.5,
+      "per90": 1.06
+    },
+    {
+      "rank": 7,
+      "name": "Erling Haaland",
+      "team": "Manchester City",
+      "crest": "https://crests.football-data.org/65.png",
+      "goals": 4,
+      "assists": 0,
+      "mins": 340,
+      "xG": 3.5,
+      "per90": 1.06
+    },
+    {
       "rank": 8,
+      "name": "Sehrou Guirassy",
+      "team": "Borussia Dortmund",
+      "crest": "https://crests.football-data.org/4.png",
+      "goals": 4,
+      "assists": 0,
+      "mins": 340,
+      "xG": 3.5,
+      "per90": 1.06
+    },
+    {
+      "rank": 9,
       "name": "Ermedin Demirovic",
       "team": "VfB Stuttgart",
       "crest": "https://crests.football-data.org/10.png",
@@ -90,21 +101,10 @@
       "per90": 1.06
     },
     {
-      "rank": 9,
+      "rank": 10,
       "name": "Luis Suárez",
       "team": "Sporting CP",
       "crest": "https://crests.football-data.org/498.png",
-      "goals": 4,
-      "assists": 0,
-      "mins": 340,
-      "xG": 3.5,
-      "per90": 1.06
-    },
-    {
-      "rank": 10,
-      "name": "Aleksey Batrakov",
-      "team": "Galatasaray",
-      "crest": "https://crests.football-data.org/610.png",
       "goals": 4,
       "assists": 0,
       "mins": 340,
@@ -160,20 +160,20 @@
     },
     {
       "rank": 6,
-      "name": "Fabián Ruiz",
-      "team": "Paris Saint-Germain",
-      "crest": "https://crests.football-data.org/524.png",
+      "name": "Kylian Mbappé",
+      "team": "Real Madrid",
+      "crest": "https://crests.football-data.org/86.png",
       "assists": 1,
       "chances_created": 7,
       "key_passes": 5
     },
     {
       "rank": 7,
-      "name": "Kylian Mbappé",
-      "team": "Real Madrid",
-      "crest": "https://crests.football-data.org/86.png",
+      "name": "Fabián Ruiz",
+      "team": "Paris Saint-Germain",
+      "crest": "https://crests.football-data.org/524.png",
       "assists": 1,
-      "chances_created": 6,
+      "chances_created": 7,
       "key_passes": 5
     }
   ],
