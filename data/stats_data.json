@@ -1,8 +1,41 @@
 {
-  "updated_at": "2026-11-04T19:25:56.468524Z",
+  "updated_at": "2026-11-05T01:19:44.443721Z",
   "top_scorers": [
     {
       "rank": 1,
+      "name": "Anastasios Douvikas",
+      "team": "Como",
+      "crest": "https://crests.football-data.org/7397.png",
+      "goals": 6,
+      "assists": 1,
+      "mins": 340,
+      "xG": 5.4,
+      "per90": 1.59
+    },
+    {
+      "rank": 2,
+      "name": "Nicolo Tresoldi",
+      "team": "Club Brugge",
+      "crest": "https://crests.football-data.org/851.png",
+      "goals": 5,
+      "assists": 0,
+      "mins": 340,
+      "xG": 4.4,
+      "per90": 1.32
+    },
+    {
+      "rank": 3,
+      "name": "Erling Haaland",
+      "team": "Manchester City",
+      "crest": "https://crests.football-data.org/65.png",
+      "goals": 5,
+      "assists": 0,
+      "mins": 340,
+      "xG": 4.4,
+      "per90": 1.32
+    },
+    {
+      "rank": 4,
       "name": "Harry Kane",
       "team": "Bayern Munich",
       "crest": "https://crests.football-data.org/5.png",
@@ -13,7 +46,7 @@
       "per90": 1.06
     },
     {
-      "rank": 2,
+      "rank": 5,
       "name": "Donyell Malen",
       "team": "Roma",
       "crest": "https://crests.football-data.org/100.png",
@@ -24,7 +57,7 @@
       "per90": 1.06
     },
     {
-      "rank": 3,
+      "rank": 6,
       "name": "Kylian Mbappé",
       "team": "Real Madrid",
       "crest": "https://crests.football-data.org/86.png",
@@ -35,7 +68,7 @@
       "per90": 1.06
     },
     {
-      "rank": 4,
+      "rank": 7,
       "name": "Fabián Ruiz",
       "team": "Paris Saint-Germain",
       "crest": "https://crests.football-data.org/524.png",
@@ -46,7 +79,7 @@
       "per90": 1.06
     },
     {
-      "rank": 5,
+      "rank": 8,
       "name": "Raphinha",
       "team": "Barcelona",
       "crest": "https://crests.football-data.org/81.png",
@@ -57,29 +90,7 @@
       "per90": 1.41
     },
     {
-      "rank": 6,
-      "name": "Nicolo Tresoldi",
-      "team": "Club Brugge",
-      "crest": "https://crests.football-data.org/851.png",
-      "goals": 4,
-      "assists": 0,
-      "mins": 340,
-      "xG": 3.5,
-      "per90": 1.06
-    },
-    {
-      "rank": 7,
-      "name": "Erling Haaland",
-      "team": "Manchester City",
-      "crest": "https://crests.football-data.org/65.png",
-      "goals": 4,
-      "assists": 0,
-      "mins": 340,
-      "xG": 3.5,
-      "per90": 1.06
-    },
-    {
-      "rank": 8,
+      "rank": 9,
       "name": "Sehrou Guirassy",
       "team": "Borussia Dortmund",
       "crest": "https://crests.football-data.org/4.png",
@@ -90,21 +101,10 @@
       "per90": 1.06
     },
     {
-      "rank": 9,
+      "rank": 10,
       "name": "Ermedin Demirovic",
       "team": "VfB Stuttgart",
       "crest": "https://crests.football-data.org/10.png",
-      "goals": 4,
-      "assists": 0,
-      "mins": 340,
-      "xG": 3.5,
-      "per90": 1.06
-    },
-    {
-      "rank": 10,
-      "name": "Luis Suárez",
-      "team": "Sporting CP",
-      "crest": "https://crests.football-data.org/498.png",
       "goals": 4,
       "assists": 0,
       "mins": 340,
@@ -115,6 +115,15 @@
   "top_assists": [
     {
       "rank": 1,
+      "name": "Nico Paz",
+      "team": "Como",
+      "crest": "https://crests.football-data.org/7397.png",
+      "assists": 5,
+      "chances_created": 18,
+      "key_passes": 17
+    },
+    {
+      "rank": 2,
       "name": "Lamine Yamal",
       "team": "Barcelona",
       "crest": "https://crests.football-data.org/81.png",
@@ -123,7 +132,7 @@
       "key_passes": 14
     },
     {
-      "rank": 2,
+      "rank": 3,
       "name": "Harry Kane",
       "team": "Bayern Munich",
       "crest": "https://crests.football-data.org/5.png",
@@ -132,7 +141,7 @@
       "key_passes": 11
     },
     {
-      "rank": 3,
+      "rank": 4,
       "name": "Ousmane Dembélé",
       "team": "Paris Saint-Germain",
       "crest": "https://crests.football-data.org/524.png",
@@ -141,7 +150,7 @@
       "key_passes": 11
     },
     {
-      "rank": 4,
+      "rank": 5,
       "name": "Donyell Malen",
       "team": "Roma",
       "crest": "https://crests.football-data.org/100.png",
@@ -150,7 +159,7 @@
       "key_passes": 8
     },
     {
-      "rank": 5,
+      "rank": 6,
       "name": "Desire Doue",
       "team": "Paris Saint-Germain",
       "crest": "https://crests.football-data.org/524.png",
@@ -159,21 +168,12 @@
       "key_passes": 8
     },
     {
-      "rank": 6,
-      "name": "Kylian Mbappé",
-      "team": "Real Madrid",
-      "crest": "https://crests.football-data.org/86.png",
-      "assists": 1,
-      "chances_created": 7,
-      "key_passes": 5
-    },
-    {
       "rank": 7,
-      "name": "Fabián Ruiz",
-      "team": "Paris Saint-Germain",
-      "crest": "https://crests.football-data.org/524.png",
+      "name": "Anastasios Douvikas",
+      "team": "Como",
+      "crest": "https://crests.football-data.org/7397.png",
       "assists": 1,
-      "chances_created": 7,
+      "chances_created": 9,
       "key_passes": 5
     }
   ],
@@ -184,9 +184,9 @@
       "team": "Arsenal",
       "crest": "https://crests.football-data.org/57.png",
       "clean_sheets": 2,
-      "saves": 9,
-      "save_pct": "81.8%",
-      "ga": 2
+      "saves": 11,
+      "save_pct": "78.6%",
+      "ga": 3
     },
     {
       "rank": 2,
@@ -232,52 +232,52 @@
   "power_movers": [
     {
       "name": "Real Betis",
-      "elo_change": "+33",
-      "current_elo": 1937,
+      "elo_change": "+28",
+      "current_elo": 1932,
       "trend": "up",
-      "note": "#7 in table (3W-0D-0L, 9 pts, GD +3) — outperforming baseline seed"
+      "note": "#11 in table (3W-0D-1L, 9 pts, GD +2) — outperforming baseline seed"
+    },
+    {
+      "name": "Como",
+      "elo_change": "+28",
+      "current_elo": 1721,
+      "trend": "up",
+      "note": "#4 in table (3W-0D-1L, 9 pts, GD +13) — outperforming baseline seed"
+    },
+    {
+      "name": "Club Brugge",
+      "elo_change": "+27",
+      "current_elo": 1828,
+      "trend": "up",
+      "note": "#9 in table (3W-0D-1L, 9 pts, GD +4) — outperforming baseline seed"
     },
     {
       "name": "VfB Stuttgart",
       "elo_change": "+27",
       "current_elo": 1589,
       "trend": "up",
-      "note": "#10 in table (2W-1D-1L, 7 pts, GD +3) — outperforming baseline seed"
-    },
-    {
-      "name": "Paris Saint-Germain",
-      "elo_change": "+23",
-      "current_elo": 2204,
-      "trend": "up",
-      "note": "#1 in table (4W-0D-0L, 12 pts, GD +15) — outperforming baseline seed"
-    },
-    {
-      "name": "LASK",
-      "elo_change": "+20",
-      "current_elo": 1604,
-      "trend": "up",
-      "note": "#15 in table (2W-0D-2L, 6 pts, GD +1) — outperforming baseline seed"
+      "note": "#14 in table (2W-1D-1L, 7 pts, GD +3) — outperforming baseline seed"
     },
     {
       "name": "Porto",
-      "elo_change": "-37",
-      "current_elo": 1986,
+      "elo_change": "-34",
+      "current_elo": 1989,
       "trend": "down",
-      "note": "#35 in table (0W-0D-3L, 0 pts, GD -4) — below pre-season projection"
+      "note": "#26 in table (1W-0D-3L, 3 pts, GD -1) — below pre-season projection"
     },
     {
       "name": "Lille",
       "elo_change": "-33",
       "current_elo": 1855,
       "trend": "down",
-      "note": "#34 in table (0W-1D-3L, 1 pts, GD -6) — below pre-season projection"
+      "note": "#35 in table (0W-1D-3L, 1 pts, GD -6) — below pre-season projection"
     },
     {
       "name": "Roma",
       "elo_change": "-28",
       "current_elo": 1989,
       "trend": "down",
-      "note": "#19 in table (1W-1D-2L, 4 pts, GD +2) — below pre-season projection"
+      "note": "#20 in table (1W-1D-2L, 4 pts, GD +2) — below pre-season projection"
     }
   ]
 }

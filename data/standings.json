@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T19:25:49.280384Z",
+  "generated_at": "2026-11-05T01:19:37.218146Z",
   "league_phase_matchdays": 8,
   "top_auto_r16": 8,
   "top_playoff_cutoff": 24,
@@ -34,11 +34,113 @@
       },
       "prob_top8": 0.999,
       "prob_top24": 1.0,
-      "prob_final": 0.261,
-      "prob_champion": 0.143,
+      "prob_final": 0.258,
+      "prob_champion": 0.136,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 1
+    },
+    {
+      "name": "Real Madrid",
+      "crest": "https://crests.football-data.org/86.png",
+      "played": 4,
+      "won": 4,
+      "drawn": 0,
+      "lost": 0,
+      "gf": 13,
+      "ga": 7,
+      "clean_sheets": 0,
+      "points": 12,
+      "seed_elo": 2237,
+      "elo": 2251,
+      "elo_change": 14,
+      "form_adjustment": 159,
+      "remaining": 4,
+      "max_points": 24,
+      "min_points": 12,
+      "gd": 6,
+      "next_fixture": {
+        "opponent": "PSV Eindhoven",
+        "venue": "home",
+        "date": "2026-11-24T20:00:00Z",
+        "played": false,
+        "score": null
+      },
+      "prob_top8": 0.997,
+      "prob_top24": 1.0,
+      "prob_final": 0.349,
+      "prob_champion": 0.219,
+      "status_top8": "alive",
+      "status_top24": "alive",
+      "rank": 2
+    },
+    {
+      "name": "Arsenal",
+      "crest": "https://crests.football-data.org/57.png",
+      "played": 4,
+      "won": 3,
+      "drawn": 1,
+      "lost": 0,
+      "gf": 8,
+      "ga": 3,
+      "clean_sheets": 2,
+      "points": 10,
+      "seed_elo": 2197,
+      "elo": 2206,
+      "elo_change": 9,
+      "form_adjustment": 221,
+      "remaining": 4,
+      "max_points": 22,
+      "min_points": 10,
+      "gd": 5,
+      "next_fixture": {
+        "opponent": "Borussia Dortmund",
+        "venue": "home",
+        "date": "2026-11-24T20:00:00Z",
+        "played": false,
+        "score": null
+      },
+      "prob_top8": 0.892,
+      "prob_top24": 1.0,
+      "prob_final": 0.259,
+      "prob_champion": 0.138,
+      "status_top8": "alive",
+      "status_top24": "alive",
+      "rank": 3
+    },
+    {
+      "name": "Como",
+      "crest": "https://crests.football-data.org/7397.png",
+      "played": 4,
+      "won": 3,
+      "drawn": 0,
+      "lost": 1,
+      "gf": 19,
+      "ga": 6,
+      "clean_sheets": 0,
+      "points": 9,
+      "seed_elo": 1693,
+      "elo": 1721,
+      "elo_change": 28,
+      "form_adjustment": 113,
+      "remaining": 4,
+      "max_points": 21,
+      "min_points": 9,
+      "gd": 13,
+      "next_fixture": {
+        "opponent": "AEK Athens",
+        "venue": "home",
+        "date": "2026-11-24T20:00:00Z",
+        "played": false,
+        "score": null
+      },
+      "prob_top8": 0.032,
+      "prob_top24": 0.997,
+      "prob_final": 0.001,
+      "prob_champion": 0.0,
+      "status_top8": "alive",
+      "status_top24": "alive",
+      "rank": 4
     },
     {
       "name": "Barcelona",
@@ -66,13 +168,13 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.919,
+      "prob_top8": 0.916,
       "prob_top24": 1.0,
-      "prob_final": 0.175,
-      "prob_champion": 0.083,
+      "prob_final": 0.176,
+      "prob_champion": 0.079,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 2
+      "rank": 5
     },
     {
       "name": "Aston Villa",
@@ -100,81 +202,115 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.197,
+      "prob_top8": 0.196,
       "prob_top24": 0.998,
       "prob_final": 0.005,
       "prob_champion": 0.001,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 3
+      "rank": 6
+    },
+    {
+      "name": "Manchester City",
+      "crest": "https://crests.football-data.org/65.png",
+      "played": 4,
+      "won": 3,
+      "drawn": 0,
+      "lost": 1,
+      "gf": 12,
+      "ga": 7,
+      "clean_sheets": 1,
+      "points": 9,
+      "seed_elo": 2166,
+      "elo": 2166,
+      "elo_change": 0,
+      "form_adjustment": 164,
+      "remaining": 4,
+      "max_points": 21,
+      "min_points": 9,
+      "gd": 5,
+      "next_fixture": {
+        "opponent": "Napoli",
+        "venue": "home",
+        "date": "2026-11-24T20:00:00Z",
+        "played": false,
+        "score": null
+      },
+      "prob_top8": 0.903,
+      "prob_top24": 1.0,
+      "prob_final": 0.191,
+      "prob_champion": 0.091,
+      "status_top8": "alive",
+      "status_top24": "alive",
+      "rank": 7
     },
     {
       "name": "Liverpool",
       "crest": "https://crests.football-data.org/64.png",
-      "played": 3,
+      "played": 4,
       "won": 3,
       "drawn": 0,
-      "lost": 0,
-      "gf": 12,
-      "ga": 7,
+      "lost": 1,
+      "gf": 14,
+      "ga": 10,
       "clean_sheets": 0,
       "points": 9,
       "seed_elo": 2072,
-      "elo": 2085,
-      "elo_change": 13,
+      "elo": 2066,
+      "elo_change": -6,
       "form_adjustment": 52,
-      "remaining": 5,
-      "max_points": 24,
+      "remaining": 4,
+      "max_points": 21,
       "min_points": 9,
-      "gd": 5,
+      "gd": 4,
       "next_fixture": {
-        "opponent": "Fenerbahce",
+        "opponent": "Club Brugge",
         "venue": "away",
-        "date": "2026-11-04T17:45:00Z",
+        "date": "2026-11-25T20:00:00Z",
         "played": false,
         "score": null
       },
-      "prob_top8": 0.918,
+      "prob_top8": 0.643,
       "prob_top24": 1.0,
-      "prob_final": 0.102,
-      "prob_champion": 0.035,
+      "prob_final": 0.082,
+      "prob_champion": 0.029,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 4
+      "rank": 8
     },
     {
-      "name": "Real Madrid",
-      "crest": "https://crests.football-data.org/86.png",
-      "played": 3,
+      "name": "Club Brugge",
+      "crest": "https://crests.football-data.org/851.png",
+      "played": 4,
       "won": 3,
       "drawn": 0,
-      "lost": 0,
-      "gf": 10,
-      "ga": 5,
-      "clean_sheets": 0,
+      "lost": 1,
+      "gf": 11,
+      "ga": 7,
+      "clean_sheets": 1,
       "points": 9,
-      "seed_elo": 2237,
-      "elo": 2251,
-      "elo_change": 14,
-      "form_adjustment": 159,
-      "remaining": 5,
-      "max_points": 24,
+      "seed_elo": 1801,
+      "elo": 1828,
+      "elo_change": 27,
+      "form_adjustment": 0,
+      "remaining": 4,
+      "max_points": 21,
       "min_points": 9,
-      "gd": 5,
+      "gd": 4,
       "next_fixture": {
-        "opponent": "AEK Athens",
-        "venue": "away",
-        "date": "2026-11-04T17:45:00Z",
+        "opponent": "Liverpool",
+        "venue": "home",
+        "date": "2026-11-25T20:00:00Z",
         "played": false,
         "score": null
       },
-      "prob_top8": 0.994,
-      "prob_top24": 1.0,
-      "prob_final": 0.334,
-      "prob_champion": 0.206,
+      "prob_top8": 0.351,
+      "prob_top24": 0.997,
+      "prob_final": 0.004,
+      "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 5
+      "rank": 9
     },
     {
       "name": "Sporting CP",
@@ -202,47 +338,81 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.098,
-      "prob_top24": 0.994,
+      "prob_top8": 0.092,
+      "prob_top24": 0.993,
       "prob_final": 0.013,
-      "prob_champion": 0.003,
+      "prob_champion": 0.002,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 6
+      "rank": 10
     },
     {
       "name": "Real Betis",
       "crest": "https://crests.football-data.org/90.png",
-      "played": 3,
+      "played": 4,
       "won": 3,
       "drawn": 0,
-      "lost": 0,
-      "gf": 7,
-      "ga": 4,
+      "lost": 1,
+      "gf": 8,
+      "ga": 6,
       "clean_sheets": 1,
       "points": 9,
       "seed_elo": 1904,
-      "elo": 1937,
-      "elo_change": 33,
+      "elo": 1932,
+      "elo_change": 28,
       "form_adjustment": 106,
-      "remaining": 5,
-      "max_points": 24,
+      "remaining": 4,
+      "max_points": 21,
       "min_points": 9,
-      "gd": 3,
+      "gd": 2,
       "next_fixture": {
-        "opponent": "Borussia Dortmund",
+        "opponent": "Slovan Bratislava",
         "venue": "away",
-        "date": "2026-11-04T20:00:00Z",
+        "date": "2026-11-24T20:00:00Z",
         "played": false,
         "score": null
       },
-      "prob_top8": 0.303,
+      "prob_top8": 0.163,
       "prob_top24": 0.999,
-      "prob_final": 0.019,
-      "prob_champion": 0.004,
+      "prob_final": 0.016,
+      "prob_champion": 0.003,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 7
+      "rank": 11
+    },
+    {
+      "name": "Borussia Dortmund",
+      "crest": "https://crests.football-data.org/4.png",
+      "played": 4,
+      "won": 3,
+      "drawn": 0,
+      "lost": 1,
+      "gf": 7,
+      "ga": 5,
+      "clean_sheets": 0,
+      "points": 9,
+      "seed_elo": 2061,
+      "elo": 2052,
+      "elo_change": -9,
+      "form_adjustment": 158,
+      "remaining": 4,
+      "max_points": 21,
+      "min_points": 9,
+      "gd": 2,
+      "next_fixture": {
+        "opponent": "Arsenal",
+        "venue": "away",
+        "date": "2026-11-24T20:00:00Z",
+        "played": false,
+        "score": null
+      },
+      "prob_top8": 0.358,
+      "prob_top24": 1.0,
+      "prob_final": 0.065,
+      "prob_champion": 0.02,
+      "status_top8": "alive",
+      "status_top24": "alive",
+      "rank": 12
     },
     {
       "name": "Bayern Munich",
@@ -270,47 +440,13 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.958,
+      "prob_top8": 0.959,
       "prob_top24": 1.0,
-      "prob_final": 0.322,
-      "prob_champion": 0.194,
+      "prob_final": 0.318,
+      "prob_champion": 0.189,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 8
-    },
-    {
-      "name": "Arsenal",
-      "crest": "https://crests.football-data.org/57.png",
-      "played": 3,
-      "won": 2,
-      "drawn": 1,
-      "lost": 0,
-      "gf": 6,
-      "ga": 2,
-      "clean_sheets": 2,
-      "points": 7,
-      "seed_elo": 2197,
-      "elo": 2205,
-      "elo_change": 8,
-      "form_adjustment": 221,
-      "remaining": 5,
-      "max_points": 22,
-      "min_points": 7,
-      "gd": 4,
-      "next_fixture": {
-        "opponent": "Slavia Praha",
-        "venue": "away",
-        "date": "2026-11-04T20:00:00Z",
-        "played": false,
-        "score": null
-      },
-      "prob_top8": 0.879,
-      "prob_top24": 1.0,
-      "prob_final": 0.25,
-      "prob_champion": 0.133,
-      "status_top8": "alive",
-      "status_top24": "alive",
-      "rank": 9
+      "rank": 13
     },
     {
       "name": "VfB Stuttgart",
@@ -339,114 +475,12 @@
         "score": null
       },
       "prob_top8": 0.001,
-      "prob_top24": 0.507,
+      "prob_top24": 0.463,
       "prob_final": 0.0,
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 10
-    },
-    {
-      "name": "Como",
-      "crest": "https://crests.football-data.org/7397.png",
-      "played": 3,
-      "won": 2,
-      "drawn": 0,
-      "lost": 1,
-      "gf": 10,
-      "ga": 5,
-      "clean_sheets": 0,
-      "points": 6,
-      "seed_elo": 1693,
-      "elo": 1712,
-      "elo_change": 19,
-      "form_adjustment": 113,
-      "remaining": 5,
-      "max_points": 21,
-      "min_points": 6,
-      "gd": 5,
-      "next_fixture": {
-        "opponent": "Lens",
-        "venue": "away",
-        "date": "2026-11-04T20:00:00Z",
-        "played": false,
-        "score": null
-      },
-      "prob_top8": 0.012,
-      "prob_top24": 0.871,
-      "prob_final": 0.0,
-      "prob_champion": 0.0,
-      "status_top8": "alive",
-      "status_top24": "alive",
-      "rank": 11
-    },
-    {
-      "name": "Manchester City",
-      "crest": "https://crests.football-data.org/65.png",
-      "played": 3,
-      "won": 2,
-      "drawn": 0,
-      "lost": 1,
-      "gf": 9,
-      "ga": 5,
-      "clean_sheets": 1,
-      "points": 6,
-      "seed_elo": 2166,
-      "elo": 2162,
-      "elo_change": -4,
-      "form_adjustment": 164,
-      "remaining": 5,
-      "max_points": 21,
-      "min_points": 6,
-      "gd": 4,
-      "next_fixture": {
-        "opponent": "RB Leipzig",
-        "venue": "away",
-        "date": "2026-11-04T20:00:00Z",
-        "played": false,
-        "score": null
-      },
-      "prob_top8": 0.819,
-      "prob_top24": 1.0,
-      "prob_final": 0.186,
-      "prob_champion": 0.09,
-      "status_top8": "alive",
-      "status_top24": "alive",
-      "rank": 12
-    },
-    {
-      "name": "Club Brugge",
-      "crest": "https://crests.football-data.org/851.png",
-      "played": 3,
-      "won": 2,
-      "drawn": 0,
-      "lost": 1,
-      "gf": 9,
-      "ga": 6,
-      "clean_sheets": 1,
-      "points": 6,
-      "seed_elo": 1801,
-      "elo": 1812,
-      "elo_change": 11,
-      "form_adjustment": 0,
-      "remaining": 5,
-      "max_points": 21,
-      "min_points": 6,
-      "gd": 3,
-      "next_fixture": {
-        "opponent": "PSV Eindhoven",
-        "venue": "away",
-        "date": "2026-11-04T20:00:00Z",
-        "played": false,
-        "score": null
-      },
-      "prob_top8": 0.1,
-      "prob_top24": 0.942,
-      "prob_final": 0.003,
-      "prob_champion": 0.0,
-      "status_top8": "alive",
-      "status_top24": "alive",
-      "rank": 13
+      "rank": 14
     },
     {
       "name": "Inter",
@@ -474,13 +508,13 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.332,
+      "prob_top8": 0.352,
       "prob_top24": 0.999,
-      "prob_final": 0.132,
-      "prob_champion": 0.054,
+      "prob_final": 0.13,
+      "prob_champion": 0.057,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 14
+      "rank": 15
     },
     {
       "name": "LASK",
@@ -509,43 +543,9 @@
         "score": null
       },
       "prob_top8": 0.0,
-      "prob_top24": 0.428,
+      "prob_top24": 0.395,
       "prob_final": 0.0,
       "prob_champion": 0.0,
-      "status_top8": "alive",
-      "status_top24": "alive",
-      "rank": 15
-    },
-    {
-      "name": "Borussia Dortmund",
-      "crest": "https://crests.football-data.org/4.png",
-      "played": 3,
-      "won": 2,
-      "drawn": 0,
-      "lost": 1,
-      "gf": 5,
-      "ga": 4,
-      "clean_sheets": 0,
-      "points": 6,
-      "seed_elo": 2061,
-      "elo": 2047,
-      "elo_change": -14,
-      "form_adjustment": 158,
-      "remaining": 5,
-      "max_points": 21,
-      "min_points": 6,
-      "gd": 1,
-      "next_fixture": {
-        "opponent": "Real Betis",
-        "venue": "home",
-        "date": "2026-11-04T20:00:00Z",
-        "played": false,
-        "score": null
-      },
-      "prob_top8": 0.278,
-      "prob_top24": 0.996,
-      "prob_final": 0.061,
-      "prob_champion": 0.02,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 16
@@ -577,7 +577,7 @@
         "score": null
       },
       "prob_top8": 0.001,
-      "prob_top24": 0.567,
+      "prob_top24": 0.55,
       "prob_final": 0.0,
       "prob_champion": 0.0,
       "status_top8": "alive",
@@ -610,13 +610,47 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.002,
-      "prob_top24": 0.65,
+      "prob_top8": 0.001,
+      "prob_top24": 0.63,
       "prob_final": 0.0,
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 18
+    },
+    {
+      "name": "Fenerbahce",
+      "crest": "https://crests.football-data.org/613.png",
+      "played": 4,
+      "won": 1,
+      "drawn": 2,
+      "lost": 1,
+      "gf": 6,
+      "ga": 11,
+      "clean_sheets": 0,
+      "points": 5,
+      "seed_elo": 1731,
+      "elo": 1745,
+      "elo_change": 14,
+      "form_adjustment": 0,
+      "remaining": 4,
+      "max_points": 17,
+      "min_points": 5,
+      "gd": -5,
+      "next_fixture": {
+        "opponent": "Shakhtar Donetsk",
+        "venue": "away",
+        "date": "2026-11-25T20:00:00Z",
+        "played": false,
+        "score": null
+      },
+      "prob_top8": 0.003,
+      "prob_top24": 0.629,
+      "prob_final": 0.0,
+      "prob_champion": 0.0,
+      "status_top8": "alive",
+      "status_top24": "alive",
+      "rank": 19
     },
     {
       "name": "Roma",
@@ -644,13 +678,13 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.017,
-      "prob_top24": 0.908,
-      "prob_final": 0.024,
-      "prob_champion": 0.006,
+      "prob_top8": 0.016,
+      "prob_top24": 0.896,
+      "prob_final": 0.026,
+      "prob_champion": 0.007,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 19
+      "rank": 20
     },
     {
       "name": "Shakhtar Donetsk",
@@ -678,47 +712,47 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.0,
-      "prob_top24": 0.444,
+      "prob_top8": 0.001,
+      "prob_top24": 0.412,
       "prob_final": 0.0,
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 20
+      "rank": 21
     },
     {
-      "name": "PSV Eindhoven",
-      "crest": "https://crests.football-data.org/674.png",
-      "played": 3,
+      "name": "Viking",
+      "crest": "https://crests.football-data.org/5720.png",
+      "played": 4,
       "won": 1,
       "drawn": 1,
-      "lost": 1,
-      "gf": 2,
-      "ga": 2,
-      "clean_sheets": 1,
+      "lost": 2,
+      "gf": 9,
+      "ga": 10,
+      "clean_sheets": 0,
       "points": 4,
-      "seed_elo": 1899,
-      "elo": 1898,
-      "elo_change": -1,
-      "form_adjustment": 114,
-      "remaining": 5,
-      "max_points": 19,
+      "seed_elo": 1533,
+      "elo": 1542,
+      "elo_change": 9,
+      "form_adjustment": 0,
+      "remaining": 4,
+      "max_points": 16,
       "min_points": 4,
-      "gd": 0,
+      "gd": -1,
       "next_fixture": {
-        "opponent": "Club Brugge",
-        "venue": "home",
-        "date": "2026-11-04T20:00:00Z",
+        "opponent": "Atletico Madrid",
+        "venue": "away",
+        "date": "2026-11-25T20:00:00Z",
         "played": false,
         "score": null
       },
-      "prob_top8": 0.047,
-      "prob_top24": 0.947,
-      "prob_final": 0.008,
-      "prob_champion": 0.001,
+      "prob_top8": 0.0,
+      "prob_top24": 0.052,
+      "prob_final": 0.0,
+      "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 21
+      "rank": 22
     },
     {
       "name": "Atletico Madrid",
@@ -746,13 +780,47 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.112,
+      "prob_top8": 0.115,
       "prob_top24": 0.99,
-      "prob_final": 0.072,
-      "prob_champion": 0.022,
+      "prob_final": 0.069,
+      "prob_champion": 0.024,
       "status_top8": "alive",
       "status_top24": "alive",
-      "rank": 22
+      "rank": 23
+    },
+    {
+      "name": "PSV Eindhoven",
+      "crest": "https://crests.football-data.org/674.png",
+      "played": 4,
+      "won": 1,
+      "drawn": 1,
+      "lost": 2,
+      "gf": 3,
+      "ga": 4,
+      "clean_sheets": 1,
+      "points": 4,
+      "seed_elo": 1899,
+      "elo": 1882,
+      "elo_change": -17,
+      "form_adjustment": 114,
+      "remaining": 4,
+      "max_points": 16,
+      "min_points": 4,
+      "gd": -1,
+      "next_fixture": {
+        "opponent": "Real Madrid",
+        "venue": "away",
+        "date": "2026-11-24T20:00:00Z",
+        "played": false,
+        "score": null
+      },
+      "prob_top8": 0.002,
+      "prob_top24": 0.806,
+      "prob_final": 0.005,
+      "prob_champion": 0.0,
+      "status_top8": "alive",
+      "status_top24": "alive",
+      "rank": 24
     },
     {
       "name": "Bodo/Glimt",
@@ -780,76 +848,8 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.002,
-      "prob_top24": 0.618,
-      "prob_final": 0.001,
-      "prob_champion": 0.0,
-      "status_top8": "alive",
-      "status_top24": "alive",
-      "rank": 23
-    },
-    {
-      "name": "Napoli",
-      "crest": "https://crests.football-data.org/113.png",
-      "played": 3,
-      "won": 1,
-      "drawn": 0,
-      "lost": 2,
-      "gf": 5,
-      "ga": 7,
-      "clean_sheets": 0,
-      "points": 3,
-      "seed_elo": 1749,
-      "elo": 1746,
-      "elo_change": -3,
-      "form_adjustment": -3,
-      "remaining": 5,
-      "max_points": 18,
-      "min_points": 3,
-      "gd": -2,
-      "next_fixture": {
-        "opponent": "Porto",
-        "venue": "away",
-        "date": "2026-11-04T20:00:00Z",
-        "played": false,
-        "score": null
-      },
-      "prob_top8": 0.002,
-      "prob_top24": 0.643,
-      "prob_final": 0.0,
-      "prob_champion": 0.0,
-      "status_top8": "alive",
-      "status_top24": "alive",
-      "rank": 24
-    },
-    {
-      "name": "Sabah FK",
-      "crest": "https://crests.football-data.org/10233.png",
-      "played": 3,
-      "won": 1,
-      "drawn": 0,
-      "lost": 2,
-      "gf": 3,
-      "ga": 6,
-      "clean_sheets": 1,
-      "points": 3,
-      "seed_elo": 1524,
-      "elo": 1531,
-      "elo_change": 7,
-      "form_adjustment": 0,
-      "remaining": 5,
-      "max_points": 18,
-      "min_points": 3,
-      "gd": -3,
-      "next_fixture": {
-        "opponent": "Viking",
-        "venue": "away",
-        "date": "2026-11-04T20:00:00Z",
-        "played": false,
-        "score": null
-      },
-      "prob_top8": 0.0,
-      "prob_top24": 0.084,
+      "prob_top8": 0.001,
+      "prob_top24": 0.596,
       "prob_final": 0.0,
       "prob_champion": 0.0,
       "status_top8": "alive",
@@ -857,106 +857,72 @@
       "rank": 25
     },
     {
-      "name": "Lens",
-      "crest": "https://crests.football-data.org/546.png",
-      "played": 3,
+      "name": "Porto",
+      "crest": "https://crests.football-data.org/503.png",
+      "played": 4,
       "won": 1,
       "drawn": 0,
-      "lost": 2,
-      "gf": 3,
+      "lost": 3,
+      "gf": 6,
       "ga": 7,
       "clean_sheets": 0,
       "points": 3,
-      "seed_elo": 1578,
-      "elo": 1586,
-      "elo_change": 8,
-      "form_adjustment": 11,
-      "remaining": 5,
-      "max_points": 18,
+      "seed_elo": 2023,
+      "elo": 1989,
+      "elo_change": -34,
+      "form_adjustment": 200,
+      "remaining": 4,
+      "max_points": 15,
       "min_points": 3,
-      "gd": -4,
+      "gd": -1,
       "next_fixture": {
-        "opponent": "Como",
-        "venue": "home",
-        "date": "2026-11-04T20:00:00Z",
+        "opponent": "Feyenoord",
+        "venue": "away",
+        "date": "2026-11-24T20:00:00Z",
         "played": false,
         "score": null
       },
-      "prob_top8": 0.0,
-      "prob_top24": 0.087,
-      "prob_final": 0.0,
-      "prob_champion": 0.0,
+      "prob_top8": 0.004,
+      "prob_top24": 0.846,
+      "prob_final": 0.022,
+      "prob_champion": 0.005,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 26
     },
     {
-      "name": "AEK Athens",
-      "crest": "https://crests.football-data.org/1899.png",
-      "played": 3,
+      "name": "Napoli",
+      "crest": "https://crests.football-data.org/113.png",
+      "played": 4,
       "won": 1,
       "drawn": 0,
-      "lost": 2,
-      "gf": 3,
-      "ga": 8,
-      "clean_sheets": 1,
+      "lost": 3,
+      "gf": 6,
+      "ga": 11,
+      "clean_sheets": 0,
       "points": 3,
-      "seed_elo": 1596,
-      "elo": 1599,
-      "elo_change": 3,
-      "form_adjustment": 0,
-      "remaining": 5,
-      "max_points": 18,
+      "seed_elo": 1749,
+      "elo": 1743,
+      "elo_change": -6,
+      "form_adjustment": -3,
+      "remaining": 4,
+      "max_points": 15,
       "min_points": 3,
       "gd": -5,
       "next_fixture": {
-        "opponent": "Real Madrid",
-        "venue": "home",
-        "date": "2026-11-04T17:45:00Z",
+        "opponent": "Manchester City",
+        "venue": "away",
+        "date": "2026-11-24T20:00:00Z",
         "played": false,
         "score": null
       },
       "prob_top8": 0.0,
-      "prob_top24": 0.067,
+      "prob_top24": 0.537,
       "prob_final": 0.0,
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 27
-    },
-    {
-      "name": "RB Leipzig",
-      "crest": "https://crests.football-data.org/721.png",
-      "played": 3,
-      "won": 1,
-      "drawn": 0,
-      "lost": 2,
-      "gf": 3,
-      "ga": 8,
-      "clean_sheets": 1,
-      "points": 3,
-      "seed_elo": 1833,
-      "elo": 1830,
-      "elo_change": -3,
-      "form_adjustment": 89,
-      "remaining": 5,
-      "max_points": 18,
-      "min_points": 3,
-      "gd": -5,
-      "next_fixture": {
-        "opponent": "Manchester City",
-        "venue": "home",
-        "date": "2026-11-04T20:00:00Z",
-        "played": false,
-        "score": null
-      },
-      "prob_top8": 0.007,
-      "prob_top24": 0.726,
-      "prob_final": 0.002,
-      "prob_champion": 0.0,
-      "status_top8": "alive",
-      "status_top24": "alive",
-      "rank": 28
     },
     {
       "name": "Villarreal",
@@ -984,13 +950,115 @@
         "played": false,
         "score": null
       },
-      "prob_top8": 0.001,
-      "prob_top24": 0.562,
+      "prob_top8": 0.0,
+      "prob_top24": 0.541,
+      "prob_final": 0.0,
+      "prob_champion": 0.0,
+      "status_top8": "alive",
+      "status_top24": "alive",
+      "rank": 28
+    },
+    {
+      "name": "AEK Athens",
+      "crest": "https://crests.football-data.org/1899.png",
+      "played": 4,
+      "won": 1,
+      "drawn": 0,
+      "lost": 3,
+      "gf": 5,
+      "ga": 11,
+      "clean_sheets": 1,
+      "points": 3,
+      "seed_elo": 1596,
+      "elo": 1598,
+      "elo_change": 2,
+      "form_adjustment": 0,
+      "remaining": 4,
+      "max_points": 15,
+      "min_points": 3,
+      "gd": -6,
+      "next_fixture": {
+        "opponent": "Como",
+        "venue": "away",
+        "date": "2026-11-24T20:00:00Z",
+        "played": false,
+        "score": null
+      },
+      "prob_top8": 0.0,
+      "prob_top24": 0.054,
       "prob_final": 0.0,
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 29
+    },
+    {
+      "name": "RB Leipzig",
+      "crest": "https://crests.football-data.org/721.png",
+      "played": 4,
+      "won": 1,
+      "drawn": 0,
+      "lost": 3,
+      "gf": 5,
+      "ga": 11,
+      "clean_sheets": 1,
+      "points": 3,
+      "seed_elo": 1833,
+      "elo": 1826,
+      "elo_change": -7,
+      "form_adjustment": 89,
+      "remaining": 4,
+      "max_points": 15,
+      "min_points": 3,
+      "gd": -6,
+      "next_fixture": {
+        "opponent": "Lens",
+        "venue": "home",
+        "date": "2026-11-24T20:00:00Z",
+        "played": false,
+        "score": null
+      },
+      "prob_top8": 0.0,
+      "prob_top24": 0.661,
+      "prob_final": 0.001,
+      "prob_champion": 0.0,
+      "status_top8": "alive",
+      "status_top24": "alive",
+      "rank": 30
+    },
+    {
+      "name": "Sabah FK",
+      "crest": "https://crests.football-data.org/10233.png",
+      "played": 4,
+      "won": 1,
+      "drawn": 0,
+      "lost": 3,
+      "gf": 4,
+      "ga": 10,
+      "clean_sheets": 1,
+      "points": 3,
+      "seed_elo": 1524,
+      "elo": 1523,
+      "elo_change": -1,
+      "form_adjustment": 0,
+      "remaining": 4,
+      "max_points": 15,
+      "min_points": 3,
+      "gd": -6,
+      "next_fixture": {
+        "opponent": "Barcelona",
+        "venue": "home",
+        "date": "2026-11-25T17:45:00Z",
+        "played": false,
+        "score": null
+      },
+      "prob_top8": 0.0,
+      "prob_top24": 0.018,
+      "prob_final": 0.0,
+      "prob_champion": 0.0,
+      "status_top8": "alive",
+      "status_top24": "alive",
+      "rank": 31
     },
     {
       "name": "Feyenoord",
@@ -1019,114 +1087,80 @@
         "score": null
       },
       "prob_top8": 0.001,
-      "prob_top24": 0.79,
-      "prob_final": 0.008,
-      "prob_champion": 0.002,
-      "status_top8": "alive",
-      "status_top24": "alive",
-      "rank": 30
-    },
-    {
-      "name": "Fenerbahce",
-      "crest": "https://crests.football-data.org/613.png",
-      "played": 3,
-      "won": 0,
-      "drawn": 2,
-      "lost": 1,
-      "gf": 3,
-      "ga": 9,
-      "clean_sheets": 0,
-      "points": 2,
-      "seed_elo": 1731,
-      "elo": 1727,
-      "elo_change": -4,
-      "form_adjustment": 0,
-      "remaining": 5,
-      "max_points": 17,
-      "min_points": 2,
-      "gd": -6,
-      "next_fixture": {
-        "opponent": "Liverpool",
-        "venue": "home",
-        "date": "2026-11-04T17:45:00Z",
-        "played": false,
-        "score": null
-      },
-      "prob_top8": 0.0,
-      "prob_top24": 0.24,
-      "prob_final": 0.0,
-      "prob_champion": 0.0,
-      "status_top8": "alive",
-      "status_top24": "alive",
-      "rank": 31
-    },
-    {
-      "name": "Slavia Praha",
-      "crest": "https://crests.football-data.org/930.png",
-      "played": 3,
-      "won": 0,
-      "drawn": 1,
-      "lost": 2,
-      "gf": 4,
-      "ga": 7,
-      "clean_sheets": 0,
-      "points": 1,
-      "seed_elo": 1676,
-      "elo": 1651,
-      "elo_change": -25,
-      "form_adjustment": 0,
-      "remaining": 5,
-      "max_points": 16,
-      "min_points": 1,
-      "gd": -3,
-      "next_fixture": {
-        "opponent": "Arsenal",
-        "venue": "home",
-        "date": "2026-11-04T20:00:00Z",
-        "played": false,
-        "score": null
-      },
-      "prob_top8": 0.0,
-      "prob_top24": 0.016,
-      "prob_final": 0.0,
-      "prob_champion": 0.0,
+      "prob_top24": 0.775,
+      "prob_final": 0.007,
+      "prob_champion": 0.001,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 32
     },
     {
-      "name": "Viking",
-      "crest": "https://crests.football-data.org/5720.png",
-      "played": 3,
-      "won": 0,
-      "drawn": 1,
-      "lost": 2,
-      "gf": 5,
-      "ga": 9,
+      "name": "Lens",
+      "crest": "https://crests.football-data.org/546.png",
+      "played": 4,
+      "won": 1,
+      "drawn": 0,
+      "lost": 3,
+      "gf": 4,
+      "ga": 16,
       "clean_sheets": 0,
-      "points": 1,
-      "seed_elo": 1533,
-      "elo": 1533,
-      "elo_change": 0,
-      "form_adjustment": 0,
-      "remaining": 5,
-      "max_points": 16,
-      "min_points": 1,
-      "gd": -4,
+      "points": 3,
+      "seed_elo": 1578,
+      "elo": 1577,
+      "elo_change": -1,
+      "form_adjustment": 11,
+      "remaining": 4,
+      "max_points": 15,
+      "min_points": 3,
+      "gd": -12,
       "next_fixture": {
-        "opponent": "Sabah FK",
-        "venue": "home",
-        "date": "2026-11-04T20:00:00Z",
+        "opponent": "RB Leipzig",
+        "venue": "away",
+        "date": "2026-11-24T20:00:00Z",
         "played": false,
         "score": null
       },
       "prob_top8": 0.0,
-      "prob_top24": 0.024,
+      "prob_top24": 0.013,
       "prob_final": 0.0,
       "prob_champion": 0.0,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 33
+    },
+    {
+      "name": "Slavia Praha",
+      "crest": "https://crests.football-data.org/930.png",
+      "played": 4,
+      "won": 0,
+      "drawn": 1,
+      "lost": 3,
+      "gf": 5,
+      "ga": 9,
+      "clean_sheets": 0,
+      "points": 1,
+      "seed_elo": 1676,
+      "elo": 1650,
+      "elo_change": -26,
+      "form_adjustment": 0,
+      "remaining": 4,
+      "max_points": 13,
+      "min_points": 1,
+      "gd": -4,
+      "next_fixture": {
+        "opponent": "Villarreal",
+        "venue": "home",
+        "date": "2026-11-25T17:45:00Z",
+        "played": false,
+        "score": null
+      },
+      "prob_top8": 0.0,
+      "prob_top24": 0.009,
+      "prob_final": 0.0,
+      "prob_champion": 0.0,
+      "status_top8": "alive",
+      "status_top24": "alive",
+      "rank": 34
     },
     {
       "name": "Lille",
@@ -1155,43 +1189,9 @@
         "score": null
       },
       "prob_top8": 0.0,
-      "prob_top24": 0.148,
-      "prob_final": 0.0,
+      "prob_top24": 0.142,
+      "prob_final": 0.001,
       "prob_champion": 0.0,
-      "status_top8": "alive",
-      "status_top24": "alive",
-      "rank": 34
-    },
-    {
-      "name": "Porto",
-      "crest": "https://crests.football-data.org/503.png",
-      "played": 3,
-      "won": 0,
-      "drawn": 0,
-      "lost": 3,
-      "gf": 2,
-      "ga": 6,
-      "clean_sheets": 0,
-      "points": 0,
-      "seed_elo": 2023,
-      "elo": 1986,
-      "elo_change": -37,
-      "form_adjustment": 200,
-      "remaining": 5,
-      "max_points": 15,
-      "min_points": 0,
-      "gd": -4,
-      "next_fixture": {
-        "opponent": "Napoli",
-        "venue": "home",
-        "date": "2026-11-04T20:00:00Z",
-        "played": false,
-        "score": null
-      },
-      "prob_top8": 0.001,
-      "prob_top24": 0.751,
-      "prob_final": 0.019,
-      "prob_champion": 0.005,
       "status_top8": "alive",
       "status_top24": "alive",
       "rank": 35
@@ -1223,7 +1223,7 @@
         "score": null
       },
       "prob_top8": 0.0,
-      "prob_top24": 0.002,
+      "prob_top24": 0.001,
       "prob_final": 0.0,
       "prob_champion": 0.0,
       "status_top8": "alive",
@@ -1804,117 +1804,81 @@
       "date": "2026-11-04T17:45:00Z",
       "home": "AEK Athens",
       "away": "Real Madrid",
-      "played": false,
-      "score": null,
-      "odds": {
-        "home": 0.017,
-        "draw": 0.034,
-        "away": 0.949
-      }
+      "played": true,
+      "score": "2-3",
+      "odds": null
     },
     {
       "matchday": "League Stage - 4",
       "date": "2026-11-04T17:45:00Z",
       "home": "Fenerbahce",
       "away": "Liverpool",
-      "played": false,
-      "score": null,
-      "odds": {
-        "home": 0.085,
-        "draw": 0.15,
-        "away": 0.765
-      }
+      "played": true,
+      "score": "3-2",
+      "odds": null
     },
     {
       "matchday": "League Stage - 4",
       "date": "2026-11-04T20:00:00Z",
       "home": "RB Leipzig",
       "away": "Manchester City",
-      "played": false,
-      "score": null,
-      "odds": {
-        "home": 0.098,
-        "draw": 0.166,
-        "away": 0.736
-      }
+      "played": true,
+      "score": "2-3",
+      "odds": null
     },
     {
       "matchday": "League Stage - 4",
       "date": "2026-11-04T20:00:00Z",
       "home": "Slavia Praha",
       "away": "Arsenal",
-      "played": false,
-      "score": null,
-      "odds": {
-        "home": 0.029,
-        "draw": 0.058,
-        "away": 0.913
-      }
+      "played": true,
+      "score": "1-2",
+      "odds": null
     },
     {
       "matchday": "League Stage - 4",
       "date": "2026-11-04T20:00:00Z",
       "home": "PSV Eindhoven",
       "away": "Club Brugge",
-      "played": false,
-      "score": null,
-      "odds": {
-        "home": 0.591,
-        "draw": 0.238,
-        "away": 0.171
-      }
+      "played": true,
+      "score": "1-2",
+      "odds": null
     },
     {
       "matchday": "League Stage - 4",
       "date": "2026-11-04T20:00:00Z",
       "home": "Borussia Dortmund",
       "away": "Real Betis",
-      "played": false,
-      "score": null,
-      "odds": {
-        "home": 0.626,
-        "draw": 0.222,
-        "away": 0.152
-      }
+      "played": true,
+      "score": "2-1",
+      "odds": null
     },
     {
       "matchday": "League Stage - 4",
       "date": "2026-11-04T20:00:00Z",
       "home": "Porto",
       "away": "Napoli",
-      "played": false,
-      "score": null,
-      "odds": {
-        "home": 0.788,
-        "draw": 0.136,
-        "away": 0.076
-      }
+      "played": true,
+      "score": "4-1",
+      "odds": null
     },
     {
       "matchday": "League Stage - 4",
       "date": "2026-11-04T20:00:00Z",
       "home": "Lens",
       "away": "Como",
-      "played": false,
-      "score": null,
-      "odds": {
-        "home": 0.277,
-        "draw": 0.288,
-        "away": 0.435
-      }
+      "played": true,
+      "score": "1-9",
+      "odds": null
     },
     {
       "matchday": "League Stage - 4",
       "date": "2026-11-04T20:00:00Z",
       "home": "Viking",
       "away": "Sabah FK",
-      "played": false,
-      "score": null,
-      "odds": {
-        "home": 0.461,
-        "draw": 0.282,
-        "away": 0.257
-      }
+      "played": true,
+      "score": "4-1",
+      "odds": null
     },
     {
       "matchday": "League Stage - 5",
@@ -1950,9 +1914,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.88,
-        "draw": 0.079,
-        "away": 0.041
+        "home": 0.89,
+        "draw": 0.073,
+        "away": 0.037
       }
     },
     {
@@ -1963,9 +1927,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.914,
-        "draw": 0.057,
-        "away": 0.029
+        "home": 0.917,
+        "draw": 0.055,
+        "away": 0.028
       }
     },
     {
@@ -1976,9 +1940,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.693,
-        "draw": 0.189,
-        "away": 0.118
+        "home": 0.687,
+        "draw": 0.192,
+        "away": 0.12
       }
     },
     {
@@ -1989,9 +1953,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.344,
-        "draw": 0.3,
-        "away": 0.357
+        "home": 0.339,
+        "draw": 0.299,
+        "away": 0.361
       }
     },
     {
@@ -2002,9 +1966,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.104,
-        "draw": 0.174,
-        "away": 0.722
+        "home": 0.107,
+        "draw": 0.178,
+        "away": 0.715
       }
     },
     {
@@ -2015,9 +1979,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.791,
-        "draw": 0.134,
-        "away": 0.074
+        "home": 0.797,
+        "draw": 0.131,
+        "away": 0.072
       }
     },
     {
@@ -2028,9 +1992,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.632,
-        "draw": 0.219,
-        "away": 0.149
+        "home": 0.646,
+        "draw": 0.213,
+        "away": 0.141
       }
     },
     {
@@ -2041,9 +2005,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.02,
-        "draw": 0.04,
-        "away": 0.94
+        "home": 0.019,
+        "draw": 0.038,
+        "away": 0.943
       }
     },
     {
@@ -2054,9 +2018,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.383,
+        "home": 0.381,
         "draw": 0.297,
-        "away": 0.32
+        "away": 0.322
       }
     },
     {
@@ -2080,9 +2044,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.955,
-        "draw": 0.03,
-        "away": 0.015
+        "home": 0.953,
+        "draw": 0.031,
+        "away": 0.016
       }
     },
     {
@@ -2106,9 +2070,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.135,
-        "draw": 0.207,
-        "away": 0.659
+        "home": 0.161,
+        "draw": 0.229,
+        "away": 0.61
       }
     },
     {
@@ -2145,9 +2109,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.46,
-        "draw": 0.283,
-        "away": 0.258
+        "home": 0.431,
+        "draw": 0.289,
+        "away": 0.28
       }
     },
     {
@@ -2158,9 +2122,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.706,
-        "draw": 0.182,
-        "away": 0.111
+        "home": 0.717,
+        "draw": 0.176,
+        "away": 0.106
       }
     },
     {
@@ -2171,9 +2135,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.076,
-        "draw": 0.137,
-        "away": 0.786
+        "home": 0.08,
+        "draw": 0.143,
+        "away": 0.777
       }
     },
     {
@@ -2184,9 +2148,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.443,
-        "draw": 0.287,
-        "away": 0.27
+        "home": 0.437,
+        "draw": 0.288,
+        "away": 0.275
       }
     },
     {
@@ -2223,9 +2187,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.356,
-        "draw": 0.3,
-        "away": 0.345
+        "home": 0.329,
+        "draw": 0.298,
+        "away": 0.372
       }
     },
     {
@@ -2249,9 +2213,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.294,
-        "draw": 0.293,
-        "away": 0.413
+        "home": 0.299,
+        "draw": 0.294,
+        "away": 0.407
       }
     },
     {
@@ -2262,9 +2226,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.301,
+        "home": 0.3,
         "draw": 0.294,
-        "away": 0.405
+        "away": 0.406
       }
     },
     {
@@ -2275,9 +2239,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.773,
-        "draw": 0.145,
-        "away": 0.082
+        "home": 0.757,
+        "draw": 0.154,
+        "away": 0.089
       }
     },
     {
@@ -2301,7 +2265,7 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.386,
+        "home": 0.387,
         "draw": 0.297,
         "away": 0.317
       }
@@ -2314,9 +2278,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.334,
-        "draw": 0.299,
-        "away": 0.367
+        "home": 0.342,
+        "draw": 0.3,
+        "away": 0.358
       }
     },
     {
@@ -2327,9 +2291,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.226,
-        "draw": 0.27,
-        "away": 0.504
+        "home": 0.21,
+        "draw": 0.262,
+        "away": 0.528
       }
     },
     {
@@ -2340,9 +2304,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.611,
-        "draw": 0.229,
-        "away": 0.16
+        "home": 0.578,
+        "draw": 0.243,
+        "away": 0.179
       }
     },
     {
@@ -2353,9 +2317,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.218,
-        "draw": 0.266,
-        "away": 0.517
+        "home": 0.208,
+        "draw": 0.261,
+        "away": 0.531
       }
     },
     {
@@ -2366,9 +2330,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.28,
-        "draw": 0.289,
-        "away": 0.43
+        "home": 0.258,
+        "draw": 0.283,
+        "away": 0.459
       }
     },
     {
@@ -2418,7 +2382,7 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.976,
+        "home": 0.977,
         "draw": 0.015,
         "away": 0.008
       }
@@ -2431,9 +2395,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.526,
-        "draw": 0.262,
-        "away": 0.211
+        "home": 0.555,
+        "draw": 0.252,
+        "away": 0.193
       }
     },
     {
@@ -2444,9 +2408,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.173,
-        "draw": 0.239,
-        "away": 0.588
+        "home": 0.16,
+        "draw": 0.229,
+        "away": 0.612
       }
     },
     {
@@ -2457,9 +2421,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.193,
-        "draw": 0.252,
-        "away": 0.555
+        "home": 0.188,
+        "draw": 0.249,
+        "away": 0.563
       }
     },
     {
@@ -2470,9 +2434,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.072,
+        "home": 0.071,
         "draw": 0.13,
-        "away": 0.798
+        "away": 0.799
       }
     },
     {
@@ -2483,9 +2447,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.868,
-        "draw": 0.087,
-        "away": 0.045
+        "home": 0.871,
+        "draw": 0.085,
+        "away": 0.044
       }
     },
     {
@@ -2509,9 +2473,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.5,
-        "draw": 0.271,
-        "away": 0.229
+        "home": 0.529,
+        "draw": 0.261,
+        "away": 0.209
       }
     },
     {
@@ -2522,9 +2486,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.181,
-        "draw": 0.244,
-        "away": 0.575
+        "home": 0.176,
+        "draw": 0.241,
+        "away": 0.583
       }
     },
     {
@@ -2535,9 +2499,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.026,
-        "draw": 0.051,
-        "away": 0.923
+        "home": 0.024,
+        "draw": 0.048,
+        "away": 0.928
       }
     },
     {
@@ -2561,9 +2525,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.041,
-        "draw": 0.08,
-        "away": 0.879
+        "home": 0.043,
+        "draw": 0.084,
+        "away": 0.873
       }
     },
     {
@@ -2574,9 +2538,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.138,
-        "draw": 0.21,
-        "away": 0.652
+        "home": 0.133,
+        "draw": 0.205,
+        "away": 0.662
       }
     },
     {
@@ -2600,9 +2564,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.082,
-        "draw": 0.146,
-        "away": 0.772
+        "home": 0.094,
+        "draw": 0.161,
+        "away": 0.745
       }
     },
     {
@@ -2613,9 +2577,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.616,
-        "draw": 0.227,
-        "away": 0.158
+        "home": 0.61,
+        "draw": 0.229,
+        "away": 0.161
       }
     },
     {
@@ -2626,9 +2590,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.035,
+        "home": 0.034,
         "draw": 0.068,
-        "away": 0.897
+        "away": 0.898
       }
     },
     {
@@ -2639,9 +2603,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.792,
-        "draw": 0.134,
-        "away": 0.074
+        "home": 0.796,
+        "draw": 0.132,
+        "away": 0.073
       }
     },
     {
@@ -2665,9 +2629,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.925,
-        "draw": 0.05,
-        "away": 0.025
+        "home": 0.921,
+        "draw": 0.052,
+        "away": 0.026
       }
     },
     {
@@ -2678,9 +2642,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.871,
-        "draw": 0.085,
-        "away": 0.044
+        "home": 0.859,
+        "draw": 0.093,
+        "away": 0.048
       }
     },
     {
@@ -2704,9 +2668,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.945,
-        "draw": 0.036,
-        "away": 0.018
+        "home": 0.942,
+        "draw": 0.038,
+        "away": 0.019
       }
     },
     {
@@ -2717,8 +2681,8 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.98,
-        "draw": 0.013,
+        "home": 0.981,
+        "draw": 0.012,
         "away": 0.007
       }
     },
@@ -2730,9 +2694,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.847,
-        "draw": 0.1,
-        "away": 0.053
+        "home": 0.851,
+        "draw": 0.098,
+        "away": 0.051
       }
     },
     {
@@ -2743,9 +2707,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.535,
-        "draw": 0.26,
-        "away": 0.206
+        "home": 0.559,
+        "draw": 0.25,
+        "away": 0.19
       }
     },
     {
@@ -2756,9 +2720,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.928,
-        "draw": 0.048,
-        "away": 0.024
+        "home": 0.93,
+        "draw": 0.046,
+        "away": 0.023
       }
     },
     {
@@ -2769,9 +2733,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.201,
-        "draw": 0.257,
-        "away": 0.543
+        "home": 0.199,
+        "draw": 0.256,
+        "away": 0.545
       }
     },
     {
@@ -2795,9 +2759,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.075,
-        "draw": 0.135,
-        "away": 0.79
+        "home": 0.074,
+        "draw": 0.133,
+        "away": 0.793
       }
     },
     {
@@ -2821,9 +2785,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.849,
-        "draw": 0.099,
-        "away": 0.052
+        "home": 0.837,
+        "draw": 0.107,
+        "away": 0.056
       }
     },
     {
@@ -2834,9 +2798,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.586,
-        "draw": 0.24,
-        "away": 0.175
+        "home": 0.592,
+        "draw": 0.237,
+        "away": 0.171
       }
     },
     {
@@ -2847,9 +2811,9 @@
       "played": false,
       "score": null,
       "odds": {
-        "home": 0.759,
-        "draw": 0.153,
-        "away": 0.088
+        "home": 0.746,
+        "draw": 0.161,
+        "away": 0.093
       }
     }
   ],
@@ -2867,8 +2831,8 @@
       "label": "Champions Path \u2014 CP2",
       "a": "Slovan Bratislava",
       "b": "Mjallby AIF",
-      "prob_a": 0.846,
-      "prob_b": 0.154,
+      "prob_a": 0.839,
+      "prob_b": 0.161,
       "leg_note": "Slovan Bratislava 2-1 Mjallby AIF",
       "resolved": false
     },
@@ -2876,8 +2840,8 @@
       "label": "Champions Path \u2014 CP3",
       "a": "Kairat Almaty",
       "b": "Levski Sofia",
-      "prob_a": 0.309,
-      "prob_b": 0.691,
+      "prob_a": 0.303,
+      "prob_b": 0.697,
       "leg_note": "Levski Sofia 1-0 Kairat Almaty",
       "resolved": false
     },
@@ -2894,8 +2858,8 @@
       "label": "Champions Path \u2014 CP5",
       "a": "NK Celje",
       "b": "Ararat-Armenia",
-      "prob_a": 0.374,
-      "prob_b": 0.626,
+      "prob_a": 0.357,
+      "prob_b": 0.643,
       "leg_note": "Ararat-Armenia 2-1 NK Celje",
       "resolved": false
     },
@@ -2912,8 +2876,8 @@
       "label": "League Path \u2014 LP1",
       "a": "Olympiacos",
       "b": "NEC Nijmegen",
-      "prob_a": 0.767,
-      "prob_b": 0.233,
+      "prob_a": 0.773,
+      "prob_b": 0.227,
       "leg_note": "Olympiacos 0-0 NEC Nijmegen",
       "resolved": false
     },
@@ -2921,8 +2885,8 @@
       "label": "League Path \u2014 LP2",
       "a": "Bodo/Glimt",
       "b": "Union Saint-Gilloise",
-      "prob_a": 0.59,
-      "prob_b": 0.41,
+      "prob_a": 0.596,
+      "prob_b": 0.404,
       "leg_note": "Bodo/Glimt 3-3 Union Saint-Gilloise",
       "resolved": false
     },
@@ -2930,8 +2894,8 @@
       "label": "League Path \u2014 LP3",
       "a": "Fenerbahce",
       "b": "Sturm Graz",
-      "prob_a": 0.662,
-      "prob_b": 0.338,
+      "prob_a": 0.67,
+      "prob_b": 0.33,
       "leg_note": "Fenerbahce 0-0 Sturm Graz",
       "resolved": false
     },
