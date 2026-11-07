@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-06T18:57:02.551022Z",
+  "updated_at": "2026-11-07T00:39:00.727046Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -240,7 +240,7 @@
     {
       "name": "Como",
       "elo_change": "+28",
-      "current_elo": 1721,
+      "current_elo": 1722,
       "trend": "up",
       "note": "#4 in table (3W-0D-1L, 9 pts, GD +13) — outperforming baseline seed"
     },
@@ -254,28 +254,28 @@
     {
       "name": "VfB Stuttgart",
       "elo_change": "+27",
-      "current_elo": 1589,
+      "current_elo": 1587,
       "trend": "up",
       "note": "#14 in table (2W-1D-1L, 7 pts, GD +3) — outperforming baseline seed"
     },
     {
       "name": "Porto",
       "elo_change": "-34",
-      "current_elo": 1989,
+      "current_elo": 1992,
       "trend": "down",
       "note": "#26 in table (1W-0D-3L, 3 pts, GD -1) — below pre-season projection"
     },
     {
       "name": "Lille",
       "elo_change": "-33",
-      "current_elo": 1855,
+      "current_elo": 1854,
       "trend": "down",
       "note": "#35 in table (0W-1D-3L, 1 pts, GD -6) — below pre-season projection"
     },
     {
       "name": "Roma",
       "elo_change": "-28",
-      "current_elo": 1989,
+      "current_elo": 1990,
       "trend": "down",
       "note": "#20 in table (1W-1D-2L, 4 pts, GD +2) — below pre-season projection"
     }
