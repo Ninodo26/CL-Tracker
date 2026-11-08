@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-08T12:50:44.569124Z",
+  "updated_at": "2026-11-08T19:21:50.962661Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -231,18 +231,18 @@
   ],
   "power_movers": [
     {
-      "name": "Real Betis",
-      "elo_change": "+28",
-      "current_elo": 1931,
-      "trend": "up",
-      "note": "#11 in table (3W-0D-1L, 9 pts, GD +2) — outperforming baseline seed"
-    },
-    {
       "name": "Como",
-      "elo_change": "+28",
-      "current_elo": 1721,
+      "elo_change": "+30",
+      "current_elo": 1700,
       "trend": "up",
       "note": "#4 in table (3W-0D-1L, 9 pts, GD +13) — outperforming baseline seed"
+    },
+    {
+      "name": "Real Betis",
+      "elo_change": "+27",
+      "current_elo": 1938,
+      "trend": "up",
+      "note": "#11 in table (3W-0D-1L, 9 pts, GD +2) — outperforming baseline seed"
     },
     {
       "name": "Club Brugge",
@@ -261,21 +261,21 @@
     {
       "name": "Porto",
       "elo_change": "-35",
-      "current_elo": 1990,
+      "current_elo": 1997,
       "trend": "down",
       "note": "#26 in table (1W-0D-3L, 3 pts, GD -1) — below pre-season projection"
     },
     {
       "name": "Lille",
-      "elo_change": "-33",
-      "current_elo": 1849,
+      "elo_change": "-34",
+      "current_elo": 1864,
       "trend": "down",
       "note": "#35 in table (0W-1D-3L, 1 pts, GD -6) — below pre-season projection"
     },
     {
       "name": "Roma",
       "elo_change": "-29",
-      "current_elo": 1995,
+      "current_elo": 2000,
       "trend": "down",
       "note": "#20 in table (1W-1D-2L, 4 pts, GD +2) — below pre-season projection"
     }
