@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-21T10:41:32.847637Z",
+  "updated_at": "2026-11-21T18:45:22.964057Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -233,7 +233,7 @@
     {
       "name": "Como",
       "elo_change": "+29",
-      "current_elo": 1700,
+      "current_elo": 1709,
       "trend": "up",
       "note": "#4 in table (3W-0D-1L, 9 pts, GD +13) — outperforming baseline seed"
     },
@@ -275,7 +275,7 @@
     {
       "name": "Roma",
       "elo_change": "-29",
-      "current_elo": 2001,
+      "current_elo": 2000,
       "trend": "down",
       "note": "#20 in table (1W-1D-2L, 4 pts, GD +2) — below pre-season projection"
     }
