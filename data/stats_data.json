@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-20T19:40:02.948704Z",
+  "updated_at": "2026-11-21T01:59:38.433917Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -247,14 +247,14 @@
     {
       "name": "Real Betis",
       "elo_change": "+26",
-      "current_elo": 1941,
+      "current_elo": 1942,
       "trend": "up",
       "note": "#11 in table (3W-0D-1L, 9 pts, GD +2) — outperforming baseline seed"
     },
     {
       "name": "VfB Stuttgart",
       "elo_change": "+23",
-      "current_elo": 1623,
+      "current_elo": 1624,
       "trend": "up",
       "note": "#14 in table (2W-1D-1L, 7 pts, GD +3) — outperforming baseline seed"
     },
