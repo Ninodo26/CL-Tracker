@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-21T18:45:22.964057Z",
+  "updated_at": "2026-11-22T00:59:16.692699Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -232,8 +232,8 @@
   "power_movers": [
     {
       "name": "Como",
-      "elo_change": "+29",
-      "current_elo": 1709,
+      "elo_change": "+28",
+      "current_elo": 1706,
       "trend": "up",
       "note": "#4 in table (3W-0D-1L, 9 pts, GD +13) — outperforming baseline seed"
     },
@@ -247,14 +247,14 @@
     {
       "name": "Real Betis",
       "elo_change": "+26",
-      "current_elo": 1942,
+      "current_elo": 1930,
       "trend": "up",
       "note": "#11 in table (3W-0D-1L, 9 pts, GD +2) — outperforming baseline seed"
     },
     {
       "name": "VfB Stuttgart",
       "elo_change": "+23",
-      "current_elo": 1624,
+      "current_elo": 1619,
       "trend": "up",
       "note": "#14 in table (2W-1D-1L, 7 pts, GD +3) — outperforming baseline seed"
     },
@@ -267,15 +267,15 @@
     },
     {
       "name": "Lille",
-      "elo_change": "-34",
-      "current_elo": 1863,
+      "elo_change": "-32",
+      "current_elo": 1834,
       "trend": "down",
       "note": "#35 in table (0W-1D-3L, 1 pts, GD -6) — below pre-season projection"
     },
     {
       "name": "Roma",
       "elo_change": "-29",
-      "current_elo": 2000,
+      "current_elo": 2004,
       "trend": "down",
       "note": "#20 in table (1W-1D-2L, 4 pts, GD +2) — below pre-season projection"
     }
