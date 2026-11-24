@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T08:37:40.622264Z",
+  "updated_at": "2026-11-24T19:58:19.999709Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -8,9 +8,9 @@
       "crest": "https://crests.football-data.org/7397.png",
       "goals": 6,
       "assists": 1,
-      "mins": 340,
+      "mins": 425,
       "xG": 5.4,
-      "per90": 1.59
+      "per90": 1.27
     },
     {
       "rank": 2,
@@ -30,9 +30,9 @@
       "crest": "https://crests.football-data.org/65.png",
       "goals": 5,
       "assists": 0,
-      "mins": 340,
+      "mins": 425,
       "xG": 4.4,
-      "per90": 1.32
+      "per90": 1.06
     },
     {
       "rank": 4,
@@ -58,17 +58,6 @@
     },
     {
       "rank": 6,
-      "name": "Kylian Mbappé",
-      "team": "Real Madrid",
-      "crest": "https://crests.football-data.org/86.png",
-      "goals": 4,
-      "assists": 1,
-      "mins": 340,
-      "xG": 3.6,
-      "per90": 1.06
-    },
-    {
-      "rank": 7,
       "name": "Fabián Ruiz",
       "team": "Paris Saint-Germain",
       "crest": "https://crests.football-data.org/524.png",
@@ -77,6 +66,17 @@
       "mins": 340,
       "xG": 3.6,
       "per90": 1.06
+    },
+    {
+      "rank": 7,
+      "name": "Kylian Mbappé",
+      "team": "Real Madrid",
+      "crest": "https://crests.football-data.org/86.png",
+      "goals": 4,
+      "assists": 1,
+      "mins": 425,
+      "xG": 3.6,
+      "per90": 0.85
     },
     {
       "rank": 8,
@@ -91,9 +91,9 @@
     },
     {
       "rank": 9,
-      "name": "Sehrou Guirassy",
-      "team": "Borussia Dortmund",
-      "crest": "https://crests.football-data.org/4.png",
+      "name": "Ermedin Demirovic",
+      "team": "VfB Stuttgart",
+      "crest": "https://crests.football-data.org/10.png",
       "goals": 4,
       "assists": 0,
       "mins": 340,
@@ -102,9 +102,9 @@
     },
     {
       "rank": 10,
-      "name": "Ermedin Demirovic",
-      "team": "VfB Stuttgart",
-      "crest": "https://crests.football-data.org/10.png",
+      "name": "Luis Suárez",
+      "team": "Sporting CP",
+      "crest": "https://crests.football-data.org/498.png",
       "goals": 4,
       "assists": 0,
       "mins": 340,
@@ -180,6 +180,16 @@
   "clean_sheets": [
     {
       "rank": 1,
+      "name": "Nikita Haikin",
+      "team": "Bodo/Glimt",
+      "crest": "https://crests.football-data.org/5721.png",
+      "clean_sheets": 3,
+      "saves": 12,
+      "save_pct": "57.1%",
+      "ga": 9
+    },
+    {
+      "rank": 2,
       "name": "David Raya",
       "team": "Arsenal",
       "crest": "https://crests.football-data.org/57.png",
@@ -189,7 +199,7 @@
       "ga": 3
     },
     {
-      "rank": 2,
+      "rank": 3,
       "name": "Rui Silva",
       "team": "Sporting CP",
       "crest": "https://crests.football-data.org/498.png",
@@ -199,7 +209,7 @@
       "ga": 4
     },
     {
-      "rank": 3,
+      "rank": 4,
       "name": "Manuel Neuer",
       "team": "Bayern Munich",
       "crest": "https://crests.football-data.org/5.png",
@@ -209,7 +219,7 @@
       "ga": 5
     },
     {
-      "rank": 4,
+      "rank": 5,
       "name": "Josep Martínez",
       "team": "Inter",
       "crest": "https://crests.football-data.org/108.png",
@@ -217,19 +227,16 @@
       "saves": 8,
       "save_pct": "57.1%",
       "ga": 6
-    },
-    {
-      "rank": 5,
-      "name": "Nikita Haikin",
-      "team": "Bodo/Glimt",
-      "crest": "https://crests.football-data.org/5721.png",
-      "clean_sheets": 2,
-      "saves": 8,
-      "save_pct": "47.1%",
-      "ga": 9
     }
   ],
   "power_movers": [
+    {
+      "name": "Galatasaray",
+      "elo_change": "+32",
+      "current_elo": 1718,
+      "trend": "up",
+      "note": "#13 in table (3W-0D-2L, 9 pts, GD +0) — outperforming baseline seed"
+    },
     {
       "name": "Club Brugge",
       "elo_change": "+27",
@@ -252,13 +259,6 @@
       "note": "#11 in table (3W-0D-1L, 9 pts, GD +2) — outperforming baseline seed"
     },
     {
-      "name": "VfB Stuttgart",
-      "elo_change": "+23",
-      "current_elo": 1618,
-      "trend": "up",
-      "note": "#14 in table (2W-1D-1L, 7 pts, GD +3) — outperforming baseline seed"
-    },
-    {
       "name": "Porto",
       "elo_change": "-35",
       "current_elo": 1993,
@@ -277,7 +277,7 @@
       "elo_change": "-30",
       "current_elo": 2005,
       "trend": "down",
-      "note": "#20 in table (1W-1D-2L, 4 pts, GD +2) — below pre-season projection"
+      "note": "#21 in table (1W-1D-2L, 4 pts, GD +2) — below pre-season projection"
     }
   ]
 }
