@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T03:58:18.164716Z",
+  "updated_at": "2026-11-25T16:52:11.692115Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -85,9 +85,9 @@
       "crest": "https://crests.football-data.org/81.png",
       "goals": 4,
       "assists": 0,
-      "mins": 255,
+      "mins": 340,
       "xG": 3.5,
-      "per90": 1.41
+      "per90": 1.06
     },
     {
       "rank": 9,
