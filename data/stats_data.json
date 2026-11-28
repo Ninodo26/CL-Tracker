@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27T18:42:45.140341Z",
+  "updated_at": "2026-11-28T03:06:39.159193Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -247,7 +247,7 @@
     {
       "name": "Real Betis",
       "elo_change": "+30",
-      "current_elo": 1933,
+      "current_elo": 1932,
       "trend": "up",
       "note": "#6 in table (4W-0D-1L, 12 pts, GD +4) — outperforming baseline seed"
     },
