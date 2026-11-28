@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-28T03:06:39.159193Z",
+  "updated_at": "2026-11-28T15:07:47.867182Z",
   "top_scorers": [
     {
       "rank": 1,
@@ -231,6 +231,13 @@
   ],
   "power_movers": [
     {
+      "name": "Real Betis",
+      "elo_change": "+33",
+      "current_elo": 1915,
+      "trend": "up",
+      "note": "#6 in table (4W-0D-1L, 12 pts, GD +4) — outperforming baseline seed"
+    },
+    {
       "name": "Como",
       "elo_change": "+33",
       "current_elo": 1713,
@@ -243,13 +250,6 @@
       "current_elo": 1718,
       "trend": "up",
       "note": "#14 in table (3W-0D-2L, 9 pts, GD +0) — outperforming baseline seed"
-    },
-    {
-      "name": "Real Betis",
-      "elo_change": "+30",
-      "current_elo": 1932,
-      "trend": "up",
-      "note": "#6 in table (4W-0D-1L, 12 pts, GD +4) — outperforming baseline seed"
     },
     {
       "name": "Fenerbahce",
